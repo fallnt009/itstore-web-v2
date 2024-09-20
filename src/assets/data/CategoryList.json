@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "title": "Component(DIY)",
+    "src": "/assets/images/component.png",
+    "subCategory": [
+      {
+        "id": 1,
+        "title": "CPU",
+        "name": "cpu",
+        "pathname": "/categories/component/cpu",
+        "src": "/assets/images/subbar/component/cpu.png"
+      },
+      {
+        "id": 2,
+        "title": "Mainboard",
+        "name": "mainboard",
+        "pathname": "/categories/component/mainboard",
+        "src": "/assets/images/subbar/component/mb.png"
+      },
+      {
+        "id": 3,
+        "title": "Ram",
+        "name": "ram",
+        "pathname": "/categories/component/ram",
+        "src": "/assets/images/subbar/component/ram.png"
+      },
+      {
+        "id": 4,
+        "title": "Storage",
+        "name": "storage",
+        "pathname": "/categories/component/storage",
+        "src": "/assets/images/subbar/component/nvmd.png"
+      },
+      {
+        "id": 5,
+        "title": "Graphic Card",
+        "name": "gpu",
+        "pathname": "/categories/component/gpu",
+        "src": "/assets/images/subbar/component/gpu.png"
+      },
+      {
+        "id": 6,
+        "title": "Case",
+        "name": "case",
+        "pathname": "/categories/component/case",
+        "src": "/assets/images/subbar/component/case.png"
+      },
+      {
+        "id": 7,
+        "title": "Power Supply",
+        "name": "powersupply",
+        "pathname": "/categories/component/powersupply",
+        "src": "/assets/images/subbar/component/psu.png"
+      },
+      {
+        "id": 8,
+        "title": "CPU Cooler",
+        "name": "cpucooler",
+        "pathname": "/categories/component/cpucooler",
+        "src": "/assets/images/subbar/component/lcooler.png"
+      },
+      {
+        "id": 9,
+        "title": "Fan",
+        "name": "fan",
+        "pathname": "/categories/component/fan",
+        "src": "/assets/images/subbar/component/fan.png"
+      },
+      {
+        "id": 10,
+        "title": "Sound Card",
+        "name": "soundcard",
+        "pathname": "/categories/component/soundcard",
+        "src": "/assets/images/subbar/component/soundCard.png"
+      }
+    ]
+  },
+
+  {
+    "id": 2,
+    "title": "Gaming Gear",
+    "src": "/assets/images/gaminggear.png",
+    "subCategory": [
+      {
+        "id": 1,
+        "title": "Keyboard",
+        "pathname": "/categories/gaming-gear/keyboard",
+        "src": "/assets/images/subbar/gears/keyboard.png"
+      },
+      {
+        "id": 2,
+        "title": "Headset",
+        "pathname": "/categories/gaming-gear/headset",
+        "src": "/assets/images/subbar/gears/headset.png"
+      },
+      {
+        "id": 3,
+        "title": "Mouse",
+        "pathname": "/categories/gaming-gear/mouse",
+        "src": "/assets/images/subbar/gears/mouse.png"
+      },
+      {
+        "id": 4,
+        "title": "Mouse Pad",
+        "pathname": "/categories/gaming-gear/mouse-pad",
+        "src": "/assets/images/subbar/gears/mousepad.png"
+      },
+      {
+        "id": 5,
+        "title": "Streaming",
+        "pathname": "/categories/gaming-gear/streaming",
+        "src": "/assets/images/subbar/gears/streaming.png"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Laptop",
+    "src": "/assets/images/subbar/laptop/gamelaptop.png",
+    "subCategory": [
+      {
+        "id": 1,
+        "title": "Gaming Laptop",
+        "pathname": "/categories/laptop/gaming-laptop",
+        "src": "/assets/images/subbar/laptop/gamelaptop.png"
+      },
+      {
+        "id": 2,
+        "title": "Working Laptop",
+        "pathname": "/categories/laptop/working-laptop",
+        "src": "/assets/images/subbar/laptop/wlaptop.png"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Monitor",
+    "name": "monitor",
+    "src": "/assets/images/subbar/monitor/monitor.png",
+    "subCategory": [
+      {
+        "id": 1,
+        "title": "Monitor",
+        "pathname": "/categories/monitor/monitor",
+        "src": "/assets/images/subbar/monitor/monitor.png"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Desktop",
+    "src": "/assets/images/subbar/desktop/pc.png",
+    "subCategory": [
+      {
+        "id": 1,
+        "title": "Desktop PC",
+        "pathname": "/categories/desktop-pc/desktop",
+        "src": "/assets/images/subbar/desktop/pc.png"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Network",
+    "src": "/assets/images/subbar/network/router.png",
+    "subCategory": [
+      {
+        "id": 1,
+        "title": "Router",
+        "pathname": "/categories/network/router",
+        "src": "/assets/images/subbar/network/router.png"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "UPS",
+    "src": "/assets/images/subbar/ups/ups.png",
+    "subCategory": [
+      {
+        "id": 1,
+        "title": "UPS",
+        "pathname": "/categories/ups/ups",
+        "src": "/assets/images/subbar/ups/ups.png"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Software",
+    "src": "/assets/images/software.png",
+    "subCategory": [
+      {
+        "id": 1,
+        "title": "Software",
+        "pathname": "/categories/software/software",
+        "src": "/assets/images/software.png"
+      }
+    ]
+  }
+]
