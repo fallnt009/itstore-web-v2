@@ -3,12 +3,13 @@ import {MdArrowRight} from 'react-icons/md';
 
 import HomeCard from '../card/HomeCard';
 import HomeCardError from '../card/HomeCardError';
+import {SALES_PRODUCT} from '../../../../shared/services/config/routing';
 
 export default function BestDealContent({salesProduct = [], loading}) {
   const navigate = useNavigate();
 
   const handleRedirect = () => {
-    // navigate(SALE_PRODUCT);
+    navigate(SALES_PRODUCT);
     navigate(0);
   };
   return (

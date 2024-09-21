@@ -1,5 +1,8 @@
 import {Link} from 'react-router-dom';
+
 import HomeCardContentInfo from './HomeCardContentInfo';
+import Image from '../../../components/Image';
+import {PRODUCT_INFO_NAV} from '../../../../shared/services/config/routing';
 
 export default function HomeCardContent({product}) {
   const {
@@ -23,7 +26,7 @@ export default function HomeCardContent({product}) {
     <div className="text-sm px-2 pt-4 pb-4 bg-slate-100 rounded-md ">
       <Link
         className="grid grid-rows-2 justify-center "
-        // to={PRODUCT_DETAIL_NAV(categoryName, subCategoryName, slug)}
+        to={PRODUCT_INFO_NAV(categoryName, subCategoryName, slug)}
       >
         <div className="row-span-2">
           <HomeCardContentInfo
@@ -35,12 +38,12 @@ export default function HomeCardContent({product}) {
         </div>
         <div className="row-span-1">
           <div className="flex justify-center">
-            <img
-              src={productImages || ''}
+            <Image
+              src={productImages}
               className={`cursor-pointer hover:border-2 h-full object-contain rounded-md`}
               alt="product"
-              width="200px"
-              height="200px"
+              width="200"
+              height="200"
             />
           </div>
         </div>

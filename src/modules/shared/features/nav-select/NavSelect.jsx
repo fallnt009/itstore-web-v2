@@ -24,7 +24,7 @@ export default function NavSelect() {
       <div className="w-full bg-slate-100 rounded-md p-4">
         <div className="relative w-full h-full overflow-hidden pr-5 border-r">
           <div
-            className={`flex transition-transform duration-1000 ease-in-out`}
+            className={`flex transition-transform duration-700 ease-in-out`}
             style={{
               transform: subBarOpen ? `translateX(0%)` : `translateX(-100%)`,
               width: '100%',

@@ -2,10 +2,10 @@ import {useState, useEffect} from 'react';
 
 import useProduct from '../shared/hooks/useProduct';
 
-import MenuContent from './features/menu/MenuContent';
-import BestDealsContent from './features/bestDeals/BestDealContent';
-import BannerSlider from './features/banner/BannerSlider';
-import NewArrivalContent from './features/newArrivals/NewArrivalContent';
+import MenuContent from './features/homepage/menu/MenuContent';
+import BestDealsContent from './features/homepage/contents/BestDealContent';
+import BannerSlider from './features/homepage/banner/BannerSlider';
+import NewArrivalContent from './features/homepage/contents/NewArrivalContent';
 
 export default function HomeContainer() {
   //loading for skeleton
@@ -15,27 +15,26 @@ export default function HomeContainer() {
   //useEffect fetchHomeProduct
   useEffect(() => {
     const fetchHomePage = async () => {
+      setLoading(true);
       try {
         await fetchHome();
       } catch (err) {
-        console.log(err);
+        setLoading(false);
+      } finally {
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       }
     };
     fetchHomePage();
   }, [fetchHome]);
-  //HomeQuickMenu
-  //Best Deals
-  //banner
 
-  console.log(Home);
-
-  //newArrivals
   return (
     <div className="px-10 py-10">
       <MenuContent />
-      <BestDealsContent salesProduct={Home.salesProducts} />
+      <BestDealsContent salesProduct={Home.salesProducts} loading={loading} />
       <BannerSlider />
-      <NewArrivalContent newProducts={Home.newProducts} />
+      <NewArrivalContent newProducts={Home.newProducts} loading={loading} />
     </div>
   );
 }

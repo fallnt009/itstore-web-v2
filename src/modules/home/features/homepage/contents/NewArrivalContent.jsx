@@ -3,12 +3,13 @@ import {MdArrowRight} from 'react-icons/md';
 
 import HomeCard from '../card/HomeCard';
 import HomeCardError from '../card/HomeCardError';
+import {NEW_PRODUCT} from '../../../../shared/services/config/routing';
 
 export default function NewArrivalContent({newProducts = [], loading}) {
   const navigate = useNavigate();
 
   const handleRedirect = () => {
-    // navigate(NEW_PRODUCT);
+    navigate(NEW_PRODUCT);
     navigate(0);
   };
   return (

@@ -1,13 +1,13 @@
-import Carousel from '../../../shared/components/ui/Carousel';
+import Carousel from '../../../../shared/components/ui/Carousel';
 
 import MenuContentItem from './MenuContentItem';
 
-import gpu from '../../../../assets/images/menu/gpu.png';
-import psu from '../../../../assets/images/menu/psu.png';
-import storage from '../../../../assets/images/menu/nvmd.png';
-import glaptop from '../../../../assets/images/menu/gamelaptop.png';
-import cpu from '../../../../assets/images/menu/cpu.png';
-import caseA from '../../../../assets/images/menu/case.png';
+import gpu from '../../../../../assets/images/menu/gpu.png';
+import psu from '../../../../../assets/images/menu/psu.png';
+import storage from '../../../../../assets/images/menu/nvmd.png';
+import glaptop from '../../../../../assets/images/menu/gamelaptop.png';
+import cpu from '../../../../../assets/images/menu/cpu.png';
+import caseA from '../../../../../assets/images/menu/case.png';
 
 export default function MenuContent() {
   const imgUrl = [
