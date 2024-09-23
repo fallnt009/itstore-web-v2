@@ -1,4 +1,4 @@
-export default function filters(subCategorySlug) {
+export default function CategoryFilters(subCategorySlug) {
   let titles = [];
 
   switch (subCategorySlug) {

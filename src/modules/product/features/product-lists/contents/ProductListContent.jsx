@@ -1,42 +1,42 @@
-export default function ProductListContent() {
-  // const {categorySlug, subCategorySlug} = useParams();
-  // const {specItems, specProduct, fetchProductFilter} = useProduct();
+import {useParams} from 'react-router-dom';
+import ProductListHeader from './ProductListHeader';
+import ProductListContentItem from './ProductListContentItem';
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const titles = categoryFilter(subCategorySlug);
-  //       //call fetch
-  //       await fetchProductFilter(subCategorySlug, titles);
-  //     } catch (err) {
-  //       //err
-  //     }
-  //   };
-  //   fetchData();
-  // }, [fetchProductFilter, subCategorySlug]);
+import SidebarFilter from '../../filters/SidebarFilter/SidebarFilter';
+
+export default function ProductListContent({
+  products,
+  filters,
+  loading,
+  onSubmit,
+  setFilters,
+}) {
+  const {categorySlug, subCategorySlug} = useParams();
+
+  const {items, totalItems} = products;
+  const {specItems, specProduct} = filters;
 
   return (
     <div>
-      {/* <CategoryHeader
-    categorySlug={categorySlug}
-    subCategorySlug={subCategorySlug}
-    totalItems={totalItems}
-  />
-  <ActiveFilterContent />
-  <div className="grid grid-cols-[1fr_5fr]">
-    <div>
-      <SidebarFilter
-        specItems={specItems}
-        specProduct={specProduct}
-        onSubmit={onSubmit}
-        setFilters={setFilters}
-        setSearch={setSearch}
+      <ProductListHeader
+        categorySlug={categorySlug}
+        subCategorySlug={subCategorySlug}
+        totalItems={totalItems}
       />
-    </div>
-    <div>
-      <CategoryProductItem product={product} loading={loading} />
-    </div>
-  </div> */}
+      {/* <ActiveFilterContent /> */}
+      <div className="grid grid-cols-[1fr_5fr]">
+        <div>
+          <SidebarFilter
+            specItems={specItems}
+            specProduct={specProduct}
+            onSubmit={onSubmit}
+            setFilters={setFilters}
+          />
+        </div>
+        <div>
+          <ProductListContentItem products={items} loading={loading} />
+        </div>
+      </div>
     </div>
   );
 }

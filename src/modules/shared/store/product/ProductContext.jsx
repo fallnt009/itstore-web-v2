@@ -2,6 +2,8 @@ import {createContext, useCallback, useReducer} from 'react';
 import productReducer, {
   INIT_PRODUCT,
   FETCH_PRODUCT_HOME,
+  FETCH_PRODUCT_LIST,
+  FETCH_PRODUCT_FILTER,
 } from './productReducer';
 
 import * as ProductApi from '../../services/apis/product-api';
@@ -28,8 +30,65 @@ export default function ProductContextProvider({children}) {
       return err.response;
     }
   }, [dispatch]);
+
+  const fetchProductList = useCallback(
+    async (categoryName, subCategoryName, page, limit, search, filters) => {
+      try {
+        const res = await ProductApi.getProductList(
+          categoryName,
+          subCategoryName,
+          page,
+          limit,
+          search,
+          filters
+        );
+        dispatch({
+          type: FETCH_PRODUCT_LIST,
+          payload: {
+            items: res.data.result,
+            itemsFilter: res.data.result,
+            totalItems: res.data.totalItems,
+            totalPages: res.data.totalPages,
+            currentPage: res.data.currentPage,
+          },
+        });
+      } catch (err) {
+        return err.response;
+      }
+    },
+    [dispatch]
+  );
+
+  const fetchProductFilter = useCallback(
+    async (title, subCategorySlug) => {
+      try {
+        const specItem = await ProductApi.getSpecItems(title, subCategorySlug);
+        const specProduct = await ProductApi.getSpecProduct(subCategorySlug);
+
+        dispatch({
+          type: FETCH_PRODUCT_FILTER,
+          payload: {
+            specItems: specItem.data.result,
+            specProduct: specProduct.data.result,
+          },
+        });
+      } catch (err) {
+        return err.response;
+      }
+    },
+    [dispatch]
+  );
   return (
-    <ProductContext.Provider value={{Home: AllProduct.Home, fetchHome}}>
+    <ProductContext.Provider
+      value={{
+        Home: AllProduct.Home,
+        ProductList: AllProduct.ProductList,
+        ProductFilters: AllProduct.ProductFilters,
+        fetchHome,
+        fetchProductList,
+        fetchProductFilter,
+      }}
+    >
       {children}
     </ProductContext.Provider>
   );

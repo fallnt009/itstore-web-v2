@@ -3,9 +3,12 @@ import SidebarFilterContentItem from './SidebarFilterContentItem';
 export default function SidebarFilterContent({
   specItems,
   specProduct,
-  filters,
+  filters = [],
   onSelect,
 }) {
+  console.log(specItems);
+  console.log(specProduct);
+
   return (
     <>
       {specItems?.map((item) => (
@@ -20,7 +23,7 @@ export default function SidebarFilterContent({
               <SidebarFilterContentItem
                 key={filtered.id}
                 item={filtered}
-                isChecked={filters.includes(filtered)}
+                isChecked={filters.some((f) => f.id === filtered.id)}
                 onSelect={onSelect}
               />
             ))}

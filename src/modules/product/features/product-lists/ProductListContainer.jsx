@@ -1,10 +1,19 @@
 import {useState, useEffect, useCallback} from 'react';
 import {useParams} from 'react-router-dom';
 
+import ProductListContent from './contents/ProductListContent';
+import ParginationIndicator from '../../../shared/components/ui/ParginationIndicator';
+import CategoryFilters from '../../utils/CategoryFilters';
+
+import useProduct from '../../../shared/hooks/useProduct';
+
 export default function ProductListContainer() {
   const {categorySlug, subCategorySlug} = useParams();
-  // const {categoryItem, totalItems, totalPages, fetchCategoryItem} =
-  //   useCategory();
+
+  const {ProductList, ProductFilters, fetchProductList, fetchProductFilter} =
+    useProduct();
+
+  const {totalPages} = ProductList;
 
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -12,59 +21,71 @@ export default function ProductListContainer() {
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState([]);
 
-  // const loadCategory = useCallback(async () => {
-  //   setLoading(true);
-  //   try {
-  //     //
-  //     // await fetchCategoryItem(
-  //     //   categorySlug,
-  //     //   subCategorySlug,
-  //     //   page,
-  //     //   12,
-  //     //   search,
-  //     //   filters
-  //     // );
-  //   } catch (err) {
-  //     setLoading(false);
-  //   } finally {
-  //     setTimeout(() => {
-  //       setLoading(false);
-  //     }, 2000);
-  //   }
-  // }, [categorySlug, subCategorySlug, fetchCategoryItem, page, search, filters]);
+  const loadProductList = useCallback(async () => {
+    setLoading(true);
+    try {
+      await fetchProductList(
+        categorySlug,
+        subCategorySlug,
+        page,
+        12,
+        search,
+        filters
+      );
 
-  // useEffect(() => {
-  //   loadCategory();
-  // }, [loadCategory]);
+      //filters function to select on each category
+      const title = CategoryFilters(subCategorySlug);
+      //Fetch ProductFilter
+      await fetchProductFilter(title, subCategorySlug);
+    } catch (err) {
+      setLoading(false);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    }
+  }, [
+    categorySlug,
+    subCategorySlug,
+    fetchProductList,
+    fetchProductFilter,
+    page,
+    search,
+    filters,
+  ]);
 
-  // const handleSubmitFilter = (newFilters, newSearch) => {
-  //   setFilters(newFilters);
-  //   setSearch(newSearch);
-  //   setPage(1);
-  // };
+  useEffect(() => {
+    loadProductList();
+  }, [loadProductList]);
 
-  // const handleChangePage = (newPage) => {
-  //   setPage(newPage);
-  // };
+  const handleSubmitFilter = (newFilters, newSearch) => {
+    setFilters(newFilters);
+    setSearch(newSearch);
+    setPage(1);
+  };
+
+  const handleChangePage = (newPage) => {
+    setPage(newPage);
+  };
 
   return (
     <div className="px-10">
       <div>
-        {/* <CategoryContent
-          product={categoryItem}
-          totalItems={totalItems}
+        <ProductListContent
+          products={ProductList}
+          filters={ProductFilters}
           loading={loading}
           onSubmit={handleSubmitFilter}
           setFilters={setFilters}
           setSearch={setSearch}
-        /> */}
+        />
       </div>
       <div className="flex justify-center gap-2 py-3">
-        {/* <ParginationButton
+        <ParginationIndicator
           page={page}
           totalPages={totalPages}
           handleChange={handleChangePage}
-        /> */}
+        />
       </div>
     </div>
   );
