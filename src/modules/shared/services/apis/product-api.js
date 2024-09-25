@@ -19,11 +19,20 @@ export const getProductList = (
     params: {page, pageSize, search, filters},
   });
 
-//PRODUCT FILTER
+//PRODUCT FILTER & PRODUCT INFO
 
-export const getSpecItems = (title, subCategorySlug) =>
+export const getSpecItems = (subCategorySlug, title) =>
   axios.get(`/products/spec-items/subcategory/${subCategorySlug}`, {
     params: {title},
   });
 export const getSpecProduct = (subCategorySlug) =>
   axios.get('/products/specproduct/filter', {params: {subCategorySlug}});
+
+//PRODUCT INFO
+export const getProductInfo = (categorySlug, subCategorySlug, productSlug) =>
+  axios.get(
+    `/categories/product/${categorySlug}/${subCategorySlug}/${productSlug}`
+  );
+
+export const getSpecText = (productId) =>
+  axios.get(`/products/subspec/public/${productId}`);

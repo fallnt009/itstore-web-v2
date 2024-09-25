@@ -12,7 +12,7 @@ export default function ProductCardButton() {
     let timeoutId;
     try {
       await new Promise((resolve) => {
-        timeoutId = setTimeout(resolve, 2000);
+        timeoutId = setTimeout(resolve, 1000);
       }); // Simulate delay
 
       setStatus('success');

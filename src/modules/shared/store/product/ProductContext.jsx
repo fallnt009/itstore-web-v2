@@ -4,6 +4,7 @@ import productReducer, {
   FETCH_PRODUCT_HOME,
   FETCH_PRODUCT_LIST,
   FETCH_PRODUCT_FILTER,
+  FETCH_PRODUCT_INFO,
 } from './productReducer';
 
 import * as ProductApi from '../../services/apis/product-api';
@@ -62,7 +63,7 @@ export default function ProductContextProvider({children}) {
   const fetchProductFilter = useCallback(
     async (title, subCategorySlug) => {
       try {
-        const specItem = await ProductApi.getSpecItems(title, subCategorySlug);
+        const specItem = await ProductApi.getSpecItems(subCategorySlug, title);
         const specProduct = await ProductApi.getSpecProduct(subCategorySlug);
 
         dispatch({
@@ -78,15 +79,50 @@ export default function ProductContextProvider({children}) {
     },
     [dispatch]
   );
+
+  const fetchProductInfo = useCallback(
+    async (categorySlug, subCategorySlug, productSlug) => {
+      try {
+        //product info api
+        const info = await ProductApi.getProductInfo(
+          categorySlug,
+          subCategorySlug,
+          productSlug
+        );
+
+        const productId = info.data.result.id;
+        //specItems,specDetail api
+        const [specItem, specText] = await Promise.all([
+          ProductApi.getSpecItems(subCategorySlug),
+          ProductApi.getSpecText(productId),
+        ]);
+
+        dispatch({
+          type: FETCH_PRODUCT_INFO,
+          payload: {
+            product: info.data.result,
+            images: info.data.result.ProductImages,
+            specTitle: specItem.data.result,
+            specText: specText.data.result,
+          },
+        });
+      } catch (err) {
+        return err.response;
+      }
+    },
+    [dispatch]
+  );
   return (
     <ProductContext.Provider
       value={{
         Home: AllProduct.Home,
         ProductList: AllProduct.ProductList,
         ProductFilters: AllProduct.ProductFilters,
+        ProductInfo: AllProduct.ProductInfo,
         fetchHome,
         fetchProductList,
         fetchProductFilter,
+        fetchProductInfo,
       }}
     >
       {children}

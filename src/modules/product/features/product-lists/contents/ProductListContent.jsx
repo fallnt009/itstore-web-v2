@@ -3,6 +3,7 @@ import ProductListHeader from './ProductListHeader';
 import ProductListContentItem from './ProductListContentItem';
 
 import SidebarFilter from '../../filters/SidebarFilter/SidebarFilter';
+import TabFilter from '../../filters/TabFilter/TabFilter';
 
 export default function ProductListContent({
   products,
@@ -34,6 +35,7 @@ export default function ProductListContent({
           />
         </div>
         <div>
+          <TabFilter />
           <ProductListContentItem products={items} loading={loading} />
         </div>
       </div>

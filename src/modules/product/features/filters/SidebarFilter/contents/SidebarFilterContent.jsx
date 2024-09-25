@@ -6,9 +6,6 @@ export default function SidebarFilterContent({
   filters = [],
   onSelect,
 }) {
-  console.log(specItems);
-  console.log(specProduct);
-
   return (
     <>
       {specItems?.map((item) => (
