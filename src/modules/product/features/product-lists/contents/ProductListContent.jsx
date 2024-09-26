@@ -4,6 +4,7 @@ import ProductListContentItem from './ProductListContentItem';
 
 import SidebarFilter from '../../filters/SidebarFilter/SidebarFilter';
 import TabFilter from '../../filters/TabFilter/TabFilter';
+import NotFound from '../not-found/NotFound';
 
 export default function ProductListContent({
   products,
@@ -24,7 +25,6 @@ export default function ProductListContent({
         subCategorySlug={subCategorySlug}
         totalItems={totalItems}
       />
-      {/* <ActiveFilterContent /> */}
       <div className="grid grid-cols-[1fr_5fr]">
         <div>
           <SidebarFilter
@@ -36,7 +36,11 @@ export default function ProductListContent({
         </div>
         <div>
           <TabFilter />
-          <ProductListContentItem products={items} loading={loading} />
+          {items.length === 0 ? (
+            <NotFound />
+          ) : (
+            <ProductListContentItem products={items} loading={loading} />
+          )}
         </div>
       </div>
     </div>

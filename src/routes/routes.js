@@ -13,3 +13,6 @@ exports.SALES_PRODUCT = '/product/bestdeals';
 exports.PRODUCT_LIST = '/categories/:categorySlug/:subCategorySlug';
 exports.PRODUCT_INFO =
   '/categories/:categorySlug/:subCategorySlug/:productSlug';
+
+//CART
+exports.MY_CART = '/mycart';

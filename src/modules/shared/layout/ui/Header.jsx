@@ -2,6 +2,8 @@ import {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {MdShoppingCart} from 'react-icons/md';
 
+import {MY_CART, LOGIN} from '../../services/config/routing';
+
 import useAuth from '../../hooks/useAuth';
 import Dropdown from '../../components/ui/Dropdown';
 import AuthToggle from '../../features/dropdown/auth/AuthToggle';
@@ -14,16 +16,9 @@ export default function Header() {
   const navigate = useNavigate();
 
   const handleOnClickCart = (e) => {
-    // startLoading();
-    try {
-      e.preventDefault();
-      // navigate('/yourcart');
-      // navigate(0);
-    } catch (err) {
-      // console.log(err);
-    } finally {
-      // stopLoading();
-    }
+    e.preventDefault();
+    navigate(MY_CART);
+    navigate(0);
   };
 
   return (
@@ -51,7 +46,7 @@ export default function Header() {
               </div>
             </Link>
           ) : (
-            <Link to={'/login'}>
+            <Link to={LOGIN}>
               <div className="flex-2 mx-4 hover:bg-cerulean-blue-800 hover:text-white rounded-full p-2">
                 <MdShoppingCart size={35} />
               </div>

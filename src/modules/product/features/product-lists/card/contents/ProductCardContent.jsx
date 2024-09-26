@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
 import {IoMdHeartEmpty} from 'react-icons/io';
 
+import useCart from '../../../../../shared/hooks/useCart';
 import {PRODUCT_INFO_NAV} from '../../../../../shared/services/config/routing';
 
 import ProductCardImage from './ProductCardImage';
@@ -9,11 +10,11 @@ import ProductCardButton from './button/ProductCardButton';
 
 export default function ProductCardContent({product}) {
   //add to Cart
-  //   const {addCartItem} = useCart();
+  const {addCartItem} = useCart();
 
   //product
   const {
-    // id,
+    id,
     title,
     price,
     qtyInStock,
@@ -52,7 +53,12 @@ export default function ProductCardContent({product}) {
       </Link>
       <div className="flex items-center gap-3 px-2 pt-3 pb-10">
         {/* Add to Cart */}
-        <ProductCardButton />
+        <ProductCardButton
+          id={id}
+          title={title}
+          onAdd={addCartItem}
+          qty={qtyInStock}
+        />
         {/* {qtyInStock === 0 ? (
           <div className="rounded-lg p-2 border border-gray-400 bg-gray-400 text-white font-semibold ">
             Add to Cart

@@ -1,8 +1,8 @@
 import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Spinner from './modules/shared/components/ui/Spinner';
-
 import useLoading from './modules/shared/hooks/useLoading';
-
 import Router from './routes/Router';
 
 function App() {

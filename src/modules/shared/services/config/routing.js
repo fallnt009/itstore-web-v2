@@ -18,3 +18,6 @@ exports.PRODUCT_LIST_NAV = (categorySlug, subCategorySlug) =>
   `/categories/${categorySlug}/${subCategorySlug}`;
 exports.PRODUCT_INFO_NAV = (categorySlug, subCategorySlug, productSlug) =>
   `/categories/${categorySlug}/${subCategorySlug}/${productSlug}`;
+
+//CART
+exports.MY_CART = '/mycart';
