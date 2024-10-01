@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 export default function Footer() {
   return (
     <div className="bg-indigo-700 max-w-full p-10 text-white text-sm">
-      <div className="grid grid-cols-4 p-4">
+      <div className="grid md:grid-cols-4 p-4">
         <Link to={'/'}>
           <div className="flex-2 font-mono font-extrabold text-5xl font-jetmono text-white">
             ITStores

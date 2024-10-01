@@ -1,11 +1,20 @@
 import {Link, useNavigate} from 'react-router-dom';
 import {NumericFormat} from 'react-number-format';
+import {toast} from 'react-toastify';
+
+import useCheckout from '../../../shared/hooks/useCheckout';
+import useLoading from '../../../shared/hooks/useLoading';
+
+import {CHECKOUT_DETAIL} from '../../../shared/services/config/routing';
 
 export default function CartSummary({cart, totalItems}) {
-  // const {createCheckout} = useCheckout();
-  // const {startLoading, stopLoading} = useLoading();
+  const {createCheckout} = useCheckout();
+  const {startLoading, stopLoading} = useLoading();
 
   const navigate = useNavigate();
+
+  const DELIVERY_FEE = 0;
+  const VAT_PERCENTAGE = 7;
 
   //Calculate total price and items
   const totalItemPrice = cart.reduce(
@@ -13,21 +22,23 @@ export default function CartSummary({cart, totalItems}) {
     0
   );
   //define delivery and vat price
-  // const vatPrice = (totalItemPrice + DELIVERY_FEE) * (VAT_PERCENTAGE / 100);
+  const vatPrice = (totalItemPrice + DELIVERY_FEE) * (VAT_PERCENTAGE / 100);
   //Calculate total
-  // const realTotal = totalItemPrice + DELIVERY_FEE + vatPrice;
+  const realTotal = totalItemPrice + DELIVERY_FEE + vatPrice;
 
   const handleOnClickCart = async (e) => {
     e.preventDefault();
-    // startLoading();
+    startLoading();
     try {
-      // await createCheckout();
-      // navigate(CHECKOUT_DETAIL);
+      await createCheckout();
+      navigate(CHECKOUT_DETAIL);
       navigate(0);
     } catch (err) {
-      console.log('something went wrong!');
+      console.log(err);
+
+      toast.error(err);
     } finally {
-      // stopLoading();
+      stopLoading();
     }
   };
 
@@ -38,37 +49,43 @@ export default function CartSummary({cart, totalItems}) {
         {/* Show product and price */}
         <div className=" text-stone-700 text-md mt-5 ">
           <div className="flex justify-between">
-            <div>Products({totalItems})</div>
+            <div>Products ({totalItems})</div>
             {/* price total */}
             <div>
               <NumericFormat
                 value={totalItemPrice}
+                decimalScale={2}
+                fixedDecimalScale={true}
                 displayType="text"
                 thousandSeparator=","
-              />{' '}
-              THB
+                suffix=" THB"
+              />
             </div>
           </div>
           <div className="flex justify-between">
             <div>Delivery price</div>
             <div>
               <NumericFormat
-                // value={DELIVERY_FEE}
+                value={DELIVERY_FEE || 0}
+                decimalScale={2}
+                fixedDecimalScale={true}
                 displayType="text"
                 thousandSeparator=","
-              />{' '}
-              THB
+                suffix=" THB"
+              />
             </div>
           </div>
           <div className="flex justify-between">
-            {/* <div>Vat {VAT_PERCENTAGE}%</div> */}
+            <div>Vat {VAT_PERCENTAGE}%</div>
             <div>
               <NumericFormat
-                // value={vatPrice}
+                value={vatPrice || 0}
+                decimalScale={2}
+                fixedDecimalScale={true}
                 displayType="text"
                 thousandSeparator=","
-              />{' '}
-              THB
+                suffix=" THB"
+              />
             </div>
           </div>
         </div>
@@ -77,7 +94,9 @@ export default function CartSummary({cart, totalItems}) {
           <div className="flex gap-1 items-baseline">
             <div className="text-3xl">
               <NumericFormat
-                // value={realTotal}
+                value={realTotal}
+                decimalScale={2}
+                fixedDecimalScale={true}
                 displayType="text"
                 thousandSeparator=","
               />
@@ -90,7 +109,7 @@ export default function CartSummary({cart, totalItems}) {
         </div>
         {/* if Cart empty cannot proceed payment */}
         <Link
-          className="flex justify-center font-bold text-sm bg-cerulean-blue-800 px-6 py-5 rounded-full text-white mt-5"
+          className="flex justify-center font-bold text-sm bg-indigo-700 border px-6 py-5 rounded-full text-white mt-5 hover:bg-white hover:text-indigo-700 hover:border-indigo-700"
           onClick={handleOnClickCart}
         >
           <div className="text-lg">Go to Checkout</div>

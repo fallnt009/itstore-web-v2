@@ -5,6 +5,8 @@ import {MdShoppingCart} from 'react-icons/md';
 import {MY_CART, LOGIN} from '../../services/config/routing';
 
 import useAuth from '../../hooks/useAuth';
+import useCart from '../../hooks/useCart';
+
 import Dropdown from '../../components/ui/Dropdown';
 import AuthToggle from '../../features/dropdown/auth/AuthToggle';
 import AuthMenu from '../../features/dropdown/auth/AuthMenu';
@@ -13,6 +15,8 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   const {authenUser, logout} = useAuth();
+  const {userCart} = useCart();
+
   const navigate = useNavigate();
 
   const handleOnClickCart = (e) => {
@@ -20,6 +24,8 @@ export default function Header() {
     navigate(MY_CART);
     navigate(0);
   };
+
+  const totalItems = userCart?.reduce((total, item) => total + item.qty, 0);
 
   return (
     <div className="bg-white">
@@ -39,9 +45,17 @@ export default function Header() {
         <div className="flex items-center gap-2">
           {authenUser ? (
             <Link onClick={handleOnClickCart}>
-              <div className="flex-2 mx-4 hover:bg-cerulean-blue-800 hover:text-white rounded-full p-2">
-                <div className="flex">
+              <div className="flex-2 mx-4 hover:bg-cerulean-blue-800 hover:text-indigo-700 rounded-full p-2">
+                <div className="relative  inline-block rounded-full p-1">
                   <MdShoppingCart size={35} />
+                  {totalItems > 0 && (
+                    <span className="absolute -bottom-2 -right-3 flex h-5 w-5">
+                      <span className="animate-ping absolute inline-flex w-full h-full bg-red-600 rounded-full"></span>
+                      <span className="relative inline-flex rounded-full justify-center text-sm bg-red-600 h-5 w-5 text-white font-semibold">
+                        {totalItems}
+                      </span>
+                    </span>
+                  )}
                 </div>
               </div>
             </Link>
@@ -52,18 +66,20 @@ export default function Header() {
               </div>
             </Link>
           )}
-          <Dropdown setOpen={setOpen}>
-            <AuthToggle
-              authenUser={authenUser}
-              onClick={() => setOpen(!open)}
-            />
-            <AuthMenu
-              authenUser={authenUser}
-              logout={logout}
-              open={open}
-              onClose={() => setOpen(false)}
-            />
-          </Dropdown>
+          <div className="rounded-full border-2 hover:border-indigo-700">
+            <Dropdown setOpen={setOpen}>
+              <AuthToggle
+                authenUser={authenUser}
+                onClick={() => setOpen(!open)}
+              />
+              <AuthMenu
+                authenUser={authenUser}
+                logout={logout}
+                open={open}
+                onClose={() => setOpen(false)}
+              />
+            </Dropdown>
+          </div>
         </div>
       </div>
     </div>

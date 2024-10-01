@@ -10,7 +10,6 @@ import {
 } from '../shared/services/config/toast';
 
 import CartContent from './features/contents/CartContent';
-import CartEmpty from './features/CartEmpty';
 import CartLoading from './features/loading/CartLoading';
 
 export default function CartContainer() {
@@ -19,8 +18,6 @@ export default function CartContainer() {
   const {startLoading, stopLoading} = useLoading();
   //loading state
   const [loading, setLoading] = useState(true);
-
-  console.log(userCart);
 
   useEffect(() => {
     if (userCart && userCart.length > 0) {
@@ -38,7 +35,7 @@ export default function CartContainer() {
     startLoading();
     try {
       await updateCartItem(cartItemId, newQty);
-      toast.success(ADDED_SUCCESS);
+      // toast.success(ADDED_SUCCESS);
     } catch (err) {
       toast.error(UNEXPECTED_ERROR);
     } finally {
@@ -47,10 +44,9 @@ export default function CartContainer() {
   };
   const handleDeleteItem = async (cartItemId) => {
     startLoading();
-
     try {
       await removeCartItem(cartItemId);
-      toast.success(DELETE_SUCCESS);
+      // toast.success(DELETE_SUCCESS);
     } catch (err) {
       toast.error(UNEXPECTED_ERROR);
     } finally {

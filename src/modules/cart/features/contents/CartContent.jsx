@@ -3,14 +3,15 @@ import CartSummary from '../summary/CartSummary';
 import CartEmpty from '../CartEmpty';
 
 export default function CartContent({cartItems, onQtyChange, onDelete}) {
-  const totalItems = cartItems?.reduce((total, item) => total + item.qty, 0);
   //render empty page
   if (!cartItems || cartItems.length === 0) {
     return <CartEmpty />;
   }
+
+  const totalItems = cartItems?.reduce((total, item) => total + item.qty, 0);
   return (
     <>
-      <div className="grid grid-cols-[3fr_2fr]">
+      <div className="grid md:grid-cols-[3fr_2fr]">
         {/* ITEM LENGTH */}
         <div className="p-2">
           {/* need to fix cart items total */}
@@ -40,7 +41,7 @@ export default function CartContent({cartItems, onQtyChange, onDelete}) {
         </div>
         {/* proceed to check out */}
         <div>
-          <CartSummary cart={cartItems} totalItem={totalItems} />
+          <CartSummary cart={cartItems} totalItems={totalItems} />
         </div>
       </div>
     </>

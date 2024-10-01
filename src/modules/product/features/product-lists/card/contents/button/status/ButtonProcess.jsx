@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ButtonProcess() {
   return (
-    <div className="flex gap-2 rounded-lg p-2 border border-indigo-600 bg-indigo-600 text-white font-semibold">
+    <div className="flex gap-2 rounded-lg p-2 px-8 border border-indigo-600 bg-indigo-600 text-white font-semibold">
       <div role="status">
         <svg
           aria-hidden="true"
@@ -10,7 +10,6 @@ export default function ButtonProcess() {
           viewBox="0 0 24 24"
         ></svg>
       </div>
-      <h1>Processing</h1>
     </div>
   );
 }

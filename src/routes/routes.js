@@ -16,3 +16,9 @@ exports.PRODUCT_INFO =
 
 //CART
 exports.MY_CART = '/mycart';
+
+//CHECKOUT
+exports.CHECKOUT_MAIN = '/checkout';
+exports.CHECKOUT_DETAILS = 'details';
+exports.CHECKOUT_SERVICES = 'services';
+exports.CHECKOUT_PAYMENT = 'payment';

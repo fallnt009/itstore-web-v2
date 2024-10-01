@@ -42,14 +42,14 @@ export default function CartContentItem({item, onQtyChange, onDelete, limit}) {
           </div>
           <button
             type="button"
-            className="font-bold text-sm hover:bg-indigo-700 px-6 py-3 rounded-3xl hover:text-white"
+            className="font-bold text-sm border border-gray-600 hover:bg-indigo-700 px-6 py-2 rounded-3xl hover:text-white"
             onClick={() => onDelete(item.id)}
           >
             Remove
           </button>
           <button
             type="button"
-            className="font-bold text-sm hover:bg-cerulean-blue-800 px-6 py-3 rounded-3xl hover:text-white"
+            className="font-bold text-sm hover:bg-cerulean-blue-800 px-6 py-2 rounded-3xl border border-gray-600 hover:bg-indigo-700 hover:text-white"
           >
             Save to Wishlist
           </button>

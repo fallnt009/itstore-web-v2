@@ -21,3 +21,8 @@ exports.PRODUCT_INFO_NAV = (categorySlug, subCategorySlug, productSlug) =>
 
 //CART
 exports.MY_CART = '/mycart';
+
+//CHECKOUT
+exports.CHECKOUT_DETAIL = '/checkout/details';
+exports.CHECKOUT_SERVICES = '/checkout/services';
+exports.CHECKOUT_PAYMENT = '/checkout/payment';

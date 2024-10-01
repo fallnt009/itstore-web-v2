@@ -13,18 +13,18 @@ export default function AuthMenuList({authenUser, logout}) {
     <>
       {/* ORDER HISTORY */}
       <button
-        className="flex gap-2 p-2 rounded-md hover:bg-cerulean-blue-100  items-center w-full"
+        className="flex gap-2 p-2 rounded-md hover:bg-slate-200  items-center w-full"
         onClick={handleOnClick}
       >
-        <i className="rounded-full bg-cerulean-blue-800 text-white p-2">
+        <i className="rounded-full bg-indigo-700 text-white p-2">
           <MdHistory />
         </i>
         <p className="text-sm font-regular">Order History</p>
       </button>
       {authenUser.roles === EMPLOYEE ? (
         <Link to="/admin-panel" className="w-full">
-          <button className="flex  gap-2 p-2 rounded-md hover:bg-cerulean-blue-100  items-center w-full">
-            <span className="rounded-full bg-cerulean-blue-800 text-white p-2">
+          <button className="flex  gap-2 p-2 rounded-md hover:bg-slate-200 items-center w-full">
+            <span className="rounded-full bg-indigo-700 text-white p-2">
               <MdAdminPanelSettings />
             </span>
             <p className="text-sm font-regular">Admin Panel</p>
@@ -35,10 +35,10 @@ export default function AuthMenuList({authenUser, logout}) {
       )}
       {/* LOGOUT */}
       <button
-        className="flex  gap-2 p-2 rounded-md hover:bg-cerulean-blue-100  items-center w-full"
+        className="flex  gap-2 p-2 rounded-md hover:bg-slate-200 items-center w-full"
         onClick={logout}
       >
-        <span className="rounded-full bg-cerulean-blue-800 text-white p-2">
+        <span className="rounded-full bg-indigo-700 text-white p-2">
           <MdLogout />
         </span>
         <p className="text-sm font-regular">Log Out</p>

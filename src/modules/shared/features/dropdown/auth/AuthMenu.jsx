@@ -16,7 +16,7 @@ export default function AuthMenu({authenUser, logout, open, onClose}) {
         <>
           <Link
             to={`/profile/${authenUser.id}`}
-            className="flex p-2 px-2 gap-3 items-center rounded-md hover:bg-cerulean-blue-100"
+            className="flex p-2 px-2 gap-3 items-center rounded-md hover:bg-slate-200 "
             onClick={onClose}
           >
             <Avatar size={60} src={authenUser.profileImage} />
@@ -36,7 +36,7 @@ export default function AuthMenu({authenUser, logout, open, onClose}) {
         <>
           <Link
             to={LOGIN}
-            className="flex p-2 px-2 gap-3 items-center rounded-md hover:bg-cerulean-blue-100"
+            className="flex p-2 px-2 gap-3 items-center rounded-md hover:bg-indigo-700 hover:text-white"
             onClick={onClose}
           >
             <Avatar size={60} />
