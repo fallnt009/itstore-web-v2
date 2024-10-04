@@ -8,11 +8,7 @@ import useCheckout from '../../../../shared/hooks/useCheckout';
 import AddressLists from './list/AddressLists';
 import AddressCreateForm from './forms/AddressCreateForm';
 
-export default function AddressContainer({
-  openDrawerWithContent,
-  onClose,
-  setSelect,
-}) {
+export default function AddressContainer({openDrawerWithContent, onClose}) {
   //useAddress
   const {address, addAddress, defaultAddress, setDefaultAddress} = useAddress();
   //useCheckout
@@ -39,7 +35,6 @@ export default function AddressContainer({
     startLoading();
     try {
       setDefaultAddress(addressId);
-      setSelect(true);
       //update addr on checkout
       const data = {userAddressId: addressId};
       await updateCheckout(item.id, data);

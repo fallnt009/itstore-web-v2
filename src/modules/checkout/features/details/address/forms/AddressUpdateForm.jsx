@@ -142,7 +142,7 @@ export default function AddressUpdateForm({
       </div>
       <button
         type="submit"
-        className="flex justify-center rounded-full border-2 py-4 px-5 text-white bg-cerulean-blue-800 font-semibold  "
+        className="flex justify-center rounded-full border-2 py-4 px-5 text-white bg-indigo-700 font-semibold  "
       >
         Save and use this address
       </button>

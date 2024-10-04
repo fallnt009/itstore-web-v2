@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import useAuth from '../../../shared/hooks/useAuth';
 import useDrawer from '../../../shared/hooks/useDrawer';
 import useAddress from '../../../shared/hooks/useAddress';
-import useCheckout from '../../../shared/hooks/useCheckout';
+// import useCheckout from '../../../shared/hooks/useCheckout';
 
 import AddressContainer from './address/AddressContainer';
 import AddressUpdateForm from './address/forms/AddressUpdateForm';
@@ -17,20 +17,15 @@ export default function CheckoutDetails() {
   const {openDrawerWithContent, closeDrawer} = useDrawer();
   const {authenUser} = useAuth();
   const {defaultAddress, updateAddress} = useAddress();
-  // const {selectAddress} = useCheckout(); //replace with components
   //states
-  const [select, setSelect] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState(null);
 
   //if already have default
-  // useEffect(() => {
-  //   if (defaultAddress) {
-  //     selectAddress(defaultAddress);
-  //     setSelect(true);
-  //   } else {
-  //     selectAddress({});
-  //     setSelect(false);
-  //   }
-  // }, [defaultAddress]);
+  useEffect(() => {
+    if (defaultAddress) {
+      setSelectedAddress(defaultAddress);
+    }
+  }, [defaultAddress]);
 
   const handleEditClick = useCallback(() => {
     openDrawerWithContent(
@@ -46,11 +41,10 @@ export default function CheckoutDetails() {
     openDrawerWithContent(
       <AddressContainer
         openDrawerWithContent={openDrawerWithContent}
-        setSelect={setSelect}
         onClose={closeDrawer}
       />
     );
-  }, [openDrawerWithContent, setSelect, closeDrawer]);
+  }, [openDrawerWithContent, closeDrawer]);
 
   return (
     <div className="container grid ">
@@ -78,7 +72,7 @@ export default function CheckoutDetails() {
             )}
           </div>
           <div className="flex flex-col gap-2 py-3">
-            <AddressBox defaultAddress={defaultAddress} setSelect={setSelect} />
+            <AddressBox defaultAddress={defaultAddress} />
             <div>
               <button
                 className="flex justify-center items-center font-semibold p-3 rounded-full border border-black hover:border-2 max-h-12 "
@@ -98,7 +92,7 @@ export default function CheckoutDetails() {
           <div className=" border-t-2 mt-9 font-semibold ">
             <div className="flex flex-col  justify-center gap-3 mt-5">
               <ActiveButton
-                select={select}
+                select={selectedAddress}
                 to={CHECKOUT_SERVICES}
                 activeTitle="Proceed to next"
                 inActiveTitle="Proceed to next"

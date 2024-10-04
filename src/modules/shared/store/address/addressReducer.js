@@ -8,7 +8,7 @@ export const SET_DEFAULT_ADDRESS = 'SET_DEFAULT_ADDRESS';
 //initial state
 export const INIT_ADDRESS = {
   address: [],
-  defaultAddress: {},
+  defaultAddress: null,
 };
 
 function addressReducer(state, action) {

@@ -50,22 +50,18 @@ export default function CheckoutContextProvider({children}) {
 
   const updateCheckout = useCallback(async (checkoutId, data) => {
     try {
-      //await to update
-      const res = await CheckoutApi.updateCheckout(checkoutId, data);
-      console.log(res.data.result);
+      console.log(checkoutId, data);
+
+      await CheckoutApi.updateCheckout(checkoutId, data);
 
       //update (userAddressId,serviceId,paymentId)
-      dispatch({
-        type: UPDATE_CHECKOUT,
-        payload: {},
-      });
     } catch (err) {
       return err.response;
     }
   }, []);
 
   const selectCheckout = useCallback(
-    async (address, service, payment) => {
+    async (address, service, payment, status) => {
       try {
         dispatch({
           type: SELECT_CHECKOUT,
@@ -73,6 +69,7 @@ export default function CheckoutContextProvider({children}) {
             address: address,
             service: service,
             payment: payment,
+            status: status,
           },
         });
       } catch (err) {
@@ -86,6 +83,7 @@ export default function CheckoutContextProvider({children}) {
     <CheckoutContext.Provider
       value={{
         checkout: AllCheckout.checkout,
+        selected: AllCheckout.selected,
         fetchCheckout,
         createCheckout,
         selectCheckout,

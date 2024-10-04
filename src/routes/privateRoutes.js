@@ -9,6 +9,8 @@ import {
 import CartContainer from '../modules/cart';
 import CheckoutContainer from '../modules/checkout';
 import CheckoutDetails from '../modules/checkout/features/details/CheckoutDetails';
+import CheckoutServices from '../modules/checkout/features/services/CheckoutServices';
+import CheckoutPayment from '../modules/checkout/features/payment/CheckoutPayment';
 
 export const privateRoutes = [
   {
@@ -25,9 +27,11 @@ export const privateRoutes = [
       },
       {
         path: CHECKOUT_SERVICES,
+        element: <CheckoutServices />,
       },
       {
         path: CHECKOUT_PAYMENT,
+        element: <CheckoutPayment />,
       },
     ],
   },

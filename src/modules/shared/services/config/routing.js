@@ -26,3 +26,6 @@ exports.MY_CART = '/mycart';
 exports.CHECKOUT_DETAIL = '/checkout/details';
 exports.CHECKOUT_SERVICES = '/checkout/services';
 exports.CHECKOUT_PAYMENT = '/checkout/payment';
+
+//PAYMENT
+exports.PAYMENT_TRANSFER = '/checkout/transferpay';

@@ -10,9 +10,12 @@ import SummaryProductList from './product-list/SummaryProductList';
 export default function CheckoutSummary({defaultAddress, userCart}) {
   const {checkout} = useCheckout();
 
-  const {Service} = checkout;
+  const {item} = checkout;
 
-  const serviceFee = Service?.price;
+  //service item
+  const {Service} = item;
+
+  const serviceFee = Service.price || 0;
 
   //Calculate total price and items
   const itemsPrice = userCart.reduce(

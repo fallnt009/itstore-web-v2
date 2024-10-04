@@ -7,7 +7,7 @@ export default function LoadingContextProvider({children}) {
 
   const startLoading = useCallback(() => setLoading(true), []);
   const stopLoading = useCallback(() => {
-    setLoading(false);
+    setTimeout(() => setLoading(false), 1000);
   }, []);
 
   return (

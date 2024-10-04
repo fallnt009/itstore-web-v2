@@ -6,7 +6,7 @@ export const SELECT_CHECKOUT = 'SELECT_CHECKOUT';
 //initial state
 export const INIT_CHECKOUT = {
   checkout: {item: {}, service: [], payment: []},
-  selected: {address: {}, service: {}, payment: {}},
+  selected: {address: {}, service: {}, payment: {}, status: false},
 };
 
 function checkoutReducer(state, action) {
@@ -36,7 +36,13 @@ function checkoutReducer(state, action) {
           address: action.payload.address,
           service: action.payload.service,
           payment: action.payload.payment,
+          status: action.payload.status,
         },
+      };
+
+    case UPDATE_CHECKOUT:
+      return {
+        ...state,
       };
 
     default:
