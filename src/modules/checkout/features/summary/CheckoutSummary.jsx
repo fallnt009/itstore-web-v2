@@ -8,14 +8,14 @@ import SummaryService from './service/SummaryService';
 import SummaryProductList from './product-list/SummaryProductList';
 
 export default function CheckoutSummary({defaultAddress, userCart}) {
-  const {checkout} = useCheckout();
+  const {checkout, getTotalAmount} = useCheckout();
 
   const {item} = checkout;
 
   //service item
   const {Service} = item;
 
-  const serviceFee = Service.price || 0;
+  const serviceFee = Service?.price || 0;
 
   //Calculate total price and items
   const itemsPrice = userCart.reduce(
@@ -29,12 +29,12 @@ export default function CheckoutSummary({defaultAddress, userCart}) {
     Number(itemsPrice) + Number(serviceFee) + Number(vatAmount);
 
   //send totalamount to the state
-  // useEffect(() => {
-  //   getTotalAmount(totalPrice, itemsPrice);
-  // }, [totalPrice, itemsPrice, getTotalAmount]);
+  useEffect(() => {
+    getTotalAmount(totalPrice, itemsPrice);
+  }, [totalPrice, itemsPrice, getTotalAmount]);
 
   return (
-    <div className="container">
+    <div>
       <div className="flex flex-col gap-5 mx-5 ">
         <div className="flex flex-col gap-2 py-4">
           <SummaryAmount

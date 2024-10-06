@@ -28,4 +28,8 @@ exports.CHECKOUT_SERVICES = '/checkout/services';
 exports.CHECKOUT_PAYMENT = '/checkout/payment';
 
 //PAYMENT
-exports.PAYMENT_TRANSFER = '/checkout/transferpay';
+exports.PAYMENT_TRANSFER = '/checkout/banktransfer';
+
+//STATUS
+exports.ORDER_SUCCESS = (orderNumber) => `/order/success/${orderNumber}`;
+exports.ORDER_DETAIL = (orderNumber) => `/order/details/${orderNumber}`;

@@ -78,7 +78,7 @@ export default function CheckoutServices() {
 
               <Link
                 to={CHECKOUT_DETAIL}
-                className="flex justify-center py-4 px-5 border-black "
+                className="flex justify-center py-4 px-5 border-black hover:text-indigo-700"
               >
                 Back to Shopping
               </Link>

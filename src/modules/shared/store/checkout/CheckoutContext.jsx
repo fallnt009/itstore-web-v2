@@ -1,11 +1,11 @@
-import {createContext, useCallback, useReducer} from 'react';
+import {createContext, useCallback, useReducer, useState} from 'react';
 
 import checkoutReducer, {
   CREATE_CHECKOUT,
   FETCH_CHECKOUT,
+  GET_TOTAL_AMOUNT,
   INIT_CHECKOUT,
   SELECT_CHECKOUT,
-  UPDATE_CHECKOUT,
 } from './checkoutReducer';
 
 import * as CheckoutApi from '../../services/apis/checkout-api';
@@ -14,6 +14,7 @@ const CheckoutContext = createContext();
 
 export default function CheckoutContextProvider({children}) {
   const [AllCheckout, dispatch] = useReducer(checkoutReducer, INIT_CHECKOUT);
+  const [isProcessCompleted, setIsProcessCompleted] = useState(false);
   //FETCH
   const fetchCheckout = useCallback(async () => {
     try {
@@ -78,16 +79,32 @@ export default function CheckoutContextProvider({children}) {
     },
     [dispatch]
   );
+  const getTotalAmount = useCallback(
+    (totalPrice, subTotal) => {
+      dispatch({
+        type: GET_TOTAL_AMOUNT,
+        payload: {totalPrice: totalPrice, subTotal: subTotal},
+      });
+    },
+    [dispatch]
+  );
 
+  const setProcessComplete = useCallback(() => {
+    setIsProcessCompleted(true);
+  }, []);
   return (
     <CheckoutContext.Provider
       value={{
         checkout: AllCheckout.checkout,
         selected: AllCheckout.selected,
+        amount: AllCheckout.amount,
+        isProcessCompleted: isProcessCompleted,
         fetchCheckout,
         createCheckout,
         selectCheckout,
         updateCheckout,
+        getTotalAmount,
+        setProcessComplete,
       }}
     >
       {children}

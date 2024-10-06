@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 import useCheckout from '../../../shared/hooks/useCheckout';
 import useLoading from '../../../shared/hooks/useLoading';
@@ -33,6 +34,8 @@ export default function CheckoutPayment() {
     }
   }, [Payment]);
 
+  console.log(Payment);
+
   //handle onClick update
   const handleOnClickPayment = async (item) => {
     setSelectedPayment(item);
@@ -43,8 +46,10 @@ export default function CheckoutPayment() {
     try {
       //data
       const data = {paymentId: selectedPayment.id};
-      const paymentName = payment.name;
+      const paymentName = Payment?.name;
       //api update
+      console.log(data, paymentName);
+
       await updateCheckout(item.id, data);
       //payment portal
       if (paymentName.toUpperCase() === BANKTRANSFER) {
@@ -53,6 +58,8 @@ export default function CheckoutPayment() {
       }
     } catch (err) {
       //err
+      console.log(err);
+      toast.error(err);
     } finally {
       stopLoading();
     }
@@ -85,7 +92,7 @@ export default function CheckoutPayment() {
 
               <Link
                 to={CHECKOUT_SERVICES}
-                className="flex justify-center py-4 px-5 border-black "
+                className="flex justify-center py-4 px-5 border-black hover:text-indigo-700"
               >
                 Back to Shopping
               </Link>

@@ -1,41 +1,48 @@
 import {Link, useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 import useLoading from '../../../../shared/hooks/useLoading';
-import useOrder from '../../../../shared/hooks/';
+import useOrder from '../../../../shared/hooks/useOrder';
+import useCheckout from '../../../../shared/hooks/useCheckout';
 
 import ActiveButton from '../../../components/ActiveButton';
 import PaymentBankTransferItem from './items/PaymentBankTransferItem';
 
 import {
-  HOME,
   CHECKOUT_SERVICES,
+  ORDER_SUCCESS,
 } from '../../../../shared/services/config/routing';
 
 export default function PaymentBankTransfer() {
+  const {createOrder} = useOrder();
+  const {amount, setProcessComplete} = useCheckout();
   const {startLoading, stopLoading} = useLoading();
-  const navigate = useNavigate();
-  //do tomorrow
-  //order create
-  //amount
-  //start and stop loading
-  //navigate
 
-  //handle submit order
-  ///Order Success ,Order Failed
-  //redirect menu home or go to order details
+  const navigate = useNavigate();
+
+  const {totalPrice, subTotal} = amount;
+
   const handlePlaceOrder = async () => {
     startLoading();
     try {
-      //   const data = {totalAmount: amount.totalAmount, subTotal: amount.subTotal};
-      //   await createOrder(data);
+      //amount price data
+      const data = {totalAmount: totalPrice, subTotal: subTotal};
+      //call api create and keep created order data in order state
+      const order = await createOrder(data);
+
+      const orderNum = order.OrderDetail.orderNumber;
+      //set process complete to access success page
+      setProcessComplete();
+      //navigate
+      navigate(ORDER_SUCCESS(orderNum));
     } catch (err) {
-      console.log(err);
+      toast.error('Something went wrong , Please try again later.');
     } finally {
       stopLoading();
-      navigate(HOME);
       navigate(0);
     }
   };
+
   return (
     <div className="container grid ">
       <div className="mx-24">
@@ -73,7 +80,7 @@ export default function PaymentBankTransfer() {
                 to={''}
                 activeTitle="Confirm your order"
                 inActiveTitle="Confirm your order"
-                // onClick={handlePlaceOrder}
+                onClick={handlePlaceOrder}
               />
 
               <Link

@@ -5,6 +5,7 @@ import DrawerContextProvider from './modules/shared/store/drawer/DrawerContext';
 import ProductContextProvider from './modules/shared/store/product/ProductContext';
 import AddressContextProvider from './modules/shared/store/address/AddressContext';
 import CheckoutContextProvider from './modules/shared/store/checkout/CheckoutContext';
+import OrderContextProvider from './modules/shared/store/order/OrderContext';
 
 export default function ContextWrapper({children}) {
   return (
@@ -14,7 +15,9 @@ export default function ContextWrapper({children}) {
           <CartContextProvider>
             <ProductContextProvider>
               <AddressContextProvider>
-                <CheckoutContextProvider>{children}</CheckoutContextProvider>
+                <CheckoutContextProvider>
+                  <OrderContextProvider>{children}</OrderContextProvider>
+                </CheckoutContextProvider>
               </AddressContextProvider>
             </ProductContextProvider>
           </CartContextProvider>
