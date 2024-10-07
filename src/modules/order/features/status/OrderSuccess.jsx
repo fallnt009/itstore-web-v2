@@ -1,8 +1,22 @@
-import {useParams} from 'react-router-dom';
+import {useParams, useNavigate} from 'react-router-dom';
 import {MdCheckCircle} from 'react-icons/md';
+
+import {HOME, ORDER_DETAIL} from '../../../shared/services/config/routing';
 
 export default function OrderSuccess() {
   const {orderNumber} = useParams();
+  const navigate = useNavigate();
+
+  const handleOnClickNavigate = (type) => {
+    const navigationMap = {
+      home: HOME,
+      orderDetail: ORDER_DETAIL(orderNumber),
+    };
+
+    if (navigationMap[type]) {
+      navigate(navigationMap[type]);
+    }
+  };
 
   return (
     <div className="px-10 py-40">
@@ -25,10 +39,15 @@ export default function OrderSuccess() {
           <button
             type="button"
             className="p-2 px-4 border rounded-lg hover:border-indigo-700 hover:text-white hover:bg-indigo-700"
+            onClick={() => handleOnClickNavigate('home')}
           >
             Go back to Home
           </button>
-          <button className="p-2 px-4 border rounded-lg hover:border-indigo-700 hover:text-white hover:bg-indigo-700">
+          <button
+            type="button"
+            className="p-2 px-4 border rounded-lg hover:border-indigo-700 hover:text-white hover:bg-indigo-700"
+            onClick={() => handleOnClickNavigate('orderDetail')}
+          >
             See your order
           </button>
         </div>

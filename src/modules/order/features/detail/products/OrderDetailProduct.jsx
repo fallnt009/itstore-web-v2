@@ -18,7 +18,7 @@ export default function OrderDetailProduct({item}) {
           <div className="flex font-bold gap-5 justify-start ">
             {productName}
           </div>
-          <div className="font-bold">{price} THB</div>
+          <div className="font-bold">{price || 0} THB</div>
         </div>
         <div className="flex justify-between text-sm text-stone-500 ">
           <p>{productDesc}</p>

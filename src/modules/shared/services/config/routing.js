@@ -32,4 +32,4 @@ exports.PAYMENT_TRANSFER = '/checkout/banktransfer';
 
 //STATUS
 exports.ORDER_SUCCESS = (orderNumber) => `/order/success/${orderNumber}`;
-exports.ORDER_DETAIL = (orderNumber) => `/order/details/${orderNumber}`;
+exports.ORDER_DETAIL = (orderNumber) => `/order/detail/${orderNumber}`;

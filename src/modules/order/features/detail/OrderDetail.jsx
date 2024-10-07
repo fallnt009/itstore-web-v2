@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 
 import useOrder from '../../../shared/hooks/useOrder';
@@ -9,6 +9,7 @@ import OrderPaymentStatus from './status/OrderPaymentStatus';
 import OrderDelivery from './status/OrderDelivery';
 import OrderDeliveryInfo from './status/OrderDeliveryInfo';
 import OrderSummary from './summary/OrderSummary';
+import OrderTracker from './tracker/OrderTracker';
 
 export default function OrderDetail() {
   //params
@@ -16,24 +17,35 @@ export default function OrderDetail() {
   const {order, fetchOrderByNumber} = useOrder();
   //destruct order
   const {detail, product} = order;
+  const {OrderDetail, UserPayment, orderStatus, totalAmount, createdAt} =
+    detail;
+
+  const [currentStatus, setCurrentStatus] = useState(1);
+  const [isCancel, setIsCancel] = useState(false);
+
   //fetch order by orderNumber
   useEffect(() => {
     fetchOrderByNumber(orderNumber);
   }, [fetchOrderByNumber, orderNumber]);
+  //useEffect for setStatus
 
-  console.log(detail);
-  console.log(product);
+  // useEffect(() => {}, []);
 
+  // console.log(detail);
+  // console.log(product);
+  //current stage ,isCancel ?
   return (
-    <div className="container">
-      <div className="grid mx-24 border-2  rounded-2xl p-6">
-        {/* <OrderHeader
+    <div className="py-10 px-10">
+      {/* Add Progress */}
+      <div className="grid p-6">
+        <OrderTracker />
+        <OrderHeader
           OrderDetail={OrderDetail}
           orderStatus={orderStatus}
           createdAt={createdAt}
         />
         <div className="overflow-y-auto max-h-[75vh] ">
-          {orderItems.map((el) => (
+          {product.map((el) => (
             <OrderDetailProduct key={el.id} item={el} />
           ))}
         </div>
@@ -44,7 +56,7 @@ export default function OrderDetail() {
         <div className="grid grid-cols-2 border-t-2 py-5">
           <OrderDeliveryInfo OrderDetail={OrderDetail} />
           <OrderSummary totalAmount={totalAmount} OrderDetail={OrderDetail} />
-        </div> */}
+        </div>
       </div>
     </div>
   );

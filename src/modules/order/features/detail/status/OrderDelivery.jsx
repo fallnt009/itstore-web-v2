@@ -1,10 +1,12 @@
 export default function OrderDelivery({OrderDetail}) {
-  //address
-  const {addressLine1, addressLine2, province, postalCode, phoneNumber} =
-    OrderDetail?.UserAddress?.Address;
+  const {UserAddress, Service} = OrderDetail || {};
 
-  //service
-  const {serviceName, serviceDesc} = OrderDetail?.Service;
+  // //address
+  const {addressLine1, addressLine2, province, postalCode, phoneNumber} =
+    UserAddress?.Address || {};
+
+  // //service
+  const {serviceName, serviceDesc} = Service || {};
 
   return (
     <div>

@@ -1,6 +1,5 @@
 export default function OrderDeliveryInfo({OrderDetail}) {
-  const parcelName = OrderDetail?.deliveryName;
-  const trackingNo = OrderDetail?.trackingNumber;
+  const {deliveryName, trackingNumber} = OrderDetail || {};
 
   return (
     <div>
@@ -8,13 +7,13 @@ export default function OrderDeliveryInfo({OrderDetail}) {
       <div className="py-2">
         <p className="text-stone-500 text-sm">Parcel Service</p>
         <div className="py-2">
-          <p>{parcelName ? parcelName : 'N/A'}</p>
+          <p>{deliveryName ? deliveryName : 'N/A'}</p>
         </div>
       </div>
       <div className="py-2">
         <p className="text-stone-500 text-sm">Tracking Number</p>
         <div className="py-2">
-          <p>{trackingNo ? trackingNo : 'N/A'}</p>
+          <p>{trackingNumber ? trackingNumber : 'N/A'}</p>
         </div>
       </div>
     </div>

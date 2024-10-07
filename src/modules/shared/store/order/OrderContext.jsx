@@ -41,8 +41,6 @@ export default function OrderContextProvider({children}) {
   const fetchOrderByNumber = useCallback(
     async (orderNumber) => {
       try {
-        console.log(orderNumber);
-
         const res = await OrderApi.getOrderByNumber(orderNumber);
 
         dispatch({

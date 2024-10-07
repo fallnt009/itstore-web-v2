@@ -1,7 +1,8 @@
 import {NumericFormat} from 'react-number-format';
 
 export default function OrderSummary({totalAmount, OrderDetail}) {
-  const serviceFee = OrderDetail?.Service?.price;
+  const {Service} = OrderDetail || {};
+  const serviceFee = Service?.price || 0;
 
   const taxCal = Number(totalAmount) * (7 / 100);
   const totalPrice = Number(totalAmount) + Number(serviceFee) + Number(taxCal);

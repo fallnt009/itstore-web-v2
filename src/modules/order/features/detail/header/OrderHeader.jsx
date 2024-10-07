@@ -1,7 +1,7 @@
 import {format} from 'date-fns';
 
 export default function OrderHeader({OrderDetail, orderStatus, createdAt}) {
-  const orderNumber = OrderDetail?.orderNumber;
+  const {orderNumber} = OrderDetail || {};
 
   return (
     <>

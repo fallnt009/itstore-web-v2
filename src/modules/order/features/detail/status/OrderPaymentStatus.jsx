@@ -1,8 +1,8 @@
 import React from 'react';
 
 export default function OrderPaymentStatus({UserPayment}) {
-  const paymentName = UserPayment?.Payment?.name;
-  const paymentStatus = UserPayment?.paymentStatus;
+  const {Payment, paymentStatus} = UserPayment || {};
+  const paymentName = Payment?.name || 'N/A';
 
   return (
     <div>
