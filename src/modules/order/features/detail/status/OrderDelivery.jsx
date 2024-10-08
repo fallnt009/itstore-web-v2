@@ -6,7 +6,8 @@ export default function OrderDelivery({OrderDetail}) {
     UserAddress?.Address || {};
 
   // //service
-  const {serviceName, serviceDesc} = Service || {};
+
+  const {name, description} = Service || {};
 
   return (
     <div>
@@ -26,8 +27,8 @@ export default function OrderDelivery({OrderDetail}) {
       <div className="py-2">
         <p className="text-stone-500 text-sm">Delivery method</p>
         <div className="py-2">
-          <p>{serviceName}</p>
-          <p>{serviceDesc}</p>
+          <p>{name}</p>
+          <p className="text-sm">{description}</p>
         </div>
       </div>
     </div>

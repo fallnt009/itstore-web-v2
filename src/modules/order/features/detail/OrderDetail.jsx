@@ -9,7 +9,6 @@ import OrderPaymentStatus from './status/OrderPaymentStatus';
 import OrderDelivery from './status/OrderDelivery';
 import OrderDeliveryInfo from './status/OrderDeliveryInfo';
 import OrderSummary from './summary/OrderSummary';
-import OrderTracker from './tracker/OrderTracker';
 
 export default function OrderDetail() {
   //params
@@ -37,8 +36,7 @@ export default function OrderDetail() {
   return (
     <div className="py-10 px-10">
       {/* Add Progress */}
-      <div className="grid p-6">
-        <OrderTracker />
+      <div className="grid p-6 border-2 rounded-xl">
         <OrderHeader
           OrderDetail={OrderDetail}
           orderStatus={orderStatus}
