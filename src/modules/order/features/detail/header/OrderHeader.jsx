@@ -1,5 +1,6 @@
 // import {format} from 'date-fns';
-import OrderTracker from '../tracker/OrderTracker';
+// import OrderTracker from '../tracker/OrderTracker';
+import OrderProgress from '../tracker/OrderProgress';
 
 import {convertToLocalTime} from '../../../../shared/utils/toLocalTime';
 
@@ -17,8 +18,8 @@ export default function OrderHeader({OrderDetail, orderStatus, createdAt}) {
           <p>{orderStatus}</p>
         </div>
       </div>
-      <div className="py-2">
-        <OrderTracker />
+      <div className="lg:hidden xl:flex justify-center py-4 ">
+        <OrderProgress />
       </div>
       {/* FOR ORDER STATUS */}
       <div className="flex justify-between gap-5">

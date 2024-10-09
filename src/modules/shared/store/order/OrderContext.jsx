@@ -5,6 +5,7 @@ import * as OrderApi from '../../../shared/services/apis/order-api';
 import orderReducer, {
   FETCH_ORDER_BY_NUMBER,
   FETCH_ORDER_LISTS,
+  SELECT_ORDER_LIST,
   INIT_ORDER,
 } from './orderReducer';
 
@@ -21,7 +22,7 @@ export default function OrderContextProvider({children}) {
       //
       dispatch({
         type: FETCH_ORDER_LISTS,
-        payload: {items: res.data.result},
+        payload: {items: res.data.result, filter: res.data.result},
       });
     } catch (err) {
       return err.response;
@@ -59,7 +60,7 @@ export default function OrderContextProvider({children}) {
 
   //for order filters
   const selectOrderList = (selectIndex) => {
-    // dispatch({type: SELECT_ORDER_LIST, payload: selectIndex});
+    dispatch({type: SELECT_ORDER_LIST, payload: selectIndex});
   };
   //make order history can order in desc or asce
 
@@ -67,9 +68,7 @@ export default function OrderContextProvider({children}) {
     <OrderContext.Provider
       value={{
         order: AllOrder.order,
-        orderFilter: AllOrder.orderFilter,
-        orderItems: AllOrder.orderItems,
-        selectedOrder: AllOrder.selectedOrder,
+        orderList: AllOrder.orderList,
         fetchAllMyOrder,
         fetchOrderByNumber,
         createOrder,

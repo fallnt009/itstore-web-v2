@@ -7,6 +7,7 @@ import {
   CHECKOUT_TRANSFER,
   ORDER_SUCCESS,
   ORDER_DETAIL,
+  ORDER_HISTORY,
 } from './routes';
 
 import CartContainer from '../modules/cart';
@@ -17,10 +18,12 @@ import CheckoutPayment from '../modules/checkout/features/payment/CheckoutPaymen
 
 //payment portal
 import PaymentBankTransfer from '../modules/checkout/features/payment-choices/banktransfer/PaymentBankTransfer';
-import OrderSuccess from '../modules/order/features/status/OrderSuccess';
 //middleware
 import CheckoutGuard from './utils/CheckoutGuard';
+//ORDER
+import OrderSuccess from '../modules/order/features/status/OrderSuccess';
 import OrderDetail from '../modules/order/features/detail/OrderDetail';
+import OrderHistory from '../modules/order/features/history/OrderHistory';
 
 export const privateRoutes = [
   {
@@ -60,5 +63,9 @@ export const privateRoutes = [
   {
     path: ORDER_DETAIL,
     element: <OrderDetail />,
+  },
+  {
+    path: ORDER_HISTORY,
+    element: <OrderHistory />,
   },
 ];

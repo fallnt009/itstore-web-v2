@@ -7,7 +7,6 @@ import {
 //action type
 export const FETCH_ORDER_LISTS = 'FETCH_ORDER_LISTS';
 export const FETCH_ORDER_BY_NUMBER = 'FETCH_ORDER_BY_NUMBER';
-export const SELECT_ORDER = 'SELECT_ORDER';
 export const SELECT_ORDER_LIST = 'SELECT_ORDER_LIST';
 //initial state
 export const INIT_ORDER = {
@@ -24,6 +23,7 @@ function orderReducer(state, action) {
         ...state,
         orderList: {
           items: action.payload.items,
+          filter: action.payload.filter,
         },
       };
     case FETCH_ORDER_BY_NUMBER:
@@ -35,38 +35,33 @@ function orderReducer(state, action) {
         },
       };
 
-    // case SELECT_ORDER:
-    //   return {
-    //     ...state,
-    //     selectedOrder: action.payload.selectedOrder,
-    //     orderItems: action.payload.orderItems,
-    //   };
-    // case SELECT_ORDER_LIST:
-    //   const selectIndex = action.payload;
+    case SELECT_ORDER_LIST:
+      const selectIndex = action.payload;
+      const orderListItem = state.orderList.items;
 
-    //   let filteredList = [];
+      let filteredList = [];
 
-    //   switch (selectIndex) {
-    //     case 0:
-    //       filteredList = state.order.filter(
-    //         (order) => order.orderStatus === ORDER_PENDING
-    //       );
-    //       break;
-    //     case 1:
-    //       filteredList = state.order.filter(
-    //         (order) => order.orderStatus === ORDER_PROCESSING
-    //       );
-    //       break;
-    //     case 2:
-    //       filteredList = state.order.filter(
-    //         (order) => order.orderStatus === ORDER_COMPLETED
-    //       );
-    //       break;
-    //     default:
-    //       return state;
-    //   }
+      switch (selectIndex) {
+        case 0:
+          filteredList = orderListItem.filter(
+            (item) => item.orderStatus === ORDER_PENDING
+          );
+          break;
+        case 1:
+          filteredList = orderListItem.filter(
+            (item) => item.orderStatus === ORDER_PROCESSING
+          );
+          break;
+        case 2:
+          filteredList = orderListItem.filter(
+            (item) => item.orderStatus === ORDER_COMPLETED
+          );
+          break;
+        default:
+          return state;
+      }
 
-    //   return {order: state.order, orderFilter: filteredList};
+      return {orderList: {items: orderListItem, filter: filteredList}};
 
     default:
       return state;

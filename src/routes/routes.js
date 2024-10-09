@@ -28,3 +28,4 @@ exports.CHECKOUT_TRANSFER = 'banktransfer';
 //status
 exports.ORDER_SUCCESS = '/order/success/:orderNumber';
 exports.ORDER_DETAIL = '/order/detail/:orderNumber';
+exports.ORDER_HISTORY = '/order/history';

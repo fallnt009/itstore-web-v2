@@ -6,9 +6,9 @@ export default function OrderStep({id, title, currentStep, isCancel}) {
 
   //title //
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center relative z-10">
       <div
-        className={`h-8 w-8 flex justify-center items-center rounded-full ${
+        className={`h-10 w-10 flex justify-center items-center rounded-full ${
           isCancelled
             ? 'bg-red-500'
             : isCurrentOrPast
@@ -17,14 +17,14 @@ export default function OrderStep({id, title, currentStep, isCancel}) {
         }`}
       >
         {isCancelled ? (
-          <MdCancel className="h-5 w-5 text-white" />
+          <MdCancel className="h-8 w-8 text-white" />
         ) : isCurrentOrPast ? (
-          <MdCheckCircle className="h-5 w-5 text-white" />
+          <MdCheckCircle className="h-8 w-8 text-white" />
         ) : null}
       </div>
       {/* Label */}
-      <p
-        className={`text-sm font-medium pt-2 text-center ${
+      {/* <p
+        className={`text-sm font-medium pt-4 text-center ${
           isCancelled
             ? 'text-red-500'
             : isCurrentOrPast
@@ -33,7 +33,7 @@ export default function OrderStep({id, title, currentStep, isCancel}) {
         }`}
       >
         {title}
-      </p>
+      </p> */}
     </div>
   );
 }
