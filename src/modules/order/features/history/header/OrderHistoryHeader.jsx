@@ -21,7 +21,7 @@ export default function OrderHistoryHeader() {
 
   return (
     <div className="border-r">
-      <div>
+      <div className="py-4">
         <h1 className="font-semibold text-4xl text-cerulean-blue-800">
           Order History
         </h1>

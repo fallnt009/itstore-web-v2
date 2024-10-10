@@ -11,12 +11,12 @@ export const SELECT_ORDER_LIST = 'SELECT_ORDER_LIST';
 //initial state
 export const INIT_ORDER = {
   //single order on success or using order number
-  order: {detail: {}, product: []},
+  order: {detail: {}, product: [], currentStep: 1, isCancel: false},
   //for listing ORDER
   orderList: {items: [], filter: []},
 };
 
-function orderReducer(state, action) {
+function orderReducer(state = INIT_ORDER, action) {
   switch (action.type) {
     case FETCH_ORDER_LISTS:
       return {
@@ -27,11 +27,14 @@ function orderReducer(state, action) {
         },
       };
     case FETCH_ORDER_BY_NUMBER:
+      const {detail, product, currentStep, isCancel} = action.payload;
       return {
         ...state,
         order: {
-          detail: action.payload.detail,
-          product: action.payload.product,
+          detail: detail,
+          product: product,
+          currentStep: currentStep,
+          isCancel: isCancel,
         },
       };
 

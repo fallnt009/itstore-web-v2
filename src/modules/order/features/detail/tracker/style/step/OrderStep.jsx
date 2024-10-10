@@ -1,12 +1,15 @@
 import {MdCheckCircle, MdCancel} from 'react-icons/md';
 
-export default function OrderStep({id, title, currentStep, isCancel}) {
+export default function OrderStep({id, title, currentStep, isCancel, style}) {
   const isCurrentOrPast = currentStep >= id; //check current step
   const isCancelled = isCancel; //check state if cancel
 
   //title //
   return (
-    <div className="flex flex-col justify-center items-center relative z-10">
+    <div
+      className="flex flex-col justify-center items-center relative z-10"
+      style={style}
+    >
       <div
         className={`h-10 w-10 flex justify-center items-center rounded-full ${
           isCancelled

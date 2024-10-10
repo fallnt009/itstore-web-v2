@@ -9,6 +9,14 @@ import orderReducer, {
   INIT_ORDER,
 } from './orderReducer';
 
+import {
+  ORDER_PENDING,
+  ORDER_PROCESSING,
+  ORDER_COMPLETED,
+  ORDER_CANCELED,
+} from '../../services/config/constants';
+import {isCancel} from 'axios';
+
 const OrderContext = createContext();
 
 export default function OrderContextProvider({children}) {
@@ -43,12 +51,29 @@ export default function OrderContextProvider({children}) {
     async (orderNumber) => {
       try {
         const res = await OrderApi.getOrderByNumber(orderNumber);
+        const orderDetail = res.data.result;
+
+        const stepMapping = {
+          [ORDER_PENDING]: {currentStep: 1, isCancel: false},
+          [ORDER_PROCESSING]: {currentStep: 2, isCancel: false},
+          [ORDER_COMPLETED]: {currentStep: 3, isCancel: false},
+          [ORDER_CANCELED]: {currentStep: 4, isCancel: true},
+        };
+
+        const {currentStep, isCancel} = stepMapping[
+          orderDetail.orderStatus
+        ] || {
+          currentStep: 1,
+          isCancel: false,
+        };
 
         dispatch({
           type: FETCH_ORDER_BY_NUMBER,
           payload: {
             detail: res.data.result,
             product: res.data.product,
+            currentStep: currentStep,
+            isCancel: isCancel,
           },
         });
       } catch (err) {

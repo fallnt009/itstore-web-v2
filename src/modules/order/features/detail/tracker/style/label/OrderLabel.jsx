@@ -1,4 +1,4 @@
-export default function OrderLabel({id, title, currentStep, isCancel}) {
+export default function OrderLabel({id, title, currentStep, isCancel, style}) {
   const isCurrentOrPast = currentStep >= id; //check current step
   const isCancelled = isCancel; //check state if cancel
   return (
@@ -10,6 +10,7 @@ export default function OrderLabel({id, title, currentStep, isCancel}) {
           ? 'text-green-500'
           : 'text-gray-500'
       }`}
+      style={style}
     >
       {title}
     </p>

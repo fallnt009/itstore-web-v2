@@ -1,10 +1,17 @@
 // import {format} from 'date-fns';
 // import OrderTracker from '../tracker/OrderTracker';
 import OrderProgress from '../tracker/OrderProgress';
+import OrderHeaderStatus from './status/OrderHeaderStatus';
 
 import {convertToLocalTime} from '../../../../shared/utils/toLocalTime';
 
-export default function OrderHeader({OrderDetail, orderStatus, createdAt}) {
+export default function OrderHeader({
+  OrderDetail,
+  orderStatus,
+  createdAt,
+  currentStep,
+  isCancel,
+}) {
   const {orderNumber} = OrderDetail || {};
 
   return (
@@ -13,13 +20,10 @@ export default function OrderHeader({OrderDetail, orderStatus, createdAt}) {
         <h1 className="font-semibold text-3xl text-gray-700">
           Order# {orderNumber}
         </h1>
-        <div className="flex gap-1 items-center p-2 rounded-lg text-indigo-600 bg-indigo-600 bg-opacity-10">
-          <h4>Status :</h4>
-          <p>{orderStatus}</p>
-        </div>
+        <OrderHeaderStatus orderStatus={orderStatus} />
       </div>
-      <div className="lg:hidden xl:flex justify-center py-4 ">
-        <OrderProgress />
+      <div className="py-4 ">
+        <OrderProgress currentStep={currentStep} isCancel={isCancel} />
       </div>
       {/* FOR ORDER STATUS */}
       <div className="flex justify-between gap-5">
