@@ -85,6 +85,7 @@ export default function OrderContextProvider({children}) {
 
   //for order filters
   const selectOrderList = (selectIndex) => {
+    //get index and filter ?
     dispatch({type: SELECT_ORDER_LIST, payload: selectIndex});
   };
   //make order history can order in desc or asce

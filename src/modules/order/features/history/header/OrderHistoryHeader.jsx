@@ -7,9 +7,11 @@ export default function OrderHistoryHeader() {
   const {selectOrderList} = useOrder();
 
   const orderStatus = [
-    {id: 1, name: 'Pending'},
-    {id: 2, name: 'Processing'},
-    {id: 3, name: 'Completed'},
+    {id: 1, name: 'All'},
+    {id: 2, name: 'Pending'},
+    {id: 3, name: 'Processing'},
+    {id: 4, name: 'Completed'},
+    {id: 5, name: 'Cancelled'},
   ];
 
   const handleSelectIndex = (list) => {
@@ -21,20 +23,13 @@ export default function OrderHistoryHeader() {
 
   return (
     <div className="border-r">
-      <div className="py-4">
-        <h1 className="font-semibold text-4xl text-cerulean-blue-800">
-          Order History
-        </h1>
-      </div>
       <div className="flex flex-col items-start justify-start gap-1 text-xl py-5 pl-1 pr-16">
         {orderStatus.map((list, index) => (
           <button
             key={list.id}
             className={
-              `hover:text-cerulean-blue-800 py-2 text-xl ` +
-              (selectIndex === index
-                ? 'text-cerulean-blue-800 font-semibold'
-                : '')
+              `hover:text-indigo-700 p-2 text-xl ` +
+              (selectIndex === index ? 'text-indigo-700 font-semibold' : '')
             }
             onClick={() => handleSelectIndex(list)}
           >

@@ -2,6 +2,7 @@ import {
   ORDER_PENDING,
   ORDER_PROCESSING,
   ORDER_COMPLETED,
+  ORDER_CANCELED,
 } from '../../../shared/services/config/constants';
 
 //action type
@@ -40,24 +41,32 @@ function orderReducer(state = INIT_ORDER, action) {
 
     case SELECT_ORDER_LIST:
       const selectIndex = action.payload;
-      const orderListItem = state.orderList.items;
+      const orderListItem = state.orderList.items; //array
 
       let filteredList = [];
 
       switch (selectIndex) {
         case 0:
+          filteredList = orderListItem;
+          break;
+        case 1:
           filteredList = orderListItem.filter(
             (item) => item.orderStatus === ORDER_PENDING
           );
           break;
-        case 1:
+        case 2:
           filteredList = orderListItem.filter(
             (item) => item.orderStatus === ORDER_PROCESSING
           );
           break;
-        case 2:
+        case 3:
           filteredList = orderListItem.filter(
             (item) => item.orderStatus === ORDER_COMPLETED
+          );
+          break;
+        case 4:
+          filteredList = orderListItem.filter(
+            (item) => item.orderStatus === ORDER_CANCELED
           );
           break;
         default:
