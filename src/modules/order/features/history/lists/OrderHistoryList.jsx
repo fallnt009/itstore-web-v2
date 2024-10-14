@@ -1,13 +1,24 @@
 // import OrderHistoryFilter from './filter/OrderHistoryFilter';
 import OrderHistoryItem from './item/OrderHistoryItem';
 
-export default function OrderHistoryList({orderFilter, onClick}) {
+import ParginationIndicator from '../../../../shared/components/ui/ParginationIndicator';
+
+export default function OrderHistoryList({
+  status,
+  orderFilter,
+  onClick,
+  page,
+  totalPages,
+  onChange,
+}) {
+  const name = status.name || 'N/A';
   return (
     <div className="px-10">
       <div className="py-10">
         <h1 className="font-semibold text-4xl text-cerulean-blue-800">
           Order History
         </h1>
+        <p className="px-1 py-2 text-gray-500">{name}</p>
       </div>
       {/* <OrderHistoryFilter /> */}
       <div className="border rounded-lg">
@@ -23,6 +34,13 @@ export default function OrderHistoryList({orderFilter, onClick}) {
             <OrderHistoryItem key={item.id} order={item} onClick={onClick} />
           ))}
         </div>
+      </div>
+      <div className="flex justify-center pt-5">
+        <ParginationIndicator
+          page={page}
+          totalPages={totalPages}
+          handleChange={onChange}
+        />
       </div>
     </div>
   );

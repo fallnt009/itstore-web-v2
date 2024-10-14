@@ -15,7 +15,6 @@ import {
   ORDER_COMPLETED,
   ORDER_CANCELED,
 } from '../../services/config/constants';
-import {isCancel} from 'axios';
 
 const OrderContext = createContext();
 
@@ -24,18 +23,25 @@ export default function OrderContextProvider({children}) {
 
   //Order
   ////
-  const fetchAllMyOrder = useCallback(async () => {
-    try {
-      const res = await OrderApi.getMyOrder();
-      //
-      dispatch({
-        type: FETCH_ORDER_LISTS,
-        payload: {items: res.data.result, filter: res.data.result},
-      });
-    } catch (err) {
-      return err.response;
-    }
-  }, [dispatch]);
+  const fetchAllMyOrder = useCallback(
+    async (page, pageSize, filter) => {
+      try {
+        const res = await OrderApi.getMyOrder(page, pageSize, filter);
+
+        dispatch({
+          type: FETCH_ORDER_LISTS,
+          payload: {
+            items: res.data.result,
+            filter: res.data.result,
+            totalPages: res.data.totalPages,
+          },
+        });
+      } catch (err) {
+        return err.response;
+      }
+    },
+    [dispatch]
+  );
 
   const createOrder = useCallback(async (data) => {
     try {

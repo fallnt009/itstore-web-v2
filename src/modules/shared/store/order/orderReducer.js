@@ -14,7 +14,7 @@ export const INIT_ORDER = {
   //single order on success or using order number
   order: {detail: {}, product: [], currentStep: 1, isCancel: false},
   //for listing ORDER
-  orderList: {items: [], filter: []},
+  orderList: {items: [], filter: [], totalPages: 1},
 };
 
 function orderReducer(state = INIT_ORDER, action) {
@@ -25,6 +25,7 @@ function orderReducer(state = INIT_ORDER, action) {
         orderList: {
           items: action.payload.items,
           filter: action.payload.filter,
+          totalPages: action.payload.totalPages,
         },
       };
     case FETCH_ORDER_BY_NUMBER:

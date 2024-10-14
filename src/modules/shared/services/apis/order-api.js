@@ -1,7 +1,7 @@
 import axios from '../config/axios';
 
-export const getMyOrder = () => {
-  return axios.get('/order/myorder');
+export const getMyOrder = (page, pageSize, filter) => {
+  return axios.get('/order/myorder', {params: {page, pageSize, filter}});
 };
 
 export const getOrderByNumber = (orderNumber) => {

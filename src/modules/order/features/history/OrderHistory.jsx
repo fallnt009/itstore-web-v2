@@ -1,11 +1,11 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {MdKeyboardArrowRight} from 'react-icons/md';
 
 import useOrder from '../../../shared/hooks/useOrder';
 import useLoading from '../../../shared/hooks/useLoading';
 
-import OrderHistoryHeader from './header/OrderHistoryHeader';
+import OrderHistoryMenu from './menu/OrderHistoryMenu';
 import OrderHistoryList from './lists/OrderHistoryList';
 import OrderHistoryLoading from './lists/loading/OrderHistoryLoading';
 
@@ -16,14 +16,21 @@ export default function OrderHistory() {
   const {loading, startLoading, stopLoading} = useLoading();
   const navigate = useNavigate();
 
-  const {filter} = orderList;
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
+
+  //status and filter
+  const [status, setStatus] = useState({id: 1, name: 'All'});
+  const [statusFilter, setStatusFilter] = useState('');
+
+  const {filter, totalPages} = orderList;
 
   //fetch Order
   useEffect(() => {
     const loadMyOrder = async () => {
       startLoading();
       try {
-        await fetchAllMyOrder();
+        await fetchAllMyOrder(page, pageSize, statusFilter);
       } catch (err) {
         //fetch error
       } finally {
@@ -31,14 +38,16 @@ export default function OrderHistory() {
       }
     };
     loadMyOrder();
-  }, [fetchAllMyOrder]);
+  }, [fetchAllMyOrder, page, pageSize, statusFilter]);
 
   const handleClickNavigate = (orderNumber) => {
     navigate(ORDER_DETAIL(orderNumber));
     navigate(0);
   };
-  //header
-  //list
+
+  const handleChangePage = (newPage) => {
+    setPage(newPage);
+  };
 
   return (
     <>
@@ -61,10 +70,18 @@ export default function OrderHistory() {
             </div>
           </div>
           <div className="grid grid-cols-[1fr_3fr]">
-            <OrderHistoryHeader />
+            <OrderHistoryMenu
+              status={status}
+              setFilter={setStatusFilter}
+              setStatus={setStatus}
+            />
             <OrderHistoryList
+              status={status}
               orderFilter={filter}
               onClick={handleClickNavigate}
+              page={page}
+              totalPages={totalPages}
+              onChange={handleChangePage}
             />
           </div>
         </div>
