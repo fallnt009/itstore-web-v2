@@ -29,3 +29,6 @@ exports.CHECKOUT_TRANSFER = 'banktransfer';
 exports.ORDER_SUCCESS = '/order/success/:orderNumber';
 exports.ORDER_DETAIL = '/order/detail/:orderNumber';
 exports.ORDER_HISTORY = '/order/history';
+
+//PROFILE
+exports.MY_PROFILE = '/profile/:userId';

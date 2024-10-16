@@ -8,10 +8,13 @@ import {
   ORDER_SUCCESS,
   ORDER_DETAIL,
   ORDER_HISTORY,
+  MY_PROFILE,
 } from './routes';
-
+//CONTAINER
 import CartContainer from '../modules/cart';
 import CheckoutContainer from '../modules/checkout';
+import ProfileContainer from '../modules/profile';
+//CHECKOUT
 import CheckoutDetails from '../modules/checkout/features/details/CheckoutDetails';
 import CheckoutServices from '../modules/checkout/features/services/CheckoutServices';
 import CheckoutPayment from '../modules/checkout/features/payment/CheckoutPayment';
@@ -67,5 +70,9 @@ export const privateRoutes = [
   {
     path: ORDER_HISTORY,
     element: <OrderHistory />,
+  },
+  {
+    path: MY_PROFILE,
+    element: <ProfileContainer />,
   },
 ];

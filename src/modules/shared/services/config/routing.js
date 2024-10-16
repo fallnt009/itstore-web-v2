@@ -34,3 +34,6 @@ exports.PAYMENT_TRANSFER = '/checkout/banktransfer';
 exports.ORDER_SUCCESS = (orderNumber) => `/order/success/${orderNumber}`;
 exports.ORDER_DETAIL = (orderNumber) => `/order/detail/${orderNumber}`;
 exports.ORDER_HISTORY = '/order/history';
+
+//PROFILE
+exports.MY_PROFILE = (userId) => `/profile/${userId}`;

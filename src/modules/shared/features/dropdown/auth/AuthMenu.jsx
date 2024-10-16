@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import Avatar from '../../../components/ui/Avatar';
 import AuthMenuList from './AuthMenuList';
 
-import {LOGIN} from '../../../services/config/routing';
+import {LOGIN, MY_PROFILE} from '../../../services/config/routing';
 
 export default function AuthMenu({authenUser, logout, open, onClose}) {
   return (
@@ -15,7 +15,7 @@ export default function AuthMenu({authenUser, logout, open, onClose}) {
       {authenUser ? (
         <>
           <Link
-            to={`/profile/${authenUser.id}`}
+            to={MY_PROFILE(authenUser.id)}
             className="flex p-2 px-2 gap-3 items-center rounded-md hover:bg-slate-200 "
             onClick={onClose}
           >

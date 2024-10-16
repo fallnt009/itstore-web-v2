@@ -14,11 +14,9 @@ export default function OrderHistoryList({
   const name = status.name || 'N/A';
   return (
     <div className="px-10">
-      <div className="py-10">
-        <h1 className="font-semibold text-4xl text-cerulean-blue-800">
-          Order History
-        </h1>
-        <p className="px-1 py-2 text-gray-500">{name}</p>
+      <div className="pt-10 pb-5">
+        <h1 className="font-semibold text-4xl">Order History</h1>
+        <p className="px-1 pt-2 text-gray-500">{name}</p>
       </div>
       {/* <OrderHistoryFilter /> */}
       <div className="border rounded-lg">
