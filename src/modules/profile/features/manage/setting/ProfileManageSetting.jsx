@@ -8,7 +8,7 @@ export default function ProfileManageSetting({authenUser}) {
         <p className="text-gray-500">Manage Account</p>
       </div>
       <SettingPicture authenUser={authenUser} />
-      <SettingInfo />
+      <SettingInfo authenUser={authenUser} />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import ProfileManageSetting from './setting/ProfileManageSetting';
 
 export default function ProfileManage() {
   const {authenUser} = useAuth();
+  console.log(authenUser);
   //authen user
   //manage container
   //header
