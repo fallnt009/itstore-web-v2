@@ -4,10 +4,9 @@ export default function Avatar({src, size}) {
   return (
     <img
       src={src || blankImg}
-      className={`rounded-full cursor-pointer `}
-      alt="user"
-      width={size}
-      height={size}
+      className={`rounded-full cursor-pointer object-cover`}
+      alt="ava"
+      style={{width: `${size}px`, height: `${size}px`}}
     />
   );
 }

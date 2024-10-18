@@ -22,12 +22,17 @@ const profileSchema = Joi.object({
       'string.empty': 'mobile is required',
       'string.pattern.base': 'phone number must be exactly 10 digits',
     }),
-  currentPassword: Joi.string().alphanum().min(8).trim().messages({
-    'string.alphanum': 'password must contain a number or alphabet',
-    'string.min': 'password must have at least 8 characters',
-  }),
+  currentPassword: Joi.string()
+    .allow('', null)
+    .alphanum()
+    .min(8)
+    .trim()
+    .messages({
+      'string.alphanum': 'password must contain a number or alphabet',
+      'string.min': 'password must have at least 8 characters',
+    }),
 
-  newPassword: Joi.string().alphanum().min(8).trim().messages({
+  newPassword: Joi.string().allow('', null).alphanum().min(8).trim().messages({
     'string.alphanum': 'password must contain a number or alphabet',
     'string.min': 'password must have at least 8 characters',
   }),

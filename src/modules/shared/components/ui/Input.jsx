@@ -23,7 +23,7 @@ export default function Input({
         maxLength={maxLength}
         min={min}
       />
-      {error && <div className=" text-red-500">*{error}</div>}
+      {error && <div className=" text-red-500">{error}</div>}
     </>
   );
 }

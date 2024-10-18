@@ -1,4 +1,4 @@
-import {createContext, useState, useEffect} from 'react';
+import {createContext, useState, useEffect, useCallback} from 'react';
 import {jwtDecode} from 'jwt-decode';
 
 import {
@@ -39,9 +39,17 @@ export default function AuthContextProvider({children}) {
     setAuthenUser(null);
   };
 
-  const updateProfile = (data) => {
-    setAuthenUser({...authenUser, ...data});
-  };
+  const updateProfile = useCallback(async (userId, data) => {
+    try {
+      //add api
+      const res = await authApi.updateProfile(userId, data);
+    } catch (err) {
+      console.log(err);
+
+      return err.response;
+    }
+    // setAuthenUser({...authenUser, ...data});
+  }, []);
 
   const register = async (data) => {
     //need to review

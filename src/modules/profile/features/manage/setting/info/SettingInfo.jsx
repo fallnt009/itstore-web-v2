@@ -1,23 +1,40 @@
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
+import {toast} from 'react-toastify';
+
+import useAuth from '../../../../../shared/hooks/useAuth';
+import useLoading from '../../../../../shared/hooks/useLoading';
 
 import Input from '../../../../../shared/components/ui/Input';
 import PasswordInput from '../../../../components/PasswordInput';
 
 import validateProfile from '../../../../utils/validate-profile';
 
-export default function SettingInfo({authenUser}) {
-  const {firstName, lastName, email, mobile} = authenUser;
+export default function SettingInfo() {
+  const {authenUser, updateProfile} = useAuth();
+  const {startLoading, stopLoading} = useLoading();
   const dataForm = {
-    firstName: firstName || '',
-    lastName: lastName || '',
-    email: email || '',
-    mobile: mobile || '',
+    firstName: authenUser?.firstName || '',
+    lastName: authenUser?.lastName || '',
+    email: authenUser?.email || '',
+    mobile: authenUser?.mobile || '',
     currentPassword: '',
     newPassword: '',
   };
-
+  //form and err
   const [input, setInput] = useState(dataForm);
   const [error, setError] = useState({});
+
+  //sync input state
+  useEffect(() => {
+    setInput({
+      firstName: authenUser?.firstName || '',
+      lastName: authenUser?.lastName || '',
+      email: authenUser?.email || '',
+      mobile: authenUser?.mobile || '',
+      currentPassword: '',
+      newPassword: '',
+    });
+  }, [authenUser]);
 
   const handleChangeInput = useCallback(
     (e) => {
@@ -27,23 +44,34 @@ export default function SettingInfo({authenUser}) {
   );
 
   const handleSubmitForm = async (e) => {
-    e.preventDefault();
-    //validate
-
+    startLoading();
     try {
-      //loading
-      //call api
-      //set input
-      //stop
-      //toast
+      e.preventDefault();
+      //validate
+      const result = validateProfile(input);
+      if (result) {
+        setError(result);
+      } else {
+        setError({});
+        //loading
+        //call api
+        await updateProfile(authenUser.id, input);
+        //reset input
+        //toast
+        // toast.success();
+      }
     } catch (err) {
       //toast
+      // toast.error();
+      console.log(err);
     } finally {
       //stopload
+      stopLoading();
     }
   };
 
   //if password modify need to compare if not send err
+  console.log(input);
 
   return (
     <div className="flex flex-col gap-3 pt-5">
@@ -146,15 +174,15 @@ export default function SettingInfo({authenUser}) {
                 </div>
               </div>
             </div>
+            <div className="pt-5">
+              <button
+                type="submit"
+                className="text-sm font-semibold bg-indigo-700 text-white border rounded-lg p-2 px-4 hover:border-indigo-700 hover:bg-white hover:text-indigo-700"
+              >
+                Save Changes
+              </button>
+            </div>
           </form>
-        </div>
-        <div>
-          <button
-            type="submit"
-            className="text-sm font-semibold bg-indigo-700 text-white border rounded-lg p-2 px-4 hover:border-indigo-700 hover:bg-white hover:text-indigo-700"
-          >
-            Save Changes
-          </button>
         </div>
       </div>
     </div>

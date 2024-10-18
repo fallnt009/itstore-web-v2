@@ -5,11 +5,11 @@ export default function AuthToggle({authenUser, onClick}) {
     <div onClick={onClick}>
       {authenUser ? (
         <>
-          <Avatar size={48} src={authenUser.profileImage} />
+          <Avatar size={50} src={authenUser.profileImage} />
         </>
       ) : (
         <>
-          <Avatar size={48} />
+          <Avatar size={50} />
         </>
       )}
     </div>
