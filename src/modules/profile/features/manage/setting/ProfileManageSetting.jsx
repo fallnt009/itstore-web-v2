@@ -1,15 +1,13 @@
-import {useState} from 'react';
-
 import SettingInfo from './info/SettingInfo';
-import SettingPicture from './picture/SettingPicture';
 
-export default function ProfileManageSetting({authenUser}) {
+export default function ProfileManageSetting() {
   //success
-  const [isSuccess, setIsSuccess] = useState(false);
   //if selectImage
   //isSuccess true === pass
   //if not select can save === pass
   //if select but not success === not pass
+
+  //move setting picture to setting info for better state management
 
   return (
     <div className="px-10">
@@ -17,12 +15,7 @@ export default function ProfileManageSetting({authenUser}) {
         <h1 className="font-semibold">Account</h1>
         <p className="text-gray-500">Manage Account</p>
       </div>
-      <SettingPicture
-        authenUser={authenUser}
-        setIsSuccess={setIsSuccess}
-        isSuccess={isSuccess}
-      />
-      <SettingInfo isSuccess={isSuccess} />
+      <SettingInfo />
     </div>
   );
 }

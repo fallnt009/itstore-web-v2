@@ -29,9 +29,7 @@ export default function ProfileManage() {
           />
         </div>
         <div className="border-l">
-          {indexSlider === 0 && (
-            <ProfileManageSetting authenUser={authenUser} />
-          )}
+          {indexSlider === 0 && <ProfileManageSetting />}
         </div>
       </div>
     </div>

@@ -1,11 +1,16 @@
 import {useEffect, useRef, useState} from 'react';
 
-import useLoading from '../../../../../shared/hooks/useLoading';
+import useLoading from '../../../../../../shared/hooks/useLoading';
 
-import Avatar from '../../../../../shared/components/ui/Avatar';
+import Avatar from '../../../../../../shared/components/ui/Avatar';
 
-export default function SettingPicture({authenUser, isSuccess, setIsSuccess}) {
-  const [selectImage, setSelectImage] = useState(null);
+export default function SettingPicture({
+  authenUser,
+  isSuccess,
+  setIsSuccess,
+  selectImage,
+  setSelectImage,
+}) {
   const [imagePreview, setImagePreview] = useState(authenUser?.profileImage);
   const [errorMsg, setErrorMsg] = useState('');
 

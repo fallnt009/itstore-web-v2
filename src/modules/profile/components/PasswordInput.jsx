@@ -39,7 +39,7 @@ export default function PasswordInput({
           {isVisible ? <IoMdEyeOff size={25} /> : <IoMdEye size={25} />}
         </button>
       </div>
-      {error && <div className=" text-red-500">{error}</div>}
+      {error && <div className=" text-red-500">* {error}</div>}
     </>
   );
 }
