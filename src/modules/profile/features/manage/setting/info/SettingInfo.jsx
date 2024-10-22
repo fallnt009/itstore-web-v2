@@ -10,6 +10,7 @@ import SettingPicture from './picture/SettingPicture';
 import PasswordPopup from './popup/PasswordPopup';
 
 import validateProfile from '../../../../utils/validate-profile';
+import {UNEXPECTED_ERROR} from '../../../../../shared/services/config/toast';
 
 export default function SettingInfo() {
   const {authenUser, updateProfile} = useAuth();
@@ -22,53 +23,77 @@ export default function SettingInfo() {
     mobile: authenUser?.mobile || '',
   };
   //form and err
-  const [input, setInput] = useState(dataForm);
+  const [initialInput, setInitialInput] = useState(dataForm);
+  const [currentInput, setCurrentInput] = useState(dataForm);
   const [error, setError] = useState({});
   //img state
   const [isSuccess, setIsSuccess] = useState(false);
   const [selectImage, setSelectImage] = useState(null);
   //popup
   const [isOpen, setIsOpen] = useState(false);
+  //edit state
+  const [isEdited, setIsEdited] = useState(false);
 
   //sync input state
   useEffect(() => {
-    setInput({
-      firstName: authenUser?.firstName || '',
-      lastName: authenUser?.lastName || '',
-      email: authenUser?.email || '',
-      mobile: authenUser?.mobile || '',
-    });
+    setCurrentInput(dataForm);
+    setInitialInput(dataForm);
   }, [authenUser]);
+
+  // Compare currentInput with initialInput to check if edited
+  useEffect(() => {
+    const isFormEdited =
+      JSON.stringify(currentInput) !== JSON.stringify(initialInput);
+    setIsEdited(isFormEdited);
+  }, [currentInput, initialInput]);
+
+  //track image if edit
+  useEffect(() => {
+    if (selectImage) {
+      setIsEdited(true);
+    }
+  }, [selectImage]);
 
   const handleChangeInput = useCallback(
     (e) => {
-      setInput({...input, [e.target.name]: e.target.value});
+      setCurrentInput({...currentInput, [e.target.name]: e.target.value});
     },
-    [input]
+    [currentInput]
   );
 
   const handleSubmitForm = async (e) => {
+    e.preventDefault();
+    //avoid submission if no change
+    if (!isEdited && !selectImage) return;
+
     startLoading();
+    const formData = new FormData();
+
+    formData.append('firstName', currentInput.firstName);
+    formData.append('lastName', currentInput.lastName);
+    formData.append('email', currentInput.email);
+    formData.append('mobile', currentInput.mobile);
+    formData.append('profileImage', selectImage);
+
     try {
-      e.preventDefault();
       //validate
-      const result = validateProfile(input);
+      const result = validateProfile(currentInput);
       if (result) {
         setError(result);
       } else {
         setError({});
         //call api
-        await updateProfile(authenUser.id, input);
-        //reset input
+        await updateProfile(authenUser.id, formData);
+        //reset state
+        setInitialInput(currentInput);
+        setIsEdited(false);
+        setSelectImage(null);
         //toast
         toast.success('Profile Updated Successfully');
       }
     } catch (err) {
       //toast
-      console.log(err.response);
-
-      toast.error(err.response);
-      console.log(err);
+      toast.error(UNEXPECTED_ERROR);
     } finally {
       //stopload
       stopLoading();
@@ -105,7 +130,7 @@ export default function SettingInfo() {
                       name="firstName"
                       type="text"
                       onChange={handleChangeInput}
-                      value={input.firstName}
+                      value={currentInput.firstName}
                       error={error.firstName}
                     />
                   </div>
@@ -117,7 +142,7 @@ export default function SettingInfo() {
                       name="lastName"
                       type="text"
                       onChange={handleChangeInput}
-                      value={input.lastName}
+                      value={currentInput.lastName}
                       error={error.lastName}
                     />
                   </div>
@@ -137,7 +162,7 @@ export default function SettingInfo() {
                       name="email"
                       type="email"
                       onChange={handleChangeInput}
-                      value={input.email}
+                      value={currentInput.email}
                       error={error.email}
                     />
                   </div>
@@ -175,7 +200,7 @@ export default function SettingInfo() {
                       name="mobile"
                       type="text"
                       onChange={handleChangeInput}
-                      value={input.mobile}
+                      value={currentInput.mobile}
                       error={error.mobile}
                     />
                   </div>
@@ -186,12 +211,14 @@ export default function SettingInfo() {
                   type="submit"
                   className={`text-sm font-semibold border rounded-lg p-2 px-4  ${
                     selectImage
-                      ? selectImage && isSuccess
+                      ? isSuccess && isEdited
                         ? 'bg-indigo-700 text-white border-indigo-700 hover:bg-white hover:text-indigo-700'
                         : 'text-white bg-gray-300'
-                      : 'bg-indigo-700 text-white border-indigo-700 hover:bg-white hover:text-indigo-700'
+                      : isEdited
+                      ? 'bg-indigo-700 text-white border-indigo-700 hover:bg-white hover:text-indigo-700'
+                      : 'text-white bg-gray-300'
                   }`}
-                  disabled={selectImage && !isSuccess}
+                  disabled={selectImage ? !isSuccess || !isEdited : !isEdited}
                 >
                   Save Changes
                 </button>

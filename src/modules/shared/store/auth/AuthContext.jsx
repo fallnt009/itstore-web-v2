@@ -43,12 +43,24 @@ export default function AuthContextProvider({children}) {
     try {
       //add api
       const res = await authApi.updateProfile(userId, data);
-    } catch (err) {
-      console.log(err);
 
+      //console.log(res.data.result);
+      setAuthenUser((prevUser) => ({...prevUser, ...res.data.result}));
+    } catch (err) {
       return err.response;
     }
-    // setAuthenUser({...authenUser, ...data});
+  }, []);
+
+  const updatePassword = useCallback(async (data) => {
+    try {
+      //call api
+      const res = await authApi.updatePassword(data);
+      //get token back
+      setAccessToken(res.data.accessToken);
+      return res;
+    } catch (err) {
+      return err.response;
+    }
   }, []);
 
   const register = async (data) => {
@@ -62,7 +74,14 @@ export default function AuthContextProvider({children}) {
 
   return (
     <AuthContext.Provider
-      value={{authenUser, login, logout, updateProfile, register}}
+      value={{
+        authenUser,
+        login,
+        logout,
+        updateProfile,
+        updatePassword,
+        register,
+      }}
     >
       {children}
     </AuthContext.Provider>

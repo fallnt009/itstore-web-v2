@@ -1,12 +1,19 @@
 import {useState, useCallback} from 'react';
 import {toast} from 'react-toastify';
 
+import useAuth from '../../../../../../shared/hooks/useAuth';
+
 import PasswordInput from '../../../../../components/PasswordInput';
 
 import validatePassword from '../../../../../utils/validate-password';
+import {
+  UNEXPECTED_ERROR,
+  PASSWORD_CHANGE_SUCCESS,
+} from '../../../../../../shared/services/config/toast';
 
 export default function PasswordPopup({onClose}) {
-  //seperate api
+  const {updatePassword} = useAuth();
+
   const [input, setInput] = useState({
     currentPassword: '',
     newPassword: '',
@@ -27,17 +34,20 @@ export default function PasswordPopup({onClose}) {
       const result = validatePassword(input);
 
       if (result) {
-        console.log(result);
-
         setError(result);
       } else {
         setError({});
         //call api here
-        toast.success('Password Changed Successfully');
-        onClose();
+        const res = await updatePassword(input);
+        if (res.status === 200) {
+          toast.success(PASSWORD_CHANGE_SUCCESS);
+          onClose();
+        } else {
+          toast.error(res.data.descEn);
+        }
       }
     } catch (err) {
-      toast.error('Something went wrong. Please try again later.');
+      toast.error(UNEXPECTED_ERROR);
       onClose();
     }
   };

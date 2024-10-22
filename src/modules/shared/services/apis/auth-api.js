@@ -8,3 +8,6 @@ export const getMyProfile = () => axios.get('/auth/me');
 
 export const updateProfile = (userId, data) =>
   axios.patch(`/users/updateinfo/${userId}`, data);
+
+//
+export const updatePassword = (data) => axios.patch(`/auth/updatepa`, data);

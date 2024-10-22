@@ -1,6 +1,6 @@
 import {useEffect, useRef} from 'react';
 
-export default function Dropdown({children, setOpen}) {
+export default function Dropdown({children, setOpen = false}) {
   const dropdownEl = useRef();
 
   useEffect(() => {
