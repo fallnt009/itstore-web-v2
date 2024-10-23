@@ -6,6 +6,8 @@ import NotFoundPage from '../modules/not-found/NotFoundPage';
 import {publicRoutes} from './publicRoutes';
 import {privateRoutes} from './privateRoutes';
 
+import ProtectedRoute from '../modules/auth/features/authen/ProtectedRoute';
+
 export default function Router() {
   const router = createBrowserRouter([
     {
@@ -14,7 +16,11 @@ export default function Router() {
       errorElement: <NotFoundPage />,
     },
     {
-      element: <MainLayout />,
+      element: (
+        <ProtectedRoute>
+          <MainLayout />
+        </ProtectedRoute>
+      ),
       children: privateRoutes,
       errorElement: <NotFoundPage />,
     },

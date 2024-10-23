@@ -12,7 +12,7 @@ export default function RegisterContainer() {
       </div>
       <p className="flex gap-1">
         Already have an account?
-        <Link to={LOGIN} className="font-semibold">
+        <Link to={LOGIN} className="font-semibold hover:text-gray-600">
           Login
         </Link>
       </p>

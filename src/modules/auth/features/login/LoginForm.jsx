@@ -3,6 +3,7 @@ import {toast} from 'react-toastify';
 
 import validateLogin from '../../utils/validate-login';
 import Input from '../../../shared/components/ui/Input';
+import PasswordInput from '../../components/PasswordInput';
 
 import useAuth from '../../../shared/hooks/useAuth';
 import useLoading from '../../../shared/hooks/useLoading';
@@ -47,7 +48,7 @@ export default function LoginForm() {
         error={error.email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <Input
+      <PasswordInput
         type="password"
         placeholder="password"
         name="password"
@@ -58,7 +59,7 @@ export default function LoginForm() {
 
       <button
         type="submit "
-        className="rounded-md border-2 p-2 hover:bg-cerulean-blue-200"
+        className="rounded-md border-2 p-2 border-indigo-600 bg-indigo-600 text-white hover:bg-white hover:text-indigo-600"
       >
         Log In
       </button>

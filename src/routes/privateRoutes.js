@@ -9,11 +9,13 @@ import {
   ORDER_DETAIL,
   ORDER_HISTORY,
   MY_PROFILE,
+  MY_WISHLIST,
 } from './routes';
 //CONTAINER
 import CartContainer from '../modules/cart';
 import CheckoutContainer from '../modules/checkout';
 import ProfileContainer from '../modules/profile';
+import WishlistContainer from '../modules/wishlist';
 //CHECKOUT
 import CheckoutDetails from '../modules/checkout/features/details/CheckoutDetails';
 import CheckoutServices from '../modules/checkout/features/services/CheckoutServices';
@@ -27,6 +29,7 @@ import CheckoutGuard from './utils/CheckoutGuard';
 import OrderSuccess from '../modules/order/features/status/OrderSuccess';
 import OrderDetail from '../modules/order/features/detail/OrderDetail';
 import OrderHistory from '../modules/order/features/history/OrderHistory';
+//Wishlist
 
 export const privateRoutes = [
   {
@@ -74,5 +77,9 @@ export const privateRoutes = [
   {
     path: MY_PROFILE,
     element: <ProfileContainer />,
+  },
+  {
+    path: MY_WISHLIST,
+    element: <WishlistContainer />,
   },
 ];

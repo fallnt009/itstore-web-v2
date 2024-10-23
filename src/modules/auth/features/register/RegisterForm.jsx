@@ -1,12 +1,15 @@
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
 
 import Input from '../../../shared/components/ui/Input';
+import PasswordInput from '../../components/PasswordInput';
 
 import useAuth from '../../../shared/hooks/useAuth';
 import useLoading from '../../../shared/hooks/useLoading';
 
 import validateRegister from '../../utils/validate-register';
+import {LOGIN} from '../../../shared/services/config/routing';
 
 export default function RegisterForm() {
   const [input, setInput] = useState({
@@ -21,6 +24,7 @@ export default function RegisterForm() {
 
   const {register} = useAuth();
   const {startLoading, stopLoading} = useLoading();
+  const navigate = useNavigate();
 
   const handleChangeInput = (e) => {
     setInput({...input, [e.target.name]: e.target.value});
@@ -52,6 +56,9 @@ export default function RegisterForm() {
       toast.error(err.response?.data.message);
     } finally {
       stopLoading();
+      //relocated to login
+      navigate(LOGIN);
+      navigate(0);
     }
   };
 
@@ -59,7 +66,6 @@ export default function RegisterForm() {
     <form className="flex flex-col gap-3" onSubmit={handleSubmitForm}>
       <Input
         type="text"
-        className="rounded-md border-2 p-2"
         placeholder="first name"
         name="firstName"
         value={input.firstName}
@@ -68,7 +74,6 @@ export default function RegisterForm() {
       />
       <Input
         type="text"
-        className="rounded-md border-2 p-2"
         placeholder="last name"
         name="lastName"
         value={input.lastName}
@@ -77,7 +82,6 @@ export default function RegisterForm() {
       />
       <Input
         type="email"
-        className="rounded-md border-2 p-2"
         placeholder="email"
         name="email"
         value={input.email}
@@ -86,25 +90,22 @@ export default function RegisterForm() {
       />
       <Input
         type="text"
-        className="rounded-md border-2 p-2"
         placeholder="mobile"
         name="mobile"
         value={input.mobile}
         error={error.mobile}
         onChange={handleChangeInput}
       />
-      <Input
+      <PasswordInput
         type="password"
-        className="rounded-md border-2 p-2"
         placeholder="password"
         name="password"
         value={input.password}
         error={error.password}
         onChange={handleChangeInput}
       />
-      <Input
+      <PasswordInput
         type="password"
-        className="rounded-md border-2 p-2"
         placeholder="confirm password"
         name="confirmPassword"
         value={input.confirmPassword}
@@ -114,7 +115,7 @@ export default function RegisterForm() {
 
       <button
         type="submit"
-        className="rounded-md border-2 p-2 hover:bg-cerulean-blue-200"
+        className="rounded-md border-2 p-2 border-indigo-600 bg-indigo-600 text-white hover:bg-white hover:text-indigo-600"
       >
         Register
       </button>

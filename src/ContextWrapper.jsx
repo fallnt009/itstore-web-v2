@@ -6,6 +6,7 @@ import ProductContextProvider from './modules/shared/store/product/ProductContex
 import AddressContextProvider from './modules/shared/store/address/AddressContext';
 import CheckoutContextProvider from './modules/shared/store/checkout/CheckoutContext';
 import OrderContextProvider from './modules/shared/store/order/OrderContext';
+import WishlistContextProvider from './modules/shared/store/wishlist/WishlistContext';
 
 export default function ContextWrapper({children}) {
   return (
@@ -16,7 +17,11 @@ export default function ContextWrapper({children}) {
             <ProductContextProvider>
               <AddressContextProvider>
                 <CheckoutContextProvider>
-                  <OrderContextProvider>{children}</OrderContextProvider>
+                  <OrderContextProvider>
+                    <WishlistContextProvider>
+                      {children}
+                    </WishlistContextProvider>
+                  </OrderContextProvider>
                 </CheckoutContextProvider>
               </AddressContextProvider>
             </ProductContextProvider>

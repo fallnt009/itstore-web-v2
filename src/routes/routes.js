@@ -32,3 +32,6 @@ exports.ORDER_HISTORY = '/order/history';
 
 //PROFILE
 exports.MY_PROFILE = '/profile/:userId';
+
+//Wishlist
+exports.MY_WISHLIST = '/mywishlist';

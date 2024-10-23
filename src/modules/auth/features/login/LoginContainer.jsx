@@ -12,7 +12,7 @@ export default function LoginContainer() {
       </div>
       <p className="flex gap-1">
         new to ITSTORE?
-        <Link to={REGISTER} className="font-semibold">
+        <Link to={REGISTER} className="font-semibold hover:text-gray-600">
           Sign Up
         </Link>
       </p>

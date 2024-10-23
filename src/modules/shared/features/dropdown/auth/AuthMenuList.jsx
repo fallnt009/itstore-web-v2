@@ -1,22 +1,35 @@
 import {Link, useNavigate} from 'react-router-dom';
-import {MdHistory, MdLogout, MdAdminPanelSettings} from 'react-icons/md';
+import {
+  MdHistory,
+  MdLogout,
+  MdChecklist,
+  MdAdminPanelSettings,
+} from 'react-icons/md';
 
 import {EMPLOYEE} from '../../../services/config/constants';
-import {ORDER_HISTORY} from '../../../services/config/routing';
+import {ORDER_HISTORY, MY_WISHLIST} from '../../../services/config/routing';
 
 import AuthMenuItem from './item/AuthMenuItem';
 
 export default function AuthMenuList({authenUser, logout}) {
   const navigate = useNavigate();
-  const handleOnClickHistory = () => {
+  const handleToggleOrderHistory = () => {
     navigate(ORDER_HISTORY);
+  };
+  const handleToggleWishlist = () => {
+    navigate(MY_WISHLIST);
   };
   return (
     <>
       <AuthMenuItem
         icon={<MdHistory />}
         title="Order History"
-        onClick={handleOnClickHistory}
+        onClick={handleToggleOrderHistory}
+      />
+      <AuthMenuItem
+        icon={<MdChecklist />}
+        title="Wishlist"
+        onClick={handleToggleWishlist}
       />
       {authenUser.roles === EMPLOYEE ? (
         <Link to="/admin-panel" className="w-full">
