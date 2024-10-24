@@ -1,12 +1,13 @@
 import axios from '../config/axios';
 
 export const getMyWishlist = (page, pageSize) =>
-  axios.get(`/wish/mywishlist`, {
+  axios.get(`/wishlist/me`, {
     params: {page, pageSize},
   });
 
-export const addWishlist = (productId) =>
-  axios.post(`/wish/${productId}/wishlist`);
+export const getInWishlist = () => axios.get(`/wishlist/in`);
+
+export const addWishlist = (productId) => axios.post(`/wishlist/${productId}`);
 
 export const deleteWishlist = (productId) =>
-  axios.delete(`/wish/${productId}/wishlist`);
+  axios.delete(`/wishlist/${productId}`);

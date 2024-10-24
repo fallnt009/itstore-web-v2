@@ -12,13 +12,14 @@ import {PRODUCT_INFO_NAV} from '../../../../../shared/services/config/routing';
 
 export default function WishlistListItem({item}) {
   const {Product} = item || {};
+  console.log(Product);
 
   const {addCartItem} = useCart();
   const {deleteWishlist} = useWishlist();
 
   //Product
   const productId = Product?.id;
-  const productImage = Product?.productImage; //fix this
+  const productImage = Product?.ProductImages;
   const productName = Product?.title;
   const productDesc = Product?.description;
   const productPrice = Product?.price;
@@ -37,7 +38,7 @@ export default function WishlistListItem({item}) {
           className="block justify-center w-[150px]"
           to={PRODUCT_INFO_NAV(categorySlug, subCategorySlug, productSlug)}
         >
-          <Image src={productImage} size="150px" />
+          <Image src={productImage[0]?.path} size="150px" />
         </Link>
         <div className="px-5">
           {/* product detail */}

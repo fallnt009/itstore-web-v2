@@ -4,6 +4,7 @@ import wishlistReducer, {
   FETCH_WISHLIST,
   ADD_WISHLIST,
   DELETE_WISHLIST,
+  FETCH_INWISHLIST,
 } from './wishlistReducer';
 
 import * as WishlistApi from '../../services/apis/wishlist-api';
@@ -34,13 +35,31 @@ export default function WishlistContextProvider({children}) {
     [dispatch]
   );
 
-  const addWishlist = useCallback(async (productId) => {
+  const fetchInWishlist = useCallback(async () => {
     try {
-      const res = await WishlistApi.addWishlist(productId);
+      const res = await WishlistApi.getInWishlist();
+
+      dispatch({
+        type: FETCH_INWISHLIST,
+        payload: {inWishlist: res.data.result},
+      });
     } catch (err) {
       return err.response;
     }
-  }, []);
+  }, [dispatch]);
+
+  const addWishlist = useCallback(
+    async (productId) => {
+      try {
+        const res = await WishlistApi.addWishlist(productId);
+        //dispatch
+        dispatch({type: ADD_WISHLIST, payload: {newWishlist: res.data.result}});
+      } catch (err) {
+        return err.response;
+      }
+    },
+    [dispatch]
+  );
 
   const deleteWishlist = useCallback(
     async (productId) => {
@@ -63,7 +82,9 @@ export default function WishlistContextProvider({children}) {
     <WishlistContext.Provider
       value={{
         Wishlist: AllWishlist.Wishlist,
+        inWishlist: AllWishlist.inWishlist,
         fetchMyWishlist,
+        fetchInWishlist,
         addWishlist,
         deleteWishlist,
       }}

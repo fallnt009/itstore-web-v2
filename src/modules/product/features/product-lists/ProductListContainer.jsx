@@ -6,12 +6,14 @@ import ParginationIndicator from '../../../shared/components/ui/ParginationIndic
 import CategoryFilters from '../../utils/CategoryFilters';
 
 import useProduct from '../../../shared/hooks/useProduct';
+import useWishlist from '../../../shared/hooks/useWishlist';
 
 export default function ProductListContainer() {
   const {categorySlug, subCategorySlug} = useParams();
 
   const {ProductList, ProductFilters, fetchProductList, fetchProductFilter} =
     useProduct();
+  const {inWishlist, fetchInWishlist} = useWishlist();
 
   const {totalPages} = ProductList;
 
@@ -37,6 +39,8 @@ export default function ProductListContainer() {
       const title = CategoryFilters(subCategorySlug);
       //Fetch ProductFilter
       await fetchProductFilter(title, subCategorySlug);
+      //laad wishlist
+      await fetchInWishlist();
     } catch (err) {
       setLoading(false);
     } finally {
@@ -49,6 +53,7 @@ export default function ProductListContainer() {
     subCategorySlug,
     fetchProductList,
     fetchProductFilter,
+    fetchInWishlist,
     page,
     search,
     filters,
@@ -73,6 +78,7 @@ export default function ProductListContainer() {
       <div>
         <ProductListContent
           products={ProductList}
+          inWishlist={inWishlist}
           filters={ProductFilters}
           loading={loading}
           onSubmit={handleSubmitFilter}

@@ -1,4 +1,6 @@
+import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
+
 import ProductListHeader from './ProductListHeader';
 import ProductListContentItem from './ProductListContentItem';
 
@@ -8,6 +10,7 @@ import NotFound from '../not-found/NotFound';
 
 export default function ProductListContent({
   products,
+  inWishlist,
   filters,
   loading,
   onSubmit,
@@ -39,7 +42,11 @@ export default function ProductListContent({
           {items.length === 0 ? (
             <NotFound />
           ) : (
-            <ProductListContentItem products={items} loading={loading} />
+            <ProductListContentItem
+              products={items}
+              inWishlist={inWishlist}
+              loading={loading}
+            />
           )}
         </div>
       </div>
