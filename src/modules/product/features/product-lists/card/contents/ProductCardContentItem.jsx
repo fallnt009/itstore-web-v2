@@ -30,7 +30,7 @@ export default function ProductCardContentItem({
         {/* discount tag */}
         {discount ? (
           <div className="text-sm">
-            <div className="flex justify-between font-semibold">
+            <div className="flex text-base items-center justify-between font-semibold py-1">
               <NumericFormat
                 value={discountPrice}
                 displayType="text"
@@ -38,7 +38,9 @@ export default function ProductCardContentItem({
                 suffix={' THB'}
               />
 
-              <div className="text-red-500">{discount.amount}% off</div>
+              <div className="text-xs p-1 bg-red-500 text-white font-semibold">
+                {discount.amount}% off
+              </div>
             </div>
             <div>
               until {format(new Date(discount.startDate), 'dd/MM/yyyy')} -
@@ -46,7 +48,7 @@ export default function ProductCardContentItem({
             </div>
           </div>
         ) : (
-          <div className=""></div>
+          <div className="pb-12 py-1"></div>
         )}
       </div>
     </div>

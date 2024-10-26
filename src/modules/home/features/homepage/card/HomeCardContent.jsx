@@ -20,7 +20,7 @@ export default function HomeCardContent({product}) {
     ProductSubCategory?.BrandCategorySub?.BrandCategory?.MainCategory?.slug ||
     'unknown';
 
-  const productImages = ProductImages[0]?.path;
+  const productImages = ProductImages?.[0]?.path || '';
 
   return (
     <div className="text-sm px-2 pt-4 pb-4 bg-slate-100 rounded-md ">
@@ -42,8 +42,8 @@ export default function HomeCardContent({product}) {
               src={productImages}
               className={`cursor-pointer hover:border-2 h-full object-contain rounded-md`}
               alt="product"
-              width="200"
-              height="200"
+              width="250"
+              height="250"
             />
           </div>
         </div>

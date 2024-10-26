@@ -9,6 +9,7 @@ import {
   SALES_PRODUCT,
   PRODUCT_LIST,
   PRODUCT_INFO,
+  HELP_CENTER,
 } from './routes';
 
 //Main
@@ -22,6 +23,7 @@ import LoginContainer from '../modules/auth/features/login/LoginContainer';
 import RegisterContainer from '../modules/auth/features/register/RegisterContainer';
 import ProductListContainer from '../modules/product/features/product-lists/ProductListContainer';
 import ProductInfoContainer from '../modules/product/features/product-info/ProductInfoContainer';
+import HelpCenterContainer from '../modules/help-center';
 
 //middleware
 import RedirectIfAuthen from '../modules/auth/features/authen/RedirectIfAuthen';
@@ -69,5 +71,9 @@ export const publicRoutes = [
   {
     path: PRODUCT_INFO,
     element: <ProductInfoContainer />,
+  },
+  {
+    path: HELP_CENTER,
+    element: <HelpCenterContainer />,
   },
 ];

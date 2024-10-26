@@ -50,7 +50,7 @@ export default function HomeCardContentInfo({title, price, discount}) {
           //   </div>
           //   <div className="py-2">until 11/12/21 - 15/12/21</div>
           // </div>
-          <div></div>
+          <div className="py-3 pb-12"></div>
         )}
       </div>
     </div>

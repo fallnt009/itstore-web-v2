@@ -9,9 +9,19 @@ import SpecContent from './spec/SpecContent';
 export default function ProductInfoContent({ProductInfo}) {
   const {images, product, specTitle, specText} = ProductInfo;
 
-  const {title, price, qtyInStock, ProductSubCategory} = product;
+  const {title, price, qtyInStock, ProductSubCategory, ProductDiscount} =
+    product;
+  console.log(product);
+
   const brandName =
     ProductSubCategory?.BrandCategorySub?.BrandCategory?.Brand?.title || '';
+
+  //Discount
+  const discountAmount = ProductDiscount?.Discount?.amount;
+  const discountPercentage = discountAmount / 100;
+
+  const discountCal = Number(price) * discountPercentage;
+  const discountPrice = price - discountCal;
 
   return (
     <div className="py-5 px-20  rounded-lg shadow-xl">
@@ -31,14 +41,44 @@ export default function ProductInfoContent({ProductInfo}) {
           </div>
           {/* Price */}
           <div className="py-5 text-2xl  font-semibold ">
-            <h1>
+            {ProductDiscount ? (
+              <div className="flex gap-3">
+                <div className="line-through">
+                  <NumericFormat
+                    value={price}
+                    displayType="text"
+                    thousandSeparator=","
+                    decimalScale={2}
+                    fixedDecimalScale={true}
+                    suffix=" THB"
+                  />
+                </div>
+                <div className="font-semibold">
+                  <NumericFormat
+                    value={discountPrice}
+                    displayType="text"
+                    thousandSeparator=","
+                    decimalScale={2}
+                    fixedDecimalScale={true}
+                    suffix=" THB"
+                  />
+                </div>
+                <div className="text-xs flex gap-1 pt-1">
+                  <p className="p-1 bg-red-500 text-white font-semibold">
+                    Save {discountAmount} %
+                  </p>
+                </div>
+              </div>
+            ) : (
               <NumericFormat
                 value={price}
                 displayType="text"
                 thousandSeparator=","
+                decimalScale={2}
+                fixedDecimalScale={true}
                 suffix=" THB"
               />
-            </h1>
+            )}
           </div>
           {/*Description box*/}
           <div>{/* <ProductDescription description={description} /> */}</div>

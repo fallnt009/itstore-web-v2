@@ -15,7 +15,7 @@ export default function WishlistMain() {
 
   // fetch wishlist
   useEffect(() => {
-    fetchMyWishlist(page, 4);
+    fetchMyWishlist(page, 8);
   }, [fetchMyWishlist, page]);
   // keep wishlist
 
