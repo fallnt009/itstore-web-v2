@@ -40,3 +40,8 @@ exports.MY_PROFILE = (userId) => `/profile/${userId}`;
 
 //Wishlist
 exports.MY_WISHLIST = '/mywishlist';
+
+//help center
+exports.HELP_CENTER = '/help-center';
+exports.TRACKING_ORDER = '/tracking-order';
+exports.PAYMENT_PROOF = '/payment-proof';

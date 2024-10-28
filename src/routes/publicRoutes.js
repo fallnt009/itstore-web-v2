@@ -10,6 +10,8 @@ import {
   PRODUCT_LIST,
   PRODUCT_INFO,
   HELP_CENTER,
+  TRACKING_ORDER,
+  PAYMENT_PROOF,
 } from './routes';
 
 //Main
@@ -24,6 +26,8 @@ import RegisterContainer from '../modules/auth/features/register/RegisterContain
 import ProductListContainer from '../modules/product/features/product-lists/ProductListContainer';
 import ProductInfoContainer from '../modules/product/features/product-info/ProductInfoContainer';
 import HelpCenterContainer from '../modules/help-center';
+import TrackingOrderContainer from '../modules/help-center/features/tracking/TrackingOrderContainer';
+import PaymentProofContainer from '../modules/help-center/features/payment-proof/PaymentProofContainer';
 
 //middleware
 import RedirectIfAuthen from '../modules/auth/features/authen/RedirectIfAuthen';
@@ -75,5 +79,13 @@ export const publicRoutes = [
   {
     path: HELP_CENTER,
     element: <HelpCenterContainer />,
+  },
+  {
+    path: TRACKING_ORDER,
+    element: <TrackingOrderContainer />,
+  },
+  {
+    path: PAYMENT_PROOF,
+    element: <PaymentProofContainer />,
   },
 ];

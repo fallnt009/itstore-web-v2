@@ -83,7 +83,7 @@ export default function OrderContextProvider({children}) {
           },
         });
       } catch (err) {
-        return err.response;
+        throw err;
       }
     },
     [dispatch]

@@ -1,11 +1,11 @@
 import {useState} from 'react';
-import useAuth from '../../../shared/hooks/useAuth';
+// import useAuth from '../../../shared/hooks/useAuth';
 
 import ProfileManageSidebar from './sidebar/ProfileManageSidebar';
 import ProfileManageSetting from './setting/ProfileManageSetting';
 
 export default function ProfileManage() {
-  const {authenUser} = useAuth();
+  // const {authenUser} = useAuth();
   const [indexSlider, setIndexSlider] = useState(0);
 
   // console.log(authenUser);

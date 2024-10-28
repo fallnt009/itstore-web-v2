@@ -39,5 +39,4 @@ exports.MY_WISHLIST = '/mywishlist';
 exports.HELP_CENTER = '/help-center';
 
 exports.TRACKING_ORDER = '/tracking-order';
-exports.ABOUT_US = '/about-us';
-exports.CONTACT_US = '/contact-us';
+exports.PAYMENT_PROOF = '/payment-proof';
