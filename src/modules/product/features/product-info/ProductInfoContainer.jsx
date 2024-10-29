@@ -1,17 +1,31 @@
+import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 
 import useProduct from '../../../shared/hooks/useProduct';
+import useError from '../../../shared/hooks/useError';
 
 import ProductInfoContent from './contents/ProductInfoContent';
-import {useEffect} from 'react';
+import ErrorPage from '../../../shared/features/error/ErrorPage';
 
 export default function ProductInfoContainer() {
   const {categorySlug, subCategorySlug, productSlug} = useParams();
   const {ProductInfo, fetchProductInfo} = useProduct();
+  const {error, errorStatus, setIsError} = useError();
 
   useEffect(() => {
-    fetchProductInfo(categorySlug, subCategorySlug, productSlug);
+    const loadProductInfo = async () => {
+      try {
+        await fetchProductInfo(categorySlug, subCategorySlug, productSlug);
+      } catch (err) {
+        setIsError(err);
+      }
+    };
+    loadProductInfo();
   }, [fetchProductInfo, categorySlug, subCategorySlug, productSlug]);
+
+  if (error) {
+    return <ErrorPage statusCode={errorStatus} />;
+  }
 
   return (
     <div className="px-10 py-10">

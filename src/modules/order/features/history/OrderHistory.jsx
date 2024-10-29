@@ -4,20 +4,26 @@ import {MdKeyboardArrowRight} from 'react-icons/md';
 
 import useOrder from '../../../shared/hooks/useOrder';
 import useLoading from '../../../shared/hooks/useLoading';
+import useError from '../../../shared/hooks/useError';
 
 import OrderHistoryMenu from './menu/OrderHistoryMenu';
 import OrderHistoryList from './lists/OrderHistoryList';
 import OrderHistoryLoading from './lists/loading/OrderHistoryLoading';
 
 import {HOME, ORDER_DETAIL} from '../../../shared/services/config/routing';
+import ErrorPage from '../../../shared/features/error/ErrorPage';
 
 export default function OrderHistory() {
   const {orderList, fetchAllMyOrder} = useOrder();
   const {loading, startLoading, stopLoading} = useLoading();
+  const {error, errorStatus, setIsError} = useError();
+
   const navigate = useNavigate();
 
+  //pargination
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
+  //Error state
 
   //status and filter
   const [status, setStatus] = useState({id: 1, name: 'All'});
@@ -32,7 +38,7 @@ export default function OrderHistory() {
       try {
         await fetchAllMyOrder(page, pageSize, statusFilter);
       } catch (err) {
-        //fetch error
+        setIsError(err);
       } finally {
         stopLoading();
       }
@@ -48,6 +54,11 @@ export default function OrderHistory() {
   const handleChangePage = (newPage) => {
     setPage(newPage);
   };
+
+  if (error) {
+    // err page here
+    return <ErrorPage statusCode={errorStatus} />;
+  }
 
   return (
     <>

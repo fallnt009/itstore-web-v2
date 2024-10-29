@@ -6,10 +6,12 @@ import useCart from '../shared/hooks/useCart';
 import useAddress from '../shared/hooks/useAddress';
 import useCheckout from '../shared/hooks/useCheckout';
 import useAuth from '../shared/hooks/useAuth';
+import useError from '../shared/hooks/useError';
 
 import CheckoutBreadCrumb from './features/breadcrumb/CheckoutBreadCrumb';
 import CheckoutSummary from './features/summary/CheckoutSummary';
 import SideDrawer from '../shared/components/ui/SideDrawer';
+import ErrorPage from '../shared/features/error/ErrorPage';
 
 export default function CheckoutContainer() {
   const {closeDrawer, isOpen, drawerContent} = useDrawer();
@@ -17,14 +19,26 @@ export default function CheckoutContainer() {
   const {defaultAddress, fetchMyAddress} = useAddress();
   const {checkout, fetchCheckout} = useCheckout();
   const {authenUser} = useAuth();
+  const {error, errorStatus, setIsError} = useError();
 
   useEffect(() => {
-    if (authenUser) {
-      fetchCart();
-      fetchMyAddress();
-      fetchCheckout();
-    }
+    const loadCheckout = async () => {
+      try {
+        if (authenUser) {
+          await fetchCart();
+          await fetchMyAddress();
+          await fetchCheckout();
+        }
+      } catch (err) {
+        setIsError(err);
+      }
+    };
+    loadCheckout();
   }, [authenUser, fetchCheckout, fetchMyAddress, fetchCart]);
+
+  if (error) {
+    return <ErrorPage statusCode={errorStatus} />;
+  }
 
   return (
     <div className="container ">

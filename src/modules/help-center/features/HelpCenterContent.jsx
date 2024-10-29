@@ -24,7 +24,7 @@ export default function HelpCenterContent() {
           <h1>Help Center</h1>
         </div>
       </div>
-      <div className="flex justify-center py-24 font-semibold text-4xl bg-gray-500">
+      <div className="flex justify-center py-36 font-semibold text-4xl bg-gradient-to-b  from-gray-500 via-gray-400 ">
         <h1 className="text-white">How Can We Help You ?</h1>
       </div>
       <div className="px-10 py-10">

@@ -4,9 +4,11 @@ import {useParams} from 'react-router-dom';
 import ProductListContent from './contents/ProductListContent';
 import ParginationIndicator from '../../../shared/components/ui/ParginationIndicator';
 import CategoryFilters from '../../utils/CategoryFilters';
+import ErrorPage from '../../../shared/features/error/ErrorPage';
 
 import useProduct from '../../../shared/hooks/useProduct';
 import useWishlist from '../../../shared/hooks/useWishlist';
+import useError from '../../../shared/hooks/useError';
 
 export default function ProductListContainer() {
   const {categorySlug, subCategorySlug} = useParams();
@@ -14,6 +16,7 @@ export default function ProductListContainer() {
   const {ProductList, ProductFilters, fetchProductList, fetchProductFilter} =
     useProduct();
   const {inWishlist, fetchInWishlist} = useWishlist();
+  const {error, errorStatus, setIsError} = useError();
 
   const {totalPages} = ProductList;
 
@@ -43,6 +46,8 @@ export default function ProductListContainer() {
       await fetchInWishlist();
     } catch (err) {
       setLoading(false);
+      //add error
+      setIsError(err);
     } finally {
       setTimeout(() => {
         setLoading(false);
@@ -72,6 +77,10 @@ export default function ProductListContainer() {
   const handleChangePage = (newPage) => {
     setPage(newPage);
   };
+
+  if (error) {
+    return <ErrorPage statusCode={errorStatus} />;
+  }
 
   return (
     <div className="px-10">

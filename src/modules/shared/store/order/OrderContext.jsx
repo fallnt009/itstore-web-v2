@@ -37,7 +37,7 @@ export default function OrderContextProvider({children}) {
           },
         });
       } catch (err) {
-        return err.response;
+        throw err;
       }
     },
     [dispatch]
@@ -49,7 +49,7 @@ export default function OrderContextProvider({children}) {
 
       return res.data.result;
     } catch (err) {
-      return err.response;
+      throw err;
     }
   }, []);
 

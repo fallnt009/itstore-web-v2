@@ -17,7 +17,7 @@ export default function CartContextProvider({children}) {
 
       setUserCart(res.data.result.CartItems);
     } catch (err) {
-      return err.response;
+      throw err;
     }
   }, []);
 
@@ -57,7 +57,7 @@ export default function CartContextProvider({children}) {
           setUserCart([...userCart, res.data.result.CartItems[0]]);
         }
       } catch (err) {
-        return err.response;
+        throw err;
       }
     },
     [userCart, setUserCart]
@@ -73,7 +73,7 @@ export default function CartContextProvider({children}) {
         )
       );
     } catch (err) {
-      return err.response;
+      throw err;
     }
   }, []);
 
@@ -82,7 +82,7 @@ export default function CartContextProvider({children}) {
       await CartApi.deletecartItem(itemId);
       setUserCart((prevCart) => prevCart.filter((item) => item.id !== itemId));
     } catch (err) {
-      return err.response;
+      throw err;
     }
   };
 

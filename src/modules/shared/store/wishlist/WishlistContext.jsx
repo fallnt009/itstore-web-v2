@@ -29,7 +29,7 @@ export default function WishlistContextProvider({children}) {
           },
         });
       } catch (err) {
-        return err.response;
+        throw err;
       }
     },
     [dispatch]
@@ -44,7 +44,7 @@ export default function WishlistContextProvider({children}) {
         payload: {inWishlist: res.data.result},
       });
     } catch (err) {
-      return err.response;
+      throw err;
     }
   }, [dispatch]);
 
@@ -55,7 +55,7 @@ export default function WishlistContextProvider({children}) {
         //dispatch
         dispatch({type: ADD_WISHLIST, payload: {newWishlist: res.data.result}});
       } catch (err) {
-        return err.response;
+        throw err;
       }
     },
     [dispatch]
@@ -72,7 +72,7 @@ export default function WishlistContextProvider({children}) {
           },
         });
       } catch (err) {
-        return err.response;
+        throw err;
       }
     },
     [dispatch]

@@ -28,7 +28,7 @@ export default function ProductContextProvider({children}) {
         },
       });
     } catch (err) {
-      return err.response;
+      throw err;
     }
   }, [dispatch]);
 
@@ -54,7 +54,7 @@ export default function ProductContextProvider({children}) {
           },
         });
       } catch (err) {
-        return err.response;
+        throw err;
       }
     },
     [dispatch]
@@ -74,7 +74,7 @@ export default function ProductContextProvider({children}) {
           },
         });
       } catch (err) {
-        return err.response;
+        throw err;
       }
     },
     [dispatch]
@@ -107,7 +107,7 @@ export default function ProductContextProvider({children}) {
           },
         });
       } catch (err) {
-        return err.response;
+        throw err;
       }
     },
     [dispatch]

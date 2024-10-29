@@ -26,7 +26,7 @@ export default function AddressContextProvider({children}) {
         payload: {address: res.data?.result},
       });
     } catch (err) {
-      return err.response;
+      throw err;
     }
   }, [dispatch]);
 
@@ -39,7 +39,7 @@ export default function AddressContextProvider({children}) {
         payload: {newAddress: res.data.result},
       });
     } catch (err) {
-      return err.response;
+      throw err;
     }
   };
 
@@ -52,7 +52,7 @@ export default function AddressContextProvider({children}) {
         payload: {id: addressId, updatedAddress: res.data.result},
       });
     } catch (err) {
-      return err.response;
+      throw err;
     }
   };
 
@@ -65,7 +65,7 @@ export default function AddressContextProvider({children}) {
         payload: {id: addressId},
       });
     } catch (err) {
-      return err.response;
+      throw err;
     }
   };
 
@@ -78,7 +78,7 @@ export default function AddressContextProvider({children}) {
         payload: {address: res.data.result},
       });
     } catch (err) {
-      return err.response;
+      throw err;
     }
   };
 

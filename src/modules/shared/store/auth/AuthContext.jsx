@@ -47,7 +47,7 @@ export default function AuthContextProvider({children}) {
       //console.log(res.data.result);
       setAuthenUser((prevUser) => ({...prevUser, ...res.data.result}));
     } catch (err) {
-      return err.response;
+      throw err;
     }
   }, []);
 
@@ -59,7 +59,7 @@ export default function AuthContextProvider({children}) {
       setAccessToken(res.data.accessToken);
       return res;
     } catch (err) {
-      return err.response;
+      throw err;
     }
   }, []);
 
@@ -68,7 +68,7 @@ export default function AuthContextProvider({children}) {
     try {
       await authApi.register(data);
     } catch (err) {
-      return err.response;
+      throw err;
     }
   };
 

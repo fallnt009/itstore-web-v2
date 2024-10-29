@@ -8,26 +8,30 @@ import CheckoutContextProvider from './modules/shared/store/checkout/CheckoutCon
 import OrderContextProvider from './modules/shared/store/order/OrderContext';
 import WishlistContextProvider from './modules/shared/store/wishlist/WishlistContext';
 
+import ErrorContextProvider from './modules/shared/store/error/ErrorContext';
+
 export default function ContextWrapper({children}) {
   return (
     <LoadingContextProvider>
-      <DrawerContextProvider>
-        <AuthContextProvider>
-          <CartContextProvider>
-            <ProductContextProvider>
-              <AddressContextProvider>
-                <CheckoutContextProvider>
-                  <OrderContextProvider>
-                    <WishlistContextProvider>
-                      {children}
-                    </WishlistContextProvider>
-                  </OrderContextProvider>
-                </CheckoutContextProvider>
-              </AddressContextProvider>
-            </ProductContextProvider>
-          </CartContextProvider>
-        </AuthContextProvider>
-      </DrawerContextProvider>
+      <ErrorContextProvider>
+        <DrawerContextProvider>
+          <AuthContextProvider>
+            <CartContextProvider>
+              <ProductContextProvider>
+                <AddressContextProvider>
+                  <CheckoutContextProvider>
+                    <OrderContextProvider>
+                      <WishlistContextProvider>
+                        {children}
+                      </WishlistContextProvider>
+                    </OrderContextProvider>
+                  </CheckoutContextProvider>
+                </AddressContextProvider>
+              </ProductContextProvider>
+            </CartContextProvider>
+          </AuthContextProvider>
+        </DrawerContextProvider>
+      </ErrorContextProvider>
     </LoadingContextProvider>
   );
 }

@@ -32,7 +32,7 @@ export default function CheckoutContextProvider({children}) {
         },
       });
     } catch (err) {
-      return err.response;
+      throw err;
     }
   }, [dispatch]);
 
@@ -45,7 +45,7 @@ export default function CheckoutContextProvider({children}) {
         payload: {item: res.data.result},
       });
     } catch (err) {
-      return err.response;
+      throw err;
     }
   }, [dispatch]);
 
@@ -57,7 +57,7 @@ export default function CheckoutContextProvider({children}) {
 
       //update (userAddressId,serviceId,paymentId)
     } catch (err) {
-      return err.response;
+      throw err;
     }
   }, []);
 
@@ -74,7 +74,7 @@ export default function CheckoutContextProvider({children}) {
           },
         });
       } catch (err) {
-        return err.response;
+        throw err;
       }
     },
     [dispatch]

@@ -13,6 +13,8 @@ import {
   ORDER_SUCCESS,
 } from '../../../../shared/services/config/routing';
 
+import {UNEXPECTED_ERROR} from '../../../../shared/services/config/toast';
+
 export default function PaymentBankTransfer() {
   const {createOrder} = useOrder();
   const {amount, setProcessComplete} = useCheckout();
@@ -36,7 +38,7 @@ export default function PaymentBankTransfer() {
       //navigate
       navigate(ORDER_SUCCESS(orderNum));
     } catch (err) {
-      toast.error('Something went wrong , Please try again later.');
+      toast.error(UNEXPECTED_ERROR);
     } finally {
       stopLoading();
       navigate(0);

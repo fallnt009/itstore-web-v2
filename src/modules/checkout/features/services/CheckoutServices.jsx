@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 import useCheckout from '../../../shared/hooks/useCheckout';
 import useLoading from '../../../shared/hooks/useLoading';
@@ -13,6 +14,8 @@ import {
   CHECKOUT_DETAIL,
   CHECKOUT_PAYMENT,
 } from '../../../shared/services/config/routing';
+
+import {UNEXPECTED_ERROR} from '../../../shared/services/config/toast';
 
 export default function CheckoutServices() {
   const {checkout, updateCheckout} = useCheckout();
@@ -39,8 +42,7 @@ export default function CheckoutServices() {
       const data = {serviceId: selectService.id};
       await updateCheckout(item.id, data);
     } catch (err) {
-      //err
-      console.log(err);
+      toast.error(UNEXPECTED_ERROR);
     } finally {
       stopLoading();
     }

@@ -3,6 +3,11 @@ import {toast} from 'react-toastify';
 
 import ButtonSuccess from './status/ButtonSuccess';
 
+import {
+  ADD_TOCART,
+  UNEXPECTED_ERROR,
+} from '../../../../../../shared/services/config/toast';
+
 export default function WishlistAddCartButton({id, title, onAdd}) {
   const [status, setStatus] = useState('add');
 
@@ -14,14 +19,14 @@ export default function WishlistAddCartButton({id, title, onAdd}) {
         timeoutId = setTimeout(resolve, 500);
       }); // Simulate delay
       await onAdd(id);
-      toast.success(`"${title}" Added`);
+      toast.success(ADD_TOCART(title));
       setStatus('success');
       timeoutId = setTimeout(() => {
         setStatus('add'); // Reset to 'add'
       }, 1000);
     } catch (err) {
       setStatus('error');
-      toast.error('Error! try again later.');
+      toast.error(UNEXPECTED_ERROR);
       timeoutId = setTimeout(() => {
         setStatus('add'); // Reset to 'add'
       }, 1000);

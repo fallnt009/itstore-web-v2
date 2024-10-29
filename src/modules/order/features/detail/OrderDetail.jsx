@@ -1,9 +1,10 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useParams, Link} from 'react-router-dom';
 import {MdKeyboardArrowRight} from 'react-icons/md';
 
 import useOrder from '../../../shared/hooks/useOrder';
 import useLoading from '../../../shared/hooks/useLoading';
+import useError from '../../../shared/hooks/useError';
 
 import OrderHeader from './header/OrderHeader';
 import OrderDetailProduct from './products/OrderDetailProduct';
@@ -13,6 +14,8 @@ import OrderDeliveryInfo from './status/OrderDeliveryInfo';
 import OrderSummary from './summary/OrderSummary';
 import OrderDetailLoading from './loading/OrderDetailLoading';
 
+import ErrorPage from '../../../shared/features/error/ErrorPage';
+
 import {HOME, ORDER_HISTORY} from '../../../shared/services/config/routing';
 
 export default function OrderDetail() {
@@ -20,6 +23,7 @@ export default function OrderDetail() {
   const {orderNumber} = useParams();
   const {order, fetchOrderByNumber} = useOrder();
   const {loading, startLoading, stopLoading} = useLoading();
+  const {error, errorStatus, setIsError} = useError();
 
   //destruct order
   const {detail, product, currentStep, isCancel} = order;
@@ -32,13 +36,17 @@ export default function OrderDetail() {
       try {
         await fetchOrderByNumber(orderNumber);
       } catch (err) {
-        //err for fetch
+        setIsError(err);
       } finally {
         stopLoading();
       }
     };
     loadOrder();
   }, [fetchOrderByNumber, orderNumber]);
+
+  if (error) {
+    return <ErrorPage statusCode={errorStatus} />;
+  }
 
   return (
     <div className="py-10 px-10">

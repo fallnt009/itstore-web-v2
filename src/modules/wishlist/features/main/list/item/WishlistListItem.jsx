@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import {toast} from 'react-toastify';
 import {NumericFormat} from 'react-number-format';
 import {MdDeleteForever} from 'react-icons/md';
 
@@ -9,10 +10,13 @@ import Image from '../../../../components/Image';
 import WishlistAddCartButton from './button/WishlistAddCartButton';
 
 import {PRODUCT_INFO_NAV} from '../../../../../shared/services/config/routing';
+import {
+  UNEXPECTED_ERROR,
+  REMOVE_WISHLIST,
+} from '../../../../../shared/services/config/toast';
 
 export default function WishlistListItem({item}) {
   const {Product} = item || {};
-  console.log(Product);
 
   const {
     id,
@@ -45,6 +49,17 @@ export default function WishlistListItem({item}) {
 
   const discountCal = Number(price) * discountPercentage;
   const discountPrice = price - discountCal;
+
+  //handle delete
+  const handleRemoveWishlist = async () => {
+    try {
+      await deleteWishlist(id);
+      //toast
+      toast.success(REMOVE_WISHLIST(title));
+    } catch (err) {
+      toast.err(UNEXPECTED_ERROR);
+    }
+  };
 
   return (
     <div>
@@ -118,7 +133,7 @@ export default function WishlistListItem({item}) {
               <button
                 type="button"
                 className="text-red-500 hover:text-gray-600"
-                onClick={() => deleteWishlist(id)}
+                onClick={handleRemoveWishlist}
               >
                 <MdDeleteForever size={25} />
               </button>

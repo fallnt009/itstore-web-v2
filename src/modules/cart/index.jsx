@@ -3,11 +3,7 @@ import {toast} from 'react-toastify';
 
 import useCart from '../shared/hooks/useCart';
 import useLoading from '../shared/hooks/useLoading';
-import {
-  DELETE_SUCCESS,
-  UNEXPECTED_ERROR,
-  ADDED_SUCCESS,
-} from '../shared/services/config/toast';
+import {UNEXPECTED_ERROR} from '../shared/services/config/toast';
 
 import CartContent from './features/contents/CartContent';
 import CartLoading from './features/loading/CartLoading';
@@ -35,7 +31,6 @@ export default function CartContainer() {
     startLoading();
     try {
       await updateCartItem(cartItemId, newQty);
-      // toast.success(ADDED_SUCCESS);
     } catch (err) {
       toast.error(UNEXPECTED_ERROR);
     } finally {
@@ -46,7 +41,6 @@ export default function CartContainer() {
     startLoading();
     try {
       await removeCartItem(cartItemId);
-      // toast.success(DELETE_SUCCESS);
     } catch (err) {
       toast.error(UNEXPECTED_ERROR);
     } finally {

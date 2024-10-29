@@ -34,8 +34,6 @@ export default function CheckoutPayment() {
     }
   }, [Payment]);
 
-  console.log(Payment);
-
   //handle onClick update
   const handleOnClickPayment = async (item) => {
     setSelectedPayment(item);

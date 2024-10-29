@@ -11,7 +11,6 @@ export default function ProductInfoContent({ProductInfo}) {
 
   const {title, price, qtyInStock, ProductSubCategory, ProductDiscount} =
     product;
-  console.log(product);
 
   const brandName =
     ProductSubCategory?.BrandCategorySub?.BrandCategory?.Brand?.title || '';

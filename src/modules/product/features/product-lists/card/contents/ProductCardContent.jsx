@@ -10,7 +10,11 @@ import ProductCardContentItem from './ProductCardContentItem';
 import ProductCardButton from './button/ProductCardButton';
 
 import {PRODUCT_INFO_NAV} from '../../../../../shared/services/config/routing';
-import {UNEXPECTED_ERROR} from '../../../../../shared/services/config/toast';
+import {
+  UNEXPECTED_ERROR,
+  ADD_WISHLIST,
+  REMOVE_WISHLIST,
+} from '../../../../../shared/services/config/toast';
 
 export default function ProductCardContent({product, inWishlist}) {
   //add to Cart
@@ -43,12 +47,12 @@ export default function ProductCardContent({product, inWishlist}) {
         //delete wishlist
         await deleteWishlist(id);
         //toast
-        toast.success(`Remove ${title} form wishlist`);
+        toast.success(REMOVE_WISHLIST(title));
       } else {
         //add wishlist
         await addWishlist(id);
         //toast
-        toast.success(`Added ${title} to wishlist`);
+        toast.success(ADD_WISHLIST(title));
       }
     } catch (err) {
       //err
