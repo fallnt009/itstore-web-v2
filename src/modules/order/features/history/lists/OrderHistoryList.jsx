@@ -1,5 +1,6 @@
 // import OrderHistoryFilter from './filter/OrderHistoryFilter';
 import OrderHistoryItem from './item/OrderHistoryItem';
+import OrderHistoryEmpty from './empty/OrderHistoryEmpty';
 
 import ParginationIndicator from '../../../../shared/components/ui/ParginationIndicator';
 
@@ -11,6 +12,8 @@ export default function OrderHistoryList({
   totalPages,
   onChange,
 }) {
+  console.log(orderFilter);
+
   const name = status.name || 'N/A';
   return (
     <div className="px-10">
@@ -28,9 +31,13 @@ export default function OrderHistoryList({
           <h4 className="flex justify-center">Action</h4>
         </div>
         <div className="flex-col flex px-5">
-          {orderFilter.map((item) => (
-            <OrderHistoryItem key={item.id} order={item} onClick={onClick} />
-          ))}
+          {orderFilter.length <= 0 ? (
+            <OrderHistoryEmpty />
+          ) : (
+            orderFilter.map((item) => (
+              <OrderHistoryItem key={item.id} order={item} onClick={onClick} />
+            ))
+          )}
         </div>
       </div>
       <div className="flex justify-center pt-5">

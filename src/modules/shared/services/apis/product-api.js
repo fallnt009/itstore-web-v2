@@ -15,14 +15,14 @@ export const getProductList = (
   search,
   filters
 ) =>
-  axios.get(`/categories/product/${categorySlug}/${subCategorySlug}`, {
+  axios.get(`/products/categories/${categorySlug}/${subCategorySlug}`, {
     params: {page, pageSize, search, filters},
   });
 
 //PRODUCT FILTER & PRODUCT INFO
 
 export const getSpecItems = (subCategorySlug, title) =>
-  axios.get(`/products/spec-items/subcategory/${subCategorySlug}`, {
+  axios.get(`/products/spec-items/sub/${subCategorySlug}`, {
     params: {title},
   });
 export const getSpecProduct = (subCategorySlug) =>
@@ -31,7 +31,7 @@ export const getSpecProduct = (subCategorySlug) =>
 //PRODUCT INFO
 export const getProductInfo = (categorySlug, subCategorySlug, productSlug) =>
   axios.get(
-    `/categories/product/${categorySlug}/${subCategorySlug}/${productSlug}`
+    `/products/categories/${categorySlug}/${subCategorySlug}/${productSlug}`
   );
 
 export const getSpecText = (productId) =>
