@@ -45,7 +45,7 @@ export default function CartSummary({cart, totalItems}) {
   return (
     <div className="py-12">
       <div className=" flex flex-col px-7">
-        <div className="text-2xl font-bold">Cart Summary</div>
+        <div className="text-2xl font-semibold">Cart Summary</div>
         {/* Show product and price */}
         <div className=" text-stone-700 text-md mt-5 ">
           <div className="flex justify-between">

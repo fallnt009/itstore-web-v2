@@ -67,11 +67,12 @@ export default function Header() {
             </Link>
           )}
           <div className="rounded-full border-2 hover:border-indigo-700">
-            <Dropdown setOpen={setOpen}>
-              <AuthToggle
-                authenUser={authenUser}
-                onClick={() => setOpen(!open)}
-              />
+            <AuthToggle
+              authenUser={authenUser}
+              onClick={() => setOpen(!open)}
+              onHover={() => setOpen(true)}
+            />
+            <Dropdown isOpen={open} setOpen={setOpen}>
               <AuthMenu
                 authenUser={authenUser}
                 logout={logout}

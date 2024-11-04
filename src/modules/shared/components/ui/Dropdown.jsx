@@ -1,11 +1,11 @@
 import {useEffect, useRef} from 'react';
 
-export default function Dropdown({children, setOpen = false}) {
+export default function Dropdown({children, isOpen, setOpen = false, style}) {
   const dropdownEl = useRef();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (!dropdownEl.current.contains(event.target)) {
+      if (dropdownEl.current && !dropdownEl.current.contains(event.target)) {
         setOpen(false);
       }
     };
@@ -14,10 +14,15 @@ export default function Dropdown({children, setOpen = false}) {
   }, [setOpen]);
 
   return (
-    <div className="flex justify-end ">
-      <div className="relative z-50" ref={dropdownEl}>
-        {children}
-      </div>
+    <div
+      className={`absolute z-50 transition-opacity duration-500 ease-in-out ${
+        isOpen ? 'opacity-100' : 'opacity-0'
+      }`}
+      ref={dropdownEl}
+      onMouseLeave={() => setOpen(false)}
+      style={style}
+    >
+      {children}
     </div>
   );
 }

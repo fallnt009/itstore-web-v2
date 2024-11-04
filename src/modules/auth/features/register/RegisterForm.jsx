@@ -50,15 +50,14 @@ export default function RegisterForm() {
         });
         stopLoading();
         toast.success('Register Success');
+        navigate(LOGIN);
+        navigate(0);
       }
     } catch (err) {
       //ทำ Notification Box for Error
-      toast.error(err.response?.data.message);
+      toast.error(err.response.data.descEn);
     } finally {
       stopLoading();
-      //relocated to login
-      navigate(LOGIN);
-      navigate(0);
     }
   };
 

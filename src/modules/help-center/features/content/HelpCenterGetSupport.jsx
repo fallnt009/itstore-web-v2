@@ -32,10 +32,10 @@ export default function HelpCenterGetSupport() {
             </div>
             <div className="border-b"></div>
             <div className="p-4 text-gray-500">
-              <p>
+              <div>
                 {list.text1}
                 <p className="font-semibold">{list.text2}</p>
-              </p>
+              </div>
             </div>
           </div>
         ))}

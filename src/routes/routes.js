@@ -6,13 +6,13 @@ exports.LOGIN = 'login';
 exports.REGISTER = 'register';
 
 //NEW & SALES
-exports.NEW_PRODUCT = '/product/newarrivals';
-exports.SALES_PRODUCT = '/product/bestdeals';
+exports.NEW_PRODUCT = '/products/newarrivals';
+exports.SALES_PRODUCT = '/products/bestdeals';
 
 //LIST & INFO
-exports.PRODUCT_LIST = '/categories/:categorySlug/:subCategorySlug';
+exports.PRODUCT_LIST = '/products/categories/:categorySlug/:subCategorySlug';
 exports.PRODUCT_INFO =
-  '/categories/:categorySlug/:subCategorySlug/:productSlug';
+  '/products/categories/:categorySlug/:subCategorySlug/:productSlug';
 
 //CART
 exports.MY_CART = '/mycart';

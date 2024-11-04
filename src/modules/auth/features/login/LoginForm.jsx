@@ -32,7 +32,7 @@ export default function LoginForm() {
       }
     } catch (err) {
       //ทำ Notification Box for Error
-      toast.error(err.response?.data.message);
+      toast.error(err.response?.data.descEn);
     } finally {
       stopLoading();
     }

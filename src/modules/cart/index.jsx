@@ -52,9 +52,7 @@ export default function CartContainer() {
     <div className="px-10 py-10">
       {/* title */}
       <div className="flex justify-start flex-col gap-2 p-2 pb-5">
-        <div className="text-4xl text-cerulean-blue-800 font-bold ">
-          Your Cart
-        </div>
+        <div className="text-4xl font-semibold ">Your Cart</div>
       </div>
       <div className="border p-4">
         {loading ? (
