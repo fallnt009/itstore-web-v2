@@ -26,7 +26,7 @@ export const getSpecItems = (subCategorySlug, title) =>
     params: {title},
   });
 export const getSpecProduct = (subCategorySlug) =>
-  axios.get('/products/specproduct/filter', {params: {subCategorySlug}});
+  axios.get('/products/spec-product/filter', {params: {subCategorySlug}});
 
 //PRODUCT INFO
 export const getProductInfo = (categorySlug, subCategorySlug, productSlug) =>

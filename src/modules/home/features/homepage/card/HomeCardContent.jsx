@@ -21,7 +21,6 @@ export default function HomeCardContent({product}) {
     'unknown';
 
   const productImages = ProductImages?.[0]?.path || '';
-  console.log(productImages);
 
   return (
     <div className="text-sm px-2 pt-4 pb-4 bg-slate-100 rounded-md ">

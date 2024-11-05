@@ -1,37 +1,27 @@
 import {useEffect, useRef, useState} from 'react';
+import {toast} from 'react-toastify';
 
+import useAuth from '../../../../../../shared/hooks/useAuth';
 import useLoading from '../../../../../../shared/hooks/useLoading';
 
 import Avatar from '../../../../../../shared/components/ui/Avatar';
 
-export default function SettingPicture({
-  authenUser,
-  isSuccess,
-  setIsSuccess,
-  selectImage,
-  setSelectImage,
-}) {
+import {UNEXPECTED_ERROR} from '../../../../../../shared/services/config/toast';
+
+export default function SettingPicture({authenUser}) {
+  const {updateProfileImage} = useAuth();
+  const {startLoading, stopLoading} = useLoading();
+
+  const [selectImage, setSelectImage] = useState(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+
   const [imagePreview, setImagePreview] = useState(authenUser?.profileImage);
   const [errorMsg, setErrorMsg] = useState('');
-
-  const {startLoading, stopLoading} = useLoading();
 
   const hiddenFileInput = useRef(null);
   //toggle upload
   const handleToggleUpload = () => {
     hiddenFileInput.current.click();
-  };
-  //handle toggle delete
-  const handleToggleDelete = () => {
-    //popup confirm if yes or no
-    //proceed to delete
-    //close popup
-    startLoading();
-    setSelectImage(null);
-    setImagePreview(null);
-    setErrorMsg(false);
-    setIsSuccess(false);
-    stopLoading();
   };
 
   //handle Change
@@ -89,6 +79,48 @@ export default function SettingPicture({
     }
   }, [selectImage, authenUser?.profileImage]);
 
+  //Change Picture by seperate api
+  //Add Apply button to change
+  const handleSubmitProfileImage = async (e) => {
+    e.preventDefault();
+    startLoading();
+    try {
+      //upload image url
+      const formData = new FormData();
+      formData.append('profileImage', selectImage);
+      //call api
+      await updateProfileImage(authenUser.id, formData);
+      //reset state
+      setSelectImage(null);
+
+      toast.success('Updated Image Successfully');
+    } catch (err) {
+      toast.error(UNEXPECTED_ERROR);
+    } finally {
+      stopLoading();
+    }
+  };
+
+  const handleToggleClear = () => {
+    //reset state
+    startLoading();
+    setSelectImage(null);
+    setImagePreview(null);
+    setErrorMsg(false);
+    setIsSuccess(false);
+    stopLoading();
+  };
+
+  const handleSubmitDelete = () => {
+    try {
+      //delete confirmed popup
+      //yes
+      //api delete image and delete files
+      //reset state
+      //toast delete success
+    } catch (err) {}
+  };
+
   return (
     <div className="flex flex-col gap-3 mt-5">
       <div className="flex justify-between items-center px-5 py-2">
@@ -106,26 +138,45 @@ export default function SettingPicture({
           </div>
         </div>
         <div className="flex gap-3 text-gray-500">
-          <button
-            type="button"
-            className="text-sm font-semibold rounded-lg p-2 px-4 border-2 hover:text-indigo-700 hover:border-indigo-700 shadow-md"
-            onClick={handleToggleUpload}
-          >
-            Upload new picture
-          </button>
+          {selectImage && isSuccess ? (
+            <button
+              type="button"
+              className="text-sm font-semibold rounded-lg p-2 px-4 border-2 border-indigo-700 hover:text-indigo-700 hover:bg-white bg-indigo-600 text-white shadow-md"
+              onClick={handleSubmitProfileImage}
+            >
+              Apply
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="text-sm font-semibold rounded-lg p-2 px-4 border-2 hover:text-indigo-700 hover:border-indigo-700 shadow-md"
+              onClick={handleToggleUpload}
+            >
+              Change Picture
+            </button>
+          )}
           <input
             type="file"
             className="hidden"
             ref={hiddenFileInput}
             onChange={handleImageChange}
           ></input>
-          <button
-            type="button"
-            className="text-sm font-semibold rounded-lg p-2 px-4 border-2 border-red-500 hover:text-red-500 hover:border-red-500 hover:bg-white bg-red-500 text-white shadow-md"
-            onClick={handleToggleDelete}
-          >
-            Delete
-          </button>
+          {selectImage ? (
+            <button
+              type="button"
+              className="text-sm font-semibold rounded-lg p-2 px-4 border-2 border-red-500 hover:text-red-500 hover:border-red-500 hover:bg-white bg-red-500 text-white shadow-md"
+              onClick={handleToggleClear}
+            >
+              Clear
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="text-sm font-semibold rounded-lg p-2 px-4 border-2 border-red-500 hover:text-red-500 hover:border-red-500 hover:bg-white bg-red-500 text-white shadow-md"
+            >
+              Delete
+            </button>
+          )}
         </div>
       </div>
     </div>

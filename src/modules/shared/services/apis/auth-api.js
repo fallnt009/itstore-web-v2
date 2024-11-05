@@ -9,5 +9,8 @@ export const getMyProfile = () => axios.get('/auth/me');
 export const updateProfile = (userId, data) =>
   axios.patch(`/users/updateinfo/${userId}`, data);
 
+export const updateProfileImage = (userId, data) =>
+  axios.patch(`/users/updateimg/${userId}`, data);
+
 //
 export const updatePassword = (data) => axios.patch(`/auth/updatepa`, data);

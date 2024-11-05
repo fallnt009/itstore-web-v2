@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import {IoMdHeartEmpty, IoMdHeart} from 'react-icons/io';
 
@@ -9,7 +9,10 @@ import ProductCardImage from './ProductCardImage';
 import ProductCardContentItem from './ProductCardContentItem';
 import ProductCardButton from './button/ProductCardButton';
 
-import {PRODUCT_INFO_NAV} from '../../../../../shared/services/config/routing';
+import {
+  PRODUCT_INFO_NAV,
+  LOGIN,
+} from '../../../../../shared/services/config/routing';
 import {
   UNEXPECTED_ERROR,
   ADD_WISHLIST,
@@ -20,6 +23,7 @@ export default function ProductCardContent({product, inWishlist}) {
   //add to Cart
   const {addCartItem} = useCart();
   const {addWishlist, deleteWishlist} = useWishlist();
+  const navigate = useNavigate();
 
   //product
   const {
@@ -56,7 +60,12 @@ export default function ProductCardContent({product, inWishlist}) {
       }
     } catch (err) {
       //err
-      toast.error(UNEXPECTED_ERROR);
+      //if not login go to login page
+      if (err.status === 401) {
+        navigate(LOGIN);
+      } else {
+        toast.error(UNEXPECTED_ERROR);
+      }
     }
   };
 

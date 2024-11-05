@@ -51,6 +51,16 @@ export default function AuthContextProvider({children}) {
     }
   }, []);
 
+  const updateProfileImage = useCallback(async (userId, data) => {
+    try {
+      const res = await authApi.updateProfileImage(userId, data);
+
+      setAuthenUser((prevUser) => ({...prevUser, ...res.data.result}));
+    } catch (err) {
+      throw err;
+    }
+  }, []);
+
   const updatePassword = useCallback(async (data) => {
     try {
       //call api
@@ -79,6 +89,7 @@ export default function AuthContextProvider({children}) {
         login,
         logout,
         updateProfile,
+        updateProfileImage,
         updatePassword,
         register,
       }}

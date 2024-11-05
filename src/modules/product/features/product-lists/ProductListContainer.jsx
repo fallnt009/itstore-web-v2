@@ -9,6 +9,7 @@ import ErrorPage from '../../../shared/features/error/ErrorPage';
 import useProduct from '../../../shared/hooks/useProduct';
 import useWishlist from '../../../shared/hooks/useWishlist';
 import useError from '../../../shared/hooks/useError';
+import useAuth from '../../../shared/hooks/useAuth';
 
 export default function ProductListContainer() {
   const {categorySlug, subCategorySlug} = useParams();
@@ -16,6 +17,7 @@ export default function ProductListContainer() {
   const {ProductList, ProductFilters, fetchProductList, fetchProductFilter} =
     useProduct();
   const {inWishlist, fetchInWishlist} = useWishlist();
+  const {authenUser} = useAuth();
   const {error, errorStatus, setIsError} = useError();
 
   const {totalPages} = ProductList;
@@ -42,8 +44,11 @@ export default function ProductListContainer() {
       const title = CategoryFilters(subCategorySlug);
       //Fetch ProductFilter
       await fetchProductFilter(title, subCategorySlug);
-      //laad wishlist
-      await fetchInWishlist();
+
+      if (authenUser) {
+        //laad wishlist if authen
+        await fetchInWishlist();
+      }
     } catch (err) {
       setLoading(false);
       //add error

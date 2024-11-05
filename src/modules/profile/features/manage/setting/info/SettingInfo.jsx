@@ -27,8 +27,7 @@ export default function SettingInfo() {
   const [currentInput, setCurrentInput] = useState(dataForm);
   const [error, setError] = useState({});
   //img state
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [selectImage, setSelectImage] = useState(null);
+
   //popup
   const [isOpen, setIsOpen] = useState(false);
   //edit state
@@ -47,13 +46,6 @@ export default function SettingInfo() {
     setIsEdited(isFormEdited);
   }, [currentInput, initialInput]);
 
-  //track image if edit
-  useEffect(() => {
-    if (selectImage) {
-      setIsEdited(true);
-    }
-  }, [selectImage]);
-
   const handleChangeInput = useCallback(
     (e) => {
       setCurrentInput({...currentInput, [e.target.name]: e.target.value});
@@ -64,7 +56,7 @@ export default function SettingInfo() {
   const handleSubmitForm = async (e) => {
     e.preventDefault();
     //avoid submission if no change
-    if (!isEdited && !selectImage) return;
+    if (!isEdited) return;
 
     startLoading();
     const formData = new FormData();
@@ -73,7 +65,6 @@ export default function SettingInfo() {
     formData.append('lastName', currentInput.lastName);
     formData.append('email', currentInput.email);
     formData.append('mobile', currentInput.mobile);
-    formData.append('profileImage', selectImage);
 
     try {
       //validate
@@ -87,7 +78,6 @@ export default function SettingInfo() {
         //reset state
         setInitialInput(currentInput);
         setIsEdited(false);
-        setSelectImage(null);
         //toast
         toast.success('Profile Updated Successfully');
       }
@@ -108,13 +98,7 @@ export default function SettingInfo() {
 
   return (
     <div>
-      <SettingPicture
-        authenUser={authenUser}
-        setIsSuccess={setIsSuccess}
-        isSuccess={isSuccess}
-        selectImage={selectImage}
-        setSelectImage={setSelectImage}
-      />
+      <SettingPicture authenUser={authenUser} />
       <div className="flex flex-col gap-3 pt-5">
         <div className="flex flex-col gap-5">
           <div className="flex flex-col">
@@ -209,16 +193,12 @@ export default function SettingInfo() {
               <div className="pt-5">
                 <button
                   type="submit"
-                  className={`text-sm font-semibold border rounded-lg p-2 px-4  ${
-                    selectImage
-                      ? isSuccess && isEdited
-                        ? 'bg-indigo-700 text-white border-indigo-700 hover:bg-white hover:text-indigo-700'
-                        : 'text-white bg-gray-300'
-                      : isEdited
+                  className={`text-sm font-semibold border rounded-lg p-2 px-4 ${
+                    isEdited
                       ? 'bg-indigo-700 text-white border-indigo-700 hover:bg-white hover:text-indigo-700'
                       : 'text-white bg-gray-300'
                   }`}
-                  disabled={selectImage ? !isSuccess || !isEdited : !isEdited}
+                  disabled={!isEdited}
                 >
                   Save Changes
                 </button>
