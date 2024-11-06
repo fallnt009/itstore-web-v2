@@ -7,7 +7,7 @@ export const getService = () => {
   return axios.get('/checkout/service');
 };
 export const getPayment = () => {
-  return axios.get('/checkout/payment');
+  return axios.get('/payment');
 };
 
 export const createCheckout = () => {

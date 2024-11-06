@@ -44,7 +44,6 @@ export default function AuthContextProvider({children}) {
       //add api
       const res = await authApi.updateProfile(userId, data);
 
-      //console.log(res.data.result);
       setAuthenUser((prevUser) => ({...prevUser, ...res.data.result}));
     } catch (err) {
       throw err;

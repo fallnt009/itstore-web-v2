@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function PaymentProofContent() {
   //userPayment have only payment_date
   //proof_image
@@ -9,5 +7,5 @@ export default function PaymentProofContent() {
   ///total price that transfer
   //days and times
   //
-  return <div>PaymentProofContent</div>;
+  return <div className="px-10 py-10"></div>;
 }

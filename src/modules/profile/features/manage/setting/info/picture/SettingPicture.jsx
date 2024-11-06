@@ -111,14 +111,28 @@ export default function SettingPicture({authenUser}) {
     stopLoading();
   };
 
-  const handleSubmitDelete = () => {
+  const handleSubmitDelete = async (e) => {
+    e.preventDefault();
+    startLoading();
+
     try {
-      //delete confirmed popup
-      //yes
-      //api delete image and delete files
+      setSelectImage(null);
+      const formData = new FormData();
+      formData.append('profileImage', selectImage);
+      //call api
+      await updateProfileImage(authenUser.id, formData);
       //reset state
-      //toast delete success
-    } catch (err) {}
+      setSelectImage(null);
+      setImagePreview(null);
+      setErrorMsg(false);
+      setIsSuccess(false);
+
+      toast.success('Updated Image Successfully');
+    } catch (err) {
+      toast.error(UNEXPECTED_ERROR);
+    } finally {
+      stopLoading();
+    }
   };
 
   return (
@@ -173,6 +187,7 @@ export default function SettingPicture({authenUser}) {
             <button
               type="button"
               className="text-sm font-semibold rounded-lg p-2 px-4 border-2 border-red-500 hover:text-red-500 hover:border-red-500 hover:bg-white bg-red-500 text-white shadow-md"
+              onClick={handleSubmitDelete}
             >
               Delete
             </button>
