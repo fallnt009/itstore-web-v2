@@ -40,3 +40,8 @@ exports.HELP_CENTER = '/help-center';
 
 exports.TRACKING_ORDER = '/tracking-order';
 exports.PAYMENT_PROOF = '/payment-proof';
+
+//Payment Transaction
+//
+exports.BANK_TRANSFER_PAYMENT = '/payment/btransfer';
+exports.QR_PAYMENT = '/payment/qr';

@@ -9,6 +9,7 @@ import OrderContextProvider from './modules/shared/store/order/OrderContext';
 import WishlistContextProvider from './modules/shared/store/wishlist/WishlistContext';
 
 import ErrorContextProvider from './modules/shared/store/error/ErrorContext';
+import PaymentContextProvider from './modules/shared/store/payment/PaymentContext';
 
 export default function ContextWrapper({children}) {
   return (
@@ -21,9 +22,11 @@ export default function ContextWrapper({children}) {
                 <AddressContextProvider>
                   <CheckoutContextProvider>
                     <OrderContextProvider>
-                      <WishlistContextProvider>
-                        {children}
-                      </WishlistContextProvider>
+                      <PaymentContextProvider>
+                        <WishlistContextProvider>
+                          {children}
+                        </WishlistContextProvider>
+                      </PaymentContextProvider>
                     </OrderContextProvider>
                   </CheckoutContextProvider>
                 </AddressContextProvider>

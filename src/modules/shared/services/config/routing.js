@@ -27,9 +27,6 @@ exports.CHECKOUT_DETAIL = '/checkout/details';
 exports.CHECKOUT_SERVICES = '/checkout/services';
 exports.CHECKOUT_PAYMENT = '/checkout/payment';
 
-//PAYMENT
-exports.PAYMENT_TRANSFER = '/checkout/banktransfer';
-
 //STATUS
 exports.ORDER_SUCCESS = (orderNumber) => `/order/success/${orderNumber}`;
 exports.ORDER_DETAIL = (orderNumber) => `/order/detail/${orderNumber}`;
@@ -45,3 +42,8 @@ exports.MY_WISHLIST = '/mywishlist';
 exports.HELP_CENTER = '/help-center';
 exports.TRACKING_ORDER = '/tracking-order';
 exports.PAYMENT_PROOF = '/payment-proof';
+
+//Payment Transaction
+//
+exports.BANK_TRANSFER_PAYMENT = '/payment/btransfer';
+exports.QR_PAYMENT = '/payment/qr';

@@ -1,6 +1,9 @@
 import React from 'react';
 
 export default function BankTransferPayment() {
+  //fetch userPayment
+  //update user payment
+  //Choose payment -> create order -> actual payment pay -> payment success waiting
   return (
     <div className="px-10 py-10">
       <div className="border p-4 bg-gray-100">

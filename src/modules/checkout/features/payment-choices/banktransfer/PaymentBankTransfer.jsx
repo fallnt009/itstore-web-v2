@@ -15,6 +15,7 @@ import {
 
 import {UNEXPECTED_ERROR} from '../../../../shared/services/config/toast';
 
+//////////////////////////////LOGIC MOVED
 export default function PaymentBankTransfer() {
   const {createOrder} = useOrder();
   const {amount, setProcessComplete} = useCheckout();

@@ -3,27 +3,29 @@ import {Link, useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
 
 import useCheckout from '../../../shared/hooks/useCheckout';
-import useLoading from '../../../shared/hooks/useLoading';
-
-//constant
-import {BANKTRANSFER} from '../../../shared/services/config/constants';
-//routing
-import {
-  CHECKOUT_SERVICES,
-  PAYMENT_TRANSFER,
-} from '../../../shared/services/config/routing';
+import useOrder from '../../../shared/hooks/useOrder';
 
 import CheckoutPaymentItem from './CheckoutPaymentItem';
 import ActiveButton from '../../components/ActiveButton';
+//routing
+import {
+  CHECKOUT_SERVICES,
+  BANK_TRANSFER_PAYMENT,
+  QR_PAYMENT,
+} from '../../../shared/services/config/routing';
+
+import {UNEXPECTED_ERROR} from '../../../shared/services/config/toast';
 
 export default function CheckoutPayment() {
-  const {checkout, updateCheckout} = useCheckout();
-  const {startLoading, stopLoading} = useLoading();
+  const {amount, checkout, updateCheckout} = useCheckout();
+  const {createOrder} = useOrder();
   const navigate = useNavigate();
 
   const [selectedPayment, setSelectedPayment] = useState(null);
 
   const {item, payment} = checkout;
+  const {totalPrice, subTotal} = amount;
+
   //checkout item
   const {Payment} = item;
 
@@ -40,26 +42,31 @@ export default function CheckoutPayment() {
   };
 
   const handleSubmitPayment = async () => {
-    startLoading();
     try {
       //data
-      const data = {paymentId: selectedPayment.id};
-      const paymentName = Payment?.name;
-      //api update
-      console.log(data, paymentName);
+      const checkoutData = {paymentId: selectedPayment.id};
+      const orderData = {totalAmount: totalPrice, subTotal: subTotal};
+      //update checkout
+      await updateCheckout(item.id, checkoutData);
+      //create order
+      const order = await createOrder(orderData);
+      const orderId = order.id;
+      //setprocess complete to make sure no one can access the route
 
-      await updateCheckout(item.id, data);
-      //payment portal
-      if (paymentName.toUpperCase() === BANKTRANSFER) {
-        navigate(PAYMENT_TRANSFER);
-        navigate(0);
+      //payment redirect
+      switch (selectedPayment?.id) {
+        case 1:
+          navigate(BANK_TRANSFER_PAYMENT, {state: {orderId: orderId}});
+          break;
+        case 2:
+          navigate(QR_PAYMENT, {state: {orderId: orderId}});
+          break;
+        default:
+          return;
       }
     } catch (err) {
       //err
-      console.log(err);
-      toast.error(err);
-    } finally {
-      stopLoading();
+      toast.error(UNEXPECTED_ERROR);
     }
   };
 
@@ -69,7 +76,7 @@ export default function CheckoutPayment() {
         <div className="flex flex-col gap-5">
           <h1 className="font-semibold text-3xl">How would you like to pay?</h1>
         </div>
-        <div>
+        <div className="pt-5">
           {payment?.map((item) => (
             <CheckoutPaymentItem
               select={selectedPayment}

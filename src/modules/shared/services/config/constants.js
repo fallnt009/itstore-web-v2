@@ -4,6 +4,7 @@ exports.EMPLOYEE = 'EMPLOYEE';
 
 //transactions types
 exports.BANKTRANSFER = 'BANK TRANSFER';
+exports.QR_PAYMENT = '';
 
 //transactions status
 exports.STATUS_PENDING = 'PENDING';
