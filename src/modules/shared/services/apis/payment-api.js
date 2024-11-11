@@ -1,6 +1,7 @@
 import axios from '../config/axios';
 
 //payment
+export const getAllPaymentMethod = () => axios.get(`/payment`);
 
 //userpayment
 export const getUserPaymentByOrderId = (orderId) =>

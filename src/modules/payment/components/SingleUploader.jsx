@@ -53,7 +53,7 @@ export default function SingleUploader({select, setSelect}) {
   return (
     <div>
       {select.length > 0 ? (
-        <div className="flex">
+        <div className="flex justify-center">
           <div className="relative py-2 ">
             <button
               className="absolute -right-3 -top-2 p-1 rounded-full text-white bg-red-600 hover:bg-stone-400"

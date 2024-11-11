@@ -10,8 +10,10 @@ import {
   ORDER_HISTORY,
   MY_PROFILE,
   MY_WISHLIST,
+  PAYMENT_SELECT,
   BANK_TRANSFER_PAYMENT,
   QR_PAYMENT,
+  PAYMENT_AWATING,
 } from './routes';
 //CONTAINER
 import CartContainer from '../modules/cart';
@@ -24,11 +26,13 @@ import CheckoutServices from '../modules/checkout/features/services/CheckoutServ
 import CheckoutPayment from '../modules/checkout/features/payment/CheckoutPayment';
 
 //payment portal
+import PaymentContainer from '../modules/payment/index';
 import PaymentBankTransfer from '../modules/checkout/features/payment-choices/banktransfer/PaymentBankTransfer';
 
 import BankTransferPayment from '../modules/payment/features/bank-transfer/BankTransferPayment';
 import QrPayment from '../modules/payment/features/qr-payment/QrPayment';
 
+import PaymentAwaiting from '../modules/payment/features/status/PaymentAwaiting';
 //middleware
 import CheckoutGuard from './utils/CheckoutGuard';
 //ORDER
@@ -88,6 +92,10 @@ export const privateRoutes = [
     path: MY_WISHLIST,
     element: <WishlistContainer />,
   },
+  {
+    path: PAYMENT_SELECT,
+    element: <PaymentContainer />,
+  },
   //payment main
   {
     path: BANK_TRANSFER_PAYMENT,
@@ -96,5 +104,10 @@ export const privateRoutes = [
   {
     path: QR_PAYMENT,
     element: <QrPayment />,
+  },
+  //Payment status
+  {
+    path: PAYMENT_AWATING,
+    element: <PaymentAwaiting />,
   },
 ];

@@ -5,7 +5,18 @@ import * as PaymentApi from '../../services/apis/payment-api';
 const PaymentContext = createContext();
 
 export default function PaymentContextProvider({children}) {
+  const [paymentMethod, setPaymentMethod] = useState([]);
   const [userPayment, setUserPayment] = useState({});
+
+  //fetch all payment
+  const fetchAllPaymentMethod = useCallback(async () => {
+    try {
+      const res = await PaymentApi.getAllPaymentMethod();
+      setPaymentMethod(res.data.result);
+    } catch (err) {
+      throw err;
+    }
+  }, []);
 
   const fetchUserPaymentByOrderId = useCallback(async (orderId) => {
     try {
@@ -28,7 +39,13 @@ export default function PaymentContextProvider({children}) {
 
   return (
     <PaymentContext.Provider
-      value={{userPayment, fetchUserPaymentByOrderId, updateUserPaymentById}}
+      value={{
+        userPayment,
+        paymentMethod,
+        fetchAllPaymentMethod,
+        fetchUserPaymentByOrderId,
+        updateUserPaymentById,
+      }}
     >
       {children}
     </PaymentContext.Provider>

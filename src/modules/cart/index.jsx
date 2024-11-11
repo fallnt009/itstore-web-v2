@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import {toast} from 'react-toastify';
 
 import useCart from '../shared/hooks/useCart';
-import useLoading from '../shared/hooks/useLoading';
+// import useLoading from '../shared/hooks/useLoading';
 import {UNEXPECTED_ERROR} from '../shared/services/config/toast';
 
 import CartContent from './features/contents/CartContent';
@@ -11,7 +11,7 @@ import CartLoading from './features/loading/CartLoading';
 export default function CartContainer() {
   //useCart
   const {userCart, updateCartItem, removeCartItem} = useCart();
-  const {startLoading, stopLoading} = useLoading();
+  // const {startLoading, stopLoading} = useLoading();
   //loading state
   const [loading, setLoading] = useState(true);
 
@@ -28,23 +28,17 @@ export default function CartContainer() {
 
   // on Qty Change
   const handleChangeQty = async (cartItemId, newQty) => {
-    startLoading();
     try {
       await updateCartItem(cartItemId, newQty);
     } catch (err) {
       toast.error(UNEXPECTED_ERROR);
-    } finally {
-      stopLoading();
     }
   };
   const handleDeleteItem = async (cartItemId) => {
-    startLoading();
     try {
       await removeCartItem(cartItemId);
     } catch (err) {
       toast.error(UNEXPECTED_ERROR);
-    } finally {
-      stopLoading();
     }
   };
 
