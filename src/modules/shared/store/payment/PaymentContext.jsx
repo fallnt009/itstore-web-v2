@@ -28,9 +28,9 @@ export default function PaymentContextProvider({children}) {
     }
   }, []);
 
-  const updateUserPaymentById = useCallback(async (userPaymentId) => {
+  const updateUserPaymentById = useCallback(async (userPaymentId, data) => {
     try {
-      await PaymentApi.updateUserPaymentById(userPaymentId);
+      await PaymentApi.updateUserPaymentById(userPaymentId, data);
       //
     } catch (err) {
       throw err;

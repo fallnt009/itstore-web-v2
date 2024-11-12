@@ -1,5 +1,5 @@
 import {BsBank2} from 'react-icons/bs';
-import {MdQrCode2} from 'react-icons/md';
+import {MdQrCode2, MdArrowForwardIos} from 'react-icons/md';
 
 export default function PaymentSelectBox({id, name, selected, onSelect}) {
   const iconsMapping = {
@@ -11,13 +11,16 @@ export default function PaymentSelectBox({id, name, selected, onSelect}) {
 
   return (
     <button
-      className={`flex items-center gap-2 p-4 border-2 rounded-lg ${
-        selected === id ? 'border-indigo-700 ' : ''
-      }`}
+      className={`flex items-center justify-between p-4 border-2 rounded-lg hover:border-indigo-700 hover:text-indigo-700`}
       onClick={() => onSelect(id)}
     >
-      <span>{icon}</span>
-      <h1 className="font-semibold"> {name}</h1>
+      <div className="flex gap-2">
+        <span>{icon}</span>
+        <h1 className="font-semibold"> {name}</h1>
+      </div>
+      <span>
+        <MdArrowForwardIos />
+      </span>
     </button>
   );
 }

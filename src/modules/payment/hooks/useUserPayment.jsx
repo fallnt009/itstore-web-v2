@@ -11,6 +11,8 @@ import {PAYMENT_AWATING} from '../../shared/services/config/routing';
 
 //messages
 import {UNEXPECTED_ERROR} from '../../shared/services/config/toast';
+//constant
+import {TRANSACTION_AWAITING} from '../../shared/services/config/constants';
 
 export default function useUserPayment() {
   //context
@@ -48,22 +50,31 @@ export default function useUserPayment() {
   }, [fetchUserPaymentByOrderId, orderId]);
 
   //function
-  const updateUserPayment = useCallback(async () => {
-    try {
-      //make input option for bank transfer
-      console.log(userPaymentId);
+  const updateUserPaymentAwait = useCallback(
+    async ({date}) => {
+      try {
+        const formData = new FormData();
 
-      //call api and userPaymentId
-      await updateUserPaymentById(userPaymentId);
-      //order status Change
+        formData.append('paymentStatus', TRANSACTION_AWAITING);
+        if (date) {
+          formData.append('paymentDate', date);
+        }
+        if (selectImage) {
+          formData.append('paymentImage', selectImage[0].file);
+        }
 
-      //navigate to payment awaiting confirmation
-      navigate(PAYMENT_AWATING);
-    } catch (err) {
-      //toast
-      toast.err(UNEXPECTED_ERROR);
-    }
-  }, [updateUserPaymentById, userPaymentId]);
+        //call api and userPaymentId
+        await updateUserPaymentById(userPaymentId, formData);
+
+        //navigate to payment awaiting confirmation
+        navigate(PAYMENT_AWATING);
+      } catch (err) {
+        //toast
+        toast.error(UNEXPECTED_ERROR);
+      }
+    },
+    [updateUserPaymentById, userPaymentId, navigate]
+  );
 
   return {
     selectImage,
@@ -73,6 +84,6 @@ export default function useUserPayment() {
     error,
     errorStatus,
     setSelectImage,
-    updateUserPayment,
+    updateUserPaymentAwait,
   };
 }

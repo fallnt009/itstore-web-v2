@@ -48,4 +48,4 @@ exports.BANK_TRANSFER_PAYMENT = '/payment/btransfer';
 exports.QR_PAYMENT = '/payment/qr';
 
 //Payment Status
-exports.PAYMENT_AWATING = '/payment/status/await';
+exports.PAYMENT_AWATING = '/payment/await/success';

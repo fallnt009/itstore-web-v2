@@ -11,7 +11,7 @@ export default function QrPayment() {
     error,
     errorStatus,
     setSelectImage,
-    updateUserPayment,
+    updateUserPaymentAwait,
   } = useUserPayment();
 
   if (error) {
@@ -26,7 +26,7 @@ export default function QrPayment() {
           amount={amount}
           selectImage={selectImage}
           setSelectImage={setSelectImage}
-          updateUserPayment={updateUserPayment}
+          updateUserPayment={updateUserPaymentAwait}
         />
       </div>
     </div>

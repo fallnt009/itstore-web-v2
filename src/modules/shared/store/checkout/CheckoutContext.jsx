@@ -51,8 +51,6 @@ export default function CheckoutContextProvider({children}) {
 
   const updateCheckout = useCallback(async (checkoutId, data) => {
     try {
-      console.log(checkoutId, data);
-
       await CheckoutApi.updateCheckout(checkoutId, data);
 
       //update (userAddressId,serviceId,paymentId)

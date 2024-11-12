@@ -1,19 +1,27 @@
-import {useCallback, useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useCallback, useEffect} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 import usePayment from '../../shared/hooks/usePayment';
 import useError from '../../shared/hooks/useError';
 import useLoading from '../../shared/hooks/useLoading';
+
+import {
+  BANK_TRANSFER_PAYMENT,
+  QR_PAYMENT,
+} from '../../shared/services/config/routing';
 
 export default function usePaymentGateway() {
   //context
   const {paymentMethod, fetchAllPaymentMethod} = usePayment();
   const {error, errorStatus, setIsError} = useError();
   const {loading, startLoading, stopLoading} = useLoading();
-  //
+  //react router
+  const location = useLocation();
   const navigate = useNavigate();
-  //state
-  const [selectedPaymentId, setSelectedPaymentId] = useState(null);
+
+  //des
+  const {orderId, orderNumber} = location.state;
+
   //fetch
   useEffect(() => {
     const loadPaymentMethod = async () => {
@@ -29,29 +37,26 @@ export default function usePaymentGateway() {
     loadPaymentMethod();
   }, [fetchAllPaymentMethod]);
 
-  const selectPaymentMethod = useCallback((paymentId) => {
-    setSelectedPaymentId(paymentId);
-  }, []);
-
-  const submitPaymentMethod = useCallback((paymentId) => {
-    //handle update paymentId in userPayment of this order
-
-    //get Id and proceed to navigate
-    switch (paymentId) {
-      case 1:
-        navigate('bb');
-        break;
-      case 2:
-        navigate('qr');
-        break;
-      default:
-        break;
-    }
-  }, []);
+  const selectPaymentMethod = useCallback(
+    (paymentId) => {
+      //get Id and proceed to navigate
+      switch (paymentId) {
+        case 1:
+          navigate(BANK_TRANSFER_PAYMENT, {state: {orderId: orderId}});
+          break;
+        case 2:
+          navigate(QR_PAYMENT, {state: {orderId: orderId}});
+          break;
+        default:
+          break;
+      }
+    },
+    [navigate]
+  );
 
   return {
     paymentMethod,
-    selectedPaymentId,
+    orderNumber,
     loading,
     error,
     errorStatus,

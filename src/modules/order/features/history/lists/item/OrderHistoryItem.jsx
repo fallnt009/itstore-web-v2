@@ -1,7 +1,10 @@
 import {format} from 'date-fns';
 import {NumericFormat} from 'react-number-format';
+import {useNavigate} from 'react-router-dom';
 
 import OrderHistoryStatus from './status/OrderHistoryStatus';
+
+import {PAYMENT_SELECT} from '../../../../../shared/services/config/routing';
 
 import {
   TRANSACTION_PENDING,
@@ -12,15 +15,26 @@ import {
 
 export default function OrderHistoryItem({order, onClick}) {
   const {
+    id,
     orderStatus,
     createdAt,
     OrderDetail: {orderNumber},
     UserPayment: {amount, paymentStatus},
   } = order;
+  //Click to navigate
+  const navigate = useNavigate();
+
+  const handleNavigateOnClick = () => {
+    navigate(PAYMENT_SELECT, {state: {orderId: id, orderNumber: orderNumber}});
+  };
 
   const PaymentStatusRender = (status) => {
     if (status === TRANSACTION_PENDING) {
-      return <button className="text-red-600">Pay</button>;
+      return (
+        <button className="text-red-600" onClick={handleNavigateOnClick}>
+          Click to Pay
+        </button>
+      );
     } else if (status === TRANSACTION_AWAITING) {
       return <h1 className="text-yellow-600">Awating</h1>;
     } else if (status === TRANSACTION_COMPLETED) {
