@@ -10,7 +10,7 @@ export default function QrPayment() {
     amount,
     error,
     errorStatus,
-    setSelectImage,
+    submitPaymentImage,
     updateUserPaymentAwait,
   } = useUserPayment();
 
@@ -25,8 +25,8 @@ export default function QrPayment() {
           orderNumber={orderNumber}
           amount={amount}
           selectImage={selectImage}
-          setSelectImage={setSelectImage}
-          updateUserPayment={updateUserPaymentAwait}
+          onSubmitImage={submitPaymentImage}
+          onUpdatePayment={updateUserPaymentAwait}
         />
       </div>
     </div>

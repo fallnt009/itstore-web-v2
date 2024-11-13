@@ -1,7 +1,6 @@
 import PaymentSelectBox from './selection/PaymentSelectBox';
 
 export default function PaymentSelection({
-  paymentInfo,
   paymentMethod,
   orderNumber,
   onSelect,

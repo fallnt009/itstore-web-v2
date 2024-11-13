@@ -3,7 +3,7 @@ import {useRef, useState} from 'react';
 import {MdImage} from 'react-icons/md';
 import {MdClose} from 'react-icons/md';
 
-export default function SingleUploader({select, setSelect}) {
+export default function SingleUploader({select, onSubmit}) {
   const [dragOver, setDragOver] = useState(false);
 
   const dropAreaRef = useRef(null);
@@ -29,7 +29,7 @@ export default function SingleUploader({select, setSelect}) {
     const file = e.dataTransfer.files[0]; // Only take the first file
     if (file) {
       const image = {file, url: URL.createObjectURL(file)};
-      setSelect([image]); // Update the state with the single image
+      onSubmit([image]); // Update the state with the single image
     }
   };
 
@@ -41,17 +41,17 @@ export default function SingleUploader({select, setSelect}) {
     const file = e.target.files[0]; // Only take the first file
     if (file) {
       const image = {file, url: URL.createObjectURL(file)};
-      setSelect([image]); // Update the state with the single image
+      onSubmit([image]); // Update the state with the single image
     }
   };
 
   const handleRemoveImage = () => {
     const updatedImages = []; // Reset the images array
-    setSelect(updatedImages);
+    onSubmit(updatedImages);
   };
 
   return (
-    <div>
+    <div className="py-4 px-4">
       {select.length > 0 ? (
         <div className="flex justify-center">
           <div className="relative py-2 ">

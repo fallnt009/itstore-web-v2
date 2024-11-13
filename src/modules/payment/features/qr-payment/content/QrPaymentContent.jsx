@@ -8,8 +8,8 @@ export default function QrPaymentContent({
   amount,
   orderNumber = '',
   selectImage,
-  setSelectImage,
-  updateUserPayment,
+  onSubmitImage,
+  onUpdatePayment,
 }) {
   return (
     <div className="sm:px-14 md:px-36 xl:px-80">
@@ -82,7 +82,7 @@ export default function QrPaymentContent({
             </div>
           </div>
           <div className="pt-5">
-            <SingleUploader select={selectImage} setSelect={setSelectImage} />
+            <SingleUploader select={selectImage} onSubmit={onSubmitImage} />
           </div>
         </div>
         {/* FINISH PAY */}
@@ -100,7 +100,7 @@ export default function QrPaymentContent({
               <button
                 type="button"
                 className="p-2 border rounded-lg border-yellow-400 bg-yellow-400 w-full font-semibold hover:bg-opacity-80"
-                onClick={updateUserPayment}
+                onClick={onUpdatePayment}
               >
                 I have paid
               </button>
