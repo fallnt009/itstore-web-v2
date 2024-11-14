@@ -28,7 +28,6 @@ export default function useUserPayment() {
   //State
   const [selectImage, setSelectImage] = useState([]);
   //date & time
-  const [dateTime, setDateTime] = useState('');
 
   //destructuring
   const {id: userPaymentId, amount, Order} = userPayment;
@@ -52,35 +51,36 @@ export default function useUserPayment() {
   }, [fetchUserPaymentByOrderId, orderId]);
 
   //function
-  const updateUserPaymentAwait = useCallback(async () => {
-    try {
-      //use type if come from bank transfer need to validate before submit
+  const updateUserPaymentAwait = useCallback(
+    async (date) => {
+      try {
+        const formData = new FormData();
 
-      const formData = new FormData();
+        formData.append('paymentStatus', TRANSACTION_AWAITING);
 
-      formData.append('paymentStatus', TRANSACTION_AWAITING);
-      if (dateTime) {
-        formData.append('paymentDate', dateTime);
+        //check date
+        if (date) {
+          formData.append('paymentDate', date);
+        }
+        //check select image array
+        if (selectImage.length > 0) {
+          formData.append('paymentImage', selectImage[0].file);
+        }
+
+        //call api and userPaymentId
+        await updateUserPaymentById(userPaymentId, formData);
+
+        //navigate to payment awaiting confirmation
+        navigate(PAYMENT_AWATING);
+      } catch (err) {
+        console.log(err);
+        //toast
+        toast.error(UNEXPECTED_ERROR);
       }
-      if (selectImage) {
-        formData.append('paymentImage', selectImage[0].file);
-      }
+    },
+    [updateUserPaymentById, userPaymentId, navigate]
+  );
 
-      //call api and userPaymentId
-      await updateUserPaymentById(userPaymentId, formData);
-
-      //navigate to payment awaiting confirmation
-      navigate(PAYMENT_AWATING);
-    } catch (err) {
-      console.log(err);
-      //toast
-      toast.error(UNEXPECTED_ERROR);
-    }
-  }, [updateUserPaymentById, userPaymentId, navigate]);
-
-  const submitPaymentDateTime = useCallback((utcString) => {
-    setDateTime(utcString);
-  }, []);
   const submitPaymentImage = useCallback((file) => {
     setSelectImage(file);
   }, []);
@@ -92,7 +92,6 @@ export default function useUserPayment() {
     loading,
     error,
     errorStatus,
-    submitPaymentDateTime,
     submitPaymentImage,
     updateUserPaymentAwait,
   };

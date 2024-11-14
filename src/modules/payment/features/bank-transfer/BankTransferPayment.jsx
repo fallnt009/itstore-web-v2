@@ -11,7 +11,6 @@ export default function BankTransferPayment() {
     amount,
     error,
     errorStatus,
-    submitPaymentDateTime,
     submitPaymentImage,
     updateUserPaymentAwait,
   } = useUserPayment();
@@ -28,7 +27,6 @@ export default function BankTransferPayment() {
           amount={amount}
           selectImage={selectImage}
           onSubmitImage={submitPaymentImage}
-          onSubmitDateTime={submitPaymentDateTime}
           onUpdatePayment={updateUserPaymentAwait}
         />
       </div>
