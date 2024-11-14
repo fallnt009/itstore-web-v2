@@ -57,7 +57,6 @@ export default function useUserPayment() {
         const formData = new FormData();
 
         formData.append('paymentStatus', TRANSACTION_AWAITING);
-        console.log(date);
 
         //check date
         if (date) {

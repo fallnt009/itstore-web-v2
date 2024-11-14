@@ -1,6 +1,4 @@
-// import {format} from 'date-fns';
-// import OrderTracker from '../tracker/OrderTracker';
-import OrderProgress from '../tracker/OrderProgress';
+import Stepper from '../../../components/Stepper';
 import OrderHeaderStatus from './status/OrderHeaderStatus';
 
 import {convertToLocalTime} from '../../../../shared/utils/toLocalTime';
@@ -10,9 +8,11 @@ export default function OrderHeader({
   orderStatus,
   createdAt,
   currentStep,
-  isCancel,
+  isCancel = true,
 }) {
   const {orderNumber} = OrderDetail || {};
+
+  const stepsList = ['Order Placed', 'Processing', 'Completed'];
 
   return (
     <div className="border-b-2 pb-4">
@@ -22,8 +22,12 @@ export default function OrderHeader({
         </h1>
         <OrderHeaderStatus orderStatus={orderStatus} />
       </div>
-      <div className="py-4 ">
-        <OrderProgress currentStep={currentStep} isCancel={isCancel} />
+      <div className="block py-5">
+        {isCancel ? (
+          <div></div>
+        ) : (
+          <Stepper stepsList={stepsList} currentStep={currentStep} />
+        )}
       </div>
       {/* FOR ORDER STATUS */}
       <div className="flex justify-between gap-5">

@@ -77,7 +77,7 @@ export default function OrderDetail() {
               <p>{orderNumber}</p>
             </div>
           </div>
-          <div className="grid p-6 border-2 rounded-xl">
+          <div className="block p-6 border-2 rounded-xl">
             <OrderHeader
               OrderDetail={OrderDetail}
               orderStatus={orderStatus}
