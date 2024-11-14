@@ -1,10 +1,11 @@
 export default function PaymentStepForm({
   step,
   title,
-  status = 'required',
+  status = 'none',
   content,
 }) {
   const statusMapping = {
+    none: {name: ''},
     required: {name: 'REQUIRED'},
     optional: {name: 'OPTIONAL'},
   };
@@ -20,9 +21,11 @@ export default function PaymentStepForm({
           </span>
           <h1 className="font-bold">{title}</h1>
         </div>
-        <div className="border rounded-xl px-3 py-1 text-xs border-gray-100 bg-gray-200 text-gray-700 font-bold">
-          {name}
-        </div>
+        {name && (
+          <div className="border rounded-xl px-3 py-1 text-xs border-gray-100 bg-gray-200 text-gray-700 font-bold">
+            {name}
+          </div>
+        )}
       </div>
       <div>{content}</div>
     </div>

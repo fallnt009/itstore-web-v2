@@ -57,6 +57,7 @@ export default function useUserPayment() {
         const formData = new FormData();
 
         formData.append('paymentStatus', TRANSACTION_AWAITING);
+        console.log(date);
 
         //check date
         if (date) {
@@ -73,7 +74,6 @@ export default function useUserPayment() {
         //navigate to payment awaiting confirmation
         navigate(PAYMENT_AWATING);
       } catch (err) {
-        console.log(err);
         //toast
         toast.error(UNEXPECTED_ERROR);
       }
