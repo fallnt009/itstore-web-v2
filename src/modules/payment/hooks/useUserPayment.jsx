@@ -72,7 +72,7 @@ export default function useUserPayment() {
         await updateUserPaymentById(userPaymentId, formData);
 
         //navigate to payment awaiting confirmation
-        navigate(PAYMENT_AWATING);
+        navigate(PAYMENT_AWATING, {state: {orderNumber: orderNumber}});
       } catch (err) {
         //toast
         toast.error(UNEXPECTED_ERROR);
