@@ -2,7 +2,12 @@ import CartContentItem from './CartContentItem';
 import CartSummary from '../summary/CartSummary';
 import CartEmpty from '../CartEmpty';
 
-export default function CartContent({cartItems, onQtyChange, onDelete}) {
+export default function CartContent({
+  cartItems,
+  onQtyChange,
+  onDelete,
+  onAddWishlist,
+}) {
   //render empty page
   if (!cartItems || cartItems.length === 0) {
     return <CartEmpty />;
@@ -32,6 +37,7 @@ export default function CartContent({cartItems, onQtyChange, onDelete}) {
                     key={el.id}
                     item={el}
                     onQtyChange={onQtyChange}
+                    onAddWishlist={onAddWishlist}
                     onDelete={onDelete}
                     limit={10}
                   />

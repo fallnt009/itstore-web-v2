@@ -1,8 +1,16 @@
 import {NumericFormat} from 'react-number-format';
+
 import Image from '../../components/Image';
 import QuantityBox from '../../components/QuantityBox';
+import AddedButton from '../../components/AddedButton';
 
-export default function CartContentItem({item, onQtyChange, onDelete, limit}) {
+export default function CartContentItem({
+  item,
+  onQtyChange,
+  onDelete,
+  onAddWishlist,
+  limit,
+}) {
   const {Product} = item;
   //discount
   const discountCalculate = () => {
@@ -17,6 +25,7 @@ export default function CartContentItem({item, onQtyChange, onDelete, limit}) {
   const handleQuantityChange = (newQty) => {
     onQtyChange(item.id, newQty);
   };
+
   return (
     <div className="grid items-start grid-cols-[1fr_4fr] border-t-2 p-5 px-5">
       {/* product img */}
@@ -80,12 +89,7 @@ export default function CartContentItem({item, onQtyChange, onDelete, limit}) {
           >
             Remove
           </button>
-          <button
-            type="button"
-            className="font-bold text-sm hover:bg-cerulean-blue-800 px-6 py-2 rounded-3xl border border-gray-600 hover:bg-indigo-700 hover:text-white"
-          >
-            Save to Wishlist
-          </button>
+          <AddedButton onClick={onAddWishlist} id={item.id} />
         </div>
       </div>
     </div>

@@ -2,12 +2,15 @@ import {useState, useCallback, useEffect} from 'react';
 import {toast} from 'react-toastify';
 
 import useCart from '../../shared/hooks/useCart';
+import useWishlist from '../../shared/hooks/useWishlist';
 
 import {UNEXPECTED_ERROR} from '../../shared/services/config/toast';
 
 export default function useUserCart() {
   //context
   const {userCart, updateCartItem, removeCartItem} = useCart();
+
+  const {addWishlist} = useWishlist();
 
   //skeleton loading
   const [loading, setLoading] = useState(true);
@@ -48,7 +51,16 @@ export default function useUserCart() {
     [removeCartItem]
   );
 
-  console.log(userCart);
+  const cartAddWishlist = useCallback(
+    async (productId) => {
+      try {
+        await addWishlist(productId);
+      } catch (err) {
+        toast.error(UNEXPECTED_ERROR);
+      }
+    },
+    [addWishlist]
+  );
 
-  return {userCart, loading, cartQtyChange, cartDeleteItem};
+  return {userCart, loading, cartQtyChange, cartDeleteItem, cartAddWishlist};
 }

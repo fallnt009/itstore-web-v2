@@ -4,7 +4,8 @@ import CartContent from './features/contents/CartContent';
 import CartLoading from './features/loading/CartLoading';
 
 export default function CartContainer() {
-  const {userCart, loading, cartQtyChange, cartDeleteItem} = useUserCart();
+  const {userCart, loading, cartQtyChange, cartDeleteItem, cartAddWishlist} =
+    useUserCart();
 
   return (
     <div className="px-10 py-10">
@@ -20,6 +21,7 @@ export default function CartContainer() {
             cartItems={userCart}
             onQtyChange={cartQtyChange}
             onDelete={cartDeleteItem}
+            onAddWishlist={cartAddWishlist}
           />
         )}
       </div>
