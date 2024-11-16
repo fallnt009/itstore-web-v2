@@ -4,6 +4,15 @@ import QuantityBox from '../../components/QuantityBox';
 
 export default function CartContentItem({item, onQtyChange, onDelete, limit}) {
   const {Product} = item;
+  //discount
+  const discountCalculate = () => {
+    const discountPercentage = Product?.ProductDiscount?.Discount?.amount || 0;
+    const discountPrice = (Number(Product.price) * discountPercentage) / 100;
+
+    const discountTotal = Product.price - discountPrice;
+
+    return discountTotal;
+  };
 
   const handleQuantityChange = (newQty) => {
     onQtyChange(item.id, newQty);
@@ -21,16 +30,40 @@ export default function CartContentItem({item, onQtyChange, onDelete, limit}) {
             {Product.title}
           </div>
           <div className="font-bold">
-            <NumericFormat
-              value={item.qty * parseFloat(Product.price)}
-              displayType="text"
-              thousandSeparator=","
-              suffix={' THB'}
-            />
+            {Product.ProductDiscount ? (
+              <div className="flex gap-2">
+                <NumericFormat
+                  value={item.qty * parseFloat(Product.price)}
+                  displayType="text"
+                  thousandSeparator=","
+                  suffix={' THB'}
+                  className="line-through"
+                />
+                <NumericFormat
+                  value={item.qty * discountCalculate()}
+                  displayType="text"
+                  thousandSeparator=","
+                  suffix={' THB'}
+                  className="text-red-500"
+                />
+              </div>
+            ) : (
+              <NumericFormat
+                value={item.qty * parseFloat(Product.price)}
+                displayType="text"
+                thousandSeparator=","
+                suffix={' THB'}
+              />
+            )}
           </div>
         </div>
-        <div className="flex text-sm text-stone-500 ">
+        <div className="flex justify-between text-sm text-stone-500 ">
           <p>{Product.description}</p>
+          {Product.ProductDiscount && (
+            <div className="flex text-xs p-1 bg-red-500 text-white font-semibold">
+              {Product?.ProductDiscount?.Discount?.amount}% off
+            </div>
+          )}
         </div>
         <div className="flex gap-8 mt-5 items-center text-stone-700">
           <div>

@@ -7,24 +7,29 @@ import useLoading from '../../../shared/hooks/useLoading';
 
 import {CHECKOUT_DETAIL} from '../../../shared/services/config/routing';
 
+const DELIVERY_FEE = 0;
+const VAT_PERCENTAGE = 7;
+
 export default function CartSummary({cart, totalItems}) {
   const {createCheckout} = useCheckout();
   const {startLoading, stopLoading} = useLoading();
 
   const navigate = useNavigate();
 
-  const DELIVERY_FEE = 0;
-  const VAT_PERCENTAGE = 7;
+  const priceCalculator = () => {
+    return cart.reduce((total, item) => {
+      const discountPercentage =
+        item?.Product?.ProductDiscount?.Discount?.amount || 0;
+      const price = parseFloat(item?.Product?.price || 0);
+      const discountedPrice = price - (price * discountPercentage) / 100;
+      return total + discountedPrice * (item?.qty || 1);
+    }, 0);
+  };
 
-  //Calculate total price and items
-  const totalItemPrice = cart.reduce(
-    (total, item) => total + parseFloat(item.Product.price) * item.qty,
-    0
-  );
   //define delivery and vat price
-  const vatPrice = (totalItemPrice + DELIVERY_FEE) * (VAT_PERCENTAGE / 100);
+  const vatPrice = (priceCalculator() + DELIVERY_FEE) * (VAT_PERCENTAGE / 100);
   //Calculate total
-  const realTotal = totalItemPrice + DELIVERY_FEE + vatPrice;
+  const realTotal = priceCalculator() + DELIVERY_FEE + vatPrice;
 
   const handleOnClickCart = async (e) => {
     e.preventDefault();
@@ -34,8 +39,6 @@ export default function CartSummary({cart, totalItems}) {
       navigate(CHECKOUT_DETAIL);
       navigate(0);
     } catch (err) {
-      console.log(err);
-
       toast.error(err);
     } finally {
       stopLoading();
@@ -53,7 +56,7 @@ export default function CartSummary({cart, totalItems}) {
             {/* price total */}
             <div>
               <NumericFormat
-                value={totalItemPrice}
+                value={priceCalculator()}
                 decimalScale={2}
                 fixedDecimalScale={true}
                 displayType="text"
