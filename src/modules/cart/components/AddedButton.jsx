@@ -1,27 +1,19 @@
-import {useState} from 'react';
+import {MdAdd, MdCheck} from 'react-icons/md';
 
-export default function AddedButton({onClick, id}) {
-  const [isAdded, setIsAdded] = useState(false);
-
-  const handleClick = async () => {
-    setIsAdded(true);
-    await onClick(id);
-    // Reset back to "Save to Wishlist" after 1 seconds
-    setTimeout(() => setIsAdded(false), 1000);
-  };
-
+export default function AddedButton({inWishlist, onClick, id}) {
   return (
     <button
       type="button"
-      onClick={handleClick}
-      className={`font-bold text-sm px-6 py-2 rounded-3xl border 
+      onClick={() => onClick(id, inWishlist)}
+      className={`flex items-center gap-2 font-semibold text-sm 
     ${
-      isAdded
-        ? 'bg-green-600 text-white border-green-600'
-        : 'hover:bg-indigo-700 hover:text-white border-gray-600'
+      inWishlist
+        ? 'text-green-600 hover:underline'
+        : 'text-gray-600 hover:underline'
     }`}
     >
-      {isAdded ? 'Added to Wishlist' : 'Save to Wishlist'}
+      <span>{inWishlist ? <MdCheck /> : <MdAdd />}</span>
+      {inWishlist ? 'Already In Wishlist' : 'Add to Wishlist'}
     </button>
   );
 }

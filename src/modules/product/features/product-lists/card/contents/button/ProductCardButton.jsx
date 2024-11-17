@@ -14,12 +14,8 @@ export default function ProductCardButton({id, title, onAdd}) {
   const [status, setStatus] = useState('add');
 
   const onClickAdd = async () => {
-    setStatus('process');
     let timeoutId;
     try {
-      await new Promise((resolve) => {
-        timeoutId = setTimeout(resolve, 1000);
-      }); // Simulate delay
       await onAdd(id);
       toast.success(ADD_TOCART(title));
       setStatus('success');
@@ -37,8 +33,6 @@ export default function ProductCardButton({id, title, onAdd}) {
 
   const renderButton = () => {
     switch (status) {
-      case 'process':
-        return <ButtonProcess />;
       case 'success':
         return <ButtonSuccess />;
       case 'error':

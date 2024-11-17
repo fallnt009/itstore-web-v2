@@ -10,7 +10,8 @@ export default function useUserCart() {
   //context
   const {userCart, updateCartItem, removeCartItem} = useCart();
 
-  const {addWishlist} = useWishlist();
+  const {inWishlist, fetchInWishlist, addWishlist, deleteWishlist} =
+    useWishlist();
 
   //skeleton loading
   const [loading, setLoading] = useState(true);
@@ -28,6 +29,18 @@ export default function useUserCart() {
       return () => clearTimeout(timer);
     }
   }, [userCart, setLoading]);
+
+  //fetch InWishlist
+  useEffect(() => {
+    const loadInWishlist = async () => {
+      try {
+        await fetchInWishlist();
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    loadInWishlist();
+  }, []);
 
   const cartQtyChange = useCallback(
     async (cartItemId, newQty) => {
@@ -52,9 +65,21 @@ export default function useUserCart() {
   );
 
   const cartAddWishlist = useCallback(
-    async (productId) => {
+    async (productId, inWishlist) => {
       try {
-        await addWishlist(productId);
+        console.log(inWishlist);
+
+        if (inWishlist) {
+          //delete wishlist
+          await deleteWishlist(productId);
+          //toast
+          toast.success('Remove Success');
+        } else {
+          //add wishlist
+          await addWishlist(productId);
+          //toast
+          toast.success('Added Success');
+        }
       } catch (err) {
         toast.error(UNEXPECTED_ERROR);
       }
@@ -62,5 +87,12 @@ export default function useUserCart() {
     [addWishlist]
   );
 
-  return {userCart, loading, cartQtyChange, cartDeleteItem, cartAddWishlist};
+  return {
+    userCart,
+    inWishlist,
+    loading,
+    cartQtyChange,
+    cartDeleteItem,
+    cartAddWishlist,
+  };
 }

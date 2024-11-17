@@ -26,11 +26,17 @@ export default function QuantityBox({initialQty, onChange, limit}) {
   return (
     <div className="flex gap-5">
       <div className="flex items-center gap-2 text-cerulean-blue-800">
-        <span className="cursor-pointer" onClick={decreaseCount}>
+        <span
+          className="cursor-pointer hover:text-indigo-600"
+          onClick={decreaseCount}
+        >
           <MdOutlineRemoveCircle size={35} />
         </span>
-        <span>{count}</span>
-        <span className="cursor-pointer" onClick={increaseCount}>
+        <span className="font-semibold">{count}</span>
+        <span
+          className="cursor-pointer hover:text-indigo-600"
+          onClick={increaseCount}
+        >
           <MdOutlineAddCircle size={35} />
         </span>
       </div>

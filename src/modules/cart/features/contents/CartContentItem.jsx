@@ -1,17 +1,34 @@
+import {Link} from 'react-router-dom';
 import {NumericFormat} from 'react-number-format';
+import {MdDelete} from 'react-icons/md';
 
 import Image from '../../components/Image';
 import QuantityBox from '../../components/QuantityBox';
 import AddedButton from '../../components/AddedButton';
 
+import {PRODUCT_INFO_NAV} from '../../../shared/services/config/routing';
+
 export default function CartContentItem({
   item,
+  inWishlist,
   onQtyChange,
   onDelete,
   onAddWishlist,
   limit,
 }) {
   const {Product} = item;
+  const {id, slug, ProductSubCategory} = Product;
+  //destruct
+
+  const productId = id || null;
+
+  //slug
+  const categorySlug =
+    ProductSubCategory?.BrandCategorySub?.BrandCategory?.MainCategory?.slug ||
+    '';
+  const subCategorySlug =
+    ProductSubCategory?.BrandCategorySub?.SubCategory?.slug || '';
+  const productSlug = slug || '';
 
   //discount
   const discountCalculate = () => {
@@ -36,9 +53,12 @@ export default function CartContentItem({
       <div className="grid h-full px-5">
         {/* product detail */}
         <div className="flex justify-between text-md text-stone-700">
-          <div className="flex font-bold gap-5 justify-start ">
+          <Link
+            className="flex font-semibold gap-5 justify-start cursor-pointer hover:underline"
+            to={PRODUCT_INFO_NAV(categorySlug, subCategorySlug, productSlug)}
+          >
             {Product.title}
-          </div>
+          </Link>
           <div className="font-bold">
             {Product.ProductDiscount ? (
               <div className="flex gap-2">
@@ -75,7 +95,7 @@ export default function CartContentItem({
             </div>
           )}
         </div>
-        <div className="flex gap-8 mt-5 items-center text-stone-700">
+        <div className="flex gap-5 pt-5 items-center text-stone-700">
           <div>
             <QuantityBox
               initialQty={item.qty}
@@ -83,14 +103,23 @@ export default function CartContentItem({
               onChange={handleQuantityChange}
             />
           </div>
-          <button
-            type="button"
-            className="font-bold text-sm border border-gray-600 hover:bg-indigo-700 px-6 py-2 rounded-3xl hover:text-white"
-            onClick={() => onDelete(item.id)}
-          >
-            Remove
-          </button>
-          <AddedButton onClick={onAddWishlist} id={item.id} />
+          <div className="flex justify-between w-full">
+            <AddedButton
+              inWishlist={inWishlist}
+              onClick={onAddWishlist}
+              id={productId}
+            />
+            <button
+              type="button"
+              className="flex items-center gap-2 font-semibold text-sm text-gray-600 hover:text-red-500"
+              onClick={() => onDelete(item.id)}
+            >
+              <span>
+                <MdDelete size={20} />
+              </span>
+              Remove
+            </button>
+          </div>
         </div>
       </div>
     </div>
