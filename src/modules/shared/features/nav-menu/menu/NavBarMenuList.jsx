@@ -10,7 +10,6 @@ import {
 import {
   HOME,
   TRACKING_ORDER,
-  PAYMENT_PROOF,
   HELP_CENTER,
 } from '../../../services/config/routing';
 
@@ -24,13 +23,8 @@ export default function NavBarMenuList() {
       icon: <MdMyLocation />,
       path: TRACKING_ORDER,
     },
-    {
-      id: 4,
-      title: 'Upload your proof',
-      icon: <MdUploadFile />,
-      path: PAYMENT_PROOF,
-    },
-    {id: 5, title: 'Need Help ?', icon: <MdLiveHelp />, path: HELP_CENTER},
+
+    {id: 4, title: 'Need Help ?', icon: <MdLiveHelp />, path: HELP_CENTER},
   ];
   return (
     <>
