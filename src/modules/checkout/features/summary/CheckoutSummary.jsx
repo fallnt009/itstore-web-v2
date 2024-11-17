@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useMemo} from 'react';
 
 import useCheckout from '../../../shared/hooks/useCheckout';
 
@@ -15,23 +15,29 @@ export default function CheckoutSummary({defaultAddress, userCart}) {
   //service item
   const {Service} = item;
 
-  const serviceFee = Service?.price || 0;
+  const serviceFee = Number(Service?.price || 0);
 
   //Calculate total price and items
-  const itemsPrice = userCart.reduce(
-    (total, item) => total + parseFloat(item.Product.price) * item.qty,
-    0
-  );
+  const priceCalculator = useMemo(() => {
+    return userCart.reduce((total, item) => {
+      const discountPercentage =
+        item?.Product?.ProductDiscount?.Discount?.amount || 0;
+      const price = parseFloat(item?.Product?.price || 0);
+      const discountedPrice = price - (price * discountPercentage) / 100;
+      return total + discountedPrice * (item?.qty || 1);
+    }, 0);
+  }, [userCart]);
   //Define delivery and vat price
-  const vatAmount = Number(itemsPrice) * (7 / 100);
-  //Calculate total
-  const totalPrice =
-    Number(itemsPrice) + Number(serviceFee) + Number(vatAmount);
+  const vatAmount = useMemo(() => priceCalculator * 0.07, [priceCalculator]);
 
+  const totalPrice = useMemo(
+    () => priceCalculator + serviceFee + vatAmount,
+    [priceCalculator, serviceFee, vatAmount]
+  );
   //send totalamount to the state
   useEffect(() => {
-    getTotalAmount(totalPrice, itemsPrice);
-  }, [totalPrice, itemsPrice, getTotalAmount]);
+    getTotalAmount(totalPrice, priceCalculator);
+  }, [totalPrice, priceCalculator, getTotalAmount]);
 
   return (
     <div>
@@ -40,7 +46,7 @@ export default function CheckoutSummary({defaultAddress, userCart}) {
           <SummaryAmount
             totalPrice={totalPrice}
             vatAmount={vatAmount}
-            itemsPrice={itemsPrice}
+            itemsPrice={priceCalculator}
             serviceFee={serviceFee}
           />
         </div>

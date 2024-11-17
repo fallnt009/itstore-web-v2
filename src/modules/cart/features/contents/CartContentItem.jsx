@@ -12,6 +12,7 @@ export default function CartContentItem({
   limit,
 }) {
   const {Product} = item;
+
   //discount
   const discountCalculate = () => {
     const discountPercentage = Product?.ProductDiscount?.Discount?.amount || 0;
