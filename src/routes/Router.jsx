@@ -1,6 +1,7 @@
 import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 
 import MainLayout from '../modules/shared/layout/MainLayout';
+import AuthLayout from '../modules/shared/layout/AuthLayout';
 import NotFoundPage from '../modules/not-found/NotFoundPage';
 
 import {publicRoutes} from './publicRoutes';
@@ -18,7 +19,7 @@ export default function Router() {
     {
       element: (
         <ProtectedRoute>
-          <MainLayout />
+          <AuthLayout />
         </ProtectedRoute>
       ),
       children: privateRoutes,

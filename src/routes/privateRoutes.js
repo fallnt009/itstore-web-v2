@@ -4,7 +4,6 @@ import {
   CHECKOUT_DETAILS,
   CHECKOUT_SERVICES,
   CHECKOUT_PAYMENT,
-  CHECKOUT_TRANSFER,
   ORDER_SUCCESS,
   ORDER_DETAIL,
   ORDER_HISTORY,
@@ -27,7 +26,6 @@ import CheckoutPayment from '../modules/checkout/features/payment/CheckoutPaymen
 
 //payment portal
 import PaymentContainer from '../modules/payment/index';
-import PaymentBankTransfer from '../modules/checkout/features/payment-choices/banktransfer/PaymentBankTransfer';
 
 import BankTransferPayment from '../modules/payment/features/bank-transfer/BankTransferPayment';
 import QrPayment from '../modules/payment/features/qr-payment/QrPayment';
@@ -61,10 +59,6 @@ export const privateRoutes = [
       {
         path: CHECKOUT_PAYMENT,
         element: <CheckoutPayment />,
-      },
-      {
-        path: CHECKOUT_TRANSFER,
-        element: <PaymentBankTransfer />,
       },
     ],
   },

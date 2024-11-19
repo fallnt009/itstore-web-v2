@@ -24,26 +24,28 @@ export default function AddressListItem({
 
   return (
     <div
-      className={`container border-2 hover:border-cerulean-blue-800 cursor-pointer rounded-lg p-4 ${
-        selectedId ? 'border-cerulean-blue-800' : ''
+      className={`container border-2 hover:border-black cursor-pointer rounded-lg p-4 ${
+        selectedId ? 'border-black' : ''
       }`}
       onClick={() => handleSelect(id)}
     >
-      <ul className="text-stone-600">
+      <ul className="text-gray-500">
         <div className="flex items-center justify-between">
-          {fullName}
+          <h1 className="font-semibold">{fullName}</h1>
           {selectedId ? (
-            <div className="text-sm">default</div>
+            <div className="text-xs p-1 px-2 border rounded-lg bg-gray-200 font-bold text-gray-500">
+              default
+            </div>
           ) : (
             <span
-              className="hover:text-cerulean-blue-800"
+              className="hover:text-red-500"
               onClick={() => deleteAddress(id)}
             >
               <MdDeleteOutline size={25} />
             </span>
           )}
         </div>
-        <ul className="py-2">
+        <ul className="py-1">
           <li>{addressLine1}</li>
           <li>{addressLine2}</li>
         </ul>

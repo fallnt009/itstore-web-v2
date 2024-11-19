@@ -9,6 +9,8 @@ import useAddress from '../../../shared/hooks/useAddress';
 import AddressContainer from './address/AddressContainer';
 import AddressUpdateForm from './address/forms/AddressUpdateForm';
 import AddressBox from './address/box/AddressBox';
+
+import Button from '../../components/Button';
 import ActiveButton from '../../components/ActiveButton';
 
 import {HOME, CHECKOUT_SERVICES} from '../../../shared/services/config/routing';
@@ -59,27 +61,27 @@ export default function CheckoutDetails() {
           <div className="flex justify-between items-center mt-5">
             <h4 className="font-semibold text-lg">Delivery Address</h4>
             {defaultAddress ? (
-              <button
-                className="font-semibold  rounded-full border border-black p-2 px-5 hover:border-2 max-w-24 max-h-10"
+              <Button
+                className="font-semibold  rounded-full border border-gray-500 p-2 px-5 hover:bg-black hover:text-white max-w-24 max-h-10"
                 onClick={handleEditClick}
               >
                 Edit
-              </button>
+              </Button>
             ) : (
-              <button className="font-semibold  rounded-full border border-stone-600 text-stone-500  p-2 px-5 max-w-24 max-h-10 cursor-default">
+              <Button className="font-semibold  rounded-full border border-stone-600 text-stone-500  p-2 px-5 max-w-24 max-h-10 cursor-default">
                 Edit
-              </button>
+              </Button>
             )}
           </div>
           <div className="flex flex-col gap-2 py-3">
             <AddressBox defaultAddress={defaultAddress} />
             <div>
-              <button
-                className="flex justify-center items-center font-semibold p-3 rounded-full border border-black hover:border-2 max-h-12 "
+              <Button
+                className="flex justify-center items-center font-semibold p-2 px-5 rounded-full border border-gray-500 hover:bg-black hover:text-white max-h-12 "
                 onClick={handleChooseAddress}
               >
                 Choose another address
-              </button>
+              </Button>
             </div>
           </div>
           <div className="flex flex-col gap-2 mt-5">

@@ -12,7 +12,7 @@ export default function ActiveButton({
       {select ? (
         <Link
           to={to}
-          className={`flex justify-center rounded-full border-2 py-4 px-5  text-cerulean-blue-800 font-semibold hover:bg-indigo-700 hover:text-white`}
+          className={`flex justify-center rounded-full border-2 py-4 px-5  border-indigo-700 text-white bg-indigo-700 font-semibold hover:bg-white hover:text-indigo-700`}
           onClick={onClick}
         >
           {activeTitle}

@@ -8,6 +8,8 @@ import useCheckout from '../../../../shared/hooks/useCheckout';
 import AddressLists from './list/AddressLists';
 import AddressCreateForm from './forms/AddressCreateForm';
 
+import Button from '../../../components/Button';
+
 export default function AddressContainer({openDrawerWithContent, onClose}) {
   //useAddress
   const {address, addAddress, defaultAddress, setDefaultAddress} = useAddress();
@@ -53,11 +55,11 @@ export default function AddressContainer({openDrawerWithContent, onClose}) {
   return (
     <div className="flex flex-col mx-5">
       <header className="flex flex-col p-5 font-semibold text-lg mx-5">
-        <h4 className="flex justify-center p-2 pb-5">Your saved Address</h4>
+        <h4 className="flex justify-center p-2 pb-5">Your Saved Address</h4>
       </header>
       <div className="flex flex-col mx-5">
-        <button
-          className="font-semibold  rounded-full border py-4 px-5 border-black mt-5 hover:border-2"
+        <Button
+          className="font-semibold  rounded-full border py-4 px-5 border-gray-500 hover:bg-black hover:text-white "
           onClick={() =>
             openDrawerWithContent(
               <AddressCreateForm onClose={onClose} addAddress={addAddress} />
@@ -65,7 +67,7 @@ export default function AddressContainer({openDrawerWithContent, onClose}) {
           }
         >
           Add new address
-        </button>
+        </Button>
         <div className="py-8">
           {address && address.length > 0 ? (
             <AddressLists
@@ -81,13 +83,13 @@ export default function AddressContainer({openDrawerWithContent, onClose}) {
         </div>
 
         {selectedId && !isDefaultAddress ? (
-          <button
+          <Button
             type="submit"
-            className="flex justify-center rounded-full border-2 py-4 px-5 text-white bg-indigo-700 font-semibold"
+            className="flex justify-center rounded-full border border-indigo-700 py-4 px-5 text-white bg-indigo-700 font-semibold hover:bg-white hover:text-indigo-700"
             onClick={() => handleAddAddress(selectedId)}
           >
             Use this address as default
-          </button>
+          </Button>
         ) : (
           <div className="flex justify-center rounded-full border-2 py-4 px-5  bg-stone-300 text-stone-500 ">
             Use this address as default

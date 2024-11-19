@@ -17,8 +17,10 @@ export default function ProductContextProvider({children}) {
   const fetchHome = useCallback(async () => {
     try {
       //fetch new & sales
-      const newProduct = await ProductApi.getNewProduct();
-      const salesProduct = await ProductApi.getSalesProduct();
+      const [newProduct, salesProduct] = await Promise.all([
+        ProductApi.getNewProduct(),
+        ProductApi.getSalesProduct(),
+      ]);
 
       dispatch({
         type: FETCH_PRODUCT_HOME,

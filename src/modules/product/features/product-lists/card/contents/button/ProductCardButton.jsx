@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {toast} from 'react-toastify';
 
 import ButtonError from './status/ButtonError';
-import ButtonProcess from './status/ButtonProcess';
+// import ButtonProcess from './status/ButtonProcess';
 import ButtonSuccess from './status/ButtonSuccess';
 
 import {
@@ -14,19 +14,18 @@ export default function ProductCardButton({id, title, onAdd}) {
   const [status, setStatus] = useState('add');
 
   const onClickAdd = async () => {
-    let timeoutId;
     try {
       await onAdd(id);
       toast.success(ADD_TOCART(title));
       setStatus('success');
-      timeoutId = setTimeout(() => {
-        setStatus('add'); // Reset to 'add'
+      setTimeout(() => {
+        setStatus('add'); // Reset to 'add' after 1 second
       }, 1000);
     } catch (err) {
       setStatus('error');
       toast.error(UNEXPECTED_ERROR);
-      timeoutId = setTimeout(() => {
-        setStatus('add'); // Reset to 'add'
+      setTimeout(() => {
+        setStatus('add'); // Reset to 'add' after 1 second
       }, 1000);
     }
   };

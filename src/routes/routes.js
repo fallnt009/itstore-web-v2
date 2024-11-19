@@ -22,8 +22,6 @@ exports.CHECKOUT_MAIN = '/checkout';
 exports.CHECKOUT_DETAILS = 'details';
 exports.CHECKOUT_SERVICES = 'services';
 exports.CHECKOUT_PAYMENT = 'payment';
-//Payment Portal
-exports.CHECKOUT_TRANSFER = 'banktransfer';
 
 //status
 exports.ORDER_SUCCESS = '/order/success/:orderNumber';

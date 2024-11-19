@@ -63,7 +63,7 @@ export default function WishlistListItem({item}) {
 
   return (
     <div>
-      <div className="grid grid-cols-[0.7fr_5fr] p-5 border-2 border-gray-300">
+      <div className="grid grid-cols-[0.7fr_5fr] p-5 border-gray-300">
         <Link
           className="block justify-center w-[150px]"
           to={PRODUCT_INFO_NAV(categorySlug, subCategorySlug, productSlug)}

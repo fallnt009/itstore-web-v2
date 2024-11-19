@@ -96,19 +96,7 @@ export default function ProductCardContent({product, inWishlist}) {
           onAdd={addCartItem}
           qty={qtyInStock}
         />
-        {/* {qtyInStock === 0 ? (
-          <div className="rounded-lg p-2 border border-gray-400 bg-gray-400 text-white font-semibold ">
-            Add to Cart
-          </div>
-        ) : (
-          <button
-            type="button"
-            className="rounded-lg p-2 border border-indigo-600 bg-indigo-600 text-white font-semibold hover:text-indigo-600 hover:bg-white"
-            // onClick={() => addCartItem(id)}
-          >
-            Add to Cart
-          </button>
-        )} */}
+
         {/* Add Wishlist */}
         {inWishlist ? (
           <button

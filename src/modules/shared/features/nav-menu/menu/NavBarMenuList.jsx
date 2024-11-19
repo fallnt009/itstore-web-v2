@@ -4,7 +4,7 @@ import {
   MdEmojiEvents,
   MdLiveHelp,
   MdMyLocation,
-  MdUploadFile,
+  // MdUploadFile,
 } from 'react-icons/md';
 
 import {

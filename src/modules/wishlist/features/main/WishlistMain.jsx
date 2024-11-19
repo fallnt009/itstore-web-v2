@@ -44,7 +44,7 @@ export default function WishlistMain() {
       <div className="pt-10 pb-5">
         <h1 className="font-semibold text-4xl">My Wishlist</h1>
       </div>
-      {items.length >= 0 ? (
+      {items.length <= 0 ? (
         <WishlistEmpty />
       ) : (
         <>

@@ -40,7 +40,7 @@ export default function useUserCart() {
       }
     };
     loadInWishlist();
-  }, []);
+  }, [fetchInWishlist]);
 
   const cartQtyChange = useCallback(
     async (cartItemId, newQty) => {
@@ -84,7 +84,7 @@ export default function useUserCart() {
         toast.error(UNEXPECTED_ERROR);
       }
     },
-    [addWishlist]
+    [addWishlist, deleteWishlist]
   );
 
   return {
