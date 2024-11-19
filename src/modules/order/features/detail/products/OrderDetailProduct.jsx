@@ -3,16 +3,16 @@ import {NumericFormat} from 'react-number-format';
 import Image from '../../../components/Image';
 
 export default function OrderDetailProduct({item}) {
-  const {Product, qty, price} = item || {};
+  const {Product, qty, totalPrice} = item || {};
 
-  const productImage = Product?.productImage;
   const productName = Product?.title;
   const productDesc = Product?.description;
+
   return (
     <div className="grid items-start grid-cols-[1fr_4fr] py-5 px-2 border-b">
       {/* product img */}
       <div className="grid justify-center w-full">
-        <Image src={productImage} size="100px" />
+        <Image src={Product?.ProductImages[0]?.path || ''} size="100px" />
       </div>
       <div className="grid">
         {/* product detail */}
@@ -22,7 +22,7 @@ export default function OrderDetailProduct({item}) {
           </div>
           <div className="font-semibold">
             <NumericFormat
-              value={price}
+              value={totalPrice}
               displayType="text"
               thousandSeparator=","
               decimalScale={2}
