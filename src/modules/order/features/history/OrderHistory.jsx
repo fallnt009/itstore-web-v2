@@ -65,7 +65,7 @@ export default function OrderHistory() {
       {loading ? (
         <OrderHistoryLoading />
       ) : (
-        <div className="py-10 px-10">
+        <div className="my-10 mx-10">
           <div className="flex gap-2 items-center py-5 text-lg border-b">
             <Link
               to={HOME}

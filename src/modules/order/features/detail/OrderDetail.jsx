@@ -49,7 +49,7 @@ export default function OrderDetail() {
   }
 
   return (
-    <div className="py-10 px-10">
+    <div className="my-10 mx-10">
       {loading ? (
         <OrderDetailLoading />
       ) : (
@@ -77,7 +77,7 @@ export default function OrderDetail() {
               <p>{orderNumber}</p>
             </div>
           </div>
-          <div className="block p-6 border-2 rounded-xl">
+          <div className="block p-6">
             <OrderHeader
               OrderDetail={OrderDetail}
               orderStatus={orderStatus}

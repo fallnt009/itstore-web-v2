@@ -15,7 +15,7 @@ export default function HomeContainer() {
   }
 
   return (
-    <div className="px-10 py-10">
+    <div className="mx-10 my-10">
       <MenuContent />
       <BestDealsContent salesProduct={Home.salesProducts} loading={loading} />
       <BannerSlider />

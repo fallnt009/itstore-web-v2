@@ -28,7 +28,7 @@ export default function ProductInfoContainer() {
   }
 
   return (
-    <div className="px-10 py-10">
+    <div className="mx-10 my-10">
       <ProductInfoContent ProductInfo={ProductInfo} />
     </div>
   );

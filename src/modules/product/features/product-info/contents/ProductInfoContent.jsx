@@ -23,7 +23,7 @@ export default function ProductInfoContent({ProductInfo}) {
   const discountPrice = price - discountCal;
 
   return (
-    <div className="py-5 px-20  rounded-lg shadow-xl">
+    <div className="py-5 px-10 rounded-lg shadow-xl">
       <div className="py-2 ">
         <BreadCrumb />
       </div>

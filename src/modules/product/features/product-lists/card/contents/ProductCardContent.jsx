@@ -79,7 +79,7 @@ export default function ProductCardContent({product, inWishlist}) {
           <ProductCardImage size="250px" src={productImages} />
         </div>
         {/* Productbox */}
-        <div className="px-2">
+        <div className="px-5">
           <ProductCardContentItem
             title={title}
             subCategoryName={subCategoryName}
@@ -88,7 +88,7 @@ export default function ProductCardContent({product, inWishlist}) {
           />
         </div>
       </Link>
-      <div className="flex items-center gap-3 px-2 pt-3 pb-10">
+      <div className="flex items-center gap-3 px-5 pt-3 pb-10">
         {/* Add to Cart */}
         <ProductCardButton
           id={id}

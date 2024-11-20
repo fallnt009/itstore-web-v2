@@ -12,7 +12,7 @@ export default function PaymentContainer() {
     return <ErrorPage statusCode={errorStatus} />;
   }
   return (
-    <div className="px-10 pt-10 pb-40">
+    <div className="mx-10 mt-10 mb-40">
       <PaymentSelection
         paymentMethod={paymentMethod}
         orderNumber={orderNumber}

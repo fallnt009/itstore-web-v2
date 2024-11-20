@@ -20,7 +20,7 @@ export default function BankTransferPayment() {
   }
 
   return (
-    <div className="px-10 py-5">
+    <div className="mx-10 my-5">
       <div className="bg-gray-100 rounded-lg py-10">
         <BankTransferContent
           orderNumber={orderNumber}

@@ -5,11 +5,9 @@ export default function SidebarFilter({
   specItems,
   specProduct,
   onSubmit,
-  setFilters,
-  setSearch,
+  onClear,
 }) {
   const [selectedFilter, setSelectedFilter] = useState([]);
-  // const [searchFilter, setSearchFilter] = useState('');
 
   const handleOnSelectFilter = (item, isChecked) => {
     setSelectedFilter((prevFilter) => {
@@ -29,14 +27,9 @@ export default function SidebarFilter({
 
   const handleClearAllFilter = () => {
     setSelectedFilter([]);
-    setFilters([]);
-    // setSearch('');
+    onClear(); //clear filter
   };
 
-  // const handleChangeSearch = (e) => {
-  //   e.preventDefault();
-  //   setSearchFilter(e.target.value);
-  // };
   return (
     <div className="p-4 border-r">
       <div className="flex justify-between items-center font-semibold">
@@ -49,7 +42,6 @@ export default function SidebarFilter({
           Clear All
         </button>
       </div>
-      {/* <SidebarFilterSearch onSearch={handleChangeSearch} /> */}
       <SidebarFilterContent
         specItems={specItems}
         specProduct={specProduct}

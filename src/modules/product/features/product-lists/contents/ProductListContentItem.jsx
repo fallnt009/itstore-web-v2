@@ -12,7 +12,7 @@ export default function ProductListContentItem({
     ),
   }));
   return (
-    <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 pt-5 px-5">
+    <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
       {productWithWishlist.map((el) => (
         <ProductCard
           key={el.id}

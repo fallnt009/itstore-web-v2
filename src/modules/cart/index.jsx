@@ -14,7 +14,7 @@ export default function CartContainer() {
   } = useUserCart();
 
   return (
-    <div className="px-10 py-10">
+    <div className="mx-10 my-10">
       {/* title */}
       <div className="flex justify-start flex-col gap-2 p-2 pb-5 select-none">
         <div className="text-4xl font-semibold ">Your Cart</div>

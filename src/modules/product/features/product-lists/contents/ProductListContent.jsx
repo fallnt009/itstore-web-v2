@@ -13,7 +13,7 @@ export default function ProductListContent({
   filters,
   loading,
   onSubmit,
-  setFilters,
+  onClear,
 }) {
   const {categorySlug, subCategorySlug} = useParams();
 
@@ -33,7 +33,7 @@ export default function ProductListContent({
             specItems={specItems}
             specProduct={specProduct}
             onSubmit={onSubmit}
-            setFilters={setFilters}
+            onClear={onClear}
           />
         </div>
         <div>

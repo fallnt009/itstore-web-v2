@@ -17,7 +17,7 @@ export default function MenuContent() {
     'https://www.ryt9.com/img/files/20220928/iq23ce27eaf62743ef527a158fa86a93b1.jpg',
   ];
   return (
-    <div className="pb-5 pt-5">
+    <div className="my-5">
       <div className="grid xl:grid-cols-2 gap-4">
         <div className="grid">
           <div className="grid grid-rows-2 gap-4">
