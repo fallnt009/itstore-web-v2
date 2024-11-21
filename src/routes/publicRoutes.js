@@ -19,8 +19,8 @@ import HomeContainer from '../modules/home';
 import AuthContainer from '../modules/auth';
 
 //Container
-import NewProductContainer from '../modules/product/features/specials/new-product/NewProductContainer';
-import SalesProductContainer from '../modules/product/features/specials/sales-product/SalesProductContainer';
+import NewProductListContanier from '../modules/product/features/product-lists/NewProductListContainer';
+// import SalesProductContainer from '../modules/product/features/specials/sales-product/SalesProductContainer';
 import LoginContainer from '../modules/auth/features/login/LoginContainer';
 import RegisterContainer from '../modules/auth/features/register/RegisterContainer';
 import ProductListContainer from '../modules/product/features/product-lists/ProductListContainer';
@@ -62,11 +62,10 @@ export const publicRoutes = [
 
   {
     path: NEW_PRODUCT,
-    element: <NewProductContainer />,
+    element: <NewProductListContanier />,
   },
   {
     path: SALES_PRODUCT,
-    element: <SalesProductContainer />,
   },
   {
     path: PRODUCT_LIST,

@@ -34,6 +34,7 @@ export default function ProductCardContent({product, inWishlist}) {
     ProductSubCategory,
     ProductDiscount,
     ProductImages,
+    isNewArrival,
     slug,
   } = product;
 
@@ -70,25 +71,38 @@ export default function ProductCardContent({product, inWishlist}) {
   };
 
   return (
-    <div className="text-sm border p-2">
+    <div className="box-border overflow-hidden w-[240px] text-sm p-2 border border-white shadow-lg transition-shadow rounded-lg grid-rows-3 cursor-pointer hover:shadow-blue-100">
       <Link
-        className="flex flex-col justify-center"
+        className="flex flex-col justify-center pt-5"
         to={PRODUCT_INFO_NAV(categoryName, subCategoryName, slug)}
       >
         <div className="flex justify-center">
-          <ProductCardImage size="250px" src={productImages} />
-        </div>
-        {/* Productbox */}
-        <div className="px-5">
-          <ProductCardContentItem
-            title={title}
-            subCategoryName={subCategoryName}
-            price={price}
-            discount={ProductDiscount?.Discount}
-          />
+          <div className="block relative ">
+            {isNewArrival && (
+              <span className="flex absolute left-0 text-xs p-1 bg-red-500 text-white font-semibold">
+                New Arrival
+              </span>
+            )}
+            {ProductDiscount && (
+              <span className="flex absolute left-0 text-xs p-1 bg-red-500 text-white font-semibold">
+                {ProductDiscount?.Discount?.amount || 0}% off
+              </span>
+            )}
+            <ProductCardImage size="250px" src={productImages} />
+          </div>
         </div>
       </Link>
-      <div className="flex items-center gap-3 px-5 pt-3 pb-10">
+      {/* Productbox */}
+      <div className="flex justify-start px-1">
+        <ProductCardContentItem
+          title={title}
+          subCategoryName={subCategoryName}
+          price={price}
+          discount={ProductDiscount?.Discount}
+          isNewArrival={isNewArrival}
+        />
+      </div>
+      <div className="flex justify-start items-center gap-3 px-1 pt-3 pb-5">
         {/* Add to Cart */}
         <ProductCardButton
           id={id}

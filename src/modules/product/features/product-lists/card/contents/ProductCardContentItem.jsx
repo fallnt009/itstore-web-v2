@@ -16,8 +16,20 @@ export default function ProductCardContentItem({
         <p className=" font-regular text-sm">{subCategoryName.toUpperCase()}</p>
         {/* Price  */}
         <div>
+          {discount && (
+            <div className="flex text-2xl items-center justify-between font-bold text-red-500">
+              <NumericFormat
+                value={discountPrice}
+                displayType="text"
+                thousandSeparator=","
+                suffix={' THB'}
+              />
+            </div>
+          )}
           <div
-            className={`font-bold text-2xl ${discount ? 'line-through' : ''}`}
+            className={`font-bold text-2xl ${
+              discount ? 'line-through text-sm font-semibold' : ''
+            }`}
           >
             <NumericFormat
               value={price}
@@ -27,28 +39,17 @@ export default function ProductCardContentItem({
             />
           </div>
         </div>
+
         {/* discount tag */}
         {discount ? (
           <div className="text-sm">
-            <div className="flex text-base items-center justify-between font-semibold py-1">
-              <NumericFormat
-                value={discountPrice}
-                displayType="text"
-                thousandSeparator=","
-                suffix={' THB'}
-              />
-
-              <div className="text-xs p-1 bg-red-500 text-white font-semibold">
-                {discount.amount}% off
-              </div>
-            </div>
             <div>
               until {format(new Date(discount.startDate), 'dd/MM/yyyy')} -
               {format(new Date(discount.endDate), 'dd/MM/yyyy')}
             </div>
           </div>
         ) : (
-          <div className="pb-12 py-1"></div>
+          <div className="pb-9 py-1"></div>
         )}
       </div>
     </div>

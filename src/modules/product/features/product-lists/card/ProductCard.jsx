@@ -8,7 +8,7 @@ export default function ProductCard({product, inWishlist, loading}) {
   }
 
   return (
-    <div className="h-full p-2">
+    <div className="flex h-full">
       {loading ? (
         <ProductCardLoading />
       ) : (

@@ -1,4 +1,4 @@
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useCallback} from 'react';
 
 import NavBarCategoryContentItem from './items/NavBarCategoryContentItem';
 import SubBarContent from './sub-category/SubBarContent';
@@ -30,29 +30,31 @@ export default function NavBarCategoryContent() {
 
   return (
     <div>
-      <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-3">
-        {CategoryList?.map((main) => (
-          <NavBarCategoryContentItem
-            key={main.id}
-            item={main}
-            src={main.src}
-            open={open && selectedMenuId === main.id}
-            onClick={handleToggleOpen}
-          />
-        ))}
-      </div>
-      <div
-        className={`transition-opacity duration-1000 ease-in-out  ${
-          open ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        {open && (
-          <SubBarContent
-            lists={CategoryList}
-            selectedMenuId={selectedMenuId}
-            onClose={handleCloseDropdown}
-          />
-        )}
+      <div className="flex flex-col justify-center">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-2 overflow-hidden">
+          {CategoryList?.map((main) => (
+            <NavBarCategoryContentItem
+              key={main.id}
+              item={main}
+              src={main.src}
+              open={open && selectedMenuId === main.id}
+              onClick={handleToggleOpen}
+            />
+          ))}
+        </div>
+        <div
+          className={`transition-opacity duration-1000 ease-in-out  ${
+            open ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          {open && (
+            <SubBarContent
+              lists={CategoryList}
+              selectedMenuId={selectedMenuId}
+              onClose={handleCloseDropdown}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

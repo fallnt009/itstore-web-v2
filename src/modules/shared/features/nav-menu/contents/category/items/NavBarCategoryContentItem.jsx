@@ -1,7 +1,7 @@
 export default function NavBarCategoryContentItem({item, src, onClick, open}) {
   return (
     <div
-      className={`p-2 py-8 select-none bg-slate-100 rounded-lg hover:bg-blue-100 cursor-pointer ${
+      className={`box-border py-7 w-[170px] select-none bg-slate-100 text-gray-700 rounded-lg hover:bg-blue-100 hover:text-blue-600 cursor-pointer ${
         open ? 'bg-blue-100' : ''
       } `}
       onClick={() => onClick(item.id)}
@@ -15,7 +15,7 @@ export default function NavBarCategoryContentItem({item, src, onClick, open}) {
             loading="lazy"
           />
         </div>
-        <div className="pt-2 font-semibold text-gray-700">{item.title}</div>
+        <div className="pt-2 font-semibold ">{item.title}</div>
       </div>
     </div>
   );

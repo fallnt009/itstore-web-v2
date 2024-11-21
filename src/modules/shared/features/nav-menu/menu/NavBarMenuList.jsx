@@ -30,7 +30,7 @@ export default function NavBarMenuList() {
     <>
       {menuLists.map((list) => (
         <Link
-          className="flex gap-2 items-center bg-slate-100 hover:bg-blue-100 p-2 rounded-lg text-gray-700"
+          className="flex gap-2 items-center bg-slate-100 hover:bg-blue-100 p-2 rounded-lg text-gray-700 hover:text-blue-600"
           key={list.id}
           to={list.path}
         >
