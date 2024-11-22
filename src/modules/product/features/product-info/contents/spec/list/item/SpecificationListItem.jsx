@@ -1,4 +1,4 @@
-export default function SpecContentListItem({item}) {
+export default function SpecificationListItem({item}) {
   const data = item.SpecProduct;
 
   return (

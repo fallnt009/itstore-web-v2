@@ -12,7 +12,7 @@ export default function ProductListContentItem({
     ),
   }));
   return (
-    <div className="grid gap-4 2xl:grid-cols-6 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 p-2">
+    <div className="grid gap-4 2xl:grid-cols-6 xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  p-2">
       {productWithWishlist.map((el) => (
         <ProductCard
           key={el.id}

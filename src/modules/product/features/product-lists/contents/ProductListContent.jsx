@@ -1,9 +1,9 @@
 import {useParams} from 'react-router-dom';
 
+import ProductListBreadCrumb from './breadcrumb/ProductListBreadCrumb';
 import ProductListHeader from './ProductListHeader';
 import ProductListContentItem from './ProductListContentItem';
 
-import SidebarFilter from '../../filters/SidebarFilter/SidebarFilter';
 import TabFilter from '../../filters/TabFilter/TabFilter';
 import NotFound from '../not-found/NotFound';
 
@@ -19,25 +19,24 @@ export default function ProductListContent({
 
   const {items, totalItems} = products;
   const {specItems, specProduct} = filters;
-
+  //chnage side bar to tabbar filter
   return (
-    <div>
-      <ProductListHeader
-        categorySlug={categorySlug}
-        subCategorySlug={subCategorySlug}
-        totalItems={totalItems}
-      />
-      <div className="grid grid-cols-[1fr_5fr]">
+    <div className="px-5 py-5">
+      <div>
+        <ProductListBreadCrumb subCategorySlug={subCategorySlug} />
+        <ProductListHeader
+          subCategorySlug={subCategorySlug}
+          totalItems={totalItems}
+        />
+      </div>
+      <div className="grid ">
         <div>
-          <SidebarFilter
+          <TabFilter
             specItems={specItems}
             specProduct={specProduct}
             onSubmit={onSubmit}
             onClear={onClear}
           />
-        </div>
-        <div>
-          <TabFilter />
           {items.length === 0 ? (
             <NotFound />
           ) : (

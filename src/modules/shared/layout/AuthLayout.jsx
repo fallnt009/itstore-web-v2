@@ -7,7 +7,9 @@ export default function AuthLayout() {
   return (
     <div>
       <Header />
-      <Outlet />
+      <div className="mx-40">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

@@ -6,8 +6,10 @@ export default function Image({src, alt, className, width, height}) {
       src={src || Blank}
       alt={alt}
       className={className}
-      width={`${width}px`}
-      height={`${height}px`}
+      style={{
+        width: `${width}px`,
+        height: `${height}px`,
+      }}
     />
   );
 }

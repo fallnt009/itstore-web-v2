@@ -8,8 +8,10 @@ export default function MainLayout() {
   return (
     <div>
       <Header />
-      <Navbar />
-      <Outlet />
+      <div className="2xl:mx-40 xl:mx-20 lg:mx-10">
+        <Navbar />
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

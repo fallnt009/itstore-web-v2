@@ -1,4 +1,6 @@
 import {useState} from 'react';
+import {MdClose} from 'react-icons/md';
+
 import SidebarFilterContent from './contents/SidebarFilterContent';
 
 export default function SidebarFilter({
@@ -6,6 +8,7 @@ export default function SidebarFilter({
   specProduct,
   onSubmit,
   onClear,
+  onCloseDrawer,
 }) {
   const [selectedFilter, setSelectedFilter] = useState([]);
 
@@ -30,29 +33,47 @@ export default function SidebarFilter({
     onClear(); //clear filter
   };
 
+  const handleSubmitFilter = () => {
+    onSubmit(selectedFilter);
+    onCloseDrawer();
+  };
+
   return (
-    <div className="p-4 border-r">
-      <div className="flex justify-between items-center font-semibold">
-        <h1 className="text-xl">Filter</h1>
+    <div className="box-border mx-5 my-5">
+      <div className="flex gap-x-24 justify-start items-center font-semibold border-b pb-5 ">
+        <button
+          className="hover:bg-gray-100 p-3 rounded-full"
+          onClick={onCloseDrawer}
+        >
+          <MdClose size={20} />
+        </button>
+        <h1 className="text-xl">All Filter</h1>
+      </div>
+      <div className="flex-1 overflow-y-auto">
+        <SidebarFilterContent
+          specItems={specItems}
+          specProduct={specProduct}
+          filters={selectedFilter}
+          onSelect={handleOnSelectFilter}
+        />
+      </div>
+      <div className="grid grid-cols-2 py-4 gap-3 mt-auto">
         <button
           type="button"
-          className="p-2 text-indigo-600 hover:text-gray-500 font-semibold"
+          className={`p-2  font-semibold ${
+            selectedFilter.length <= 0
+              ? 'text-gray-400 border border-gray-100 rounded-xl bg-gray-100 select-none'
+              : 'text-indigo-600 hover:text-gray-500 '
+          }`}
+          disabled={selectedFilter.length <= 0}
           onClick={handleClearAllFilter}
         >
           Clear All
         </button>
-      </div>
-      <SidebarFilterContent
-        specItems={specItems}
-        specProduct={specProduct}
-        filters={selectedFilter}
-        onSelect={handleOnSelectFilter}
-      />
-      <div className="flex justify-center py-4">
         <button
           type="button"
-          className="flex justify-center items-center border p-2 w-full rounded-xl gap-2 border-indigo-600 bg-indigo-600 text-white font-semibold hover:bg-white hover:text-indigo-600"
-          onClick={() => onSubmit(selectedFilter)}
+          className="flex justify-center items-center border p-2 rounded-xl gap-2 border-indigo-600 bg-indigo-600 text-white font-semibold hover:bg-white hover:text-indigo-600"
+          onClick={handleSubmitFilter}
         >
           Submit
         </button>

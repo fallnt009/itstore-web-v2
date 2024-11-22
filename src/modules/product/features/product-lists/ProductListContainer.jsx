@@ -1,8 +1,10 @@
 import useProductList from '../../hooks/useProductList';
+import useProductFilterDrawer from '../../hooks/useProductFilterDrawer';
 
 import ProductListContent from './contents/ProductListContent';
 import ParginationIndicator from '../../../shared/components/ui/ParginationIndicator';
 import ErrorPage from '../../../shared/features/error/ErrorPage';
+import SideDrawer from '../../../shared/components/ui/SideDrawer';
 
 export default function ProductListContainer() {
   const {
@@ -19,12 +21,14 @@ export default function ProductListContainer() {
     submitChangePage,
   } = useProductList();
 
+  const {isOpen, closeDrawer, drawerContent} = useProductFilterDrawer();
+
   if (error) {
     return <ErrorPage statusCode={errorStatus} />;
   }
 
   return (
-    <div className="mx-10">
+    <div className="mx-10 my-10">
       <div>
         <ProductListContent
           products={ProductList}
@@ -42,6 +46,9 @@ export default function ProductListContainer() {
           handleChange={submitChangePage}
         />
       </div>
+      <SideDrawer width="max-w-sm" isOpen={isOpen} onClose={closeDrawer}>
+        {drawerContent}
+      </SideDrawer>
     </div>
   );
 }

@@ -1,4 +1,9 @@
-export default function SideDrawer({children, isOpen, onClose}) {
+export default function SideDrawer({
+  children,
+  isOpen,
+  onClose,
+  width = 'max-w-lg',
+}) {
   return (
     <main
       className={
@@ -10,11 +15,11 @@ export default function SideDrawer({children, isOpen, onClose}) {
     >
       <section
         className={
-          'w-screen max-w-lg right-0 absolute bg-white h-full shadow-xl transition-transform delay-400 duration-500 ease-in-out ' +
+          `w-screen ${width} right-0 absolute bg-white h-full shadow-xl transition-transform delay-400 duration-500 ease-in-out ` +
           (isOpen ? 'translate-x-0' : 'translate-x-full')
         }
       >
-        <article className="relative w-screen max-w-lg pb-10 flex flex-col space-y-6 overflow-y-scroll h-full">
+        <article className="relative w-full pb-10 flex flex-col space-y-6 overflow-y-auto h-full">
           {children}
         </article>
       </section>

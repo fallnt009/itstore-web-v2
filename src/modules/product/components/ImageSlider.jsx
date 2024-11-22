@@ -9,30 +9,55 @@ export default function ImageSlider({images}) {
     setImageIndex(index);
   };
 
+  // const images = [
+  //   {
+  //     path: 'https://plus.unsplash.com/premium_photo-1683865776032-07bf70b0add1?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  //   },
+  //   {
+  //     path: 'https://images.unsplash.com/photo-1591154669695-5f2a8d20c089?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dXJsfGVufDB8fDB8fHww',
+  //   },
+  //   {
+  //     path: 'https://images.unsplash.com/photo-1517404215738-15263e9f9178?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dXJsfGVufDB8fDB8fHww',
+  //   },
+  //   {
+  //     path: 'https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D',
+  //   },
+  //   {
+  //     path: 'https://plus.unsplash.com/premium_photo-1673580742890-4af144293960?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D',
+  //   },
+  // ];
+
   return (
-    <div className="container ">
-      <div className="grid grid-cols-[1fr_3fr]">
-        <div className="grid grid-rows-4 overflow-y-auto max-h-[65vh] no-scrollbar gap-3">
-          {images?.map((el, index) => (
-            <span
-              key={index}
-              onClick={() => handleSelectImage(index)}
-              className="object-contain"
-            >
-              <Image key={el.id} src={el.path} size="100px" />
-            </span>
-          ))}
-        </div>
+    <div className="max-w-[400px] mx-auto">
+      <div className="mb-4">
         {/* Main Image */}
-        <div className="max-h-[55vh] ">
-          {images ? (
-            <Image src={images[imageIndex]?.path} size="350px" />
-          ) : (
-            <div className="flex justify-center items-center h-[350px] w-[350px] bg-stone-100 text-stone-400">
-              No Photo
-            </div>
-          )}
-        </div>
+        <Image
+          src={images[imageIndex]?.path}
+          width={400}
+          height={400}
+          className="object-cover h-full w-full transition-all duration-500 ease-in-out opacity-100"
+        />
+      </div>
+      <div className="flex gap-3 overflow-x-auto max-w-full scrollbar-none">
+        {images?.map((el, index) => (
+          <div
+            key={index}
+            onClick={() => handleSelectImage(index)}
+            className={`cursor-pointer ${
+              index === imageIndex
+                ? 'border-2 border-blue-500'
+                : 'border-2 border-transparent'
+            } transition-all duration-300 ease-in-out`}
+          >
+            <Image
+              key={el.id}
+              src={el.path}
+              width={80}
+              height={80}
+              className="object-cover h-full w-full transition-all duration-300 ease-in-out transform hover:scale-110"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
