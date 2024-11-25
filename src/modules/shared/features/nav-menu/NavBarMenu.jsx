@@ -1,14 +1,14 @@
 import NavBarMenuList from './menu/NavBarMenuList';
-import NavBarMenuContent from './contents/NavBarMenuContent';
+import NavBarCategoryContent from './contents/category/NavBarCategoryContent';
 
 export default function NavBarMenu() {
   return (
     <>
-      <div className="flex gap-5 py-4">
+      <div className="flex justify-start gap-5">
         <NavBarMenuList />
       </div>
-      <div>
-        <NavBarMenuContent />
+      <div className="mt-3">
+        <NavBarCategoryContent />
       </div>
     </>
   );

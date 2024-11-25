@@ -29,9 +29,9 @@ export default function NavBarCategoryContent() {
   }, []);
 
   return (
-    <div>
-      <div className="flex flex-col justify-center">
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-2 overflow-hidden">
+    <>
+      <div className="flex flex-col">
+        <div className="flex gap-5 justify-between">
           {CategoryList?.map((main) => (
             <NavBarCategoryContentItem
               key={main.id}
@@ -56,6 +56,6 @@ export default function NavBarCategoryContent() {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 }

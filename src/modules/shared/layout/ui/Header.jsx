@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <div className="bg-white">
-      <div className="flex px-10 py-10 items-center justify-between">
+      <div className="flex py-5 items-center justify-between">
         {/* Logo */}
         <Link to={'/'}>
           <div className="flex-2 font-mono font-extrabold text-5xl font-jetmono text-indigo-700">

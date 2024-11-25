@@ -39,8 +39,8 @@ export default function SidebarFilter({
   };
 
   return (
-    <div className="box-border mx-5 my-5">
-      <div className="flex gap-x-24 justify-start items-center font-semibold border-b pb-5 ">
+    <div className="box-border mx-5 pt-5 grid grid-rows-[auto,1fr,auto] h-screen">
+      <div className="flex gap-x-24 justify-start items-center font-semibold pb-5 border-b ">
         <button
           className="hover:bg-gray-100 p-3 rounded-full"
           onClick={onCloseDrawer}
@@ -57,7 +57,7 @@ export default function SidebarFilter({
           onSelect={handleOnSelectFilter}
         />
       </div>
-      <div className="grid grid-cols-2 py-4 gap-3 mt-auto">
+      <div className="grid grid-cols-2 pt-5 gap-3 border-t z-10 relative">
         <button
           type="button"
           className={`p-2  font-semibold ${

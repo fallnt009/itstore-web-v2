@@ -7,8 +7,8 @@ import Footer from './ui/Footer';
 export default function MainLayout() {
   return (
     <div>
-      <Header />
-      <div className="2xl:mx-40 xl:mx-20 lg:mx-10">
+      <div className="2xl:mx-20 xl:mx-5 lg:mx-5 md:mx-5 sm:mx-5">
+        <Header />
         <Navbar />
         <Outlet />
       </div>

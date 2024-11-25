@@ -42,7 +42,7 @@ export default function Carousel({imgUrl, interval = 8000}) {
   };
   return (
     <div
-      className="relative w-full h-[295px] overflow-hidden rounded-md"
+      className="relative max-h-[800px] max-w-[1000px] overflow-hidden rounded-2xl"
       onMouseEnter={showIndicatorHandler}
       onMouseLeave={hideIndicatorHandler}
     >
@@ -56,11 +56,14 @@ export default function Carousel({imgUrl, interval = 8000}) {
           }}
         >
           {imgUrl.map((url, index) => (
-            <div key={index} className="w-full flex-shrink-0">
+            <div
+              key={index}
+              className="w-full flex-shrink-0 aspect-video max-h-[400px] "
+            >
               <img
                 src={url}
                 alt={`carousel-pic${index}`}
-                className="object-cover w-full h-full"
+                className="object-fill h-full w-full max-h-full max-w-full"
               />
             </div>
           ))}

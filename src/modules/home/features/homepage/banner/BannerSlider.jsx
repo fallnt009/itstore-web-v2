@@ -15,8 +15,8 @@ export default function BannerSlider() {
   ];
 
   return (
-    <div className="my-10 ">
+    <>
       <BannerSlide imgUrl={imageUrl} />
-    </div>
+    </>
   );
 }

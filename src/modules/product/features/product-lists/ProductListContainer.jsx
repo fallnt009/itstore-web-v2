@@ -28,7 +28,7 @@ export default function ProductListContainer() {
   }
 
   return (
-    <div className="mx-10 my-10">
+    <div>
       <div>
         <ProductListContent
           products={ProductList}

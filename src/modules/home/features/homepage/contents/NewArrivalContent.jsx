@@ -13,7 +13,7 @@ export default function NewArrivalContent({newProducts = [], loading}) {
     navigate(0);
   };
   return (
-    <div className="my-10">
+    <>
       <div className="flex flex-col justify-start">
         <h1 className="text-3xl text-indigo-700 font-semibold ">
           New Arrivals
@@ -40,6 +40,6 @@ export default function NewArrivalContent({newProducts = [], loading}) {
       ) : (
         <HomeCardError />
       )}
-    </div>
+    </>
   );
 }

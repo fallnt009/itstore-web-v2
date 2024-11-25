@@ -15,11 +15,19 @@ export default function HomeContainer() {
   }
 
   return (
-    <div className="my-10">
-      <MenuContent />
-      <BestDealsContent salesProduct={Home.salesProducts} loading={loading} />
-      <BannerSlider />
-      <NewArrivalContent newProducts={Home.newProducts} loading={loading} />
+    <div>
+      <div className="my-5">
+        <MenuContent />
+      </div>
+      <div>
+        <BestDealsContent salesProduct={Home.salesProducts} loading={loading} />
+      </div>
+      <div>
+        <BannerSlider />
+      </div>
+      <div>
+        <NewArrivalContent newProducts={Home.newProducts} loading={loading} />
+      </div>
     </div>
   );
 }

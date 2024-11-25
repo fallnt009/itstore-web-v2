@@ -13,7 +13,7 @@ export default function BestDealContent({salesProduct = [], loading}) {
     navigate(0);
   };
   return (
-    <div className="my-10">
+    <>
       <div className="flex flex-col justify-start">
         <h1 className="text-3xl text-indigo-700 font-semibold">Best Deals</h1>
         <div>
@@ -38,6 +38,6 @@ export default function BestDealContent({salesProduct = [], loading}) {
       ) : (
         <HomeCardError />
       )}
-    </div>
+    </>
   );
 }

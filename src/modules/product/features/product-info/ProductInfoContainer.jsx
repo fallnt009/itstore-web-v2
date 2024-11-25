@@ -11,7 +11,7 @@ export default function ProductInfoContainer() {
   }
 
   return (
-    <div className="mx-10 my-10">
+    <div>
       <ProductInfoContent ProductInfo={ProductInfo} />
     </div>
   );

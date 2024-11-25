@@ -6,8 +6,8 @@ export default function AuthLayout() {
   //no Navbar
   return (
     <div>
-      <Header />
-      <div className="mx-40">
+      <div className="2xl:mx-20 xl:mx-5 lg:mx-5 md:mx-5 sm:mx-5">
+        <Header />
         <Outlet />
       </div>
       <Footer />
