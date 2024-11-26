@@ -12,8 +12,6 @@ export default function ProductListContent({
   inWishlist,
   filters,
   loading,
-  onSubmit,
-  onClear,
 }) {
   const {categorySlug, subCategorySlug} = useParams();
 
@@ -31,12 +29,7 @@ export default function ProductListContent({
       </div>
       <div className="grid ">
         <div>
-          <TabFilter
-            specItems={specItems}
-            specProduct={specProduct}
-            onSubmit={onSubmit}
-            onClear={onClear}
-          />
+          <TabFilter specItems={specItems} specProduct={specProduct} />
           {items.length === 0 ? (
             <NotFound />
           ) : (

@@ -1,5 +1,5 @@
 import useProductList from '../../hooks/useProductList';
-import useProductFilterDrawer from '../../hooks/useProductFilterDrawer';
+import useProductFilter from '../../hooks/useProductFilter';
 
 import ProductListContent from './contents/ProductListContent';
 import ParginationIndicator from '../../../shared/components/ui/ParginationIndicator';
@@ -16,12 +16,10 @@ export default function ProductListContainer() {
     totalPages,
     error,
     errorStatus,
-    submitFilter,
-    clearFilter,
     submitChangePage,
   } = useProductList();
 
-  const {isOpen, closeDrawer, drawerContent} = useProductFilterDrawer();
+  const {isOpen, closeDrawer, drawerContent} = useProductFilter();
 
   if (error) {
     return <ErrorPage statusCode={errorStatus} />;
@@ -35,8 +33,6 @@ export default function ProductListContainer() {
           inWishlist={inWishlist}
           filters={ProductFilters}
           loading={loading}
-          onSubmit={submitFilter} //handle submit
-          onClear={clearFilter} //clear filter state
         />
       </div>
       <div className="flex justify-center gap-2 my-5">

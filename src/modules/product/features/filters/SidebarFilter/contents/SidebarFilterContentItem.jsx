@@ -8,7 +8,7 @@ export default function SidebarFilterContentItem({item, onSelect, isChecked}) {
         type="checkbox"
         className="scale-150 cursor-pointer"
         checked={isChecked}
-        onChange={(e) => onSelect(item, e.target.checked)}
+        onChange={() => onSelect(item, !isChecked)}
       />
       {item.text}
     </div>

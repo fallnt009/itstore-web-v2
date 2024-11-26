@@ -6,7 +6,7 @@ import SidebarFilterContentItem from './SidebarFilterContentItem';
 export default function SidebarFilterContent({
   specItems,
   specProduct,
-  filters = [],
+  activeFilters,
   onSelect,
 }) {
   const [isExpand, setIsExpand] = useState({});
@@ -49,14 +49,18 @@ export default function SidebarFilterContent({
               ?.filter(
                 (detail) => detail.SpecSubcategory.SpecItem.id === item.id
               )
-              .map((filtered) => (
-                <SidebarFilterContentItem
-                  key={filtered.id}
-                  item={filtered}
-                  isChecked={filters.some((f) => f.id === filtered.id)}
-                  onSelect={onSelect}
-                />
-              ))}
+              .map((filtered) => {
+                return (
+                  <SidebarFilterContentItem
+                    key={filtered.id}
+                    item={filtered}
+                    isChecked={activeFilters?.some(
+                      (filter) => filter.id === filtered.id
+                    )}
+                    onSelect={onSelect}
+                  />
+                );
+              })}
           </div>
         </div>
       ))}
