@@ -1,13 +1,12 @@
-import useNewProductList from '../../hooks/useNewProductList';
-
-import NewProductListContent from '../product-lists/new-product/NewProductListContent';
-
 import ParginationIndicator from '../../../shared/components/ui/ParginationIndicator';
+import useSalesProductList from '../../hooks/useSalesProductList';
+
+import SalesProductListContent from './sales-product/SalesProductListContent';
 import ErrorPage from '../../../shared/features/error/ErrorPage';
 
-export default function NewProductListContainer() {
+export default function SalesProductListContainer() {
   const {
-    NewProductList,
+    SaleProductList,
     inWishlist,
     loading,
     error,
@@ -15,7 +14,7 @@ export default function NewProductListContainer() {
     page,
     totalPages,
     submitChangePage,
-  } = useNewProductList();
+  } = useSalesProductList();
 
   if (error) {
     return <ErrorPage statusCode={errorStatus} />;
@@ -23,9 +22,13 @@ export default function NewProductListContainer() {
 
   return (
     <div className="mx-10">
+      <div className="py-5">breadcrumb</div>
+      <header className="flex justify-center mb-5 py-10 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+        <h1 className="text-4xl font-semibold text-white">Best Deals</h1>
+      </header>
       <div>
-        <NewProductListContent
-          newProducts={NewProductList}
+        <SalesProductListContent
+          SaleProductList={SaleProductList}
           inWishlist={inWishlist}
           loading={loading}
         />

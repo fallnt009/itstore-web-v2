@@ -1,29 +1,30 @@
-import {useState, useEffect, useCallback} from 'react';
+import {useEffect, useState, useCallback} from 'react';
 
+import useError from '../../shared/hooks/useError';
 import useProduct from '../../shared/hooks/useProduct';
 import useWishlist from '../../shared/hooks/useWishlist';
 import useAuth from '../../shared/hooks/useAuth';
-import useError from '../../shared/hooks/useError';
 
-export default function useNewProductList() {
-  const {NewProductList, fetchNewProductList} = useProduct();
+export default function useSalesProductList() {
+  const {SaleProductList, fetchSaleProductList} = useProduct();
   const {inWishlist, fetchInWishlist} = useWishlist();
-  const {authenUser} = useAuth();
   const {error, errorStatus, setIsError} = useError();
+  const {authenUser} = useAuth();
 
-  //
-  const {totalPages} = NewProductList;
+  //des
+  const {totalPages} = SaleProductList;
 
-  //state
+  //states
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(9);
 
+  //fetch
   useEffect(() => {
-    const loadNewProductList = async () => {
+    const loadSalesProductList = async () => {
       setLoading(true);
       try {
-        await fetchNewProductList(page, pageSize);
+        await fetchSaleProductList(page, pageSize);
 
         if (authenUser) {
           //laad wishlist if authen
@@ -35,27 +36,28 @@ export default function useNewProductList() {
         setLoading(false);
       }
     };
-
-    loadNewProductList();
+    loadSalesProductList();
   }, [
     authenUser,
     page,
     pageSize,
-    fetchNewProductList,
+    fetchSaleProductList,
     fetchInWishlist,
     setIsError,
   ]);
 
+  //handleChangePage
   const submitChangePage = useCallback((newPage) => {
     setPage(newPage);
   }, []);
-
   const submitChangePageSize = useCallback((newPageSize) => {
     setPageSize(newPageSize);
   }, []);
 
+  console.log(SaleProductList);
+
   return {
-    NewProductList,
+    SaleProductList,
     inWishlist,
     loading,
     error,

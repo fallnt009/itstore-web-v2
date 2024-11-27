@@ -20,7 +20,8 @@ import AuthContainer from '../modules/auth';
 
 //Container
 import NewProductListContanier from '../modules/product/features/product-lists/NewProductListContainer';
-// import SalesProductContainer from '../modules/product/features/specials/sales-product/SalesProductContainer';
+import SalesProductListContainer from '../modules/product/features/product-lists/SalesProductListContainer';
+
 import LoginContainer from '../modules/auth/features/login/LoginContainer';
 import RegisterContainer from '../modules/auth/features/register/RegisterContainer';
 import ProductListContainer from '../modules/product/features/product-lists/ProductListContainer';
@@ -66,6 +67,7 @@ export const publicRoutes = [
   },
   {
     path: SALES_PRODUCT,
+    element: <SalesProductListContainer />,
   },
   {
     path: PRODUCT_LIST,

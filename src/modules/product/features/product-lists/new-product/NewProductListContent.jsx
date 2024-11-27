@@ -1,32 +1,34 @@
+import {Link} from 'react-router-dom';
+import {MdKeyboardArrowRight} from 'react-icons/md';
+
+import {HOME} from '../../../../shared/services/config/routing';
+
 import NewProductContentItem from './NewProductListContentItem';
 
-import SidebarFilter from '../../filters/SidebarFilter/SidebarFilter';
 import NotFound from '../not-found/NotFound';
 
 export default function NewProductListContent({
   newProducts,
   inWishlist,
-  filters,
   loading,
-  onSubmit,
-  onClear,
 }) {
   const {items} = newProducts;
 
   return (
     <div>
-      <div className="my-5">
-        <h1 className="text-3xl font-semibold">New Arrivals</h1>
-      </div>
-      <div className="grid grid-cols-[1fr_5fr]">
-        <div>
-          <SidebarFilter
-          // specItems={specItems}
-          // specProduct={specProduct}
-          // onSubmit={onSubmit}
-          // onClear={onClear}
-          />
+      <div className="py-5 bg-white">
+        <div className="flex items-center gap-2">
+          <Link to={HOME}>Home</Link>
+          <span className="text-indigo-600">
+            <MdKeyboardArrowRight size={20} />
+          </span>
+          <h1 className="font-semibold">New Arrivals</h1>
         </div>
+      </div>
+      <header className="flex justify-center mb-5 py-10 rounded-xl bg-gradient-to-r from-orange-500 to-yellow-500">
+        <h1 className="text-4xl font-semibold text-white">New Arrivals</h1>
+      </header>
+      <div className="grid ">
         <div>
           {items.length === 0 ? (
             <NotFound />

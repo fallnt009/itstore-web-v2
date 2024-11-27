@@ -1,6 +1,6 @@
-import ProductCard from '../card/ProductCard';
+import ProductCard from '../../card/ProductCard';
 
-export default function ProductListContentItem({
+export default function SalesProductListContentItem({
   products,
   inWishlist,
   loading,

@@ -71,7 +71,7 @@ export default function ProductCardContent({product, inWishlist}) {
   };
 
   return (
-    <div className="box-border overflow-hidden w-[240px] text-sm p-2 border border-white shadow-lg transition-shadow rounded-lg grid-rows-3 cursor-pointer hover:shadow-blue-100">
+    <div className="box-border overflow-hidden w-[240px] text-sm p-2 border border-white shadow-lg transition-shadow rounded-lg grid-rows-3 cursor-pointer hover:shadow-blue-100 ">
       <Link
         className="flex flex-col justify-center pt-5"
         to={PRODUCT_INFO_NAV(categoryName, subCategoryName, slug)}
