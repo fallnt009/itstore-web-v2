@@ -10,18 +10,17 @@ export default function NewArrivalContent({newProducts = [], loading}) {
 
   const handleRedirect = () => {
     navigate(NEW_PRODUCT);
-    navigate(0);
   };
   return (
     <>
-      <div className="flex flex-col justify-start">
+      <div className="flex items-center justify-between">
         <h1 className="text-3xl text-indigo-700 font-semibold ">
           New Arrivals
         </h1>
 
         <button
           type="button"
-          className="bg-white py-2 rounded-xl text-indigo-700 flex items-center hover:font-semibold"
+          className="bg-white rounded-xl text-indigo-700 flex items-center hover:font-semibold"
           onClick={handleRedirect}
         >
           See more

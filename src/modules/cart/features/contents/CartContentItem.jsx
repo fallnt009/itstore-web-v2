@@ -21,6 +21,7 @@ export default function CartContentItem({
   //destruct
 
   const productId = id || null;
+  const productImage = Product?.ProductImages[0]?.path || '';
 
   //slug
   const categorySlug =
@@ -48,11 +49,7 @@ export default function CartContentItem({
     <div className="grid items-start grid-cols-[1fr_4fr] border-t-2 p-5 px-5">
       {/* product img */}
       <div className="grid w-full justify-center">
-        <Image
-          src={Product?.ProductImages[0]?.path || ''}
-          width={110}
-          height={110}
-        />
+        <Image src={productImage} width={110} height={110} />
       </div>
       <div className="grid h-full px-5">
         {/* product detail */}

@@ -1,14 +1,10 @@
-export default function ProductListHeader({subCategorySlug, totalItems}) {
+export default function ProductListHeader({subCategorySlug, categorySlug}) {
   const subCategoryTitle = subCategorySlug.toUpperCase();
-
+  const categoryTitle = categorySlug.toUpperCase();
   return (
-    <div className="text-black my-5">
-      <div className="flex items-center gap-2">
-        <p className="text-2xl font-bold">{subCategoryTitle}</p>
-      </div>
-      <div className="flex items-center text-xs">
-        <p>Total Items : {totalItems}</p>
-      </div>
-    </div>
+    <header className="flex flex-col justify-start py-10 px-10 rounded-xl bg-gradient-to-r from-indigo-600 to-sky-400 select-none">
+      <h1 className="text-4xl font-semibold text-white">{subCategoryTitle}</h1>
+      <p className="text-white">{categoryTitle}</p>
+    </header>
   );
 }

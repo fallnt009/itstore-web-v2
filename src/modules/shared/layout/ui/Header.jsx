@@ -22,7 +22,6 @@ export default function Header() {
   const handleOnClickCart = (e) => {
     e.preventDefault();
     navigate(MY_CART);
-    navigate(0);
   };
 
   const totalItems = userCart?.reduce((total, item) => total + item.qty, 0);

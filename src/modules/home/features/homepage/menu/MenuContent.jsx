@@ -21,7 +21,7 @@ export default function MenuContent() {
       <div className="block">
         <Carousel imgUrl={imgUrl} />
       </div>
-      <div className="block bg-slate-100 rounded-xl"></div>
+      <div className="block bg-slate-100 rounded-xl py-10"></div>
     </div>
   );
 }

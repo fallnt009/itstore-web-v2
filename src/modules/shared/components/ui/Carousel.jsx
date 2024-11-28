@@ -3,29 +3,43 @@ import {MdArrowCircleLeft, MdArrowCircleRight} from 'react-icons/md';
 
 export default function Carousel({imgUrl, interval = 8000}) {
   const [index, setIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
   const [showIndicators, setShowIndicators] = useState(false);
   const [isPause, setIsPause] = useState(false);
 
   const handlePrevious = () => {
-    setIndex((prevIndex) =>
-      prevIndex === imgUrl.length - 1 ? 0 : prevIndex - 1
-    );
+    if (isTransitioning) return;
+
+    setIsTransitioning(true);
+    setIndex((prevIndex) => (prevIndex - 1 + imgUrl.length) % imgUrl.length);
+
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 1000);
   };
 
   const handleNext = () => {
-    setIndex((prevIndex) =>
-      prevIndex === imgUrl.length - 1 ? 0 : prevIndex + 1
-    );
+    if (isTransitioning) return;
+
+    setIsTransitioning(true);
+    setIndex((prevIndex) => (prevIndex + 1) % imgUrl.length);
+
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 1000);
   };
 
   useEffect(() => {
     if (!isPause) {
       const slideInterval = setInterval(() => {
-        handleNext();
+        if (!isTransitioning) {
+          handleNext();
+        }
       }, interval);
       return () => clearInterval(slideInterval);
     }
-  }, [isPause, index, interval]);
+  }, [isPause, index, interval, isTransitioning]);
 
   const handleIndicator = (current) => {
     setIndex(current);
@@ -42,7 +56,7 @@ export default function Carousel({imgUrl, interval = 8000}) {
   };
   return (
     <div
-      className="relative max-h-[800px] max-w-[1000px] overflow-hidden rounded-2xl"
+      className="relative max-w-full sm:max-w-[800px] md:max-w-[1000px] lg:max-w-[1200px] max-h-[700px] mx-auto w-full overflow-hidden rounded-2xl"
       onMouseEnter={showIndicatorHandler}
       onMouseLeave={hideIndicatorHandler}
     >
@@ -63,7 +77,7 @@ export default function Carousel({imgUrl, interval = 8000}) {
               <img
                 src={url}
                 alt={`carousel-pic${index}`}
-                className="object-fill h-full w-full max-h-full max-w-full"
+                className="w-full h-full mx-auto "
               />
             </div>
           ))}

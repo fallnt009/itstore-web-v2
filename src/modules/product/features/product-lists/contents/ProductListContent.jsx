@@ -1,46 +1,22 @@
-import {useParams} from 'react-router-dom';
+import ProductCard from '../card/ProductCard';
 
-import ProductListBreadCrumb from './breadcrumb/ProductListBreadCrumb';
-import ProductListHeader from './ProductListHeader';
-import ProductListContentItem from './ProductListContentItem';
-
-import TabFilter from '../../filters/TabFilter/TabFilter';
-import NotFound from '../not-found/NotFound';
-
-export default function ProductListContent({
-  products,
-  inWishlist,
-  filters,
-  loading,
-}) {
-  const {categorySlug, subCategorySlug} = useParams();
-
-  const {items, totalItems} = products;
-  const {specItems, specProduct} = filters;
-  //chnage side bar to tabbar filter
+export default function ProductListContent({items, inWishlist, loading}) {
+  const productWithWishlist = items.map((product) => ({
+    ...product,
+    inWishlist: inWishlist.some(
+      (wishlist) => wishlist.productId === product.id
+    ),
+  }));
   return (
-    <div className="px-5 py-5">
-      <div>
-        <ProductListBreadCrumb subCategorySlug={subCategorySlug} />
-        <ProductListHeader
-          subCategorySlug={subCategorySlug}
-          totalItems={totalItems}
+    <div className="grid gap-4 2xl:grid-cols-6 xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 p-2">
+      {productWithWishlist.map((el) => (
+        <ProductCard
+          key={el.id}
+          product={el}
+          inWishlist={el.inWishlist}
+          loading={loading}
         />
-      </div>
-      <div className="grid ">
-        <div>
-          <TabFilter specItems={specItems} specProduct={specProduct} />
-          {items.length === 0 ? (
-            <NotFound />
-          ) : (
-            <ProductListContentItem
-              products={items}
-              inWishlist={inWishlist}
-              loading={loading}
-            />
-          )}
-        </div>
-      </div>
+      ))}
     </div>
   );
 }

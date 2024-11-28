@@ -10,24 +10,21 @@ export default function BestDealContent({salesProduct = [], loading}) {
 
   const handleRedirect = () => {
     navigate(SALES_PRODUCT);
-    navigate(0);
   };
   return (
     <>
-      <div className="flex flex-col justify-start">
+      <div className="flex items-center justify-between mb-3">
         <h1 className="text-3xl text-indigo-700 font-semibold">Best Deals</h1>
-        <div>
-          <button
-            type="button"
-            className="bg-white  py-2 rounded-xl text-indigo-700 flex items-center hover:font-semibold"
-            onClick={handleRedirect}
-          >
-            See more
-            <span>
-              <MdArrowRight />
-            </span>
-          </button>
-        </div>
+        <button
+          type="button"
+          className="bg-white rounded-xl text-indigo-700 flex items-center hover:font-semibold"
+          onClick={handleRedirect}
+        >
+          See more
+          <span>
+            <MdArrowRight />
+          </span>
+        </button>
       </div>
       {salesProduct.length ? (
         <div className="grid lg:grid-cols-5 gap-5 py-5">

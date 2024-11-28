@@ -7,7 +7,12 @@ import TabFilterButton from './button/TabFilterButton';
 import TabFilterSelect from './selectbox/TabFilterSelect';
 import ActiveFilterButton from './button/ActiveFilterButton';
 
-export default function TabFilter({specItems, specProduct}) {
+export default function TabFilter({
+  specItems,
+  specProduct,
+  totalItems,
+  subCategorySlug,
+}) {
   //active filter
   //need to know filter that selected
 
@@ -15,6 +20,13 @@ export default function TabFilter({specItems, specProduct}) {
 
   return (
     <div className="flex flex-col gap-4 border-b pb-5">
+      <div className="flex items-center gap-2 px-2 text-base">
+        <h1>
+          All Products in "
+          <span className="font-semibold">{subCategorySlug}</span>"
+        </h1>
+        <p className="text-gray-500 text-sm">({totalItems} items)</p>
+      </div>
       <div className="grid grid-cols-[auto,1fr,auto] w-full gap-2">
         <TabFilterButton
           icon={<MdFilterAlt />}

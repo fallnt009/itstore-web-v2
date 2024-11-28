@@ -54,8 +54,6 @@ export default function useSalesProductList() {
     setPageSize(newPageSize);
   }, []);
 
-  console.log(SaleProductList);
-
   return {
     SaleProductList,
     inWishlist,
