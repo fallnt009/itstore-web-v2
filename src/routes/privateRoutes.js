@@ -13,12 +13,18 @@ import {
   BANK_TRANSFER_PAYMENT,
   QR_PAYMENT,
   PAYMENT_AWATING,
+  ADMIN_DASHBOARD,
+  ADMIN_PRODUCT,
+  ADMIN_ORDER,
+  ADMIN_MAIN,
 } from './routes';
+
 //CONTAINER
 import CartContainer from '../modules/cart';
 import CheckoutContainer from '../modules/checkout';
 import ProfileContainer from '../modules/profile';
 import WishlistContainer from '../modules/wishlist';
+import AdminContainer from '../modules/admin';
 //CHECKOUT
 import CheckoutDetails from '../modules/checkout/features/details/CheckoutDetails';
 import CheckoutServices from '../modules/checkout/features/services/CheckoutServices';
@@ -38,6 +44,11 @@ import OrderSuccess from '../modules/order/features/status/OrderSuccess';
 import OrderDetail from '../modules/order/features/detail/OrderDetail';
 import OrderHistory from '../modules/order/features/history/OrderHistory';
 //Wishlist
+
+//admin
+import AdminDashboard from '../modules/admin/features/dashboard/AdminDashboard';
+import AdminOrder from '../modules/admin/features/order/AdminOrder';
+import AdminProduct from '../modules/admin/features/product/AdminProduct';
 
 export const privateRoutes = [
   {
@@ -103,5 +114,24 @@ export const privateRoutes = [
   {
     path: PAYMENT_AWATING,
     element: <PaymentAwaiting />,
+  },
+  {
+    path: ADMIN_MAIN,
+    element: <AdminContainer />,
+
+    children: [
+      {
+        path: ADMIN_DASHBOARD,
+        element: <AdminDashboard />,
+      },
+      {
+        path: ADMIN_PRODUCT,
+        element: <AdminProduct />,
+      },
+      {
+        path: ADMIN_ORDER,
+        element: <AdminOrder />,
+      },
+    ],
   },
 ];

@@ -76,7 +76,7 @@ export default function BannerSlide({imgUrl, interval = 8000}) {
 
   return (
     <div
-      className="relative max-w-full sm:max-w-[800px] md:max-w-[1000px] lg:max-w-[1200px] max-h-[700px] mx-auto w-full overflow-hidden rounded-2xl"
+      className="relative xl:max-w-full sm:max-w-[800px] md:max-w-[1000px] lg:max-w-[1200px] max-h-[700px] mx-auto w-full overflow-hidden"
       onMouseEnter={showIndicatorHandler}
       onMouseLeave={hideIndicatorHandler}
     >

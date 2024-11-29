@@ -12,7 +12,13 @@ function App() {
     <>
       {loading && <BouncingDot />}
       <Router />
-      <ToastContainer autoClose="2000" theme="light" position="top-right" />
+      <ToastContainer
+        autoClose="3000"
+        theme="light"
+        position="top-right"
+        toastClassName="custom-toast"
+        style={{zIndex: 1000}}
+      />
     </>
   );
 }

@@ -22,6 +22,7 @@ export default function useProductList() {
 
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   //Selected
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState([]);
@@ -36,7 +37,7 @@ export default function useProductList() {
           categorySlug,
           subCategorySlug,
           page,
-          12,
+          pageSize,
           search,
           filters
         );

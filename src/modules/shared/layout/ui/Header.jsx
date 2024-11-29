@@ -35,17 +35,12 @@ export default function Header() {
             ITStores
           </div>
         </Link>
-        {/* Search Bar */}
-        {/* <div className="flex-1 mx-10">
-          <div className=" p-3 rounded-full bg-neutral-400">Search Bar</div>
-        </div> */}
-        {/* Cart */}
-        {/* Avatar */}
+
         <div className="flex items-center gap-2">
           {authenUser ? (
             <Link onClick={handleOnClickCart}>
-              <div className="flex-2 mx-4 hover:bg-cerulean-blue-800 hover:text-indigo-700 rounded-full p-2">
-                <div className="relative  inline-block rounded-full p-1">
+              <div className="flex-2 mx-4 hover:text-indigo-600 rounded-full p-2">
+                <div className="relative inline-block rounded-full p-1">
                   <MdShoppingCart size={35} />
                   {totalItems > 0 && (
                     <span className="absolute -bottom-2 -right-3 flex h-5 w-5">
@@ -60,7 +55,7 @@ export default function Header() {
             </Link>
           ) : (
             <Link to={LOGIN}>
-              <div className="flex-2 mx-4 hover:bg-cerulean-blue-800 hover:text-white rounded-full p-2">
+              <div className="flex-2 mx-4 hover:bg-indigo-600  hover:text-white rounded-full p-2">
                 <MdShoppingCart size={35} />
               </div>
             </Link>

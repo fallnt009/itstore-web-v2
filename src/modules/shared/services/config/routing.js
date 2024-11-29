@@ -52,3 +52,8 @@ exports.QR_PAYMENT = '/payment/qr';
 
 //Payment Status
 exports.PAYMENT_AWATING = '/payment/await/success';
+
+//admin dashboard
+exports.ADMIN_DASHBOARD = '/admin/dashboard';
+exports.ADMIN_PRODUCT = '/admin/product';
+exports.ADMIN_ORDER = '/admin/order';

@@ -17,7 +17,7 @@ export default function useSalesProductList() {
   //states
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(9);
+  const [pageSize, setPageSize] = useState(10);
 
   //fetch
   useEffect(() => {

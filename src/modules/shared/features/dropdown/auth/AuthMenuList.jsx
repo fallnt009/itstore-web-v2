@@ -7,7 +7,11 @@ import {
 } from 'react-icons/md';
 
 import {EMPLOYEE} from '../../../services/config/constants';
-import {ORDER_HISTORY, MY_WISHLIST} from '../../../services/config/routing';
+import {
+  ORDER_HISTORY,
+  MY_WISHLIST,
+  ADMIN_DASHBOARD,
+} from '../../../services/config/routing';
 
 import AuthMenuItem from './item/AuthMenuItem';
 
@@ -32,7 +36,7 @@ export default function AuthMenuList({authenUser, logout}) {
         onClick={handleToggleWishlist}
       />
       {authenUser.roles === EMPLOYEE ? (
-        <Link to="/admin-panel" className="w-full">
+        <Link to={ADMIN_DASHBOARD} className="w-full">
           <button className="flex  gap-2 p-2 rounded-md hover:bg-slate-200 items-center w-full">
             <span className="rounded-full bg-indigo-700 text-white p-2">
               <MdAdminPanelSettings />

@@ -24,10 +24,9 @@ export default function LoginForm() {
       if (result) {
         setError(result);
       } else {
-        setError({});
         startLoading();
+        setError({});
         await login(email, password);
-        stopLoading();
         toast.success('Login Success');
       }
     } catch (err) {
