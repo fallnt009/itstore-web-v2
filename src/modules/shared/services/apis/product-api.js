@@ -36,3 +36,7 @@ export const getProductInfo = (categorySlug, subCategorySlug, productSlug) =>
 
 export const getSpecText = (productId) =>
   axios.get(`/products/subspec/public/${productId}`);
+
+//for admin
+export const getAllProduct = (page, pageSize) =>
+  axios.get('/products/all', {params: {page, pageSize}});

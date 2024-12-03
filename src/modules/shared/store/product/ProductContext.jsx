@@ -7,6 +7,7 @@ import productReducer, {
   FETCH_PRODUCT_INFO,
   FETCH_NEW_PRODUCT_LIST,
   FETCH_SALE_PRODUCT_LIST,
+  FETCH_ALL_PRODUCT,
 } from './productReducer';
 
 import * as ProductApi from '../../services/apis/product-api';
@@ -155,6 +156,31 @@ export default function ProductContextProvider({children}) {
       throw err;
     }
   }, []);
+
+  //For admin fetch,create,update,delete
+  const fetchAllProduct = useCallback(async (page, pageSize) => {
+    try {
+      const res = await ProductApi.getAllProduct(page, pageSize);
+      dispatch({
+        type: FETCH_ALL_PRODUCT,
+        payload: {
+          items: res.data.result,
+          itemsFilter: res.data.result,
+          totalItems: res.data.totalItems,
+          totalPages: res.data.totalPages,
+          currentPage: res.data.currentPage,
+        },
+      });
+    } catch (err) {
+      throw err;
+    }
+  }, []);
+
+  const createProduct = useCallback(async () => {}, []);
+  const editProduct = useCallback(async () => {}, []);
+  const deleteProduct = useCallback(async () => {
+    //soft delete ? inactive product
+  }, []);
   return (
     <ProductContext.Provider
       value={{
@@ -164,12 +190,14 @@ export default function ProductContextProvider({children}) {
         ProductInfo: AllProduct.ProductInfo,
         NewProductList: AllProduct.NewProductList,
         SaleProductList: AllProduct.SaleProductList,
+        ProductOverview: AllProduct.ProductOverview,
         fetchHome,
         fetchProductList,
         fetchProductFilter,
         fetchProductInfo,
         fetchNewProductList,
         fetchSaleProductList,
+        fetchAllProduct,
       }}
     >
       {children}

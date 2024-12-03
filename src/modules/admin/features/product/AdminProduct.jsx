@@ -1,3 +1,5 @@
+import useAdminProduct from '../../hooks/useAdminProduct';
+
 import AdminProductNavBar from './nav/AdminProductNavBar';
 import AdminProductContent from './content/AdminProductContent';
 import SearchInput from '../../components/SearchInput';
@@ -5,12 +7,25 @@ import SelectTabFilter from '../../components/SelectTabFilter';
 
 export default function AdminProduct() {
   //Add/Edit/Delete product
+  const {
+    ProductOverview,
+    loading,
+    error,
+    errorStatus,
+    page,
+    totalPages,
+    submitChangePage,
+    submitChangePageSize,
+  } = useAdminProduct();
+
+  const {items} = ProductOverview;
   //Organize productCategory
   //upload product by excel
 
   //select box/dropdown show active
   //search id,title,price
   //filter instock/outof ,status active/inactive ,price high/low
+
   return (
     <main>
       <header className="text-2xl font-semibold">
@@ -24,7 +39,12 @@ export default function AdminProduct() {
         <SelectTabFilter />
       </section>
       <section className="py-5">
-        <AdminProductContent />
+        <AdminProductContent
+          items={items}
+          page={page}
+          totalPages={totalPages}
+          onChangePage={submitChangePage}
+        />
       </section>
     </main>
   );
