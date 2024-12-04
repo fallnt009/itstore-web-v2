@@ -38,5 +38,13 @@ export const getSpecText = (productId) =>
   axios.get(`/products/subspec/public/${productId}`);
 
 //for admin
-export const getAllProduct = (page, pageSize) =>
-  axios.get('/products/all', {params: {page, pageSize}});
+export const getAllProduct = (page, pageSize, sorts, filters, search) =>
+  axios.get('/products/all', {
+    params: {
+      page,
+      pageSize,
+      sorts: JSON.stringify(sorts),
+      filters: JSON.stringify(filters),
+      search,
+    },
+  });

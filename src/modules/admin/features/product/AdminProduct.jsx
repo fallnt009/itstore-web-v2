@@ -2,20 +2,25 @@ import useAdminProduct from '../../hooks/useAdminProduct';
 
 import AdminProductNavBar from './nav/AdminProductNavBar';
 import AdminProductContent from './content/AdminProductContent';
-import SearchInput from '../../components/SearchInput';
 import SelectTabFilter from '../../components/SelectTabFilter';
+
+import ErrorPage from '../../../shared/features/error/ErrorPage';
 
 export default function AdminProduct() {
   //Add/Edit/Delete product
   const {
     ProductOverview,
-    loading,
     error,
     errorStatus,
     page,
     totalPages,
+    sorts,
+    filters,
     submitChangePage,
-    submitChangePageSize,
+    setSortOrder,
+    setChangeFilters,
+    setSubmitSearch,
+    setClearAll,
   } = useAdminProduct();
 
   const {items} = ProductOverview;
@@ -26,6 +31,10 @@ export default function AdminProduct() {
   //search id,title,price
   //filter instock/outof ,status active/inactive ,price high/low
 
+  if (error) {
+    return <ErrorPage statusCode={errorStatus} />;
+  }
+
   return (
     <main>
       <header className="text-2xl font-semibold">
@@ -33,10 +42,16 @@ export default function AdminProduct() {
       </header>
       <nav className="flex gap-5 pt-5 py-2">
         <AdminProductNavBar />
-        <SearchInput />
       </nav>
-      <section>
-        <SelectTabFilter />
+      <section className="pt-5">
+        <SelectTabFilter
+          sorts={sorts}
+          filters={filters}
+          onChangeSort={setSortOrder}
+          onChangeFilter={setChangeFilters}
+          onChangeSearch={setSubmitSearch}
+          onClear={setClearAll}
+        />
       </section>
       <section className="py-5">
         <AdminProductContent

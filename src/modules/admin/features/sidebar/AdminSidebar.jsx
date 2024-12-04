@@ -16,7 +16,10 @@ export default function AdminSidebar() {
   return (
     <div className="flex flex-col gap-3 pr-5 pb-5">
       {lists.map((item) => (
-        <button className="flex items-center justify-start gap-2 p-2 px-4 rounded-lg font-semibold bg-slate-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600">
+        <button
+          className="flex items-center justify-start gap-2 p-2 px-4 rounded-lg font-semibold bg-slate-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+          key={item.id}
+        >
           <span>{item.icon}</span>
           <h1>{item.title}</h1>
         </button>

@@ -158,23 +158,32 @@ export default function ProductContextProvider({children}) {
   }, []);
 
   //For admin fetch,create,update,delete
-  const fetchAllProduct = useCallback(async (page, pageSize) => {
-    try {
-      const res = await ProductApi.getAllProduct(page, pageSize);
-      dispatch({
-        type: FETCH_ALL_PRODUCT,
-        payload: {
-          items: res.data.result,
-          itemsFilter: res.data.result,
-          totalItems: res.data.totalItems,
-          totalPages: res.data.totalPages,
-          currentPage: res.data.currentPage,
-        },
-      });
-    } catch (err) {
-      throw err;
-    }
-  }, []);
+  const fetchAllProduct = useCallback(
+    async (page, pageSize, sorts, filters, search) => {
+      try {
+        const res = await ProductApi.getAllProduct(
+          page,
+          pageSize,
+          sorts,
+          filters,
+          search
+        );
+        dispatch({
+          type: FETCH_ALL_PRODUCT,
+          payload: {
+            items: res.data.result,
+            itemsFilter: res.data.result,
+            totalItems: res.data.totalItems,
+            totalPages: res.data.totalPages,
+            currentPage: res.data.currentPage,
+          },
+        });
+      } catch (err) {
+        throw err;
+      }
+    },
+    []
+  );
 
   const createProduct = useCallback(async () => {}, []);
   const editProduct = useCallback(async () => {}, []);

@@ -1,35 +1,80 @@
-import {MdClose} from 'react-icons/md';
+// import {MdClose} from 'react-icons/md';
+import SearchInput from '../components/SearchInput';
 
-export default function SelectTabFilter() {
+export default function SelectTabFilter({
+  sorts,
+  filters,
+  onChangeSort,
+  onChangeFilter,
+  onChangeSearch,
+  onClear,
+}) {
+  const {sortBy, sortValue} = sorts;
+  const {inStock, isActive} = filters;
+
+  const checkActive = isActive === true ? 'active' : 'inactive';
+  const checkStock = inStock === true ? 'instock' : 'outOfStock';
+
+  const checkSort = (sortBy, sortValue) => {
+    const sortMapping = {
+      createdAt: {
+        ASC: 'asc',
+        DESC: 'desc',
+      },
+      price: {
+        ASC: 'lowestPrice',
+        DESC: 'highestPrice',
+      },
+    };
+
+    if (sortMapping[sortBy] && sortMapping[sortBy][sortValue]) {
+      return sortMapping[sortBy][sortValue];
+    }
+    return '';
+  };
+
+  const currentSort = checkSort(sortBy, sortValue);
+
   return (
     <div className="flex items-center justify-between">
-      <div>
-        <div
-          type="button"
-          className="flex items-center gap-2 bg-blue-600 text-blue-700 bg-opacity-10 pl-3 py-2 rounded-xl  transition-all duration-200 select-none"
-        >
-          Active
-          <span className="hover:bg-slate-300 rounded-full p-1 cursor-pointer">
-            <MdClose />
-          </span>
-        </div>
-      </div>
       <div className="flex gap-2">
-        <select className="p-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500 placeholder-slate-400">
-          <option>Active</option>
-          <option>Inactive</option>
+        <select
+          className="p-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500 bg-slate-100 font-semibold"
+          value={checkActive}
+          onChange={(e) => onChangeFilter(e.target.value)}
+        >
+          <option value="active">Active</option>
+          <option value="inactive">In Active</option>
         </select>
-        <select className="p-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500 placeholder-slate-400">
-          <option>In Stock</option>
-          <option>Out of Stock</option>
+        <select
+          className="p-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500  bg-slate-100 font-semibold"
+          value={checkStock}
+          onChange={(e) => onChangeFilter(e.target.value)}
+        >
+          <option value="instock">In Stock</option>
+          <option value="outOfStock">Out of Stock</option>
         </select>
-        <select className="p-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500 placeholder-slate-400">
-          <option>Highest Price</option>
-          <option>Lowest Price</option>
-        </select>
-        <button className="p-2 px-4 border rounded-xl bg-slate-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600 cursor-pointe">
-          Submit
+        <div>
+          <SearchInput onChangeSearch={onChangeSearch} />
+        </div>
+        <button
+          className="p-2 px-4 hover:text-gray-700  text-blue-600 font-semibold"
+          onClick={onClear}
+        >
+          Clear All
         </button>
+      </div>
+      <div>
+        <select
+          className="p-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500 bg-slate-100 font-semibold"
+          value={currentSort}
+          onChange={(e) => onChangeSort(e.target.value)}
+        >
+          <option value="highestPrice">Highest Price</option>
+          <option value="lowestPrice">Lowest Price</option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
       </div>
     </div>
   );
