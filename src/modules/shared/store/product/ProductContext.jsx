@@ -185,7 +185,13 @@ export default function ProductContextProvider({children}) {
     []
   );
 
-  const createProduct = useCallback(async () => {}, []);
+  const createProduct = useCallback(async (bcsId, data) => {
+    try {
+      console.log(bcsId, data);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
   const editProduct = useCallback(async () => {}, []);
   const deleteProduct = useCallback(async () => {
     //soft delete ? inactive product
@@ -207,6 +213,7 @@ export default function ProductContextProvider({children}) {
         fetchNewProductList,
         fetchSaleProductList,
         fetchAllProduct,
+        createProduct,
       }}
     >
       {children}

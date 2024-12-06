@@ -39,7 +39,7 @@ export default function SelectTabFilter({
     <div className="flex items-center justify-between">
       <div className="flex gap-2">
         <select
-          className="p-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500 bg-slate-100 font-semibold"
+          className="p-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500 bg-slate-100 font-semibold cursor-pointer"
           value={checkActive}
           onChange={(e) => onChangeFilter(e.target.value)}
         >
@@ -47,7 +47,7 @@ export default function SelectTabFilter({
           <option value="inactive">In Active</option>
         </select>
         <select
-          className="p-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500  bg-slate-100 font-semibold"
+          className="p-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500  bg-slate-100 font-semibold cursor-pointer"
           value={checkStock}
           onChange={(e) => onChangeFilter(e.target.value)}
         >
@@ -66,7 +66,7 @@ export default function SelectTabFilter({
       </div>
       <div>
         <select
-          className="p-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500 bg-slate-100 font-semibold"
+          className="p-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500 bg-slate-100 font-semibold cursor-pointer"
           value={currentSort}
           onChange={(e) => onChangeSort(e.target.value)}
         >
