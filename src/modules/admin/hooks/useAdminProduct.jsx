@@ -1,14 +1,14 @@
 import {useEffect, useState, useCallback} from 'react';
 
-import useProduct from '../../shared/hooks/useProduct';
+import useAdmin from '../../shared/hooks/useAdmin';
 import useError from '../../shared/hooks/useError';
 
 export default function useAdminProduct() {
-  const {ProductOverview, fetchAllProduct} = useProduct();
+  const {productOverview, fetchAllProduct} = useAdmin();
   const {error, errorStatus, setIsError} = useError();
 
   //totalPages
-  const {totalPages} = ProductOverview;
+  const {totalPages} = productOverview;
 
   //pargination state
   const [loading, setLoading] = useState(false);
@@ -86,7 +86,7 @@ export default function useAdminProduct() {
     setSearch('');
   }, []);
   return {
-    ProductOverview,
+    productOverview,
     loading,
     error,
     errorStatus,

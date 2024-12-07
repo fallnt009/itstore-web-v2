@@ -10,6 +10,7 @@ import WishlistContextProvider from './modules/shared/store/wishlist/WishlistCon
 
 import ErrorContextProvider from './modules/shared/store/error/ErrorContext';
 import PaymentContextProvider from './modules/shared/store/payment/PaymentContext';
+import AdminContextProvider from './modules/shared/store/admin/AdminContext';
 
 export default function ContextWrapper({children}) {
   return (
@@ -23,9 +24,11 @@ export default function ContextWrapper({children}) {
                   <CheckoutContextProvider>
                     <OrderContextProvider>
                       <PaymentContextProvider>
-                        <WishlistContextProvider>
-                          {children}
-                        </WishlistContextProvider>
+                        <AdminContextProvider>
+                          <WishlistContextProvider>
+                            {children}
+                          </WishlistContextProvider>
+                        </AdminContextProvider>
                       </PaymentContextProvider>
                     </OrderContextProvider>
                   </CheckoutContextProvider>

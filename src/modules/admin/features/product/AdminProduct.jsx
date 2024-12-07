@@ -11,7 +11,7 @@ import ErrorPage from '../../../shared/features/error/ErrorPage';
 export default function AdminProduct() {
   //Add/Edit/Delete product
   const {
-    ProductOverview,
+    productOverview,
     error,
     errorStatus,
     page,
@@ -25,7 +25,7 @@ export default function AdminProduct() {
     setClearAll,
   } = useAdminProduct();
 
-  const {items} = ProductOverview;
+  const {items} = productOverview;
   //Organize productCategory
   //upload product by excel
 
