@@ -63,9 +63,6 @@ export default function AdminProduct() {
           onChangePage={submitChangePage}
         />
       </section>
-      <section>
-        <AdminProductCreate />
-      </section>
     </main>
   );
 }

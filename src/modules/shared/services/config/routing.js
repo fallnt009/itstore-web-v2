@@ -56,4 +56,5 @@ exports.PAYMENT_AWATING = '/payment/await/success';
 //admin dashboard
 exports.ADMIN_DASHBOARD = '/admin/dashboard';
 exports.ADMIN_PRODUCT = '/admin/product';
+exports.ADMIN_PRODUCT_CREATE = '/admin/product/create';
 exports.ADMIN_ORDER = '/admin/order';

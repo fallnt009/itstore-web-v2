@@ -1,17 +1,8 @@
 import FormInput from '../../../components/FormInput';
-import ProductFormSelect from './select/ProductFormSelect';
-import ProductFormTable from './table/ProductFormTable';
 
-import ParginationIndicator from '../../../../shared/components/ui/ParginationIndicator';
-
-export default function ProductForm({input, error, onChange}) {
-  //get input ,error ,handles
-
-  //useProductForm ready handle change
-  // useCategoryTag ready fetch allbrand ,fetchbcs ,setselectBrandId
-  //make select Brand
+export default function ProductForm({input, error, onChange, onSubmit}) {
   return (
-    <form className="grid grid-cols-2 py-5 gap-5">
+    <form className="py-5 gap-5" method="post" onSubmit={onSubmit}>
       <article className="flex flex-col gap-2">
         <section className="flex flex-col gap-2">
           <h1 className="font-semibold">Title</h1>
@@ -26,6 +17,7 @@ export default function ProductForm({input, error, onChange}) {
           <h1 className="font-semibold">Price</h1>
           <FormInput
             name="price"
+            type="number"
             value={input.price}
             error={error.price}
             onChange={onChange}
@@ -45,29 +37,19 @@ export default function ProductForm({input, error, onChange}) {
           <h1 className="font-semibold">Quantity</h1>
           <FormInput
             name="qtyInStock"
+            type="number"
             value={input.qtyInStock}
             error={error.qtyInStock}
             onChange={onChange}
           />
         </section>
         <section className="flex pt-5 justify-end">
-          <button className="p-2 px-4 border rounded-lg bg-slate-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600 cursor-pointer font-semibold">
+          <button
+            type="submit"
+            className="p-2 px-4 border rounded-lg bg-slate-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600 cursor-pointer font-semibold"
+          >
             Submit
           </button>
-        </section>
-      </article>
-      <article className="flex flex-col gap-2">
-        <section className="flex items-center justify-between gap-2">
-          <ProductFormSelect />
-        </section>
-        <header>
-          <h1 className="font-semibold">Select Tag</h1>
-        </header>
-        <section className="border rounded-xl bg-slate-100 overflow-auto">
-          <ProductFormTable />
-        </section>
-        <section>
-          <ParginationIndicator />
         </section>
       </article>
     </form>

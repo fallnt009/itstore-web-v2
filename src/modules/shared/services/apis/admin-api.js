@@ -16,5 +16,5 @@ export const getAllProduct = (page, pageSize, sorts, filters, search) =>
 export const getAllBrand = () => axios.get('/categories/brand');
 
 //get BrandTag
-export const getBrandTag = (brandId) =>
-  axios.get(`/categories/brandtag/${brandId}`);
+export const getBrandTag = (brandId, page) =>
+  axios.get(`/categories/brandtag/${brandId}`, {params: {page}});

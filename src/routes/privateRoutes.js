@@ -17,6 +17,7 @@ import {
   ADMIN_PRODUCT,
   ADMIN_ORDER,
   ADMIN_MAIN,
+  ADMIN_PRODUCT_CREATE,
 } from './routes';
 
 //CONTAINER
@@ -38,7 +39,7 @@ import QrPayment from '../modules/payment/features/qr-payment/QrPayment';
 
 import PaymentAwaiting from '../modules/payment/features/status/PaymentAwaiting';
 //middleware
-import CheckoutGuard from './utils/CheckoutGuard';
+// import CheckoutGuard from './utils/CheckoutGuard';
 //ORDER
 import OrderSuccess from '../modules/order/features/status/OrderSuccess';
 import OrderDetail from '../modules/order/features/detail/OrderDetail';
@@ -49,6 +50,7 @@ import OrderHistory from '../modules/order/features/history/OrderHistory';
 import AdminDashboard from '../modules/admin/features/dashboard/AdminDashboard';
 import AdminOrder from '../modules/admin/features/order/AdminOrder';
 import AdminProduct from '../modules/admin/features/product/AdminProduct';
+import AdminProductCreate from '../modules/admin/features/product/create/AdminProductCreate';
 
 export const privateRoutes = [
   {
@@ -75,11 +77,7 @@ export const privateRoutes = [
   },
   {
     path: ORDER_SUCCESS,
-    element: (
-      <CheckoutGuard>
-        <OrderSuccess />
-      </CheckoutGuard>
-    ),
+    element: <OrderSuccess />,
   },
   {
     path: ORDER_DETAIL,
@@ -127,6 +125,10 @@ export const privateRoutes = [
       {
         path: ADMIN_PRODUCT,
         element: <AdminProduct />,
+      },
+      {
+        path: ADMIN_PRODUCT_CREATE,
+        element: <AdminProductCreate />,
       },
       {
         path: ADMIN_ORDER,

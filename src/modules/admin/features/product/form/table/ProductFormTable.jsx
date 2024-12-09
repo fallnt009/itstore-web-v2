@@ -1,7 +1,6 @@
 import ProductFormTableItem from './item/ProductFormTableItem';
 
-export default function ProductFormTable() {
-  //pargination 6
+export default function ProductFormTable({items, bcsId, onSelectTag}) {
   return (
     <table className="w-full table-auto border-collapse text-center">
       <thead className="font-normal text-gray-600">
@@ -13,16 +12,22 @@ export default function ProductFormTable() {
         </tr>
       </thead>
       <tbody className="text-gray-700">
-        {/* {items.map((product) => (
-      <AdminProductTableItem key={product.id} product={product} />
-    ))} */}
-
-        <ProductFormTableItem />
-        <ProductFormTableItem />
-        <ProductFormTableItem />
-        <ProductFormTableItem />
-        <ProductFormTableItem />
-        <ProductFormTableItem />
+        {items.length > 0 ? (
+          items.map((tag) => (
+            <ProductFormTableItem
+              key={tag.id}
+              tag={tag}
+              selectedId={bcsId}
+              onSelectTag={onSelectTag}
+            />
+          ))
+        ) : (
+          <tr className="bg-white">
+            <td className="py-4 text-gray-500" colSpan={4}>
+              No Result Found
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

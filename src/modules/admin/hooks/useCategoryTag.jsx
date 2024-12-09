@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 
 import useAdmin from '../../shared/hooks/useAdmin';
 import useError from '../../shared/hooks/useError';
@@ -8,9 +8,9 @@ export default function useCategoryTag() {
   const {error, errorStatus, setIsError} = useError();
   //state
   const [selectedBrandId, setSelectedBrandId] = useState(null);
-  const [bcsError, setBcsError] = useState(null);
-  //fetch all brands
-  //selectedBrand and fetchBCS
+  const [tagError, setTagError] = useState(null);
+
+  const [page, setPage] = useState(1);
   //
   useEffect(() => {
     const loadAllBrand = async () => {
@@ -24,25 +24,38 @@ export default function useCategoryTag() {
     loadAllBrand();
   }, [fetchAllBrand, setIsError]);
 
+  const loadBrandCategorySub = useCallback(async () => {
+    if (!selectedBrandId) return;
+    setTagError(null);
+    try {
+      await fetchBrandCategorySub(selectedBrandId, page);
+    } catch (err) {
+      //throw error
+      setTagError(err);
+    }
+  }, [fetchBrandCategorySub, selectedBrandId, page]);
+
   useEffect(() => {
-    const loadBrandCategorySub = async () => {
-      if (!selectedBrandId) return;
-      setBcsError(null);
-      try {
-        await fetchBrandCategorySub(selectedBrandId);
-      } catch (err) {
-        //throw error
-        setBcsError(err);
-      }
-    };
     if (selectedBrandId) {
       loadBrandCategorySub();
     }
-  }, [fetchBrandCategorySub, selectedBrandId]);
+  }, [loadBrandCategorySub, selectedBrandId, page]);
 
   const setSelectBrandId = useCallback((brandId) => {
-    setSelectedBrandId(brandId);
+    setSelectedBrandId((prevId) => (prevId !== brandId ? brandId : prevId));
   }, []);
 
-  return {tagOverview, error, errorStatus, bcsError, setSelectBrandId};
+  const setChangePage = useCallback((newPage) => {
+    setPage((prevPage) => (prevPage !== newPage ? newPage : prevPage));
+  }, []);
+
+  return {
+    tagOverview,
+    error,
+    errorStatus,
+    tagError,
+    page,
+    setSelectBrandId,
+    setChangePage,
+  };
 }

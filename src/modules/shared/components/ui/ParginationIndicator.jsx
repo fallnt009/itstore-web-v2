@@ -22,6 +22,7 @@ export default function ParginationIndicator({
   if (startPage > 1) {
     buttons.push(
       <button
+        type="button"
         className={`rounded-xl py-2 px-3 text-base ${
           page === 1 ? 'bg-indigo-600 text-white font-semibold' : ''
         } hover:bg-stone-400 hover:text-white hover:font-semibold`}
@@ -49,6 +50,7 @@ export default function ParginationIndicator({
   for (let i = startPage; i <= endPage; i++) {
     buttons.push(
       <button
+        type="button"
         className={`rounded-xl py-2 px-3 text-base ${
           page === i ? 'bg-indigo-600 text-white font-semibold' : ''
         } hover:bg-stone-400 hover:text-white hover:font-semibold`}
@@ -73,6 +75,7 @@ export default function ParginationIndicator({
     //Add the last page button
     buttons.push(
       <button
+        type="button"
         className={`rounded-xl py-2 px-3 text-base  ${
           page === totalPages ? 'bg-indigo-600 text-white font-semibold' : ''
         } hover:bg-stone-400 hover:text-white hover:font-semibold`}

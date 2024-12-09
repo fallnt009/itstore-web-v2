@@ -54,16 +54,18 @@ export default function AdminContextProvider({children}) {
     }
   }, []);
 
-  const fetchBrandCategorySub = useCallback(async (brandId) => {
+  const fetchBrandCategorySub = useCallback(async (brandId, page) => {
     try {
-      const res = await AdminApi.getBrandTag(brandId);
+      const res = await AdminApi.getBrandTag(brandId, page);
 
       dispatch({
         type: FETCH_CATEGORY_TAG,
-        items: res.data.result,
-        totalItems: res.data.totalItems,
-        totalPages: res.data.totalPages,
-        currentPage: res.data.currentPage,
+        payload: {
+          items: res.data.result,
+          totalItems: res.data.totalItems,
+          totalPages: res.data.totalPages,
+          currentPage: res.data.currentPage,
+        },
       });
     } catch (err) {
       throw err;
