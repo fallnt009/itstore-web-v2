@@ -57,7 +57,6 @@ export default function AdminContextProvider({children}) {
   const fetchBrandCategorySub = useCallback(async (brandId, page) => {
     try {
       const res = await AdminApi.getBrandTag(brandId, page);
-
       dispatch({
         type: FETCH_CATEGORY_TAG,
         payload: {
@@ -72,11 +71,20 @@ export default function AdminContextProvider({children}) {
     }
   }, []);
 
+  const fetchProductById = useCallback(async (productId) => {
+    try {
+      const res = await AdminApi.getProductById(productId);
+      return res;
+    } catch (err) {
+      throw err;
+    }
+  }, []);
+
   const createProduct = useCallback(async (bcsId, data) => {
     try {
-      console.log(bcsId, data);
+      await AdminApi.createProduct(bcsId, data);
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   }, []);
   const editProduct = useCallback(async () => {}, []);
@@ -91,6 +99,8 @@ export default function AdminContextProvider({children}) {
         fetchAllProduct,
         fetchAllBrand,
         fetchBrandCategorySub,
+        fetchProductById,
+        createProduct,
       }}
     >
       {children}

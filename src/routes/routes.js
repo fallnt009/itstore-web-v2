@@ -53,4 +53,5 @@ exports.ADMIN_MAIN = '/admin';
 exports.ADMIN_DASHBOARD = 'dashboard';
 exports.ADMIN_PRODUCT = 'product';
 exports.ADMIN_PRODUCT_CREATE = 'product/create';
+exports.ADMIN_PRODUCT_EDIT = 'product/edit/:productId';
 exports.ADMIN_ORDER = 'order';

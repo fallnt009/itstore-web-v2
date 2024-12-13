@@ -1,3 +1,4 @@
+import {useParams} from 'react-router-dom';
 import {MdArrowBackIos} from 'react-icons/md';
 
 import useAdminProductForm from '../../../hooks/useAdminProductForm';
@@ -6,29 +7,41 @@ import useCategoryTag from '../../../hooks/useCategoryTag';
 import ProductForm from '../form/ProductForm';
 import ProductTag from '../tag/ProductTag';
 
-// import ErrorPage from '../../../../shared/features/error/ErrorPage';
+import ErrorPage from '../../../../shared/features/error/ErrorPage';
 
-export default function AdminProductCreate() {
+export default function AdminProductEdit() {
+  //useParams to get product id
+  //fetch ProductId info
+  //put in formValues
+  //state isEdit or not
+  const {productId} = useParams();
+
   const {
     formValues,
     formErrors,
     bcsId,
     selectedImage,
+    error,
+    errorStatus,
     handleChangeInput,
     handleSubmitForm,
     handleSelectBcsId,
     handleClickBack,
     handleSelectImage,
-  } = useAdminProductForm();
+  } = useAdminProductForm(productId);
 
   const {
     tagOverview,
-    brandError,
     tagError,
+    brandError,
     page,
     setSelectBrandId,
     setChangePage,
   } = useCategoryTag();
+
+  if (error) {
+    return <ErrorPage statusCode={errorStatus} />;
+  }
 
   return (
     <main>
@@ -43,7 +56,7 @@ export default function AdminProductCreate() {
           </i>
           <h2>Back</h2>
         </button>
-        <h1 className="text-2xl font-semibold">Create Product</h1>
+        <h1 className="text-2xl font-semibold">Edit Product</h1>
       </header>
       <article className="grid grid-cols-2 px-5 gap-5">
         <ProductForm

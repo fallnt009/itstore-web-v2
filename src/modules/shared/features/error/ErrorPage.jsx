@@ -3,7 +3,7 @@ import {MdErrorOutline} from 'react-icons/md';
 
 import {HOME} from '../../services/config/routing';
 
-export default function ErrorPage({statusCode}) {
+export default function ErrorPage({statusCode, text}) {
   return (
     <div className="px-10 py-40">
       <div className="flex flex-col justify-center items-center">
@@ -18,6 +18,7 @@ export default function ErrorPage({statusCode}) {
           <div className="flex flex-col justify-center items-center py-4 gap-2 text-gray-500 ">
             <p>Please either refresh the page or return home to try again.</p>
             {statusCode && <p>Error Code : {statusCode}</p>}
+            {text && <p>{text}</p>}
           </div>
         </div>
         <div className="py-4">

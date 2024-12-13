@@ -1,6 +1,15 @@
 import FormInput from '../../../components/FormInput';
 
-export default function ProductForm({input, error, onChange, onSubmit}) {
+import MultiUploader from '../../../../shared/components/upload/MultiUploader';
+
+export default function ProductForm({
+  input,
+  error,
+  selectedImage,
+  onChange,
+  onSubmit,
+  onSelectImage,
+}) {
   return (
     <form className="py-5 gap-5" method="post" onSubmit={onSubmit}>
       <article className="flex flex-col gap-2">
@@ -42,6 +51,10 @@ export default function ProductForm({input, error, onChange, onSubmit}) {
             error={error.qtyInStock}
             onChange={onChange}
           />
+        </section>
+        <section className="flex flex-col gap-5 pt-2 w-full">
+          <h1 className="font-semibold">Product Images</h1>
+          <MultiUploader select={selectedImage} setSelect={onSelectImage} />
         </section>
         <section className="flex pt-5 justify-end">
           <button

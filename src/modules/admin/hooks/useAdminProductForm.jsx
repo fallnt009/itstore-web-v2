@@ -1,16 +1,19 @@
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
 
-import useProduct from '../../shared/hooks/useProduct';
+import useAdmin from '../../shared/hooks/useAdmin';
+import useError from '../../shared/hooks/useError';
 
 import validateProduct from '../utils/validate-product';
 
 import {ADMIN_PRODUCT} from '../../shared/services/config/routing';
 
-export default function useAdminProductForm() {
+export default function useAdminProductForm(productId) {
   //useProduct
-  const {createProduct} = useProduct();
+  const {createProduct, fetchProductById} = useAdmin();
+
+  const {error, errorStatus, setIsError} = useError();
 
   const navigate = useNavigate();
   //state
@@ -26,6 +29,39 @@ export default function useAdminProductForm() {
 
   //bcs
   const [bcsId, setBcsId] = useState(null);
+  //error
+
+  //fetch productData when productId provided
+  const loadProductById = async (id) => {
+    try {
+      // await
+      const res = await fetchProductById(id);
+      //setState
+      if (!res.data || !res.data.result) {
+        throw new Error('Invalid API response structure');
+      }
+
+      //setbcsId , setSelectedImage ,setFormValues
+      setBcsId(res.data.result.ProductSubCategory.brandCategorySubId);
+      setSelectedImage(res.data.result.ProductImages);
+      setFormValues({
+        title: res.data.result.title,
+        price: res.data.result.price,
+        description: res.data.result.description,
+        qtyInStock: res.data.result.qtyInStock,
+      });
+    } catch (err) {
+      //global error
+      setIsError(err);
+    }
+  };
+  useEffect(() => {
+    if (productId) {
+      loadProductById(productId);
+    }
+  }, [productId]);
+
+  useEffect(() => {});
 
   //onChange
   const handleChangeInput = useCallback(
@@ -46,7 +82,9 @@ export default function useAdminProductForm() {
   const handleClickBack = useCallback(() => {
     navigate(ADMIN_PRODUCT);
   }, [navigate]);
-  const handleSelectImage = useCallback(() => {}, []);
+  const handleSelectImage = useCallback((img) => {
+    setSelectedImage(img);
+  }, []);
   const handleSelectBcsId = useCallback((bcsId) => {
     setBcsId(bcsId);
   }, []);
@@ -69,10 +107,6 @@ export default function useAdminProductForm() {
       if (Object.keys(combinedErrors).length > 0) {
         return;
       }
-      console.log(formValues, bcsId);
-
-      console.log(typeof formValues.price);
-      console.log(typeof formValues.qtyInStock);
 
       try {
         //form data
@@ -92,6 +126,8 @@ export default function useAdminProductForm() {
 
         //call api here
         //create and update (bcsId,data)
+
+        await createProduct(bcsId, formData);
         //toast success
         toast.success('Success');
       } catch (err) {
@@ -99,16 +135,22 @@ export default function useAdminProductForm() {
         toast.error('Error Creating!');
       }
     },
-    [formValues, selectedImage, bcsId]
+    [formValues, selectedImage, bcsId, createProduct]
   );
+
+  // console.log(newError);
 
   return {
     formValues,
     formErrors,
     bcsId,
+    selectedImage,
+    error,
+    errorStatus,
     handleChangeInput,
     handleSelectBcsId,
     handleSubmitForm,
     handleClickBack,
+    handleSelectImage,
   };
 }

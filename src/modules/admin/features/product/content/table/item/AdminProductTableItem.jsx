@@ -1,4 +1,13 @@
+import {useNavigate} from 'react-router-dom';
+
+import {ADMIN_PRODUCT_EDIT} from '../../../../../../shared/services/config/routing';
+
 export default function AdminProductTableItem({product}) {
+  const navigate = useNavigate();
+
+  const handleClickEdit = () => {
+    navigate(ADMIN_PRODUCT_EDIT(product.id));
+  };
   return (
     <tr className="bg-white border-b">
       <td className="py-2 px-4">{product.id}</td>
@@ -7,8 +16,10 @@ export default function AdminProductTableItem({product}) {
       <td className="py-2 px-4">{product.isActive ? 'Active' : 'InActive'}</td>
       <td className="py-2 px-4">In Stock</td>
       <td className="py-2 px-4 flex justify-around">
-        <button>Edit</button>
-        <button>Delete</button>
+        <button type="button" className="" onClick={handleClickEdit}>
+          Edit
+        </button>
+        <button type="button">Delete</button>
       </td>
     </tr>
   );

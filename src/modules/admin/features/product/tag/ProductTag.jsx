@@ -10,6 +10,8 @@ export default function ProductTag({
   onSelectBrand,
   onChangePage,
   onSelectTag,
+  tagError,
+  brandError,
 }) {
   const {items, brandItems, totalPages} = tag;
 
@@ -21,7 +23,11 @@ export default function ProductTag({
   return (
     <section className="flex flex-col gap-2 py-5">
       <section className="flex items-center justify-between gap-2">
-        <ProductFormSelect brands={brandItems} onChange={onSelectBrand} />
+        <ProductFormSelect
+          brands={brandItems}
+          onChange={onSelectBrand}
+          brandError={brandError}
+        />
       </section>
       <header className="flex justify-between py-2">
         <h1 className="font-semibold">Select Tag</h1>
@@ -31,25 +37,34 @@ export default function ProductTag({
           </p>
         )}
       </header>
-      <section
-        className={`border rounded-xl bg-slate-100 overflow-auto ${
-          error.bcsError ? 'border-red-500' : ''
-        }`}
-      >
-        <ProductFormTable
-          items={items}
-          bcsId={bcsId}
-          onSelectTag={onSelectTag}
-        />
-      </section>
-      {error.bcsError && <p className="text-red-500">* {error.bcsError}</p>}
-      <section className="flex justify-end">
-        <ParginationIndicator
-          page={page}
-          totalPages={totalPages}
-          handleChange={onChangePage}
-        />
-      </section>
+      {tagError ? (
+        <div className="flex justify-center rounded-xl bg-slate-50 py-10">
+          Someting Went Wrong!
+        </div>
+      ) : (
+        <>
+          <section
+            className={`border rounded-xl bg-slate-100 overflow-auto ${
+              error.bcsError ? 'border-red-500' : ''
+            }`}
+          >
+            <ProductFormTable
+              items={items}
+              bcsId={bcsId}
+              onSelectTag={onSelectTag}
+            />
+          </section>
+
+          {error.bcsError && <p className="text-red-500">* {error.bcsError}</p>}
+          <section className="flex justify-end">
+            <ParginationIndicator
+              page={page}
+              totalPages={totalPages}
+              handleChange={onChangePage}
+            />
+          </section>
+        </>
+      )}
     </section>
   );
 }

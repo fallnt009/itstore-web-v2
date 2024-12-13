@@ -1,14 +1,13 @@
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 
 import useAdmin from '../../shared/hooks/useAdmin';
-import useError from '../../shared/hooks/useError';
 
 export default function useCategoryTag() {
   const {tagOverview, fetchAllBrand, fetchBrandCategorySub} = useAdmin();
-  const {error, errorStatus, setIsError} = useError();
   //state
   const [selectedBrandId, setSelectedBrandId] = useState(null);
   const [tagError, setTagError] = useState(null);
+  const [brandError, setBrandError] = useState(null);
 
   const [page, setPage] = useState(1);
   //
@@ -18,11 +17,13 @@ export default function useCategoryTag() {
         await fetchAllBrand();
       } catch (err) {
         //setError
-        setIsError(err);
+        console.log(err);
+
+        setBrandError(err);
       }
     };
     loadAllBrand();
-  }, [fetchAllBrand, setIsError]);
+  }, [fetchAllBrand]);
 
   const loadBrandCategorySub = useCallback(async () => {
     if (!selectedBrandId) return;
@@ -51,8 +52,7 @@ export default function useCategoryTag() {
 
   return {
     tagOverview,
-    error,
-    errorStatus,
+    brandError,
     tagError,
     page,
     setSelectBrandId,

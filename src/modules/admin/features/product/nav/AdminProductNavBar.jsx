@@ -12,7 +12,7 @@ export default function AdminProductNavBar() {
       path: ADMIN_PRODUCT_CREATE,
     },
     {
-      id: 1,
+      id: 2,
       title: 'Add Category',
       path: '',
     },

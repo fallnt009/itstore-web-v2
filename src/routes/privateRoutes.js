@@ -18,6 +18,7 @@ import {
   ADMIN_ORDER,
   ADMIN_MAIN,
   ADMIN_PRODUCT_CREATE,
+  ADMIN_PRODUCT_EDIT,
 } from './routes';
 
 //CONTAINER
@@ -51,6 +52,7 @@ import AdminDashboard from '../modules/admin/features/dashboard/AdminDashboard';
 import AdminOrder from '../modules/admin/features/order/AdminOrder';
 import AdminProduct from '../modules/admin/features/product/AdminProduct';
 import AdminProductCreate from '../modules/admin/features/product/create/AdminProductCreate';
+import AdminProductEdit from '../modules/admin/features/product/create/AdminProductEdit';
 
 export const privateRoutes = [
   {
@@ -129,6 +131,10 @@ export const privateRoutes = [
       {
         path: ADMIN_PRODUCT_CREATE,
         element: <AdminProductCreate />,
+      },
+      {
+        path: ADMIN_PRODUCT_EDIT,
+        element: <AdminProductEdit />,
       },
       {
         path: ADMIN_ORDER,
