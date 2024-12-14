@@ -7,6 +7,7 @@ export default function ProductTag({
   page,
   error,
   bcsId,
+  selectedBrand,
   onSelectBrand,
   onChangePage,
   onSelectTag,
@@ -25,6 +26,7 @@ export default function ProductTag({
       <section className="flex items-center justify-between gap-2">
         <ProductFormSelect
           brands={brandItems}
+          selectedBrand={selectedBrand}
           onChange={onSelectBrand}
           brandError={brandError}
         />

@@ -25,3 +25,5 @@ export const getBrandTag = (brandId, page) =>
 //create
 export const createProduct = (bcsId, data) =>
   axios.post(`/products/create/${bcsId}`, data);
+export const updateProduct = (productId, data) =>
+  axios.patch(`/products/${productId}`, data);

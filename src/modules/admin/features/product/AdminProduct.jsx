@@ -4,8 +4,6 @@ import AdminProductNavBar from './nav/AdminProductNavBar';
 import AdminProductContent from './content/AdminProductContent';
 import SelectTabFilter from '../../components/SelectTabFilter';
 
-import AdminProductCreate from './create/AdminProductCreate';
-
 import ErrorPage from '../../../shared/features/error/ErrorPage';
 
 export default function AdminProduct() {

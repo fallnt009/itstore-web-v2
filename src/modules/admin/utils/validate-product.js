@@ -20,6 +20,11 @@ const productSchema = Joi.object({
     'number.integer': 'Quantity in Stock must be an integer',
     'number.min': 'Quantity in Stock cannot be negative',
   }),
+
+  id: Joi.alternatives().try(Joi.string(), Joi.number()).optional().messages({
+    'string.base': 'ID must be a valid string',
+    'number.base': 'ID must be a valid number',
+  }),
 });
 
 const validateProduct = (input) => {

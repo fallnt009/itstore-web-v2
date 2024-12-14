@@ -51,6 +51,7 @@ function adminReducer(state, action) {
           brandItems: action.payload.brandItems,
         },
       };
+
     default: {
       return state;
     }

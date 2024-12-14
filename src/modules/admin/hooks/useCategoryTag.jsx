@@ -2,7 +2,7 @@ import {useCallback, useEffect, useState} from 'react';
 
 import useAdmin from '../../shared/hooks/useAdmin';
 
-export default function useCategoryTag() {
+export default function useCategoryTag(brandId) {
   const {tagOverview, fetchAllBrand, fetchBrandCategorySub} = useAdmin();
   //state
   const [selectedBrandId, setSelectedBrandId] = useState(null);
@@ -36,6 +36,14 @@ export default function useCategoryTag() {
     }
   }, [fetchBrandCategorySub, selectedBrandId, page]);
 
+  //if already have brandId from fetch setSelectedId
+  useEffect(() => {
+    if (brandId) {
+      setSelectedBrandId(brandId);
+    }
+  }, [brandId]);
+
+  //if Selected load BrandCS
   useEffect(() => {
     if (selectedBrandId) {
       loadBrandCategorySub();
@@ -55,6 +63,7 @@ export default function useCategoryTag() {
     brandError,
     tagError,
     page,
+    selectedBrandId,
     setSelectBrandId,
     setChangePage,
   };

@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import {toast} from 'react-toastify';
 
 import useAdmin from '../../shared/hooks/useAdmin';
@@ -9,13 +9,15 @@ import validateProduct from '../utils/validate-product';
 
 import {ADMIN_PRODUCT} from '../../shared/services/config/routing';
 
-export default function useAdminProductForm(productId) {
+export default function useAdminProductForm() {
+  const {productId} = useParams();
   //useProduct
-  const {createProduct, fetchProductById} = useAdmin();
+  const {createProduct, editProduct, fetchProductById} = useAdmin();
 
   const {error, errorStatus, setIsError} = useError();
 
   const navigate = useNavigate();
+
   //state
   const [formValues, setFormValues] = useState({
     title: '',
@@ -29,6 +31,7 @@ export default function useAdminProductForm(productId) {
 
   //bcs
   const [bcsId, setBcsId] = useState(null);
+  const [brandId, setBrandId] = useState(null);
   //error
 
   //fetch productData when productId provided
@@ -36,32 +39,31 @@ export default function useAdminProductForm(productId) {
     try {
       // await
       const res = await fetchProductById(id);
-      //setState
-      if (!res.data || !res.data.result) {
-        throw new Error('Invalid API response structure');
-      }
+
+      const {data, images, keys} = res;
 
       //setbcsId , setSelectedImage ,setFormValues
-      setBcsId(res.data.result.ProductSubCategory.brandCategorySubId);
-      setSelectedImage(res.data.result.ProductImages);
+      setBcsId(keys?.bcsId || '');
+      setBrandId(keys?.brandId || '');
+      setSelectedImage(images || []);
       setFormValues({
-        title: res.data.result.title,
-        price: res.data.result.price,
-        description: res.data.result.description,
-        qtyInStock: res.data.result.qtyInStock,
+        id: data.id || '',
+        title: data.title || '',
+        price: data.price || '',
+        description: data.description || '',
+        qtyInStock: data.qtyInStock || 0,
       });
     } catch (err) {
       //global error
       setIsError(err);
     }
   };
+
   useEffect(() => {
     if (productId) {
       loadProductById(productId);
     }
   }, [productId]);
-
-  useEffect(() => {});
 
   //onChange
   const handleChangeInput = useCallback(
@@ -110,6 +112,7 @@ export default function useAdminProductForm(productId) {
 
       try {
         //form data
+
         const formData = new FormData();
 
         formData.append('title', formValues.title);
@@ -124,26 +127,32 @@ export default function useAdminProductForm(productId) {
           });
         }
 
-        //call api here
-        //create and update (bcsId,data)
+        //selected Update or Create
+        if (formValues.id) {
+          //updated data
+          formData.append('bcsId', bcsId);
 
-        await createProduct(bcsId, formData);
-        //toast success
-        toast.success('Success');
+          await editProduct(formValues.id, formData);
+          toast.success('Updated Product Success');
+        } else {
+          //create
+          await createProduct(bcsId, formData);
+          //toast success
+          toast.success('Create Product Success');
+        }
       } catch (err) {
         //unexpected error
         toast.error('Error Creating!');
       }
     },
-    [formValues, selectedImage, bcsId, createProduct]
+    [formValues, selectedImage, bcsId, createProduct, editProduct]
   );
-
-  // console.log(newError);
 
   return {
     formValues,
     formErrors,
     bcsId,
+    brandId,
     selectedImage,
     error,
     errorStatus,

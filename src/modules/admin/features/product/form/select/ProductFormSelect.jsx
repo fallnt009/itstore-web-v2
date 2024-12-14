@@ -1,4 +1,9 @@
-export default function ProductFormSelect({brands, brandError, onChange}) {
+export default function ProductFormSelect({
+  brands,
+  selectedBrand,
+  brandError,
+  onChange,
+}) {
   if (brandError) {
     return <div>Brand Not Avaliable</div>;
   }
@@ -10,7 +15,7 @@ export default function ProductFormSelect({brands, brandError, onChange}) {
       <select
         className="p-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500  bg-slate-100 font-semibold cursor-pointer"
         onChange={(e) => onChange(e.target.value)}
-        defaultValue=""
+        value={selectedBrand || ''}
       >
         <option value="" disabled>
           Choose Brand

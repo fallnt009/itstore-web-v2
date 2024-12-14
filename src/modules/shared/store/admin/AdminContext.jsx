@@ -1,4 +1,4 @@
-import {createContext, useReducer, useCallback, useState} from 'react';
+import {createContext, useReducer, useCallback} from 'react';
 import adminReducer, {
   INIT_ADMIN,
   FETCH_PRODUCT_OVERVIEW,
@@ -74,7 +74,19 @@ export default function AdminContextProvider({children}) {
   const fetchProductById = useCallback(async (productId) => {
     try {
       const res = await AdminApi.getProductById(productId);
-      return res;
+
+      const productData = res.data.result;
+
+      return {
+        data: productData,
+        images: productData.ProductImages,
+        keys: {
+          brandId:
+            productData.ProductSubCategory.BrandCategorySub.BrandCategory
+              .brandId,
+          bcsId: productData.ProductSubCategory.BrandCategorySub.id,
+        },
+      };
     } catch (err) {
       throw err;
     }
@@ -87,7 +99,13 @@ export default function AdminContextProvider({children}) {
       throw err;
     }
   }, []);
-  const editProduct = useCallback(async () => {}, []);
+  const editProduct = useCallback(async (productId, data) => {
+    try {
+      await AdminApi.updateProduct(productId, data);
+    } catch (err) {
+      throw err;
+    }
+  }, []);
   const deleteProduct = useCallback(async () => {
     //soft delete ? inactive product
   }, []);
@@ -101,6 +119,7 @@ export default function AdminContextProvider({children}) {
         fetchBrandCategorySub,
         fetchProductById,
         createProduct,
+        editProduct,
       }}
     >
       {children}

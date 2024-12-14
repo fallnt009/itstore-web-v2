@@ -1,4 +1,3 @@
-import {useParams} from 'react-router-dom';
 import {MdArrowBackIos} from 'react-icons/md';
 
 import useAdminProductForm from '../../../hooks/useAdminProductForm';
@@ -10,16 +9,11 @@ import ProductTag from '../tag/ProductTag';
 import ErrorPage from '../../../../shared/features/error/ErrorPage';
 
 export default function AdminProductEdit() {
-  //useParams to get product id
-  //fetch ProductId info
-  //put in formValues
-  //state isEdit or not
-  const {productId} = useParams();
-
   const {
     formValues,
     formErrors,
     bcsId,
+    brandId,
     selectedImage,
     error,
     errorStatus,
@@ -28,16 +22,17 @@ export default function AdminProductEdit() {
     handleSelectBcsId,
     handleClickBack,
     handleSelectImage,
-  } = useAdminProductForm(productId);
+  } = useAdminProductForm();
 
   const {
     tagOverview,
     tagError,
     brandError,
     page,
+    selectedBrandId,
     setSelectBrandId,
     setChangePage,
-  } = useCategoryTag();
+  } = useCategoryTag(brandId);
 
   if (error) {
     return <ErrorPage statusCode={errorStatus} />;
@@ -71,6 +66,7 @@ export default function AdminProductEdit() {
           tag={tagOverview}
           page={page}
           error={formErrors}
+          selectedBrand={selectedBrandId}
           tagError={tagError}
           brandError={brandError}
           bcsId={bcsId}

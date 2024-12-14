@@ -51,8 +51,8 @@ import OrderHistory from '../modules/order/features/history/OrderHistory';
 import AdminDashboard from '../modules/admin/features/dashboard/AdminDashboard';
 import AdminOrder from '../modules/admin/features/order/AdminOrder';
 import AdminProduct from '../modules/admin/features/product/AdminProduct';
-import AdminProductCreate from '../modules/admin/features/product/create/AdminProductCreate';
-import AdminProductEdit from '../modules/admin/features/product/create/AdminProductEdit';
+import AdminProductCreate from '../modules/admin/features/product/action/AdminProductCreate';
+import AdminProductEdit from '../modules/admin/features/product/action/AdminProductEdit';
 
 export const privateRoutes = [
   {

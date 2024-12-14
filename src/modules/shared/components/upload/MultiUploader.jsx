@@ -98,7 +98,7 @@ export default function MultiUploader({select, setSelect}) {
           {select?.map((image, index) => (
             <div key={index} className="flex justify-center relative py-2">
               <img
-                src={image.url}
+                src={image.path}
                 alt={`selected ${index}`}
                 className="max-h-[100px] max-w-[100px] object-fill rounded-lg shadow-xl"
               />
