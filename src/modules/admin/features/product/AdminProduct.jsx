@@ -6,6 +6,10 @@ import SelectTabFilter from '../../components/SelectTabFilter';
 
 import ErrorPage from '../../../shared/features/error/ErrorPage';
 
+import Popup from '../../../shared/components/popup/Popup';
+import DeletePopup from '../../../shared/components/popup/DeletePopup';
+import usePopup from '../../hooks/usePopup';
+
 export default function AdminProduct() {
   //Add/Edit/Delete product
   const {
@@ -21,7 +25,10 @@ export default function AdminProduct() {
     setChangeFilters,
     setSubmitSearch,
     setClearAll,
+    submitDeleteProduct,
   } = useAdminProduct();
+
+  const {isOpen, itemId, setOpenPopup, setClosePopup} = usePopup();
 
   const {items} = productOverview;
   //Organize productCategory
@@ -59,8 +66,16 @@ export default function AdminProduct() {
           page={page}
           totalPages={totalPages}
           onChangePage={submitChangePage}
+          onOpenPopup={setOpenPopup}
         />
       </section>
+      <Popup isOpen={isOpen} onClose={setClosePopup}>
+        <DeletePopup
+          onSubmit={submitDeleteProduct}
+          onClose={setClosePopup}
+          id={itemId}
+        />
+      </Popup>
     </main>
   );
 }

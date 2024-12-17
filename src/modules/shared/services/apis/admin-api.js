@@ -22,8 +22,10 @@ export const getAllBrand = () => axios.get('/categories/brand');
 export const getBrandTag = (brandId, page) =>
   axios.get(`/categories/brandtag/${brandId}`, {params: {page}});
 
-//create
+//crud product
 export const createProduct = (bcsId, data) =>
   axios.post(`/products/create/${bcsId}`, data);
 export const updateProduct = (productId, data) =>
   axios.patch(`/products/${productId}`, data);
+export const deleteProduct = (productId) =>
+  axios.delete(`/products/${productId}`);

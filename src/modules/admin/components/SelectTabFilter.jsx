@@ -12,8 +12,10 @@ export default function SelectTabFilter({
   const {sortBy, sortValue} = sorts;
   const {inStock, isActive} = filters;
 
-  const checkActive = isActive === true ? 'active' : 'inactive';
-  const checkStock = inStock === true ? 'instock' : 'outOfStock';
+  const checkActive =
+    isActive === true ? 'active' : isActive === false ? 'inactive' : '';
+  const checkStock =
+    inStock === true ? 'instock' : inStock === false ? 'outOfStock' : '';
 
   const checkSort = (sortBy, sortValue) => {
     const sortMapping = {
@@ -43,6 +45,7 @@ export default function SelectTabFilter({
           value={checkActive}
           onChange={(e) => onChangeFilter(e.target.value)}
         >
+          <option value="">Product Status</option>
           <option value="active">Active</option>
           <option value="inactive">In Active</option>
         </select>
@@ -51,6 +54,7 @@ export default function SelectTabFilter({
           value={checkStock}
           onChange={(e) => onChangeFilter(e.target.value)}
         >
+          <option value="">Stock Status</option>
           <option value="instock">In Stock</option>
           <option value="outOfStock">Out of Stock</option>
         </select>

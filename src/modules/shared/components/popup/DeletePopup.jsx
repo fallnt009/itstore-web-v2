@@ -1,11 +1,16 @@
 import {MdClose} from 'react-icons/md';
 
-export default function DeletePopup({name, prevData, onClose, onSubmit}) {
+export default function DeletePopup({name, id, prevData, onClose, onSubmit}) {
+  const handleConfirmDelete = () => {
+    onSubmit(id);
+    onClose();
+  };
   return (
-    <div className="w-62 h-34 ">
+    <div className="w-62 h-36">
       <div className="flex justify-between text-base font-semibold pb-4">
         <h1>
-          Delete {name} "{prevData.text || ''}"
+          Delete {id ? `ID:${id}` : ''}
+          {name} {prevData ? `${prevData.text}` : ''}
         </h1>
         <button type="button" onClick={onClose}>
           <MdClose />
@@ -26,7 +31,7 @@ export default function DeletePopup({name, prevData, onClose, onSubmit}) {
         <button
           type="button"
           className="flex-1 border p-2 px-4 rounded-lg text-white bg-red-500 hover:bg-white hover:border-red-500 hover:text-red-500"
-          onClick={onSubmit}
+          onClick={handleConfirmDelete}
         >
           Confirm
         </button>

@@ -1,10 +1,15 @@
 import {useEffect, useState, useCallback} from 'react';
+import {toast} from 'react-toastify';
 
 import useAdmin from '../../shared/hooks/useAdmin';
 import useError from '../../shared/hooks/useError';
 
+import {
+  UNEXPECTED_ERROR,
+  DELETE_SUCCESS,
+} from '../../shared/services/config/toast';
 export default function useAdminProduct() {
-  const {productOverview, fetchAllProduct} = useAdmin();
+  const {productOverview, fetchAllProduct, deleteProduct} = useAdmin();
   const {error, errorStatus, setIsError} = useError();
 
   //totalPages
@@ -18,7 +23,7 @@ export default function useAdminProduct() {
   //filter state
   const [sorts, setSorts] = useState({sortBy: 'createdAt', sortValue: 'ASC'});
   //highest price {sortBy:'price', sortValue: 'ASC' }
-  const [filters, setFilters] = useState({isActive: true, inStock: true});
+  const [filters, setFilters] = useState({isActive: '', inStock: ''});
   const [search, setSearch] = useState('');
 
   //fetch All product
@@ -81,10 +86,25 @@ export default function useAdminProduct() {
     };
   }, []);
   const setClearAll = useCallback(() => {
-    setFilters({isActive: true, inStock: true});
+    setFilters({isActive: '', inStock: ''});
     setSorts({sortBy: 'createdAt', sortValue: 'ASC'});
     setSearch('');
   }, []);
+
+  //Click to Set Product Status InActive
+  //Delete ? Soft Delete ? Admin Only ?
+
+  const submitDeleteProduct = useCallback(async (productId) => {
+    try {
+      //call api proceed to delete
+      await deleteProduct(productId);
+
+      toast.success(DELETE_SUCCESS);
+    } catch (err) {
+      toast.error(UNEXPECTED_ERROR);
+    }
+  }, []);
+
   return {
     productOverview,
     loading,
@@ -100,5 +120,6 @@ export default function useAdminProduct() {
     setChangeFilters,
     setSubmitSearch,
     setClearAll,
+    submitDeleteProduct,
   };
 }

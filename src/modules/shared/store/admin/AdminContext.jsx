@@ -106,8 +106,13 @@ export default function AdminContextProvider({children}) {
       throw err;
     }
   }, []);
-  const deleteProduct = useCallback(async () => {
+  const deleteProduct = useCallback(async (productId) => {
     //soft delete ? inactive product
+    try {
+      await AdminApi.deleteProduct(productId);
+    } catch (err) {
+      throw err;
+    }
   }, []);
   return (
     <AdminContext.Provider
@@ -120,6 +125,7 @@ export default function AdminContextProvider({children}) {
         fetchProductById,
         createProduct,
         editProduct,
+        deleteProduct,
       }}
     >
       {children}

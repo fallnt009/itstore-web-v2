@@ -6,11 +6,12 @@ export default function AdminProductContent({
   page,
   totalPages,
   onChangePage,
+  onOpenPopup,
 }) {
   return (
     <main>
       <section className="border rounded-xl bg-slate-100 overflow-auto">
-        <AdminProductTable items={items} />
+        <AdminProductTable items={items} onOpenPopup={onOpenPopup} />
       </section>
       <section className="flex pt-5 justify-end">
         <ParginationIndicator
