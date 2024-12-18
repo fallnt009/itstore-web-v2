@@ -5,6 +5,7 @@ import useCategoryTag from '../../../hooks/useCategoryTag';
 
 import ProductForm from '../form/ProductForm';
 import ProductTag from '../tag/ProductTag';
+import ProductSettings from '../settings/ProductSettings';
 
 // import ErrorPage from '../../../../shared/features/error/ErrorPage';
 
@@ -19,6 +20,7 @@ export default function AdminProductCreate() {
     handleSelectBcsId,
     handleClickBack,
     handleSelectImage,
+    handleToggleActiveProduct,
   } = useAdminProductForm();
 
   const {
@@ -54,17 +56,23 @@ export default function AdminProductCreate() {
           onChange={handleChangeInput}
           onSubmit={handleSubmitForm}
         />
-        <ProductTag
-          tag={tagOverview}
-          page={page}
-          error={formErrors}
-          tagError={tagError}
-          brandError={brandError}
-          bcsId={bcsId}
-          onSelectBrand={setSelectBrandId}
-          onSelectTag={handleSelectBcsId}
-          onChangePage={setChangePage}
-        />
+        <section>
+          <ProductTag
+            tag={tagOverview}
+            page={page}
+            error={formErrors}
+            tagError={tagError}
+            brandError={brandError}
+            bcsId={bcsId}
+            onSelectBrand={setSelectBrandId}
+            onSelectTag={handleSelectBcsId}
+            onChangePage={setChangePage}
+          />
+          <ProductSettings
+            isActive={formValues.isActive}
+            onToggleChange={handleToggleActiveProduct}
+          />
+        </section>
       </article>
     </main>
   );

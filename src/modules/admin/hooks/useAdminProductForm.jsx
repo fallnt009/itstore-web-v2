@@ -9,6 +9,12 @@ import validateProduct from '../utils/validate-product';
 
 import {ADMIN_PRODUCT} from '../../shared/services/config/routing';
 
+import {
+  UNEXPECTED_ERROR,
+  CREATE_SUCCESS,
+  UPDATE_SUCCESS,
+} from '../../shared/services/config/toast';
+
 export default function useAdminProductForm() {
   const {productId} = useParams();
   //useProduct
@@ -24,6 +30,7 @@ export default function useAdminProductForm() {
     price: 0,
     description: '',
     qtyInStock: 0,
+    isActive: false,
   });
   const [formErrors, setFormErrors] = useState({});
 
@@ -32,7 +39,6 @@ export default function useAdminProductForm() {
   //bcs
   const [bcsId, setBcsId] = useState(null);
   const [brandId, setBrandId] = useState(null);
-  //error
 
   //fetch productData when productId provided
   const loadProductById = async (id) => {
@@ -52,6 +58,7 @@ export default function useAdminProductForm() {
         price: data.price || '',
         description: data.description || '',
         qtyInStock: data.qtyInStock || 0,
+        isActive: data.isActive || false,
       });
     } catch (err) {
       //global error
@@ -119,6 +126,7 @@ export default function useAdminProductForm() {
         formData.append('price', formValues.price);
         formData.append('description', formValues.description);
         formData.append('qtyInStock', formValues.qtyInStock);
+        formData.append('isActive', formValues.isActive.toString());
 
         // select image
         if (selectedImage.length > 0) {
@@ -133,20 +141,29 @@ export default function useAdminProductForm() {
           formData.append('bcsId', bcsId);
 
           await editProduct(formValues.id, formData);
-          toast.success('Updated Product Success');
+          toast.success(UPDATE_SUCCESS);
         } else {
           //create
           await createProduct(bcsId, formData);
           //toast success
-          toast.success('Create Product Success');
+          toast.success(CREATE_SUCCESS);
         }
       } catch (err) {
         //unexpected error
-        toast.error('Error Creating!');
+        toast.error(UNEXPECTED_ERROR);
+
+        //redirect to main product
       }
     },
     [formValues, selectedImage, bcsId, createProduct, editProduct]
   );
+
+  const handleToggleActiveProduct = () => {
+    setFormValues((prevState) => ({
+      ...prevState,
+      isActive: !prevState.isActive,
+    }));
+  };
 
   return {
     formValues,
@@ -161,5 +178,6 @@ export default function useAdminProductForm() {
     handleSubmitForm,
     handleClickBack,
     handleSelectImage,
+    handleToggleActiveProduct,
   };
 }

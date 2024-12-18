@@ -6,14 +6,13 @@ const productSchema = Joi.object({
     'string.empty': 'Product Name is required',
     'string.base': 'Product Name must a character',
   }),
-  price: Joi.string().trim().required().messages({
+  price: Joi.number().positive().required().messages({
     'any.required': 'Price is required',
-    'string.empty': 'Price is required',
+    'number.base': 'Price must be a number',
+    'number.positive': 'Price must be a positive number',
   }),
-  description: Joi.string().trim().required().messages({
-    'any.required': 'Description is required',
-    'string.empty': 'Description is required',
-    'string.base': 'Description must a character',
+  description: Joi.string().trim().allow(null, '').optional().messages({
+    'string.base': 'Description must be a character',
   }),
   qtyInStock: Joi.number().integer().min(0).allow(null).optional().messages({
     'number.base': 'Quantity in Stock must be a number',
@@ -25,6 +24,7 @@ const productSchema = Joi.object({
     'string.base': 'ID must be a valid string',
     'number.base': 'ID must be a valid number',
   }),
+  isActive: Joi.boolean().default(false).optional(),
 });
 
 const validateProduct = (input) => {

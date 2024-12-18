@@ -7,6 +7,7 @@ import ProductForm from '../form/ProductForm';
 import ProductTag from '../tag/ProductTag';
 
 import ErrorPage from '../../../../shared/features/error/ErrorPage';
+import ProductSettings from '../settings/ProductSettings';
 
 export default function AdminProductEdit() {
   const {
@@ -22,6 +23,7 @@ export default function AdminProductEdit() {
     handleSelectBcsId,
     handleClickBack,
     handleSelectImage,
+    handleToggleActiveProduct,
   } = useAdminProductForm();
 
   const {
@@ -62,18 +64,24 @@ export default function AdminProductEdit() {
           onChange={handleChangeInput}
           onSubmit={handleSubmitForm}
         />
-        <ProductTag
-          tag={tagOverview}
-          page={page}
-          error={formErrors}
-          selectedBrand={selectedBrandId}
-          tagError={tagError}
-          brandError={brandError}
-          bcsId={bcsId}
-          onSelectBrand={setSelectBrandId}
-          onSelectTag={handleSelectBcsId}
-          onChangePage={setChangePage}
-        />
+        <section>
+          <ProductTag
+            tag={tagOverview}
+            page={page}
+            error={formErrors}
+            selectedBrand={selectedBrandId}
+            tagError={tagError}
+            brandError={brandError}
+            bcsId={bcsId}
+            onSelectBrand={setSelectBrandId}
+            onSelectTag={handleSelectBcsId}
+            onChangePage={setChangePage}
+          />
+          <ProductSettings
+            isActive={formValues.isActive}
+            onToggleChange={handleToggleActiveProduct}
+          />
+        </section>
       </article>
     </main>
   );

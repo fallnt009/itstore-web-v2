@@ -50,12 +50,12 @@ export default function AdminProductTableItem({product, onOpenPopup}) {
       <td className="py-2 px-4">
         <div
           className={`py-1 select-none text-xs font-semibold rounded-lg ${
-            product.qtyInStock > 0
-              ? 'text-green-600 bg-green-100'
-              : ' text-red-500 bg-red-100'
+            product.qtyInStock > 0 ? 'text-green-600 ' : ' text-red-500 '
           }`}
         >
-          {product.qtyInStock > 0 ? 'In Stock' : 'Out of Stock'}
+          {product.qtyInStock > 0
+            ? `In Stock (${product.qtyInStock})`
+            : 'Out of Stock'}
         </div>
       </td>
       <td className="py-2 px-4">
