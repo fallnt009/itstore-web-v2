@@ -35,7 +35,7 @@ export default function usePaymentGateway() {
       }
     };
     loadPaymentMethod();
-  }, [fetchAllPaymentMethod]);
+  }, [fetchAllPaymentMethod, startLoading, stopLoading, setIsError]);
 
   const selectPaymentMethod = useCallback(
     (paymentId) => {
@@ -51,7 +51,7 @@ export default function usePaymentGateway() {
           break;
       }
     },
-    [navigate]
+    [navigate, orderId]
   );
 
   return {

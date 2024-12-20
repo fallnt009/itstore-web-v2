@@ -59,3 +59,4 @@ exports.ADMIN_PRODUCT = '/admin/product';
 exports.ADMIN_PRODUCT_CREATE = '/admin/product/create';
 exports.ADMIN_PRODUCT_EDIT = (productId) => `/admin/product/edit/${productId}`;
 exports.ADMIN_ORDER = '/admin/order';
+exports.ADMIN_CATEGORY = '/admin/category';

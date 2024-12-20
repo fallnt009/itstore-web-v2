@@ -48,7 +48,13 @@ export default function useUserPayment() {
       }
     };
     loadUserPayment();
-  }, [fetchUserPaymentByOrderId, orderId]);
+  }, [
+    fetchUserPaymentByOrderId,
+    orderId,
+    startLoading,
+    stopLoading,
+    setIsError,
+  ]);
 
   //function
   const updateUserPaymentAwait = useCallback(
@@ -77,7 +83,7 @@ export default function useUserPayment() {
         toast.error(UNEXPECTED_ERROR);
       }
     },
-    [updateUserPaymentById, userPaymentId, navigate]
+    [updateUserPaymentById, userPaymentId, navigate, orderNumber, selectImage]
   );
 
   const submitPaymentImage = useCallback((file) => {

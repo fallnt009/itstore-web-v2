@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {MdArrowCircleLeft, MdArrowCircleRight} from 'react-icons/md';
 
 export default function BannerSlide({imgUrl, interval = 8000}) {
@@ -29,7 +29,7 @@ export default function BannerSlide({imgUrl, interval = 8000}) {
     }, 1000);
   };
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (isTransitioning) return;
 
     setIsTransitioning(true);
@@ -38,7 +38,7 @@ export default function BannerSlide({imgUrl, interval = 8000}) {
     setTimeout(() => {
       setIsTransitioning(false);
     }, 1000);
-  };
+  }, [isTransitioning, totalPages]);
   useEffect(() => {
     // Dynamically adjust the number of items per page on resize
     const handleResize = () => {
@@ -58,7 +58,7 @@ export default function BannerSlide({imgUrl, interval = 8000}) {
       }, interval);
       return () => clearInterval(slideInterval);
     }
-  }, [isPause, index, interval, isTransitioning]);
+  }, [isPause, index, interval, isTransitioning, handleNext]);
 
   const handleIndicator = (current) => {
     setIndex(current);

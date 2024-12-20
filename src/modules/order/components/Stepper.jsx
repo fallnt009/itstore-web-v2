@@ -1,5 +1,5 @@
 import {useState, useRef, useEffect} from 'react';
-import {MdCheckCircle, MdCancel} from 'react-icons/md';
+import {MdCheckCircle} from 'react-icons/md';
 
 export default function Stepper({currentStep = 1, stepsList}) {
   const [isCompleted, setIsComplete] = useState(false);
@@ -15,7 +15,7 @@ export default function Stepper({currentStep = 1, stepsList}) {
       marginLeft: stepRef.current[0]?.offsetWidth / 2,
       marginRight: stepRef.current[stepsList.length - 1]?.offsetWidth / 2,
     });
-  }, [stepRef]);
+  }, [stepRef, stepsList.length]);
 
   //calculate progress bar
   const calculateProgressBarWidth = () => {

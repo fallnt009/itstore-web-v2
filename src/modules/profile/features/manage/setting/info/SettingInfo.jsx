@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {toast} from 'react-toastify';
 
 import useAuth from '../../../../../shared/hooks/useAuth';
@@ -16,12 +16,15 @@ export default function SettingInfo() {
   const {authenUser, updateProfile} = useAuth();
   const {startLoading, stopLoading} = useLoading();
 
-  const dataForm = {
-    firstName: authenUser?.firstName || '',
-    lastName: authenUser?.lastName || '',
-    email: authenUser?.email || '',
-    mobile: authenUser?.mobile || '',
-  };
+  const dataForm = useMemo(
+    () => ({
+      firstName: authenUser?.firstName || '',
+      lastName: authenUser?.lastName || '',
+      email: authenUser?.email || '',
+      mobile: authenUser?.mobile || '',
+    }),
+    [authenUser]
+  );
   //form and err
   const [initialInput, setInitialInput] = useState(dataForm);
   const [currentInput, setCurrentInput] = useState(dataForm);
@@ -37,7 +40,7 @@ export default function SettingInfo() {
   useEffect(() => {
     setCurrentInput(dataForm);
     setInitialInput(dataForm);
-  }, [authenUser]);
+  }, [dataForm]);
 
   // Compare currentInput with initialInput to check if edited
   useEffect(() => {

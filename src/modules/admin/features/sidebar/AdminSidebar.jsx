@@ -2,6 +2,7 @@ import {useNavigate} from 'react-router-dom';
 import {MdDashboard} from 'react-icons/md';
 
 import {
+  ADMIN_CATEGORY,
   ADMIN_DASHBOARD,
   ADMIN_PRODUCT,
 } from '../../../shared/services/config/routing';
@@ -17,7 +18,7 @@ export default function AdminSidebar() {
     {id: 5, title: 'Payment', path: '', icon: ''},
     {id: 6, title: 'Inventory', path: '', icon: ''},
     {id: 7, title: 'Discount', path: '', icon: ''},
-    {id: 8, title: 'Tags', path: '', icon: ''},
+    {id: 8, title: 'Category', path: ADMIN_CATEGORY, icon: ''},
     {id: 9, title: 'Settings', path: '', icon: ''},
   ];
 

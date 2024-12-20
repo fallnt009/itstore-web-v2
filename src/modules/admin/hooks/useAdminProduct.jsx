@@ -94,16 +94,19 @@ export default function useAdminProduct() {
   //Click to Set Product Status InActive
   //Delete ? Soft Delete ? Admin Only ?
 
-  const submitDeleteProduct = useCallback(async (productId) => {
-    try {
-      //call api proceed to delete
-      await deleteProduct(productId);
+  const submitDeleteProduct = useCallback(
+    async (productId) => {
+      try {
+        //call api proceed to delete
+        await deleteProduct(productId);
 
-      toast.success(DELETE_SUCCESS);
-    } catch (err) {
-      toast.error(UNEXPECTED_ERROR);
-    }
-  }, []);
+        toast.success(DELETE_SUCCESS);
+      } catch (err) {
+        toast.error(UNEXPECTED_ERROR);
+      }
+    },
+    [deleteProduct]
+  );
 
   return {
     productOverview,

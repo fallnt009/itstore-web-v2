@@ -23,8 +23,8 @@ export default function WishlistListItem({item}) {
     title,
     description,
     price,
-    ProductSubCategory,
-    ProductImages,
+    // ProductSubCategory,
+    // ProductImages,
     ProductDiscount,
   } = Product;
 

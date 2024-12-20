@@ -1,8 +1,6 @@
 import axios from 'axios';
 import {getAccessToken} from '../../utils/local-storage';
 
-import NetworkError from '../../components/error/NetworkError';
-
 import {LOGIN} from '../config/routing';
 
 axios.defaults.baseURL = process.env.REACT_APP_ENDPOINT_URL;

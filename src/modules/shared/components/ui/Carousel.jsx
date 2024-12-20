@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {MdArrowCircleLeft, MdArrowCircleRight} from 'react-icons/md';
 
 export default function Carousel({imgUrl, interval = 8000}) {
@@ -19,7 +19,7 @@ export default function Carousel({imgUrl, interval = 8000}) {
     }, 1000);
   };
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (isTransitioning) return;
 
     setIsTransitioning(true);
@@ -28,7 +28,7 @@ export default function Carousel({imgUrl, interval = 8000}) {
     setTimeout(() => {
       setIsTransitioning(false);
     }, 1000);
-  };
+  }, [imgUrl.length, isTransitioning]);
 
   useEffect(() => {
     if (!isPause) {
@@ -39,7 +39,7 @@ export default function Carousel({imgUrl, interval = 8000}) {
       }, interval);
       return () => clearInterval(slideInterval);
     }
-  }, [isPause, index, interval, isTransitioning]);
+  }, [isPause, index, interval, isTransitioning, handleNext]);
 
   const handleIndicator = (current) => {
     setIndex(current);

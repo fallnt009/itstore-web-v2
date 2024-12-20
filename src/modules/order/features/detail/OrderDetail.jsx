@@ -1,10 +1,5 @@
-import {useEffect, useState} from 'react';
-import {useParams, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {MdKeyboardArrowRight} from 'react-icons/md';
-
-import useOrder from '../../../shared/hooks/useOrder';
-import useLoading from '../../../shared/hooks/useLoading';
-import useError from '../../../shared/hooks/useError';
 
 import OrderHeader from './header/OrderHeader';
 import OrderDetailProduct from './products/OrderDetailProduct';
@@ -18,31 +13,15 @@ import ErrorPage from '../../../shared/features/error/ErrorPage';
 
 import {HOME, ORDER_HISTORY} from '../../../shared/services/config/routing';
 
+import useOrderDetail from '../../hooks/useOrderDetail';
+
 export default function OrderDetail() {
-  //params
-  const {orderNumber} = useParams();
-  const {order, fetchOrderByNumber} = useOrder();
-  const {loading, startLoading, stopLoading} = useLoading();
-  const {error, errorStatus, setIsError} = useError();
+  const {order, orderNumber, error, errorStatus, loading} = useOrderDetail();
 
   //destruct order
   const {detail, product, currentStep, isCancel} = order;
   const {OrderDetail, UserPayment, orderStatus, totalAmount, createdAt} =
     detail;
-  //fetch order by orderNumber
-  useEffect(() => {
-    const loadOrder = async () => {
-      startLoading();
-      try {
-        await fetchOrderByNumber(orderNumber);
-      } catch (err) {
-        setIsError(err);
-      } finally {
-        stopLoading();
-      }
-    };
-    loadOrder();
-  }, [fetchOrderByNumber, orderNumber]);
 
   if (error) {
     return <ErrorPage statusCode={errorStatus} />;

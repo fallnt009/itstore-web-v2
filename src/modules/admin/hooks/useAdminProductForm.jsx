@@ -41,36 +41,39 @@ export default function useAdminProductForm() {
   const [brandId, setBrandId] = useState(null);
 
   //fetch productData when productId provided
-  const loadProductById = async (id) => {
-    try {
-      // await
-      const res = await fetchProductById(id);
+  const loadProductById = useCallback(
+    async (id) => {
+      try {
+        // await
+        const res = await fetchProductById(id);
 
-      const {data, images, keys} = res;
+        const {data, images, keys} = res;
 
-      //setbcsId , setSelectedImage ,setFormValues
-      setBcsId(keys?.bcsId || '');
-      setBrandId(keys?.brandId || '');
-      setSelectedImage(images || []);
-      setFormValues({
-        id: data.id || '',
-        title: data.title || '',
-        price: data.price || '',
-        description: data.description || '',
-        qtyInStock: data.qtyInStock || 0,
-        isActive: data.isActive || false,
-      });
-    } catch (err) {
-      //global error
-      setIsError(err);
-    }
-  };
+        //setbcsId , setSelectedImage ,setFormValues
+        setBcsId(keys?.bcsId || '');
+        setBrandId(keys?.brandId || '');
+        setSelectedImage(images || []);
+        setFormValues({
+          id: data.id || '',
+          title: data.title || '',
+          price: data.price || '',
+          description: data.description || '',
+          qtyInStock: data.qtyInStock || 0,
+          isActive: data.isActive || false,
+        });
+      } catch (err) {
+        //global error
+        setIsError(err);
+      }
+    },
+    [fetchProductById, setIsError]
+  );
 
   useEffect(() => {
     if (productId) {
       loadProductById(productId);
     }
-  }, [productId]);
+  }, [productId, loadProductById]);
 
   //onChange
   const handleChangeInput = useCallback(

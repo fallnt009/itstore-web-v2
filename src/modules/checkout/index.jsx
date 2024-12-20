@@ -34,7 +34,7 @@ export default function CheckoutContainer() {
       }
     };
     loadCheckout();
-  }, [authenUser, fetchCheckout, fetchMyAddress, fetchCart]);
+  }, [authenUser, fetchCheckout, fetchMyAddress, fetchCart, setIsError]);
 
   if (error) {
     return <ErrorPage statusCode={errorStatus} />;

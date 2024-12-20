@@ -44,7 +44,15 @@ export default function OrderHistory() {
       }
     };
     loadMyOrder();
-  }, [fetchAllMyOrder, page, pageSize, statusFilter]);
+  }, [
+    fetchAllMyOrder,
+    page,
+    pageSize,
+    statusFilter,
+    setIsError,
+    startLoading,
+    stopLoading,
+  ]);
 
   const handleClickNavigate = (orderNumber) => {
     navigate(ORDER_DETAIL(orderNumber));

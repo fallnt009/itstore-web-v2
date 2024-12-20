@@ -13,24 +13,32 @@ export default function WishlistAddCartButton({id, title, onAdd}) {
 
   const onClickAdd = async () => {
     setStatus('process');
-    let timeoutId;
+
+    let delayedTimeout;
+    let resetTimeout;
     try {
       await new Promise((resolve) => {
-        timeoutId = setTimeout(resolve, 500);
+        delayedTimeout = setTimeout(resolve, 500);
       }); // Simulate delay
       await onAdd(id);
       toast.success(ADD_TOCART(title));
       setStatus('success');
-      timeoutId = setTimeout(() => {
+      resetTimeout = setTimeout(() => {
         setStatus('add'); // Reset to 'add'
       }, 1000);
     } catch (err) {
       setStatus('error');
       toast.error(UNEXPECTED_ERROR);
-      timeoutId = setTimeout(() => {
+      resetTimeout = setTimeout(() => {
         setStatus('add'); // Reset to 'add'
       }, 1000);
+    } finally {
+      clearTimeout(delayedTimeout);
     }
+
+    return () => {
+      clearTimeout(resetTimeout);
+    };
   };
 
   const renderButton = () => {

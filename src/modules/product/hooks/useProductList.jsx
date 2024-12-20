@@ -67,6 +67,7 @@ export default function useProductList() {
     fetchProductList,
     fetchProductFilter,
     page,
+    pageSize,
     filters,
     search,
   ]);

@@ -28,7 +28,7 @@ export default function WishlistMain() {
       }
     };
     loadWishlist();
-  }, [fetchMyWishlist, page]);
+  }, [fetchMyWishlist, page, setIsError]);
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
