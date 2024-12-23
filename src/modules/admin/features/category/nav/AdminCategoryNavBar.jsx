@@ -1,8 +1,4 @@
-import {useNavigate} from 'react-router-dom';
-
-export default function AdminCategoryNavBar() {
-  const navigate = useNavigate();
-
+export default function AdminCategoryNavBar({selectedNavId, onSelect}) {
   const navList = [
     {
       id: 1,
@@ -26,16 +22,17 @@ export default function AdminCategoryNavBar() {
     },
   ];
 
-  const handleNavigate = (path) => {
-    navigate(path);
-  };
   return (
     <ul className="flex gap-2 font-semibold">
       {navList.map((item) => (
         <li
-          className="p-2 border rounded-lg bg-slate-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600 cursor-pointer"
+          className={`p-2 border rounded-lg  hover:bg-blue-100 hover:text-blue-600 cursor-pointer ${
+            selectedNavId === item.id
+              ? 'text-blue-600 bg-blue-100'
+              : 'bg-slate-100 text-gray-700'
+          }`}
           key={item.id}
-          onClick={() => handleNavigate(item.path)}
+          onClick={() => onSelect(item.id)}
         >
           {item.title}
         </li>

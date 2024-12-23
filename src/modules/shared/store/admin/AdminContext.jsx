@@ -4,6 +4,7 @@ import adminReducer, {
   FETCH_PRODUCT_OVERVIEW,
   FETCH_CATEGORY_TAG,
   FETCH_ALL_BRAND,
+  FETCH_CATEGORY,
 } from './AdminReducer';
 
 import * as AdminApi from '../../../shared/services/apis/admin-api';
@@ -114,11 +115,62 @@ export default function AdminContextProvider({children}) {
       throw err;
     }
   }, []);
+
+  const fetchBrand = useCallback(async (page) => {
+    try {
+      const res = await AdminApi.getBrand(page);
+
+      dispatch({
+        type: FETCH_CATEGORY,
+        payload: {
+          items: res.data.result,
+          totalItems: res.data.count,
+          totalPages: res.data.totalPages,
+          currentPage: res.data.currentPage,
+        },
+      });
+    } catch (err) {
+      throw err;
+    }
+  }, []);
+  const fetchCategory = useCallback(async (page) => {
+    try {
+      const res = await AdminApi.getCategory(page);
+      dispatch({
+        type: FETCH_CATEGORY,
+        payload: {
+          items: res.data.result,
+          totalItems: res.data.count,
+          totalPages: res.data.totalPages,
+          currentPage: res.data.currentPage,
+        },
+      });
+    } catch (err) {
+      throw err;
+    }
+  }, []);
+  const fetchSubCategory = useCallback(async (page) => {
+    try {
+      const res = await AdminApi.getSubCategory(page);
+      dispatch({
+        type: FETCH_CATEGORY,
+        payload: {
+          items: res.data.result,
+          totalItems: res.data.count,
+          totalPages: res.data.totalPages,
+          currentPage: res.data.currentPage,
+        },
+      });
+    } catch (err) {
+      throw err;
+    }
+  }, []);
   return (
     <AdminContext.Provider
       value={{
         productOverview: AllAdmin.ProductOverview,
         tagOverview: AllAdmin.TagOverview,
+        categoryOverview: AllAdmin.CategoryOverview,
         fetchAllProduct,
         fetchAllBrand,
         fetchBrandCategorySub,
@@ -126,6 +178,9 @@ export default function AdminContextProvider({children}) {
         createProduct,
         editProduct,
         deleteProduct,
+        fetchBrand,
+        fetchCategory,
+        fetchSubCategory,
       }}
     >
       {children}

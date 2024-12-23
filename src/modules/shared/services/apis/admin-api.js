@@ -15,8 +15,11 @@ export const getAllProduct = (page, pageSize, sorts, filters, search) =>
 export const getProductById = (productId) =>
   axios.get(`/products/${productId}`);
 
-//get All Brand
-export const getAllBrand = () => axios.get('/categories/brand');
+//get All Brand for Select
+export const getAllBrand = () =>
+  axios.get('/categories/brand', {
+    params: {all: true},
+  });
 
 //get BrandTag
 export const getBrandTag = (brandId, page) =>
@@ -29,3 +32,11 @@ export const updateProduct = (productId, data) =>
   axios.patch(`/products/${productId}`, data);
 export const deleteProduct = (productId) =>
   axios.delete(`/products/${productId}`);
+
+//Category Api
+export const getBrand = (page) =>
+  axios.get('/categories/brand', {params: {page}});
+export const getCategory = (page) =>
+  axios.get('/categories/category', {params: {page}});
+export const getSubCategory = (page) =>
+  axios.get('/categories/sub-category', {params: {page}});
