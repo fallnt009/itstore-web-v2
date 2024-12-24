@@ -5,6 +5,7 @@ import adminReducer, {
   FETCH_CATEGORY_TAG,
   FETCH_ALL_BRAND,
   FETCH_CATEGORY,
+  FETCH_ALL_CATEGORY,
 } from './AdminReducer';
 
 import * as AdminApi from '../../../shared/services/apis/admin-api';
@@ -165,12 +166,50 @@ export default function AdminContextProvider({children}) {
       throw err;
     }
   }, []);
+  const fetchBCS = useCallback(async (page, filters) => {
+    try {
+      const res = await AdminApi.getBcs(page, filters);
+      dispatch({
+        type: FETCH_CATEGORY,
+        payload: {
+          items: res.data.result,
+          totalItems: res.data.count,
+          totalPages: res.data.totalPages,
+          currentPage: res.data.currentPage,
+        },
+      });
+    } catch (err) {
+      throw err;
+    }
+  }, []);
+
+  const fetchAllCategory = useCallback(async () => {
+    try {
+      const [brands, category, subCategory] = await Promise.all([
+        AdminApi.getAllBrand(),
+        AdminApi.getAllCategory(),
+        AdminApi.getAllSubCategory(),
+      ]);
+
+      dispatch({
+        type: FETCH_ALL_CATEGORY,
+        payload: {
+          brands: brands.data.result,
+          category: category.data.result,
+          subCategory: subCategory.data.result,
+        },
+      });
+    } catch (err) {
+      throw err;
+    }
+  }, []);
   return (
     <AdminContext.Provider
       value={{
         productOverview: AllAdmin.ProductOverview,
         tagOverview: AllAdmin.TagOverview,
         categoryOverview: AllAdmin.CategoryOverview,
+        categoryFilters: AllAdmin.CategoryFilter,
         fetchAllProduct,
         fetchAllBrand,
         fetchBrandCategorySub,
@@ -181,6 +220,8 @@ export default function AdminContextProvider({children}) {
         fetchBrand,
         fetchCategory,
         fetchSubCategory,
+        fetchBCS,
+        fetchAllCategory,
       }}
     >
       {children}

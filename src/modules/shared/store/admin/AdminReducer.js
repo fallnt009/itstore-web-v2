@@ -2,6 +2,7 @@ export const FETCH_PRODUCT_OVERVIEW = 'FETCH_PRODUCT_OVERVIEW';
 export const FETCH_ALL_BRAND = 'FETCH_ALL_BRAND';
 export const FETCH_CATEGORY = 'FETCH_CATEGORY';
 export const FETCH_CATEGORY_TAG = 'FETCH_CATEGORY_TAG';
+export const FETCH_ALL_CATEGORY = 'FETCH_ALL_CATEGORY';
 
 export const INIT_ADMIN = {
   ProductOverview: {
@@ -23,6 +24,11 @@ export const INIT_ADMIN = {
     totalItems: 0,
     totalPages: 1,
     currentPage: 1,
+  },
+  CategoryFilter: {
+    brands: [],
+    category: [],
+    subCategory: [],
   },
 };
 
@@ -67,6 +73,15 @@ function adminReducer(state, action) {
           totalItems: action.payload.totalItems,
           totalPages: action.payload.totalPages,
           currentPage: action.payload.currentPage,
+        },
+      };
+    case FETCH_ALL_CATEGORY:
+      return {
+        ...state,
+        CategoryFilter: {
+          brands: action.payload.brands,
+          category: action.payload.category,
+          subCategory: action.payload.subCategory,
         },
       };
 

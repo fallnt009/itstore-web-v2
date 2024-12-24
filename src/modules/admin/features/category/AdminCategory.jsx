@@ -2,6 +2,7 @@ import useAdminCategory from '../../hooks/useAdminCategory';
 
 import AdminCategoryContent from './content/AdminCategoryContent';
 import AdminCategoryNavBar from './nav/AdminCategoryNavBar';
+import AdminCategorySelect from './select/AdminCategorySelect';
 
 import ParginationIndicator from '../../../shared/components/ui/ParginationIndicator';
 import ErrorPage from '../../../shared/features/error/ErrorPage';
@@ -14,12 +15,16 @@ export default function AdminCategory() {
 
   const {
     categoryOverview,
+    categoryFilters,
     page,
     selectedNavId,
     error,
     errorStatus,
+    filters,
     handleChangePage,
     handleSelectNavId,
+    handleSetFilter,
+    handleClearAllFilter,
   } = useAdminCategory();
 
   const {items, totalItems, totalPages} = categoryOverview;
@@ -27,6 +32,9 @@ export default function AdminCategory() {
   if (error) {
     return <ErrorPage statusCode={errorStatus} />;
   }
+  //tags
+  //filters (category,brand,subCategory)
+  //all data with pagination
 
   return (
     <main>
@@ -39,11 +47,32 @@ export default function AdminCategory() {
           onSelect={handleSelectNavId}
         />
       </nav>
-      <section className="flex justify-end text-gray-500 text-sm pb-3 px-3">
-        <p>found {totalItems || 0} items</p>
-      </section>
+      <article
+        className={`flex items-center mb-5 ${
+          selectedNavId === 4 ? 'justify-between' : 'justify-end'
+        }`}
+      >
+        {selectedNavId === 4 ? (
+          <section>
+            <AdminCategorySelect
+              selectedFilters={filters}
+              categoryFilters={categoryFilters}
+              onChange={handleSetFilter}
+              onClear={handleClearAllFilter}
+            />
+          </section>
+        ) : (
+          <></>
+        )}
+        <section className="flex text-gray-500 text-sm">
+          <p>found {totalItems || 0} items</p>
+        </section>
+      </article>
       <section className="h-[370px] border rounded-xl">
-        <AdminCategoryContent categoryData={items} />
+        <AdminCategoryContent
+          selectedNavId={selectedNavId}
+          categoryData={items}
+        />
       </section>
       <section className="flex py-5 justify-center">
         <ParginationIndicator

@@ -15,11 +15,15 @@ export const getAllProduct = (page, pageSize, sorts, filters, search) =>
 export const getProductById = (productId) =>
   axios.get(`/products/${productId}`);
 
-//get All Brand for Select
+//get All Category for Select
 export const getAllBrand = () =>
   axios.get('/categories/brand', {
     params: {all: true},
   });
+export const getAllCategory = () =>
+  axios.get('/categories/category', {params: {all: true}});
+export const getAllSubCategory = () =>
+  axios.get('/categories/sub-category', {params: {all: true}});
 
 //get BrandTag
 export const getBrandTag = (brandId, page) =>
@@ -40,3 +44,5 @@ export const getCategory = (page) =>
   axios.get('/categories/category', {params: {page}});
 export const getSubCategory = (page) =>
   axios.get('/categories/sub-category', {params: {page}});
+export const getBcs = (page, filters) =>
+  axios.get('/categories/bcs', {params: {page, filters}});
