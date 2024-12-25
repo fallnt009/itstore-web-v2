@@ -20,6 +20,7 @@ import {
   ADMIN_PRODUCT_CREATE,
   ADMIN_PRODUCT_EDIT,
   ADMIN_CATEGORY,
+  ADMIN_CATEGORY_CREATE,
 } from './routes';
 
 //CONTAINER
@@ -56,6 +57,7 @@ import AdminProductCreate from '../modules/admin/features/product/action/AdminPr
 import AdminProductEdit from '../modules/admin/features/product/action/AdminProductEdit';
 
 import AdminCategory from '../modules/admin/features/category/AdminCategory';
+import AdminCategoryCreate from '../modules/admin/features/category/actions/AdminCategoryCreate';
 
 export const privateRoutes = [
   {
@@ -146,6 +148,10 @@ export const privateRoutes = [
       {
         path: ADMIN_CATEGORY,
         element: <AdminCategory />,
+      },
+      {
+        path: ADMIN_CATEGORY_CREATE,
+        element: <AdminCategoryCreate />,
       },
     ],
   },

@@ -1,4 +1,5 @@
 import {useNavigate} from 'react-router-dom';
+import {MdAdd} from 'react-icons/md';
 
 import {ADMIN_PRODUCT_CREATE} from '../../../../shared/services/config/routing';
 
@@ -10,11 +11,7 @@ export default function AdminProductNavBar() {
       id: 1,
       title: 'Add Product',
       path: ADMIN_PRODUCT_CREATE,
-    },
-    {
-      id: 2,
-      title: 'Add Category',
-      path: '',
+      icon: <MdAdd />,
     },
   ];
 
@@ -25,10 +22,11 @@ export default function AdminProductNavBar() {
     <ul className="flex gap-2 font-semibold">
       {navList.map((item) => (
         <li
-          className="p-2 border rounded-lg bg-slate-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600 cursor-pointer"
+          className="flex items-center gap-2 p-2 border rounded-lg hover:bg-white bg-blue-100 text-blue-600 cursor-pointer"
           key={item.id}
           onClick={() => handleNavigate(item.path)}
         >
+          <span>{item.icon}</span>
           {item.title}
         </li>
       ))}

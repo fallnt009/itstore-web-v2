@@ -16,7 +16,7 @@ export default function AdminProductTableItem({product, onOpenPopup}) {
   //stock
 
   return (
-    <tr className="bg-white border-b">
+    <tr className="bg-white border-b font-semibold">
       <td className="py-2">
         <p className="text-sm">{product.id}</p>
       </td>

@@ -13,7 +13,7 @@ export default function TagContentTable({categoryData}) {
       <tbody className="text-gray-700">
         {categoryData.length > 0 ? (
           categoryData.map((item) => (
-            <tr className="border-t bg-white" key={item.id}>
+            <tr className="border-t bg-white font-semibold" key={item.id}>
               <td className="py-1">{item.id}</td>
               <td className="py-1"> {item.BrandCategory?.Brand?.title}</td>
               <td className="py-1">

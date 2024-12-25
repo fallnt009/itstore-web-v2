@@ -41,7 +41,7 @@ export default function AdminProductEdit() {
   }
 
   return (
-    <main>
+    <main className="mx-5">
       <header className="flex items-center gap-5">
         <button
           type="button"

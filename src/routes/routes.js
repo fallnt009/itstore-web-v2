@@ -57,3 +57,4 @@ exports.ADMIN_PRODUCT_EDIT = 'product/edit/:productId';
 exports.ADMIN_ORDER = 'order';
 
 exports.ADMIN_CATEGORY = 'category';
+exports.ADMIN_CATEGORY_CREATE = 'category/create';

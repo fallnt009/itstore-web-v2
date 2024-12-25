@@ -43,32 +43,34 @@ export default function AdminProduct() {
   }
 
   return (
-    <main>
-      <header className="text-2xl font-semibold">
-        <h1>Product Overview</h1>
+    <main className="bg-gray-50 pb-5 border-t shadow-inner">
+      <header className="text-3xl font-semibold px-5 pt-5">
+        <h1>Products </h1>
       </header>
-      <nav className="flex gap-5 pt-5 py-2">
+      <nav className="flex justify-end gap-5 pb-5 px-5">
         <AdminProductNavBar />
       </nav>
-      <section className="pt-5">
-        <SelectTabFilter
-          sorts={sorts}
-          filters={filters}
-          onChangeSort={setSortOrder}
-          onChangeFilter={setChangeFilters}
-          onChangeSearch={setSubmitSearch}
-          onClear={setClearAll}
-        />
-      </section>
-      <section className="py-5">
-        <AdminProductContent
-          items={items}
-          page={page}
-          totalPages={totalPages}
-          onChangePage={submitChangePage}
-          onOpenPopup={setOpenPopup}
-        />
-      </section>
+      <article className="bg-white px-5 mx-5 rounded-xl">
+        <section className="pt-5 ">
+          <SelectTabFilter
+            sorts={sorts}
+            filters={filters}
+            onChangeSort={setSortOrder}
+            onChangeFilter={setChangeFilters}
+            onChangeSearch={setSubmitSearch}
+            onClear={setClearAll}
+          />
+        </section>
+        <section className="py-5">
+          <AdminProductContent
+            items={items}
+            page={page}
+            totalPages={totalPages}
+            onChangePage={submitChangePage}
+            onOpenPopup={setOpenPopup}
+          />
+        </section>
+      </article>
       <Popup isOpen={isOpen} onClose={setClosePopup}>
         <DeletePopup
           onSubmit={submitDeleteProduct}

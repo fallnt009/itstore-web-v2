@@ -27,9 +27,15 @@ export default function AdminSidebar() {
   };
   return (
     <div className="flex flex-col gap-3 pr-5 pb-5">
+      <div className="flex justify-center text-2xl font-bold py-5">
+        <h1>My Store</h1>
+      </div>
+      <div>
+        <p className="text-xs text-gray-400 font-bold ">MENU</p>
+      </div>
       {lists.map((item) => (
         <button
-          className="flex items-center justify-start gap-2 p-2 px-4 rounded-lg font-semibold bg-slate-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+          className="flex items-center justify-start gap-2 py-4 px-6 rounded-lg font-semibold  text-gray-700 hover:bg-blue-100 hover:text-blue-600"
           key={item.id}
           onClick={() => handleNavigate(item.path)}
         >
