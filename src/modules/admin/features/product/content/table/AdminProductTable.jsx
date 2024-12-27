@@ -15,7 +15,7 @@ export default function AdminProductTable({items, onOpenPopup}) {
           <th className="py-2 px-4 w-32">Actions</th>
         </tr>
       </thead>
-      <tbody className="text-gray-700">
+      <tbody className="text-gray-500">
         {items.map((product) => (
           <AdminProductTableItem
             key={product.id}

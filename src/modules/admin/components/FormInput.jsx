@@ -15,7 +15,7 @@ export default function FormInput({
         type={type || 'text'}
         onChange={onChange}
         name={name}
-        value={value}
+        value={value || ''}
         placeholder={placeholder}
       />
       {error && <p className="text-red-500 text-sm py-1">* {error}</p>}

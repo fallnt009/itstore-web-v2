@@ -41,10 +41,14 @@ const validateCategory = (input) => {
   return error ? formatErrors(error) : null;
 };
 const validateCategoryTags = (input) => {
+  if (!input || typeof input !== 'object') {
+    return {error: 'Input must be a valid object'};
+  }
+
   const {error} = categoryTagSchema.validate(input, {abortEarly: false});
   if (!error) return null;
 
-  return error ? formatErrors(error) : null;
+  return formatErrors(error);
 };
 
 export {validateCategory, validateCategoryTags};

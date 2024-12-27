@@ -6,17 +6,15 @@ export default function CategoryContentTable({categoryData}) {
           <th className="py-1 px-4">ID</th>
           <th className="py-1 px-4 ">Brand</th>
           <th className="py-1 px-4 ">Slug</th>
-          <th className="py-1 px-4">Action</th>
         </tr>
       </thead>
-      <tbody className="text-gray-700">
+      <tbody className="text-gray-500">
         {categoryData.length > 0 ? (
           categoryData.map((item) => (
             <tr className="border-t bg-white font-semibold" key={item.id}>
-              <td className="py-1">{item.id}</td>
-              <td className="py-1"> {item.title}</td>
-              <td className="py-1"> {item.slug}</td>
-              <td className="py-1"> actions</td>
+              <td className="py-2">{item.id}</td>
+              <td className="py-2"> {item.title}</td>
+              <td className="py-2"> {item.slug}</td>
             </tr>
           ))
         ) : (

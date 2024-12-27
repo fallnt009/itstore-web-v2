@@ -1,4 +1,4 @@
-import {useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import {MdDashboard} from 'react-icons/md';
 
 import {
@@ -9,6 +9,7 @@ import {
 
 export default function AdminSidebar() {
   const navigate = useNavigate();
+  const location = useLocation();
   // have
   const lists = [
     {id: 1, title: 'Dashboard', path: ADMIN_DASHBOARD, icon: <MdDashboard />},
@@ -25,17 +26,19 @@ export default function AdminSidebar() {
   const handleNavigate = (path) => {
     navigate(path);
   };
+
   return (
     <div className="flex flex-col gap-3 pr-5 pb-5">
-      <div className="flex justify-center text-2xl font-bold py-5">
-        <h1>My Store</h1>
-      </div>
       <div>
         <p className="text-xs text-gray-400 font-bold ">MENU</p>
       </div>
       {lists.map((item) => (
         <button
-          className="flex items-center justify-start gap-2 py-4 px-6 rounded-lg font-semibold  text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+          className={`flex  items-center justify-start gap-2 py-2 pl-2 pr-6 rounded-lg hover:bg-gray-200 hover:text-gray-700 ${
+            location.pathname === item.path
+              ? 'text-gray-700 bg-gray-200'
+              : 'text-gray-500 '
+          }`}
           key={item.id}
           onClick={() => handleNavigate(item.path)}
         >

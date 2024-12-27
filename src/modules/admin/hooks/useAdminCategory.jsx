@@ -4,8 +4,6 @@ import {useNavigate} from 'react-router-dom';
 import useAdmin from '../../shared/hooks/useAdmin';
 import useError from '../../shared/hooks/useError';
 
-import {ADMIN_CATEGORY_CREATE} from '../../shared/services/config/routing';
-
 export default function useAdminCategory() {
   const {
     categoryOverview,
@@ -18,7 +16,7 @@ export default function useAdminCategory() {
   } = useAdmin();
   const {error, errorStatus, setIsError} = useError();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   //navbar state
   const [selectedNavId, setIsSelectedNavId] = useState(1);
 
@@ -89,16 +87,6 @@ export default function useAdminCategory() {
     });
   }, []);
 
-  const navigateTo = useCallback(
-    (pathName) => {
-      const pathMapping = {
-        create: ADMIN_CATEGORY_CREATE,
-      };
-      navigate(pathMapping[pathName]);
-    },
-    [navigate]
-  );
-
   return {
     categoryOverview,
     categoryFilters,
@@ -111,6 +99,5 @@ export default function useAdminCategory() {
     handleChangePage,
     handleSetFilter,
     handleClearAllFilter,
-    navigateTo,
   };
 }

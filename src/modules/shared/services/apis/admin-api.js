@@ -46,3 +46,12 @@ export const getSubCategory = (page) =>
   axios.get('/categories/sub-category', {params: {page}});
 export const getBcs = (page, filters) =>
   axios.get('/categories/bcs', {params: {page, filters}});
+
+//category create
+export const createBrand = (data) => axios.post('/categories/brand', data);
+export const createCategory = (data) =>
+  axios.post('/categories/category', data);
+export const createSubCategory = (data) =>
+  axios.post('/categories/sub-category', data);
+export const createCategoryTag = (data) =>
+  axios.post('/categories/brandtag', data);

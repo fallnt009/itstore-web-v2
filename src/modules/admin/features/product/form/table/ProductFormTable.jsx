@@ -11,7 +11,7 @@ export default function ProductFormTable({items, bcsId, onSelectTag}) {
           <th className="py-2 px-4">Action</th>
         </tr>
       </thead>
-      <tbody className="text-gray-700">
+      <tbody className="text-gray-500">
         {items.length > 0 ? (
           items.map((tag) => (
             <ProductFormTableItem

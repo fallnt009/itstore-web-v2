@@ -11,7 +11,9 @@ export default function CategoryCreateMenu({selected, onClick}) {
         <button
           type="button"
           className={`flex gap-2 border p-2 rounded-xl  hover:bg-blue-600 hover:text-white ${
-            selected ? 'text-white bg-blue-600' : 'bg-blue-100 text-blue-600'
+            selected === item.id
+              ? 'text-white bg-blue-600'
+              : 'bg-blue-100 text-blue-600'
           }`}
           key={item.id}
           onClick={() => onClick(item.id)}
