@@ -21,7 +21,7 @@ export default function CartContentItem({
   //destruct
 
   const productId = id || null;
-  const productImage = Product?.ProductImages[0]?.path || '';
+  const productImage = Product?.ProductImages?.[0]?.path || '' || '';
 
   //slug
   const categorySlug =
@@ -58,10 +58,10 @@ export default function CartContentItem({
             className="flex font-semibold gap-5 justify-start cursor-pointer hover:underline"
             to={PRODUCT_INFO_NAV(categorySlug, subCategorySlug, productSlug)}
           >
-            {Product.title}
+            {Product?.title}
           </Link>
           <div className="font-bold">
-            {Product.ProductDiscount ? (
+            {Product?.ProductDiscount ? (
               <div className="flex gap-2">
                 <NumericFormat
                   value={item.qty * parseFloat(Product.price)}
@@ -89,8 +89,8 @@ export default function CartContentItem({
           </div>
         </div>
         <div className="flex justify-between text-sm text-stone-500 ">
-          <p>{Product.description}</p>
-          {Product.ProductDiscount && (
+          <p>{Product?.description}</p>
+          {Product?.ProductDiscount && (
             <div className="flex text-xs p-1 bg-red-500 text-white font-semibold">
               {Product?.ProductDiscount?.Discount?.amount}% off
             </div>

@@ -6,6 +6,7 @@ import adminReducer, {
   FETCH_ALL_BRAND,
   FETCH_CATEGORY,
   FETCH_ALL_CATEGORY,
+  FETCH_ALL_ORDER,
 } from './AdminReducer';
 
 import * as AdminApi from '../../../shared/services/apis/admin-api';
@@ -203,6 +204,24 @@ export default function AdminContextProvider({children}) {
       throw err;
     }
   }, []);
+
+  const fetchAllOrder = useCallback(async (page, pageSize, sorts) => {
+    try {
+      const res = await AdminApi.getAllOrder(page, pageSize, sorts);
+
+      dispatch({
+        type: FETCH_ALL_ORDER,
+        payload: {
+          items: res.data.result,
+          totalItems: res.data.count,
+          totalPages: res.data.totalPages,
+          currentPage: res.data.currentPage,
+        },
+      });
+    } catch (err) {
+      throw err;
+    }
+  }, []);
   return (
     <AdminContext.Provider
       value={{
@@ -210,6 +229,7 @@ export default function AdminContextProvider({children}) {
         tagOverview: AllAdmin.TagOverview,
         categoryOverview: AllAdmin.CategoryOverview,
         categoryFilters: AllAdmin.CategoryFilter,
+        orderOverview: AllAdmin.OrderOverview,
         fetchAllProduct,
         fetchAllBrand,
         fetchBrandCategorySub,
@@ -222,6 +242,7 @@ export default function AdminContextProvider({children}) {
         fetchSubCategory,
         fetchBCS,
         fetchAllCategory,
+        fetchAllOrder,
       }}
     >
       {children}

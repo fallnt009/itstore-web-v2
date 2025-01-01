@@ -1,4 +1,9 @@
+import useAdminOrder from '../../hooks/useAdminOrder';
+
+import AdminOrderContent from './content/AdminOrderContent';
+
 export default function AdminOrder() {
+  const {orderOverview, page, handleChangePage} = useAdminOrder();
   //order need
   //orderOverview
   /// filter order ,pargination ,notification
@@ -8,14 +13,18 @@ export default function AdminOrder() {
   //nortification tab (number of unreview order and click to show)
   //view order / approve order and update information
   return (
-    <main>
-      <header className="text-3xl font-semibold px-5 pt-5">
-        <h1>Products </h1>
+    <main className="pb-5">
+      <header className="flex items-center  justify-between text-2xl font-semibold px-5 py-5">
+        <h1>Order Lists</h1>
       </header>
-      <nav></nav>
-      <article>
-        <section></section>
-        <section></section>
+      <article className="bg-white mx-5 px-5 rounded-xl">
+        <section className="py-5">
+          <AdminOrderContent
+            orderLists={orderOverview}
+            page={page}
+            onChangePage={handleChangePage}
+          />
+        </section>
       </article>
     </main>
   );

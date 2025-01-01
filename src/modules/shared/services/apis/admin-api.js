@@ -55,3 +55,10 @@ export const createSubCategory = (data) =>
   axios.post('/categories/sub-category', data);
 export const createCategoryTag = (data) =>
   axios.post('/categories/brandtag', data);
+
+//Order
+//get All Order
+export const getAllOrder = (page, pageSize, sorts) =>
+  axios.get('/order/all', {
+    params: {page, pageSize, sorts: JSON.stringify(sorts)},
+  });

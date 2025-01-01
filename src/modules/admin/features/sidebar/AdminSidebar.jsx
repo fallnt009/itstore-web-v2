@@ -4,6 +4,7 @@ import {MdDashboard} from 'react-icons/md';
 import {
   ADMIN_CATEGORY,
   ADMIN_DASHBOARD,
+  ADMIN_ORDER,
   ADMIN_PRODUCT,
 } from '../../../shared/services/config/routing';
 
@@ -14,7 +15,7 @@ export default function AdminSidebar() {
   const lists = [
     {id: 1, title: 'Dashboard', path: ADMIN_DASHBOARD, icon: <MdDashboard />},
     {id: 2, title: 'Product', path: ADMIN_PRODUCT, icon: ''},
-    {id: 3, title: 'Order', path: '', icon: ''},
+    {id: 3, title: 'Order', path: ADMIN_ORDER, icon: ''},
     {id: 4, title: 'Customer', path: '', icon: ''},
     {id: 5, title: 'Payment', path: '', icon: ''},
     {id: 6, title: 'Inventory', path: '', icon: ''},
