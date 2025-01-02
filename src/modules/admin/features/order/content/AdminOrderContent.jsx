@@ -3,11 +3,15 @@ import AdminOrderContentTab from './tab/AdminOrderContentTab';
 import OrderContentTable from './table/OrderContentTable';
 
 import ParginationIndicator from '../../../../shared/components/ui/ParginationIndicator';
+import DatePicker from '../../../components/date/DatePicker';
 
 export default function AdminOrderContent({orderLists, page, onChangePage}) {
   const {items, totalPages} = orderLists;
   return (
     <main className="">
+      <section className="flex pb-5">
+        <DatePicker />
+      </section>
       <section className="flex items-center justify-between">
         <AdminOrderContentTab />
         <OrderContentFilters />
