@@ -58,7 +58,7 @@ export const createCategoryTag = (data) =>
 
 //Order
 //get All Order
-export const getAllOrder = (page, pageSize, sorts) =>
+export const getAllOrder = (page, pageSize, filters, sorts, dates) =>
   axios.get('/order/all', {
-    params: {page, pageSize, sorts: JSON.stringify(sorts)},
+    params: {page, pageSize, filters, sorts: JSON.stringify(sorts), dates},
   });

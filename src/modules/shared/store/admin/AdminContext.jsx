@@ -205,23 +205,32 @@ export default function AdminContextProvider({children}) {
     }
   }, []);
 
-  const fetchAllOrder = useCallback(async (page, pageSize, sorts) => {
-    try {
-      const res = await AdminApi.getAllOrder(page, pageSize, sorts);
+  const fetchAllOrder = useCallback(
+    async (page, pageSize, filters, sorts, dates) => {
+      try {
+        const res = await AdminApi.getAllOrder(
+          page,
+          pageSize,
+          filters,
+          sorts,
+          dates
+        );
 
-      dispatch({
-        type: FETCH_ALL_ORDER,
-        payload: {
-          items: res.data.result,
-          totalItems: res.data.count,
-          totalPages: res.data.totalPages,
-          currentPage: res.data.currentPage,
-        },
-      });
-    } catch (err) {
-      throw err;
-    }
-  }, []);
+        dispatch({
+          type: FETCH_ALL_ORDER,
+          payload: {
+            items: res.data.result,
+            totalItems: res.data.count,
+            totalPages: res.data.totalPages,
+            currentPage: res.data.currentPage,
+          },
+        });
+      } catch (err) {
+        throw err;
+      }
+    },
+    []
+  );
   return (
     <AdminContext.Provider
       value={{

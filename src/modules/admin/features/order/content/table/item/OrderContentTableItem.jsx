@@ -24,18 +24,16 @@ export default function OrderContentTableItem({data}) {
 
   //order deliveryDate ? 'date' :'N/A'
   const deliveryDate = OrderDetail?.deliveryDate || 'N/A';
-
+  //odd:bg-white even:bg-slate-50 for strip
   return (
     <tr className="text-gray-700 text-sm">
-      <td className="border-t px-4 py-3 text-center">#{id}</td>
-      <td className="border-t px-4 py-3 text-center">{orderDateFormat}</td>
-      <td className="border-t px-4 py-3 text-center">
-        <p className="line-clamp-1">{fullName}</p>
-      </td>
-      <td className="border-t px-4 py-3">
+      <td className="p-3 text-center whitespace-nowrap">#{id}</td>
+      <td className="p-3 text-left whitespace-nowrap">{orderDateFormat}</td>
+      <td className="p-3 text-left whitespace-nowrap">{fullName}</td>
+      <td className="p-3 whitespace-nowrap">
         <PaymentStatus status={UserPayment?.paymentStatus} />
       </td>
-      <td className="border-t px-4 py-3 text-center">
+      <td className="p-3 text-left whitespace-nowrap">
         <NumericFormat
           value={UserPayment?.amount}
           displayType="text"
@@ -45,14 +43,17 @@ export default function OrderContentTableItem({data}) {
           prefix="฿"
         />
       </td>
-      <td className="border-t px-4 py-3 text-center">{deliveryDate}</td>
-      <td className="border-t px-4 py-3 text-center">
+      <td className="p-3 text-left whitespace-nowrap">{deliveryDate}</td>
+      <td
+        className="p-3 text-left
+       whitespace-nowrap"
+      >
         {orderItemsTotalQty} items
       </td>
-      <td className="border-t px-4 py-3">
+      <td className="p-3 whitespace-nowrap">
         <ReviewStatus status={reviewStatus} />
       </td>
-      <td className="border-t px-4 py-3">
+      <td className="p-3 whitespace-nowrap">
         <OrderActions />
       </td>
     </tr>

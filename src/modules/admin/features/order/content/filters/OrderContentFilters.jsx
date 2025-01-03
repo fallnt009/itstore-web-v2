@@ -1,11 +1,15 @@
-import {MdFilterList, MdMoreHoriz, MdImportExport} from 'react-icons/md';
+import {MdSort, MdMoreHoriz, MdImportExport} from 'react-icons/md';
 
 export default function OrderContentFilters() {
   const filterLists = [
-    {id: 1, title: 'filter', icon: <MdFilterList />},
+    {id: 1, title: 'pageSize', icon: <MdSort />},
     {id: 2, title: 'sorts', icon: <MdImportExport />},
     {id: 3, title: 'more', icon: <MdMoreHoriz />},
   ];
+
+  //pageSize
+  //sort select asc , desc
+  //more
   return (
     <div className="flex gap-2">
       {filterLists.map((item) => (

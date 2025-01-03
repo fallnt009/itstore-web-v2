@@ -1,38 +1,62 @@
+import {MdSearchOff} from 'react-icons/md';
+
 import OrderContentTableItem from './item/OrderContentTableItem';
 
 export default function OrderContentTable({items}) {
-  const menuLists = [
-    {id: 1, title: 'No.', size: 'w-[5%]'},
-    {id: 2, title: 'Date', size: 'w-[10%]'},
-    {id: 3, title: 'Customer', size: 'w-[10%]'},
-    {id: 4, title: 'Payment', size: 'w-[2%]'},
-    {id: 5, title: 'Total', size: 'w-[10%]'},
-    {id: 6, title: 'Delivery', size: 'w-[8%]'},
-    {id: 7, title: 'Items', size: 'w-[10%]'},
-    {id: 8, title: 'Review', size: 'w-[2%]'},
-    {id: 9, title: 'Action', size: 'w-[10%]'},
-  ];
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-200">
-      <table className="w-full">
-        <thead>
-          <tr className="bg-gray-100 text-sm">
-            {menuLists.map((item) => (
-              <th
-                className={`text-gray-500 font-normal py-3 border-l ${item.size}`}
-                key={item.id}
-              >
-                {item.title}
-              </th>
-            ))}
+    <table className="w-full">
+      <thead>
+        <tr className="bg-gray-100 text-sm">
+          <th className="text-gray-500 font-normal p-3 text-center w-20">
+            No.
+          </th>
+          <th className="text-gray-500 font-normal p-3 text-left w-24">Date</th>
+          <th className="text-gray-500 font-normal p-3 text-left ">Customer</th>
+          <th className="text-gray-500 font-normal p-3 text-left w-24">
+            Payment
+          </th>
+          <th className="text-gray-500 font-normal p-3 text-left w-24">
+            Total
+          </th>
+          <th className="text-gray-500 font-normal p-3 text-left w-24">
+            Delivery
+          </th>
+          <th className="text-gray-500 font-normal p-3 text-left w-24">
+            Items
+          </th>
+          <th className="text-gray-500 font-normal p-3 text-left w-24">
+            Review
+          </th>
+          <th className="text-gray-500 font-normal p-3 text-left w-24">
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-gray-100">
+        {items.length === 0 ? (
+          <tr className="select-none">
+            <td colSpan="9" className=" text-gray-500 py-8">
+              <div className="flex flex-col items-center justify-center">
+                <span className="pb-2">
+                  <MdSearchOff size={70} />
+                </span>
+
+                <span className="text-xl text-gray-700 font-medium">
+                  No Result found
+                </span>
+                <span className="text-sm">
+                  No result match this filter criteria Change filters to show
+                  results
+                </span>
+              </div>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {items?.map((order) => (
+        ) : (
+          items?.map((order) => (
             <OrderContentTableItem key={order.id} data={order} />
-          ))}
-        </tbody>
-      </table>
-    </div>
+          ))
+        )}
+      </tbody>
+    </table>
   );
 }

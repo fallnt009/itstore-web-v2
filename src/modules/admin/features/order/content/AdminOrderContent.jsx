@@ -5,19 +5,28 @@ import OrderContentTable from './table/OrderContentTable';
 import ParginationIndicator from '../../../../shared/components/ui/ParginationIndicator';
 import DatePicker from '../../../components/date/DatePicker';
 
-export default function AdminOrderContent({orderLists, page, onChangePage}) {
+export default function AdminOrderContent({
+  orderLists,
+  page,
+  dates,
+  onChangePage,
+  onToggleFilters,
+  onSubmitDate,
+}) {
   const {items, totalPages} = orderLists;
   return (
-    <main className="">
+    <main className="container">
       <section className="flex pb-5">
-        <DatePicker />
+        <DatePicker dates={dates} onSubmit={onSubmitDate} />
       </section>
       <section className="flex items-center justify-between">
-        <AdminOrderContentTab />
+        <AdminOrderContentTab onToggle={onToggleFilters} />
         <OrderContentFilters />
       </section>
       <section className="py-5">
-        <OrderContentTable items={items} />
+        <div className="overflow-auto rounded-lg shadow">
+          <OrderContentTable items={items} />
+        </div>
       </section>
       <section className="flex justify-end">
         <ParginationIndicator

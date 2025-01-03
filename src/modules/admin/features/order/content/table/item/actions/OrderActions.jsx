@@ -8,7 +8,7 @@ export default function OrderActions() {
     {id: 2, icon: <MdOutlineComment size={18} />},
   ];
   return (
-    <div className="flex gap-5 justify-center">
+    <div className="grid grid-cols-2">
       {buttonLists.map((item) => (
         <button className="hover:text-blue-500" key={item.id}>
           {item.icon}

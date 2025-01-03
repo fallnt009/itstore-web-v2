@@ -1,4 +1,4 @@
-export default function DatePickerItem({selectedDate, error, onChange}) {
+export default function DatePickerItem({selectedDate, onSubmit, onChange}) {
   return (
     <div className="flex items-center	gap-5 text-sm ">
       <div className=" text-gray-500">
@@ -22,7 +22,11 @@ export default function DatePickerItem({selectedDate, error, onChange}) {
         />
       </div>
       <div>
-        <button className="text-xs rounded-xl border p-2 px-4 font-semibold bg-blue-100 text-blue-500 hover:bg-gray-100 hover:text-gray-500">
+        <button
+          type="button"
+          className="text-xs rounded-xl border p-2 px-4 font-semibold bg-blue-100 text-blue-500 hover:bg-gray-100 hover:text-gray-500"
+          onClick={onSubmit}
+        >
           Apply
         </button>
       </div>

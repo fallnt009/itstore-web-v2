@@ -21,27 +21,47 @@ export default function useAdminOrder() {
   const [filters, setFilters] = useState({});
   //dates
   const [dateFilters, setDateFilters] = useState({
-    startDate: new Date().toISOString().split('T', 1)[0],
-    endDate: new Date().toISOString().split('T', 1)[0],
+    startDate: '',
+    endDate: '',
   });
-  //fetch unreviewed verifierId &&& verifierDate === null
-  //unpaid = paymentStatus === Pending
-  //completed = paymentStatus === Completed
-  //canceled = orderStatus === canceled
 
-  //{paymentStatus,orderStatus,startDate,endDate,verifierId,verifyDate}
+  //set Default date
+  useEffect(() => {
+    //get current date
+    const now = new Date();
 
+    //calculate first and last date of current month
+
+    const startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+    const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+    const formatDate = (date) =>
+      `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+        2,
+        '0'
+      )}-${String(date.getDate()).padStart(2, '0')}`;
+
+    //set default Date
+    setDateFilters({
+      startDate: formatDate(startDate),
+      endDate: formatDate(endDate),
+    });
+  }, []);
+
+  //fetch all order
   useEffect(() => {
     const loadAllOrder = async () => {
       try {
-        await fetchAllOrder(page, pageSize);
+        await fetchAllOrder(page, pageSize, filters, sorts, dateFilters);
       } catch (err) {
         console.log(err);
+        //setError
       }
     };
     loadAllOrder();
-  }, [fetchAllOrder, page, pageSize]);
+  }, [fetchAllOrder, page, pageSize, filters, sorts, dateFilters]);
 
+  //pagination
   const handleChangePage = useCallback((newPage) => {
     setPage(newPage);
   }, []);
@@ -49,6 +69,7 @@ export default function useAdminOrder() {
     setPageSize(newPageSize);
   }, []);
 
+  //sorts
   const handleSortOrder = useCallback((newSort) => {
     const sortsMapping = {
       asc: {sortBy: 'createdAt', sortValue: 'ASC'},
@@ -60,6 +81,7 @@ export default function useAdminOrder() {
     }
   }, []);
 
+  //filters
   const handleToggleFilters = useCallback(
     (type) => {
       const filtersMapping = {
@@ -67,28 +89,30 @@ export default function useAdminOrder() {
         paid: {paymentStatus: TRANSACTION_AWAITING},
         completed: {orderStatus: ORDER_COMPLETED},
         canceled: {orderStatus: ORDER_CANCELED},
-        unreviewed: {verifierId: null, verifyDate: null},
+        unreviewed: {isVerify: false},
       };
       if (filtersMapping[type]) {
-        setFilters(...filtersMapping[type]);
+        setFilters(filtersMapping[type]);
+      } else {
+        //clear filters
+        setFilters({});
       }
     },
     [setFilters]
   );
 
-  const handleChangeDate = useCallback((startDate, endDate) => {
-    setDateFilters({
-      startDate: startDate,
-      endDate: endDate,
-    });
+  const handleChangeDate = useCallback((selectedDate) => {
+    setDateFilters(selectedDate);
   }, []);
 
   return {
     orderOverview,
     page,
+    dateFilters,
     handleChangePage,
     handleToggleFilters,
     handleSortOrder,
     handleChangeDate,
+    handleChangePageSize,
   };
 }
