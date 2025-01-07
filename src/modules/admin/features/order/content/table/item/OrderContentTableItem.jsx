@@ -2,8 +2,8 @@ import {NumericFormat} from 'react-number-format';
 import {format} from 'date-fns';
 
 import OrderActions from './actions/OrderActions';
-import PaymentStatus from './status/PaymentStatus';
-import ReviewStatus from './status/ReviewStatus';
+import PaymentStatus from '../../../../../components/status/PaymentStatus';
+import ReviewStatus from '../../../../../components/status/ReviewStatus';
 
 export default function OrderContentTableItem({data}) {
   const {OrderDetail, OrderItems, UserPayment, id, orderDate} = data;

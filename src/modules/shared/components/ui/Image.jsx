@@ -1,4 +1,4 @@
-import Blank from '../../../assets/images/product/productBlank.jpg';
+import Blank from '../../../../assets/images/product/productBlank.jpg';
 
 export default function Image({src, alt, className, width, height}) {
   return (

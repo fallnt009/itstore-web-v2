@@ -3,7 +3,7 @@ import {
   TRANSACTION_AWAITING,
   TRANSACTION_COMPLETED,
   TRANSACTION_REJECTED,
-} from '../../../../../../../shared/services/config/constants';
+} from '../../../shared/services/config/constants';
 
 export default function PaymentStatus({status = 'PENDING'}) {
   const statusMapping = {

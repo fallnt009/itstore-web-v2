@@ -31,7 +31,7 @@ export default function AddressContextProvider({children}) {
   }, [dispatch]);
 
   //create Address
-  const addAddress = async (newAddress) => {
+  const addAddress = useCallback(async (newAddress) => {
     try {
       const res = await AddressApi.createAddress(newAddress);
       dispatch({
@@ -41,10 +41,10 @@ export default function AddressContextProvider({children}) {
     } catch (err) {
       throw err;
     }
-  };
+  }, []);
 
   //update Address
-  const updateAddress = async (addressId, updatedAddress) => {
+  const updateAddress = useCallback(async (addressId, updatedAddress) => {
     try {
       const res = await AddressApi.updateAddress(addressId, updatedAddress);
       dispatch({
@@ -54,10 +54,10 @@ export default function AddressContextProvider({children}) {
     } catch (err) {
       throw err;
     }
-  };
+  }, []);
 
   //delete Address
-  const deleteAddress = async (addressId) => {
+  const deleteAddress = useCallback(async (addressId) => {
     try {
       await AddressApi.deleteAddress(addressId);
       dispatch({
@@ -67,10 +67,10 @@ export default function AddressContextProvider({children}) {
     } catch (err) {
       throw err;
     }
-  };
+  }, []);
 
   //set default
-  const setDefaultAddress = async (addressId) => {
+  const setDefaultAddress = useCallback(async (addressId) => {
     try {
       const res = await AddressApi.updateDefault(addressId);
       dispatch({
@@ -80,7 +80,7 @@ export default function AddressContextProvider({children}) {
     } catch (err) {
       throw err;
     }
-  };
+  }, []);
 
   return (
     <AddressContext.Provider

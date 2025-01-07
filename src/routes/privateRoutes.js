@@ -58,11 +58,17 @@ import AdminProductEdit from '../modules/admin/features/product/action/AdminProd
 
 import AdminCategory from '../modules/admin/features/category/AdminCategory';
 import AdminCategoryCreate from '../modules/admin/features/category/actions/AdminCategoryCreate';
+import AdminOrderDetails from '../modules/admin/features/order/order-details/AdminOrderDetails';
+import CheckoutMain from '../modules/checkout/main';
 
 export const privateRoutes = [
   {
     path: MY_CART,
     element: <CartContainer />,
+  },
+  {
+    path: '/checkout/test',
+    element: <CheckoutMain />,
   },
   {
     path: CHECKOUT_MAIN,
@@ -152,6 +158,10 @@ export const privateRoutes = [
       {
         path: ADMIN_CATEGORY_CREATE,
         element: <AdminCategoryCreate />,
+      },
+      {
+        path: 'order/test',
+        element: <AdminOrderDetails />,
       },
     ],
   },

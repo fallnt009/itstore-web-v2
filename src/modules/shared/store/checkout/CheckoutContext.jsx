@@ -23,12 +23,13 @@ export default function CheckoutContextProvider({children}) {
         await CheckoutApi.getService(),
         await CheckoutApi.getPayment(),
       ]);
+
       dispatch({
         type: FETCH_CHECKOUT,
         payload: {
-          item: checkoutItem.data.result,
-          service: service.data.result,
-          payment: payment.data.result,
+          item: checkoutItem?.data?.result || [],
+          service: service?.data?.result || [],
+          payment: payment?.data?.result || [],
         },
       });
     } catch (err) {
@@ -90,6 +91,7 @@ export default function CheckoutContextProvider({children}) {
   const setProcessComplete = useCallback(() => {
     setIsProcessCompleted(true);
   }, []);
+
   return (
     <CheckoutContext.Provider
       value={{

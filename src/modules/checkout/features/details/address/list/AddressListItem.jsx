@@ -24,14 +24,14 @@ export default function AddressListItem({
 
   return (
     <div
-      className={`container border-2 hover:border-black cursor-pointer rounded-lg p-4 ${
-        selectedId ? 'border-black' : ''
+      className={`container border-2 hover:border-indigo-600 cursor-pointer rounded-lg p-4 ${
+        selectedId ? 'border-indigo-600' : ''
       }`}
       onClick={() => handleSelect(id)}
     >
       <ul className="text-gray-500">
         <div className="flex items-center justify-between">
-          <h1 className="font-semibold">{fullName}</h1>
+          <h1 className="font-semibold text-black">{fullName}</h1>
           {selectedId ? (
             <div className="text-xs p-1 px-2 border rounded-lg bg-gray-200 font-bold text-gray-500">
               default
@@ -51,7 +51,7 @@ export default function AddressListItem({
         </ul>
         <li>{postalCode}</li>
         <li>{province}</li>
-        <li className="py-3">{phoneNumber}</li>
+        <li className="pt-3">{phoneNumber}</li>
       </ul>
     </div>
   );

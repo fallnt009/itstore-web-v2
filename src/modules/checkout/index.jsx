@@ -41,12 +41,12 @@ export default function CheckoutContainer() {
   }
 
   return (
-    <div className="container ">
-      <div className=" grid my-10 p-16">
+    <div className="container border mx-auto">
+      <div className=" grid my-10 p-16 border">
         <div className="flex justify-center p-5 ">
           <CheckoutBreadCrumb />
         </div>
-        <div className="grid md:grid-cols-[2fr_1fr] p-5">
+        <div className="grid md:grid-cols-[2fr_1fr] p-5 border">
           <Outlet />
           <CheckoutSummary
             checkout={checkout}

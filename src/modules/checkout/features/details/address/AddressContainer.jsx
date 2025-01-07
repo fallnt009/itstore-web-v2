@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import {toast} from 'react-toastify';
+import {MdAdd, MdKeyboardArrowLeft} from 'react-icons/md';
 
 import useAddress from '../../../../shared/hooks/useAddress';
 import useLoading from '../../../../shared/hooks/useLoading';
@@ -52,20 +53,29 @@ export default function AddressContainer({openDrawerWithContent, onClose}) {
   //find that not default
   const isDefaultAddress = selectedId === defaultAddress?.id;
 
+  //back close button
   return (
     <div className="flex flex-col mx-5">
-      <header className="flex flex-col p-5 font-semibold text-lg mx-5">
-        <h4 className="flex justify-center p-2 pb-5">Your Saved Address</h4>
+      <header className="grid grid-cols-[30px_1fr] my-5 font-semibold text-lg">
+        <button
+          type="button"
+          className="items-center hover:text-indigo-600"
+          onClick={onClose}
+        >
+          <MdKeyboardArrowLeft size={30} />
+        </button>
+        <h1 className="flex items-center justify-center">Your Saved Address</h1>
       </header>
       <div className="flex flex-col mx-5">
         <Button
-          className="font-semibold  rounded-full border py-4 px-5 border-gray-500 hover:bg-black hover:text-white "
+          className="flex justify-center items-center gap-5 font-semibold  rounded-xl border py-3 border-gray-500 hover:bg-black hover:text-white "
           onClick={() =>
-            openDrawerWithContent(
-              <AddressCreateForm onClose={onClose} addAddress={addAddress} />
-            )
+            openDrawerWithContent(<AddressCreateForm onClose={onClose} />)
           }
         >
+          <span>
+            <MdAdd size={25} />
+          </span>
           Add new address
         </Button>
         <div className="py-8">

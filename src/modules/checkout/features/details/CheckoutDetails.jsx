@@ -48,6 +48,9 @@ export default function CheckoutDetails() {
     );
   }, [openDrawerWithContent, closeDrawer]);
 
+  //checkdefault
+  //use Shipping as
+
   return (
     <div className="container grid ">
       <div className="mx-24">
@@ -59,7 +62,7 @@ export default function CheckoutDetails() {
         </div>
         <div>
           <div className="flex justify-between items-center mt-5">
-            <h4 className="font-semibold text-lg">Delivery Address</h4>
+            <h4 className="font-semibold text-lg">Shipping Address</h4>
             {defaultAddress ? (
               <Button
                 className="font-semibold  rounded-full border border-gray-500 p-2 px-5 hover:bg-black hover:text-white max-w-24 max-h-10"
@@ -83,6 +86,9 @@ export default function CheckoutDetails() {
                 Choose another address
               </Button>
             </div>
+            <span className="text-gray-700">
+              use the same on billing address
+            </span>
           </div>
           <div className="flex flex-col gap-2 mt-5">
             <h4 className="font-semibold text-lg">Confirmation Email</h4>
