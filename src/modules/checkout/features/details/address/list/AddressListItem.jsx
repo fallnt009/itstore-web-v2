@@ -3,6 +3,7 @@ import useAddress from '../../../../../shared/hooks/useAddress';
 
 export default function AddressListItem({
   addressItem,
+  isDefault,
   selectedId,
   setSelectedId,
 }) {
@@ -18,21 +19,17 @@ export default function AddressListItem({
 
   const {deleteAddress} = useAddress();
 
-  const handleSelect = (addrId) => {
-    setSelectedId(addrId);
-  };
-
   return (
     <div
       className={`container border-2 hover:border-indigo-600 cursor-pointer rounded-lg p-4 ${
         selectedId ? 'border-indigo-600' : ''
       }`}
-      onClick={() => handleSelect(id)}
+      onClick={() => setSelectedId(id)}
     >
       <ul className="text-gray-500">
         <div className="flex items-center justify-between">
           <h1 className="font-semibold text-black">{fullName}</h1>
-          {selectedId ? (
+          {selectedId && isDefault ? (
             <div className="text-xs p-1 px-2 border rounded-lg bg-gray-200 font-bold text-gray-500">
               default
             </div>

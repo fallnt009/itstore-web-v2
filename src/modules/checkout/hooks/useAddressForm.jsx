@@ -56,7 +56,6 @@ export default function useAddressForm({onClose}) {
       } catch (err) {
         toast.error(err.response?.data.message);
       } finally {
-        // stopLoading();
         onClose();
       }
     },

@@ -1,3 +1,5 @@
+//@ delete
+
 export default function CheckoutPaymentItem({select, payment, onClick}) {
   const {id, name} = payment || {};
 

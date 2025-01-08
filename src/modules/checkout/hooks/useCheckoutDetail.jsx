@@ -19,8 +19,19 @@ export default function useCheckoutDetail() {
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [selectedService, setSelectedService] = useState(null);
 
-  const [shippingAddressId, setShippingAddressId] = useState(null);
-  const [billingAddressId, setBillingAddressId] = useState(null);
+  const [shippingAddress, setShippingAddress] = useState(null);
+  const [billingAddress, setBillingAddress] = useState(null);
+
+  //useEffect fetch if already have defalut address
+
+  useEffect(() => {
+    if (defaultAddress?.shipping) {
+      setShippingAddress(defaultAddress?.shipping);
+    }
+    if (defaultAddress?.billing) {
+      setBillingAddress(defaultAddress?.billing);
+    }
+  }, [defaultAddress?.billing, defaultAddress?.shipping]);
 
   //useEffect
   useEffect(() => {
@@ -46,16 +57,18 @@ export default function useCheckoutDetail() {
     setSelectedPayment(JSON.parse(e.target.value));
   }, []);
 
-  console.log(defaultAddress);
-
   return {
     checkoutInfo: item,
     cartItemList: userCart,
     paymentList: payment,
     serviceList: service,
+    email: authenUser?.email,
     selectedService,
     selectedPayment,
-    defaultAddress,
+    shippingAddress,
+    billingAddress,
+    error,
+    errorStatus,
     handleSelectService,
     handleSelectPayment,
     getTotalAmount,

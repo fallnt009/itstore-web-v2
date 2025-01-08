@@ -23,15 +23,19 @@ export default function useCheckoutDrawer() {
   }, [defaultAddress]);
 
   //handle Choose first
-  //
-  const handleChooseAddress = useCallback(() => {
-    openDrawerWithContent(
-      <AddressContainer
-        openDrawerWithContent={openDrawerWithContent}
-        onClose={closeDrawer}
-      />
-    );
-  }, [openDrawerWithContent, closeDrawer]);
+  //check if Choose and
+  const handleChooseAddress = useCallback(
+    (addressType) => {
+      openDrawerWithContent(
+        <AddressContainer
+          openDrawerWithContent={openDrawerWithContent}
+          onClose={closeDrawer}
+          addressType={addressType}
+        />
+      );
+    },
+    [openDrawerWithContent, closeDrawer]
+  );
 
   //handle Edit
   //Can edit when selected only

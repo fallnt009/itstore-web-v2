@@ -1,6 +1,6 @@
 import {MdOutlineAccountCircle} from 'react-icons/md';
 
-export default function CheckoutAddressContent({defaultAddress}) {
+export default function CheckoutAddressContent({defaultAddress, isSame}) {
   const {
     fullName,
     addressLine1,
@@ -14,6 +14,13 @@ export default function CheckoutAddressContent({defaultAddress}) {
     return (
       <div className="mb-5 mt-3 px-3 text-gray-600 text-sm flex flex-col gap-2">
         <h1>Please select your address</h1>
+      </div>
+    );
+  }
+  if (isSame && defaultAddress) {
+    return (
+      <div className="mb-5 mt-3 px-3 text-gray-600 text-sm flex flex-col gap-2">
+        <p>Same as shipping address</p>
       </div>
     );
   }

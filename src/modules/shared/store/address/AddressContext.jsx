@@ -47,6 +47,8 @@ export default function AddressContextProvider({children}) {
   const updateAddress = useCallback(async (addressId, updatedAddress) => {
     try {
       const res = await AddressApi.updateAddress(addressId, updatedAddress);
+      //add addressType
+
       dispatch({
         type: EDIT_ADDRESS,
         payload: {id: addressId, updatedAddress: res.data.result},
@@ -69,13 +71,28 @@ export default function AddressContextProvider({children}) {
     }
   }, []);
 
-  //set default
-  const setDefaultAddress = useCallback(async (addressId) => {
+  //seperate default billing and shippping
+  const setDefaultShippingAddress = useCallback(async (addressId) => {
     try {
-      const res = await AddressApi.updateDefault(addressId);
+      //
+      const res = await AddressApi.updateShippingAddressDefault(addressId);
+      //dispatch
       dispatch({
         type: SET_DEFAULT_ADDRESS,
-        payload: {address: res.data.result},
+        payload: {shipping: res.data.result, billing: undefined},
+      });
+    } catch (err) {
+      throw err;
+    }
+  }, []);
+
+  const setDefaultBillingAddress = useCallback(async (addressId) => {
+    try {
+      const res = await AddressApi.updateBillingAddressDefault(addressId);
+      //dispatch
+      dispatch({
+        type: SET_DEFAULT_ADDRESS,
+        payload: {shipping: undefined, billing: res.data.result},
       });
     } catch (err) {
       throw err;
@@ -90,7 +107,8 @@ export default function AddressContextProvider({children}) {
         addAddress,
         updateAddress,
         deleteAddress,
-        setDefaultAddress,
+        setDefaultShippingAddress,
+        setDefaultBillingAddress,
         fetchMyAddress,
       }}
     >

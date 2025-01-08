@@ -1,3 +1,5 @@
+//@ delete
+
 export default function CheckoutServiceItem({service, select, onClick}) {
   const {name, price, description} = service;
 

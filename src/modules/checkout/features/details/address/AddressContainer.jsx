@@ -1,59 +1,25 @@
-import {useState, useEffect} from 'react';
-import {toast} from 'react-toastify';
 import {MdAdd, MdKeyboardArrowLeft} from 'react-icons/md';
 
-import useAddress from '../../../../shared/hooks/useAddress';
-import useLoading from '../../../../shared/hooks/useLoading';
-import useCheckout from '../../../../shared/hooks/useCheckout';
+import useAddressContent from '../../../hooks/useAddressContent';
 
 import AddressLists from './list/AddressLists';
 import AddressCreateForm from './forms/AddressCreateForm';
 
 import Button from '../../../components/Button';
 
-export default function AddressContainer({openDrawerWithContent, onClose}) {
-  //useAddress
-  const {address, addAddress, defaultAddress, setDefaultAddress} = useAddress();
-  //useCheckout
-  const {checkout, updateCheckout} = useCheckout();
-  //loading
-  const {startLoading, stopLoading} = useLoading();
+export default function AddressContainer({
+  openDrawerWithContent,
+  onClose,
+  addressType,
+}) {
+  const {
+    address,
+    selectedId,
+    isDefaultAddress,
+    handleSelectedId,
+    handleAddAddress,
+  } = useAddressContent(addressType, onClose);
 
-  const {item} = checkout;
-
-  //states
-  //addr Id
-  const [selectedId, setSelectedId] = useState(null);
-
-  useEffect(() => {
-    //if address not default
-    if (defaultAddress) {
-      setSelectedId(defaultAddress.id);
-    } else {
-      setSelectedId();
-    }
-  }, [defaultAddress]);
-
-  const handleAddAddress = async (addressId) => {
-    startLoading();
-    try {
-      setDefaultAddress(addressId);
-      //update addr on checkout
-      const data = {userAddressId: addressId};
-      await updateCheckout(item.id, data);
-      onClose();
-    } catch (err) {
-      //?
-      toast.error('ERROR');
-    } finally {
-      stopLoading();
-    }
-  };
-
-  //find that not default
-  const isDefaultAddress = selectedId === defaultAddress?.id;
-
-  //back close button
   return (
     <div className="flex flex-col mx-5">
       <header className="grid grid-cols-[30px_1fr] my-5 font-semibold text-lg">
@@ -82,7 +48,8 @@ export default function AddressContainer({openDrawerWithContent, onClose}) {
           {address && address.length > 0 ? (
             <AddressLists
               address={address}
-              setSelectedId={setSelectedId}
+              isDefault={isDefaultAddress()}
+              setSelectedId={handleSelectedId}
               selectedId={selectedId}
             />
           ) : (
@@ -92,11 +59,11 @@ export default function AddressContainer({openDrawerWithContent, onClose}) {
           )}
         </div>
 
-        {selectedId && !isDefaultAddress ? (
+        {selectedId && !isDefaultAddress() ? (
           <Button
             type="submit"
             className="flex justify-center rounded-full border border-indigo-700 py-4 px-5 text-white bg-indigo-700 font-semibold hover:bg-white hover:text-indigo-700"
-            onClick={() => handleAddAddress(selectedId)}
+            onClick={() => handleAddAddress(addressType, selectedId)}
           >
             Use this address as default
           </Button>

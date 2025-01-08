@@ -1,34 +1,34 @@
-import {
-  MdEdit,
-  MdAdd,
-  MdOutlineAccountCircle,
-  MdOutlineEmail,
-} from 'react-icons/md';
+import {MdAdd, MdEdit, MdOutlineEmail} from 'react-icons/md';
 
 import useCheckoutDetail from './hooks/useCheckoutDetail';
 import useCheckoutDrawer from './hooks/useCheckoutDrawer';
 
-import ProductCardHorizontal from '../shared/components/product-card/ProductCardHorizontal';
-import InputRadioBox from './components/input/InputRadioBox';
-import SideDrawer from '../shared/components/ui/SideDrawer';
 import CheckoutSummaryContent from './features/summary/CheckoutSummaryContent';
 import CheckoutAddressContent from './features/address/CheckoutAddressContent';
 
+import ProductCardHorizontal from '../shared/components/product-card/ProductCardHorizontal';
+import InputRadioBox from './components/input/InputRadioBox';
+import SideDrawer from '../shared/components/ui/SideDrawer';
+import ErrorPage from '../shared/features/error/ErrorPage';
+
 export default function CheckoutMain() {
   const {
-    checkoutInfo,
+    // checkoutInfo,
     cartItemList,
     paymentList,
     serviceList,
+    email,
     selectedService,
     selectedPayment,
-    defaultAddress,
+    shippingAddress,
+    billingAddress,
+    error,
+    errorStatus,
     handleSelectService,
     handleSelectPayment,
     getTotalAmount,
   } = useCheckoutDetail();
 
-  //add go back to choose
   const {
     isOpen,
     closeDrawer,
@@ -36,21 +36,16 @@ export default function CheckoutMain() {
     handleChooseAddress,
     handleEditClick,
   } = useCheckoutDrawer();
-  //input radio done on fetch ,handle done
-  //order overview done //need remove cart
-  //order summary // finish
-  // console.log(checkoutInfo);
-  /////doing right now
-  //contact
-  //shipping
-  //billing
 
-  //to do
-  //make billing address usable
-  //add go back to drawer
-  //add text if billing address same as shipping
-  //make contact information show email addr
-  //hadle form fetch and submmit update address
+  //TODO
+  //handle Edit Address
+  //Clear old checkout page
+  //handle Submit Checkout to payment
+  //handle go back in drawer
+
+  if (error) {
+    return <ErrorPage statusCode={errorStatus} />;
+  }
 
   return (
     <main className="container mx-auto bg-white mb-5 pb-10 border">
@@ -145,15 +140,7 @@ export default function CheckoutMain() {
                 service={selectedService}
                 getTotalAmount={getTotalAmount}
               />
-              <div className="py-3 flex justify-between">
-                {/* <h1>Paid by customer</h1>
-                <NumericFormat
-                  value="1535"
-                  displayType="text"
-                  thousandSeparator=","
-                  prefix={'฿'}
-                /> */}
-              </div>
+              <div className="py-3 flex justify-between"></div>
             </div>
             <div className="flex justify-between items-center bg-gray-100 py-4 text-gray-700 px-5 text-sm">
               <p>Click Submit to finish your order</p>
@@ -177,47 +164,60 @@ export default function CheckoutMain() {
             <div className="mb-5 mt-3 px-3 text-gray-600 text-sm flex flex-col gap-2">
               <span className="flex items-center gap-1">
                 <MdOutlineEmail />
-                <p>alexRandy@gmail.com</p>
+                <p>{email || 'N/A'}</p>
               </span>
             </div>
           </article>
           <article className="border-2 rounded-xl">
             <div className="flex items-center justify-between gap-3 px-3 pt-5">
               <h1 className="font-semibold text-lg">Shipping Address</h1>
-              {/* <button type="button"  className="text-gray-500 p-2 rounded-full hover:bg-indigo-100 hover:text-indigo-600">
-                <MdEdit />
-              </button> */}
-              <button
-                type="button"
-                className="text-gray-500 p-2 rounded-full hover:bg-indigo-100 hover:text-indigo-600"
-                onClick={handleChooseAddress}
-              >
-                <MdAdd size={20} />
-              </button>
+              <span className="flex items-center">
+                {shippingAddress && (
+                  <button
+                    type="button"
+                    className="text-gray-500 p-2 rounded-full hover:bg-indigo-100 hover:text-indigo-600"
+                  >
+                    <MdEdit />
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className="text-gray-500 p-2 rounded-full hover:bg-indigo-100 hover:text-indigo-600"
+                  onClick={() => handleChooseAddress('shipping')}
+                >
+                  <MdAdd size={20} />
+                </button>
+              </span>
             </div>
-            {/* selectedAddress */}
-            <CheckoutAddressContent defaultAddress={defaultAddress} />
+            {/* selectedAddress shipping */}
+            <CheckoutAddressContent defaultAddress={shippingAddress} />
           </article>
           <article className="border-2 rounded-xl">
             <div className="flex items-center justify-between gap-3 px-3 pt-5">
               <h1 className="font-semibold text-lg">Billing Address</h1>
-              <button
-                type="button"
-                className="text-gray-500 p-2 rounded-full hover:bg-indigo-100 hover:text-indigo-600"
-              >
-                <MdEdit size={20} />
-              </button>
+              <span className="flex items-center">
+                {billingAddress && (
+                  <button
+                    type="button"
+                    className="text-gray-500 p-2 rounded-full hover:bg-indigo-100 hover:text-indigo-600"
+                  >
+                    <MdEdit />
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className="text-gray-500 p-2 rounded-full hover:bg-indigo-100 hover:text-indigo-600"
+                  onClick={() => handleChooseAddress('billing')}
+                >
+                  <MdAdd size={20} />
+                </button>
+              </span>
             </div>
-            <div className="my-5 mt-3 px-3 text-gray-600 text-sm flex flex-col gap-2">
-              {/* <span className="flex items-center gap-2">
-                  <MdOutlineAccountCircle />
-                  <p>Alex Randle</p>
-                </span>
-                <p>153 m.12 Nongkwai Hangdong</p>
-                <p>Address Line 2 optional</p>
-                <p>Chiang Mai 50230</p> */}
-              <p>Same as shipping address</p>
-            </div>
+
+            <CheckoutAddressContent
+              defaultAddress={billingAddress}
+              isSame={shippingAddress?.id === billingAddress?.id}
+            />
           </article>
         </section>
       </div>

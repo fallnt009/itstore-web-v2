@@ -1,3 +1,5 @@
+//@ delete
+
 import {useEffect, useMemo} from 'react';
 
 import useCheckout from '../../../shared/hooks/useCheckout';
